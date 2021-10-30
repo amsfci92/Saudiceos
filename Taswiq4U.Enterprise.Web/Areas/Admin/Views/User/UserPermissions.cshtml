@@ -1,0 +1,435 @@
+﻿@using Cigarette.Enterprise.ViewModels.VM.Breadcrumb
+@using Microsoft.AspNet.Identity;
+
+@model IList<string>
+@{
+    ViewBag.Title = "تعدببل صلاحيات موظف  ";
+
+ViewBag.Breadcrumb = new BreadcrumbVM
+{
+    Title = "تعدببل صلاحيات موظف  ",
+    BreadcrumbItems = new List<BreadcrumbItem>
+{
+            new BreadcrumbItem{Title = "تعدبل صلاحيات موظف  ", Link = "", IsMuted = false},
+            new BreadcrumbItem{Title = "  الموظفين  ", Link = "/admin/user/all", IsMuted = false},
+            new BreadcrumbItem{Title = "لوحة التحكم", Link =  "/admin/dashboard/details", IsMuted = true},
+        }
+};
+Layout = "~/Areas/Admin/Views/Shared/_AdminLayout2.cshtml";
+}
+@functions  {
+    string InUserRole(IList<string> roles, string role)
+    {
+        return roles.Contains(role) ? "checked=checked" : "";
+    }
+    string GetPermissionDetails(string role)
+    {
+        return $"data-userid={ViewBag.UserId} data-c-role={role}";
+    }
+}
+@section  Styles{
+    <!--begin::Page Vendor Stylesheets(used by this page)-->
+    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendor Stylesheets-->
+}
+
+<!--begin::Basic info-->
+<div class="card mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+        <!--begin::Card title-->
+        <div class="card-title m-0">
+            <h3 class="fw-bolder m-0">تعدببل موظف</h3>
+        </div>
+        <!--end::Card title-->
+    </div>
+    <!--begin::Card header-->
+    <!--begin::Content-->
+    <div id="kt_account_profile_details" class="collapse show">
+        <!--begin::Form-->
+        <form id="kt_account_profile_details_form" class="form" action="/admin/user/edit" method="post">
+            <!--begin::Card body-->
+            <div class="card-body border-top p-9">
+                <div class="text-center pt-15">
+                    <div class="fv-row">
+                        <!--begin::Label-->
+                        <label class="fs-5 fw-bolder form-label mb-2">قائمه الصلاحيات</label>
+                        <div class="alert alert-info">يتم تحديث الصلاحيات بمجرد التعديل </div>
+                        <!--end::Label-->
+                        <!--begin::Table wrapper-->
+                        <div class="table-responsive">
+                            <!--begin::Table-->
+                            <table class="table align-middle table-row-dashed fs-6 gy-5">
+                                <!--begin::Table body-->
+                                <tbody class="text-gray-600 fw-bold">
+                                    <!--begin::Table row-->
+                                    @*
+        <tr>
+            <td class="text-gray-800">
+                صلاحيات المسئول العليا
+                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Allows a full access to the system" aria-label="Allows a full access to the system"></i>
+            </td>
+            <td>
+                <!--begin::Checkbox-->
+                <label class="form-check form-check-sm form-check-custom form-check-solid me-9">
+                    <input class="form-check-input permission-input" type="checkbox" value="" id="kt_roles_select_all">
+                    <span class="form-check-label" for="kt_roles_select_all">Select all</span>
+                </label>
+                <!--end::Checkbox-->
+            </td>
+        </tr>
+                                    *@
+                                    <!--end::Table row-->
+                                    <!--begin::Table row-->
+                                    <tr>
+                                        <!--begin::Label-->
+                                        <td class="text-gray-800">التنفيذين</td>
+                                        <!--end::Label-->
+                                        <!--begin::Input group-->
+                                        <td>
+                                            <!--begin::Wrapper-->
+                                            <div class="d-flex">
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.CEO_ViewAll)) @(GetPermissionDetails(Permissions.CEO_ViewAll)) type="checkbox" value="" name="user_management_read">
+                                                    <span class="form-check-label">عرض</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.CEO_ADD)) @(GetPermissionDetails(Permissions.CEO_ADD)) type="checkbox" value="" name="user_management_write">
+                                                    <span class="form-check-label">إضافة</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.CEO_Update)) @(GetPermissionDetails(Permissions.CEO_Update)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">تعديل</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.CEO_Delete)) @(GetPermissionDetails(Permissions.CEO_Delete)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">مسح</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.CEO_ViewUpdateRequests)) @(GetPermissionDetails(Permissions.CEO_ViewUpdateRequests)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">عرض طلبات التحديث</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.CEO_ViewAddRequests)) @(GetPermissionDetails(Permissions.CEO_ViewAddRequests)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">عرض طلبات الإضافة</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                            </div>
+                                            <!--end::Wrapper-->
+                                        </td>
+                                        <!--end::Input group-->
+                                    </tr>
+                                    <!--end::Table row-->
+                                    <!--begin::Table row-->
+                                    <tr>
+                                        <!--begin::Label-->
+                                        <td class="text-gray-800">الأخبار</td>
+                                        <!--end::Label-->
+                                        <!--begin::Input group-->
+                                        <td>
+                                            <!--begin::Wrapper-->
+                                            <div class="d-flex">
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.News_ViewAll)) @(GetPermissionDetails(Permissions.News_ViewAll)) type="checkbox" value="" name="user_management_read">
+                                                    <span class="form-check-label">عرض</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.News_ADD)) @(GetPermissionDetails(Permissions.News_ADD)) type="checkbox" value="" name="user_management_write">
+                                                    <span class="form-check-label">إضافة</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.News_Update)) @(GetPermissionDetails(Permissions.News_Update)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">تعديل</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.News_Delete)) @(GetPermissionDetails(Permissions.News_Delete)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">مسح</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+
+                                            </div>
+                                            <!--end::Wrapper-->
+                                        </td>
+                                        <!--end::Input group-->
+                                    </tr>
+                                    <!--end::Table row-->
+                                    <!--begin::Table row-->
+                                    <tr>
+                                        <!--begin::Label-->
+                                        <td class="text-gray-800">الإعلانات</td>
+                                        <!--end::Label-->
+                                        <!--begin::Input group-->
+                                        <td>
+                                            <!--begin::Wrapper-->
+                                            <div class="d-flex">
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Banner_ViewAll)) @(GetPermissionDetails(Permissions.Banner_ViewAll)) type="checkbox" value="" name="user_management_read">
+                                                    <span class="form-check-label">عرض</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Banner_ADD)) @(GetPermissionDetails(Permissions.Banner_ADD)) type="checkbox" value="" name="user_management_write">
+                                                    <span class="form-check-label">إضافة</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Banner_Update)) @(GetPermissionDetails(Permissions.Banner_Update)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">تعديل</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Banner_Delete)) @(GetPermissionDetails(Permissions.Banner_Delete)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">مسح</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                            </div>
+                                            <!--end::Wrapper-->
+                                        </td>
+                                        <!--end::Input group-->
+                                    </tr>
+                                    <!--end::Table row-->
+                                    <!--begin::Table row-->
+                                    <tr>
+                                        <!--begin::Label-->
+                                        <td class="text-gray-800">الخدمات</td>
+                                        <!--end::Label-->
+                                        <!--begin::Input group-->
+                                        <td>
+                                            <!--begin::Wrapper-->
+                                            <div class="d-flex">
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Service_ViewAll)) @(GetPermissionDetails(Permissions.Service_ViewAll)) type="checkbox" value="" name="user_management_read">
+                                                    <span class="form-check-label">عرض</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Service_ADD)) @(GetPermissionDetails(Permissions.Service_ADD)) type="checkbox" value="" name="user_management_write">
+                                                    <span class="form-check-label">إضافة</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Service_Update)) @(GetPermissionDetails(Permissions.Service_Update)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">تعديل</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Service_Delete)) @(GetPermissionDetails(Permissions.Service_Delete)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">مسح</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                            </div>
+                                            <!--end::Wrapper-->
+                                        </td>
+                                        <!--end::Input group-->
+                                    </tr>
+                                    <!--end::Table row-->
+                                    <!--begin::Table row-->
+                                    <tr>
+                                        <!--begin::Label-->
+                                        <td class="text-gray-800">المستخدمين</td>
+                                        <!--end::Label-->
+                                        <!--begin::Input group-->
+                                        <td>
+                                            <!--begin::Wrapper-->
+                                            <div class="d-flex">
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.User_ViewAll)) @(GetPermissionDetails(Permissions.User_ViewAll)) type="checkbox" value="" name="user_management_read">
+                                                    <span class="form-check-label">عرض</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.User_ADD)) @(GetPermissionDetails(Permissions.User_ADD)) type="checkbox" value="" name="user_management_write">
+                                                    <span class="form-check-label">إضافة</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.User_Update)) @(GetPermissionDetails(Permissions.User_Update)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">تعديل</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.User_Delete)) @(GetPermissionDetails(Permissions.User_Delete)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">مسح</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.User_PassReset)) @(GetPermissionDetails(Permissions.User_PassReset)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">ضبط كلمه المرور</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.User_Permission)) @(GetPermissionDetails(Permissions.User_Permission)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">الصلاحيات</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                            </div>
+                                            <!--end::Wrapper-->
+                                        </td>
+                                        <!--end::Input group-->
+                                    </tr>
+                                    <!--end::Table row-->
+                                    <!--begin::Table row-->
+                                    <tr>
+                                        <!--begin::Label-->
+                                        <td class="text-gray-800">التقارير</td>
+                                        <!--end::Label-->
+                                        <!--begin::Input group-->
+                                        <td>
+                                            <!--begin::Wrapper-->
+                                            <div class="d-flex">
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Report_ViewAll)) @(GetPermissionDetails(Permissions.Report_ViewAll)) type="checkbox" value="" name="user_management_read">
+                                                    <span class="form-check-label">عرض</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Report_ADD)) @(GetPermissionDetails(Permissions.Report_ADD)) type="checkbox" value="" name="user_management_write">
+                                                    <span class="form-check-label">إضافة</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Report_Update)) @(GetPermissionDetails(Permissions.Report_Update)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">تعديل</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Report_Delete)) @(GetPermissionDetails(Permissions.Report_Delete)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">مسح</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+
+                                            </div>
+                                            <!--end::Wrapper-->
+                                        </td>
+                                        <!--end::Input group-->
+                                    </tr>
+                                    <!--end::Table row-->
+                                    <!--begin::Table row-->
+                                    <tr>
+                                        <!--begin::Label-->
+                                        <td class="text-gray-800">الرسائل</td>
+                                        <!--end::Label-->
+                                        <!--begin::Input group-->
+                                        <td>
+                                            <!--begin::Wrapper-->
+                                            <div class="d-flex">
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Inbox_ViewAll)) @(GetPermissionDetails(Permissions.Inbox_ViewAll)) type="checkbox" value="" name="user_management_read">
+                                                    <span class="form-check-label">عرض</span>
+                                                </label>
+                                                <!--end::Checkbox-->  
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Inbox_Delete)) @(GetPermissionDetails(Permissions.Inbox_Delete)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">مسح</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+
+                                            </div>
+                                            <!--end::Wrapper-->
+                                        </td>
+                                        <!--end::Input group-->
+                                    </tr>
+                                    <!--end::Table row-->
+                                    <!--begin::Table row-->
+                                    <tr>
+                                        <!--begin::Label-->
+                                        <td class="text-gray-800">الاعدادات</td>
+                                        <!--end::Label-->
+                                        <!--begin::Input group-->
+                                        <td>
+                                            <!--begin::Wrapper-->
+                                            <div class="d-flex">
+
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-solid  me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Settings_Update)) @(GetPermissionDetails(Permissions.Settings_Update)) type="checkbox" value="" name="user_management_create">
+                                                    <span class="form-check-label">تعديل</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+
+                                            </div>
+                                            <!--end::Wrapper-->
+                                        </td>
+                                        <!--end::Input group-->
+                                    </tr>
+                                    <!--end::Table row-->
+                                    <!--begin::Table row-->
+                                    <tr>
+                                        <!--begin::Label-->
+                                        <td class="text-gray-800">الإحصائيات</td>
+                                        <!--end::Label-->
+                                        <!--begin::Input group-->
+                                        <td>
+                                            <!--begin::Wrapper-->
+                                            <div class="d-flex">
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-15">
+                                                    <input class="form-check-input permission-input" @(InUserRole(Model, Permissions.Dashboard_ViewAll)) @(GetPermissionDetails(Permissions.Dashboard_ViewAll)) type="checkbox" value="" name="user_management_read">
+                                                    <span class="form-check-label">عرض</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                            </div>
+                                            <!--end::Wrapper-->
+                                        </td>
+                                        <!--end::Input group-->
+                                    </tr>
+                                    <!--end::Table row-->
+
+                                </tbody>
+                                <!--end::Table body-->
+                            </table>
+                            <!--end::Table-->
+                        </div>
+                        <!--end::Table wrapper-->
+                    </div>
+                </div>
+            </div>
+            <!--end::Card body-->
+        </form>
+        <!--end::Form-->
+    </div>
+    <!--end::Content-->
+</div>
+<!--end::Basic info-->
+
+@section Scripts {
+
+}

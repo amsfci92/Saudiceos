@@ -1,0 +1,113 @@
+﻿@using Saudiceos.Enterprise.Web.helper
+@using Cigarette.Enterprise.ViewModels.ViewModels.WepAPIViewModel.Advertisement
+@using Cigarette.Enterprise.DAL
+@using Cigarette.Enterprise.ViewModels.ViewModels.Category
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@using PagedList.Mvc
+@using Saudiceos.Enterprise.Web.Managers
+@using Microsoft.AspNet.Identity
+@using Saudiceos.Enterprise.Web.Models
+@{
+    var baseApiUrl = System.Configuration.ConfigurationManager.AppSettings["ApiDomain"];
+
+    var adBaseUrl = string.Format("{0}{1}", baseApiUrl, "/Api/ImageUpload/image?url={0}&type=2");
+    var commBaseUrl = string.Format("{0}{1}", baseApiUrl, "/Api/ImageUpload/i?url={0}&type=1");
+    var apiUrl = string.Format("{0}{1}", baseApiUrl, "/Api/ImageUpload/i?url={0}&type=3");
+
+    var language = "ar";
+    var country = "EG";
+    country = CookieHelper.Instance(HttpContext.Current, HttpContext.Current.Response).CurrentCountry();
+    language = CookieHelper.Instance(HttpContext.Current, HttpContext.Current.Response).CurrentLanguage();
+
+   
+}
+
+<style>
+    @@media (min-width: 992px) {
+        .modal-lg, .modal-xl {
+            max-width: 1000px !important;
+        }
+    }
+</style>
+
+    <!-- CSS -->
+<link href="~/Content/ltr/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />
+
+<!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/js/jquery.smartWizard.min.js" type="text/javascript"></script>
+
+<div class="container">
+
+    <div class="modal fade" id="add-ad-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        @HomeResource.W_AddAdvertisment
+                    </h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body">
+                    @if (!GeneralManager.Instance().IsMyCountry(country, User.Identity.GetCountryId()))
+                    {
+
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>
+                                    @(language == "ar"? "لا يمكنك أضافه الاعلان الا في الدوله الخاصه بك, غير الدوله وأضف الاعلان" : "You can only add Ad in your country, Please switch to your country and Add.")
+                                </h2>
+                            </div>
+                        </div>
+                    }
+                    else if (!GeneralManager.Instance().IsActivePhone(User.Identity.Name))
+                    {
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>
+                                    @(language == "ar"? "لا يمكنك أضافه الاعلان الا بعد تفعيل رقم الهاتف" : "You can not add Ad till you activate your Phone Number.")
+                                </h2>
+                            </div>
+                        </div>
+
+                    }
+                    else
+                    {
+                <div id="smartwizard">
+                    <ul class="nav">
+                    </ul>
+                  
+
+                </div>
+                    }
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="show-sw" />
+<input type="hidden" id="hide-sw" />
+
+@Html.InlineScripts("~/Scripts/addadvertismentpopup")
+<script type="text/javascript">
+
+    a_a_p('@country',
+        '@language',
+        '@HomeResource.WNext',
+        '@HomeResource.WPrev',
+        '@HomeResource.WMakeSureCompleteData',
+        '@HomeResource.WRefreshPage',
+        "@HomeResource.WPleaseAddPhoto",
+        '@System.Configuration.ConfigurationManager.AppSettings["ApiDomain"]',
+        '@User.Identity.GetPhoneNumber()')
+    $(document).ready(function () {
+        //if ($('#categories-add-ad-main').length > 0) {
+        //    $('#categories-add-ad-main').load($('#categories-add-ad-main').attr('data-url'))
+        //}
+        //$('#IsNogitable').change(function () {
+        //    $(this).val(this.checked);
+        //})
+    });
+</script>

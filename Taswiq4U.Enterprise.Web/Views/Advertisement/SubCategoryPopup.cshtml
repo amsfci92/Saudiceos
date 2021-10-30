@@ -1,0 +1,57 @@
+﻿@model List<Cigarette.Enterprise.ViewModels.ViewModels.Category.CategoryVM>
+
+<ul class="list1" id="ulLevel2">
+    @foreach (var item in Model)
+    {
+        <li>
+            <a href="#" class="list1 alevel2" name="alevel2" id="@item.Id">@item.Name</a>
+        </li>
+    }
+</ul>
+
+
+
+
+<script src="~/Scripts/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+        $(document).ready(function () {
+            
+
+
+
+
+            $(".alevel2").click(function () {
+
+                //var CategoryId = $("#Category").find(":selected").val();
+                var CategoryId = $(this).prop("id");
+                var catNAme = $(this).text();
+                console.log(CategoryId);
+                if (CategoryId > 0) {
+                    $.ajax({
+                        type: "get",
+                        url: '@Url.Action("GetActiveSubSubCountryCategories", "Advertisement")',
+                        data: { CategoryId: CategoryId },
+                        success: function (data) {
+                            $(".modal.advSubTypesModal .allSubTypes .advSubTitle ul").css("display", "block");
+                            $("#ulLevel3").html(data);
+                            $(".subSubTitleHding").text(catNAme);
+                            $(".subSubTitleHding").css("display", "block");
+                            $("#ulLevel3").css("display", "block");
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                }
+                else {
+                    $("#ulLevel3").html("");
+                }
+
+            });
+
+
+
+
+        });
+</script>

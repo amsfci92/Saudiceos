@@ -1,0 +1,98 @@
+﻿@using Saudiceos.Enterprise.Web.helper
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@{
+    ViewBag.Title = HomeResource.About;
+
+    var language = "ar";
+    var country = "eg";
+    country = CookieHelper.Instance(HttpContext.Current, HttpContext.Current.Response).CurrentCountry();
+    language = CookieHelper.Instance(HttpContext.Current, HttpContext.Current.Response).CurrentLanguage();
+
+
+    //var language = "ar";
+    //var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    //if (cookie != null && cookie.Value != null)
+    //{
+    //    language = cookie.Value;
+    //}
+    //else
+    //{
+    //    HttpCookie newcookie = new HttpCookie("Language");
+    //    newcookie.Value = language;
+    //    Response.Cookies.Add(newcookie);
+    //}
+}
+
+
+@if (language == "ar")
+{
+    <!-- about us Section -->
+    <section class="aboutUs">
+        <div class="container">
+            <div class="row">
+                <!-- ***** FAQ Start ***** -->
+                <div class="col-md-12 offset-md-12">
+                    <div class="faq-title text-center pb-3">
+                        <h2>@HomeResource.About</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="PageContent">
+                        @Html.Raw(ViewBag.aboutAr)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="leftImgSection">
+                        <img src="~/Content/ltr/images/logo.png" class="img-fluid" alt="logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- about us Section End -->
+
+}
+else
+{
+
+    <!-- about us Section -->
+    <section class="aboutUs">
+        <div class="container">
+            <div class="row">
+                <!-- ***** FAQ Start ***** -->
+                <div class="col-md-12 offset-md-12">
+                    <div class="faq-title text-center pb-3">
+                        <h2>@HomeResource.About</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="PageContent">
+                        @Html.Raw(ViewBag.aboutEn)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="leftImgSection">
+                        <img src="~/Content/arabic/images/logo.png" class="img-fluid" alt="logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- about us Section End -->
+
+
+}
+
+<script src="~/Scripts/js/arabic/jQuery_3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#mnnhn").css("color", "#5ab75a");
+    });
+</script>

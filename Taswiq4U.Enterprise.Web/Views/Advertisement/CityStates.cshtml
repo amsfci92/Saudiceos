@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Cigarette.Enterprise.ViewModels.ViewModels.AdminViewModels.State.StateListItemViewModel>
+@{ 
+    Layout = null;
+}
+@*<div class="form-group">*@
+    <label for="">المدينة<span>*</span></label>
+    <select class="form-control" name="State">
+        <option>اختر المدينة</option>
+        @foreach (var state in Model)
+        {
+            <option value="@state.Id">@state.ArabicName</option>
+        }
+
+    </select>
+@*</div>*@

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+  </configSections>
+  <!--<add name="TaswiqDB" connectionString="metadata=res://*/CigaratteEnterprise.csdl|res://*/CigaratteEnterprise.ssdl|res://*/CigaratteEnterprise.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-JR0FQ16\SQLEXPRESS;initial catalog=TaswiqDB;persist security info=True;user id=sa;password=123;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />-->
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.SqlConnectionFactory, EntityFramework" />
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+    </providers>
+  </entityFramework>
+  <connectionStrings>
+    <!--<add name="TaswiqDB" connectionString="metadata=res://*/CigaratteEnterprise.csdl|res://*/CigaratteEnterprise.ssdl|res://*/CigaratteEnterprise.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=.;initial catalog=TaswiqDB;persist security info=True;user id=sa;password=salahali93;multipleactiveresultsets=True;application name=EntityFramework&quot;" providerName="System.Data.EntityClient" />-->
+    <!--<add name="TaswiqDB" connectionString="metadata=res://*/CigaratteEnterprise.csdl|res://*/CigaratteEnterprise.ssdl|res://*/CigaratteEnterprise.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=.;initial catalog=TaswiqDB;integrated security=True;user id=sa;password=salahali93;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />-->
+    <!--<add name="TaswiqDB" connectionString="metadata=res://*/CigaratteEnterprise.csdl|res://*/CigaratteEnterprise.ssdl|res://*/CigaratteEnterprise.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=sedali-pc\sqlexpress;initial catalog=TaswiqDB;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />-->
+    <!--<add name="TaswiqDB" connectionString="metadata=res://*/CigaratteEnterprise.csdl|res://*/CigaratteEnterprise.ssdl|res://*/CigaratteEnterprise.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=SEDALI-PC\SqlExpress;initial catalog=TaswiqDB;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />-->
+    <!--<add name="TaswiqDB" connectionString="metadata=res://*/CigaratteEnterprise.csdl|res://*/CigaratteEnterprise.ssdl|res://*/CigaratteEnterprise.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=SEDALI-PC\SqlExpress;initial catalog=TaswiqDB;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />-->
+    <!--<add name="TaswiqDB" connectionString="metadata=res://*/CigaratteEnterprise.csdl|res://*/CigaratteEnterprise.ssdl|res://*/CigaratteEnterprise.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=SedAli-PC\SqlExpress;initial catalog=TaswiqDB;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />-->
+    <!--<add name="DB_A53F07_taswiq4usystemEntities" connectionString="metadata=res://*/CigaratteEnterprise.csdl|res://*/CigaratteEnterprise.ssdl|res://*/CigaratteEnterprise.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-GHUS2PB;initial catalog=DB_A53F07_taswiq4usystem;persist security info=True;user id=sa;password=123;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />-->
+    <!--<add name="TaswiqDB" connectionString="metadata=res://*/CigaratteEnterprise.csdl|res://*/CigaratteEnterprise.ssdl|res://*/CigaratteEnterprise.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-GHUS2PB;initial catalog=DB_A53F07_taswiq4usystem;user id=sa;password=123;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />-->
+  
+  <!-- <add name="TaswiqDB" connectionString="metadata=res://*/CigaratteEnterprise.csdl|res://*/CigaratteEnterprise.ssdl|res://*/CigaratteEnterprise.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=64.202.186.136;initial catalog=taswiq4u;user id=sa;password=012012012;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+   
+    <add name="Taswiq4UEntities" connectionString="metadata=res://*/CigaratteEnterprise.csdl|res://*/CigaratteEnterprise.ssdl|res://*/CigaratteEnterprise.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=S64-202-186-136\SQLEXPRESS;initial catalog=Taswiq4U;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />-->
+
+
+    
+  <!--<add name="TaswiqDB" connectionString="metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=S64-202-186-136\SQLEXPRESS;initial catalog=Taswiq4U;user id=sa;password=012012012;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />-->
+  <add name="TaswiqDB" connectionString="metadata=res://*/TaswiqUModel.csdl|res://*/TaswiqUModel.ssdl|res://*/TaswiqUModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=S64-202-186-136\SQLEXPRESS;initial catalog=Taswiq4U;user id=sa;password=012012012;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" /></connectionStrings>
+  <!--<add name="TaswiqDB" connectionString="metadata=res://*/CigaratteEnterprise.csdl|res://*/CigaratteEnterprise.ssdl|res://*/CigaratteEnterprise.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=SQL5047.site4now.net;Initial Catalog=DB_A61DF3_tas;User Id=DB_A61DF3_tas_admin;Password=P@ssword123;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" /></connectionStrings>-->
+</configuration>

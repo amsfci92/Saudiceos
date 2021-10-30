@@ -1,0 +1,401 @@
+﻿@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@using Cigarette.Enterprise.ViewModels.ViewModels.Category_SpecificationAttribute
+@using Saudiceos.Enterprise.Web.helper
+@model Cigarette.Enterprise.ViewModels.ViewModels.ContactUs.ContactUsBM
+@{
+    ViewBag.Title = HomeResource.W_ContactUs;
+}
+
+
+@{
+  
+
+    var language = "ar";
+    var country = "eg";
+    country = CookieHelper.Instance(HttpContext.Current, HttpContext.Current.Response).CurrentCountry();
+    language = CookieHelper.Instance(HttpContext.Current, HttpContext.Current.Response).CurrentLanguage();
+
+    //var language = "ar";
+    //var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    //if (cookie != null && cookie.Value != null)
+    //{
+    //    language = cookie.Value;
+    //}
+    //else
+    //{
+    //    HttpCookie newcookie = new HttpCookie("Language");
+    //    newcookie.Value = language;
+    //    Response.Cookies.Add(newcookie);
+    //}
+}
+
+
+@if (language == "ar")
+{
+    <!-- register Section -->
+    <section class="mainContent  text-right">
+        <div class="container">
+            
+            <div class="row">
+                <!-- ***** FAQ Start ***** -->
+                <div class="col-md-12 offset-md-12">
+
+                    <div class="faq-title text-center pb-3">
+                        <h2>@HomeResource.W_ContactUs</h2>
+                    </div>
+                </div>
+                <div class="col-md-6 login regPage ">
+                    <form class="" action="@Url.RouteUrl("ContactUs", new { language = language, country = country})" method="post">
+                        @*<div class="form-group">
+                    <label for="exampleInputEmail1">الاسم</label>
+                    <input  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                </div>*@
+                        <div class="form-group">
+                            @*<label for="exampleInputEmail1">الرقم</label>*@
+                            @Html.LabelFor(x => x.Phone)
+                            @*<input name="Phone" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">*@
+                            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Phone, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @*<label for="exampleInputEmail1">البريد الالكتروني</label>*@
+                            @Html.LabelFor(x => x.Email)
+                            @*<input name="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">*@
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @*<label for="exampleFormControlTextarea1">اكتب رسالتك</label>*@
+                            @Html.LabelFor(x => x.Message)
+                            @*<textarea name="Message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>*@
+                            @Html.TextAreaFor(x => x.Message, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Message, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="btnSubmit">
+                            <button type="submit" class="btn forgetBtn" style="width:100%">
+                                ارسال
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 register regPage contactSection">
+                    <div class="contactBox">
+                        <div class="contactIcon">
+                            <span class="fas fa-phone"></span>
+                        </div>
+                        <div class="contactDetails">
+                            <span><bdi> @ViewBag.Phone</bdi></span>
+                            <span><bdi> @ViewBag.Phone2</bdi></span>
+                        </div>
+                    </div>
+                    <div class="contactBox">
+                        <div class="contactIcon">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                        <div class="contactDetails">
+                            <span><bdi>@ViewBag.Email</bdi></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- register Section End -->
+}
+else
+{
+    <!-- register Section -->
+    <section class="mainContent  text-left">
+        <div class="container">
+            <h1 class="headerPages">Call us</h1>
+            <div class="row">
+                <div class="col-md-6 login regPage ">
+                    <form class="" action="@Url.RouteUrl("ContactUs", new { language = language, country = country})" method="post">
+                        @*<div class="form-group">
+                                <label for="exampleInputEmail1">الاسم</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                            </div>*@
+                        <div class="form-group">
+                            @*<label for="exampleInputEmail1">الرقم</label>*@
+                            <label>Phone</label>
+                            @*<input name="Phone" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">*@
+                            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Phone, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @*<label for="exampleInputEmail1">البريد الالكتروني</label>*@
+                            <lable>Email</lable>
+                            @*<input name="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">*@
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @*<label for="exampleFormControlTextarea1">اكتب رسالتك</label>*@
+                            <label>Message</label>
+                            @*<textarea name="Message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>*@
+                            @Html.TextAreaFor(x => x.Message, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Message, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="btnSubmit">
+                            <button type="submit" class="btn forgetBtn" style="width:100%">
+                                Send
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 register regPage contactSection">
+                    <div class="contactBox">
+                        <div class="contactIcon">
+                            <span class="fas fa-phone"></span>
+                        </div>
+                        <div class="contactDetails">
+                            <span><bdi> 002 01154781145</bdi></span>
+                            <span> <bdi>002 01154781145</bdi> </span>
+                        </div>
+                    </div>
+                    <div class="contactBox">
+                        <div class="contactIcon">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                        <div class="contactDetails">
+                            <span><bdi>ayat@gmail.com</bdi></span>
+                            <span><bdi>ayat@gmail.com</bdi></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- register Section End -->
+}
+
+<script src="~/Scripts/js/arabic/jQuery_3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#etslbna").css("color", "#5ab75a");
+    });
+</script>
+
+
+
+
+
+<script>
+    // const photos = document.querySelector('input[type="file"][multiple]');
+
+    // formData.append('title', 'My Vegas Vacation');
+    // for (let i = 0; i < photos.files.length; i++) {
+    //   formData.append('photos', photos.files[i]);
+    // }
+
+    class RequestManager {
+        constructor(baseUrl, headers) {
+            this._baseUrl = baseUrl;
+            this._headers = headers;
+        }
+
+        /**
+        * Get Request
+        */
+        async get(url) {
+            return await fetch(`${this._baseUrl}${url}`,
+                {
+                    headers: this._headers
+                })
+                .then(response => response.json());
+
+        }
+
+        /**
+        * Post Request
+        */
+        async post(url, body) {
+            let res = await fetch(`${this._baseUrl}${url}`,
+                {
+                    method: 'POST',
+                    body: body,
+                    headers: this._headers
+                })
+                .then(response => response.json())
+            return await res;
+        }
+    }
+
+    class Advertisment {
+        constructor(
+            Id,
+            Title,
+            ArabicDescription,
+            EnglishDescription,
+            Price,
+            Phone,
+            Email,
+            IsNogitable,
+            CategoryId,
+            CountryId,
+            CityId,
+            StateId,
+            LocationLongtude,
+            LocationLatitude,
+            UserId,
+            IsNew,
+            ContactMe,
+            IsFree,
+            Photos,
+            Advertisment_Specification) {
+            this._Title = Title;
+            this._ArabicDescription = ArabicDescription;
+            this._EnglishDescription = EnglishDescription;
+            this._Price = Price;
+            this._Phone = Phone;
+            this._Email = Email;
+            this._IsNogitable = IsNogitable;
+            this._CategoryId = CategoryId;
+            this._CountryId = CountryId;
+            this._CityId = CityId;
+            this._StateId = StateId;
+            this._LocationLongtude = LocationLongtude;
+            this._LocationLatitude = LocationLatitude;
+            this._UserId = UserId;
+            this._IsNew = IsNew;
+            this._ContactMe = ContactMe;
+            this._IsFree = IsFree;
+            this._Photos = Photos;
+            this._Advertisment_Specification = Advertisment_Specification;
+        }
+        get Id() { return this._Id }
+        get Title() { return this._Title }
+        get ArabicDescription() { return this._ArabicDescription }
+        get EnglishDescription() { return this._EnglishDescription }
+        get Price() { return this._Price }
+        get Phone() { return this._Phone }
+        get Email() { return this._Email }
+        get IsNogitable() { return this._IsNogitable }
+        get CategoryId() { return this._CategoryId }
+        get CountryId() { return this._CountryId }
+        get CityId() { return this._CityId }
+        get StateId() { return this._StateId }
+        get LocationLongtude() { return this._LocationLongtude }
+        get LocationLatitude() { return this._LocationLatitude }
+        get UserId() { return this._UserId }
+        get IsNew() { return this._IsNew }
+        get ContactMe() { return this._ContactMe }
+        get IsFree() { return this._IsFree }
+        get Photos() { return this._Photos }
+        get Advertisment_Specificatin() { return this._Advertisment_Specification }
+    }
+
+    class AdvertismentService {
+        constructor(requestManager) {
+            this._requestManager = requestManager;
+        }
+        getCountryData() {
+            let result = {};
+            this._requestManager.get('api/country/GetCountryData')
+                .then(res => { result = res })
+                .catch(error => console.log(error));
+            return result;
+        }
+        getCites(countryId) {
+            let result = [];
+            this._requestManager.get(`api/country/CitiesList/${countryId}`)
+                .then(res => { result = res })
+                .catch(error => console.log(error));
+            return result;
+        }
+        getCategories(countryId) {
+            let result = [];
+            this._requestManager.get(`api/getCategories/${countryId}`)
+                .then(res => { result = res })
+                .catch(error => console.log(error));
+            return result;
+        }
+        getSpecefications(categoryId) {
+            let result = [];
+            this._requestManager.get(`api/getSpecification/${countryId}`)
+                .then(res => { result = res })
+                .catch(error => console.log(error));
+            return result;
+        }
+        getSpeceficationsValues(adId) { }
+        setSpecificationValues() { }
+        getAdvertismentDetails(adId) { }
+        appendAdvertismentImages() { }
+
+        uploadAdvertismentImage() { }
+        saveAdvertisment(advertisment) { }
+    }
+
+
+    const enviroment = {
+        BASE_URL: 'http://api.Saudiceos.com/'
+    };
+
+    let headers = {
+        "Authorization": "bearer zuAecv61P1dtbv5lBPds43FkmtgIGqE3l-xZ9sZn7_O_aw_1pTR9znmUS7tsExMdShdHwViTgaCGtmE7H8s5SEXUH3z3uzwtLwKw63xi0UEBtFW7Br4db3jjPutwOB4zUYyvq4D9F_OUeiLMJWkZjtzn57Ktv8IaFMpeq6H3Fd1wK59IDhPAgKA3OuFnCdexX-CYmMh_5weiC567UL1LdLPBvI2eIvT7DqtO1RX5GcRO5WA2oim2CV2hVWoxlGcfjOs3uvbqIoM4GsLrDOr_A0nloFmMiQUjpG65dpNiXrKA-yC7iep-IuImEZLE5A5UysLgPc8_Mi0p78fPo1eeTZxfp2iDPoqvxZagsO51z_F83BuhsssI7hYDRSfpPaQs7ZXJH8kforOjnkKedbdve64NscjxSLct-xFPebTmtff-Y9ejnomrTLEQbJdJTPjmcMdAfV1jmaYRimkeFoODg6XU23flGkeLmfnX0gt3pVmyCzIVQb4xwpVvJHmP4VnFdtF82AZ3LS6QgFaqpcriaQ",
+        "Content-Type": "application/json"
+    };
+
+    const requestManager = new RequestManager(enviroment.BASE_URL, headers);
+    let advertismentService = new AdvertismentService(requestManager);
+
+    console.log(advertismentService.getCites(1));
+
+
+    var data = "username=1-01091875220&password=00112200&grant_type=password";
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+            document.getElementsByName("Authorization").forEach((m, i) => { m.value = 'bearer ' + JSON.parse(this.responseText).access_token })
+
+        }
+    });
+
+    xhr.open("POST", "http://api.Saudiceos.com/api/token");
+    xhr.setRequestHeader("Content-Type", "text/plain");
+
+
+    xhr.send(data);
+    // requestManager.get('todos')
+    //         .then(result => {
+    //             console.log(JSON.stringify(result));
+    //         })
+    //         .catch(error => {
+    //             console.error('Error:', error);
+    //         });
+
+    // // insert post
+    // requestManager.post('posts', JSON.stringify({
+    //             title: 'foo',
+    //             body: 'bar',
+    //             userId: 1
+    //         }))
+    //         .then(result => {
+    //             console.log(JSON.stringify(result));
+    //         })
+    //         .catch(error => {
+    //             console.error('Error:', error);
+    //         });
+
+
+    var settings = {
+        "url": "http://api.Saudiceos.com//api/country/CitiesList/1",
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "Authorization": "Bearer 4bzMarcTGOGGqjKujmvNcOleyURFcvia4YJIUcoT1SW-Y854IpDfbygmlmjHmmvmU-hlIyy0EHavUatSh8TvnWkjLri9LZ29Q824C6rB1mWT0LX4sl3K7TngE1qDCi_FCC8NyUYrhbDof8Vhld8MtoOqd0Cz9eQRbnwcVcFHiRKInMRa-RXL6dQ1B2RM24fc_UkGJZe8Q8-_IThj21P5Cyl7XYoGKEE6kmkGILsQVmyBMY8kV3pMf47GhZnP2x2OH12hVTihoPHV_7eGjfU960LnELJi1OJ53QSnB85Z60yONuruP3AuY3ruTqJI9aLwsSvxTx6KpDI26sAHUHu5L6Yih9FTlXLnORRhs_xoEnHjSmIlEG1YH3xu0urQsrgEOWX6sYRcjUp6W84UfOCg5BLz53VyPUOiIr2j5S2BYimkx-UeMF1VSmVT4wHOaVy1atL9-sf0zWZrPWPV9LaSYPX6OpRWIZXTGUsdNF29wbRWmWYK7ZtXhdYrdtcli8s9OGPRq_z1RpdF6DFDDfb53g",
+            "Content-Type": "text/plain"
+        }
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+
+</script>

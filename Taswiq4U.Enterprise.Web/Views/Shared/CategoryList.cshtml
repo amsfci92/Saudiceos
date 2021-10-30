@@ -1,0 +1,243 @@
+﻿@using Cigarette.Enterprise.ViewModels.ViewModels.Category;
+
+@{
+    Layout = null;
+
+    var apiUrl = string.Format("{0}{1}", System.Configuration.ConfigurationManager.AppSettings["ApiDomain"], "/Api/ImageUpload");
+
+    var apiUrl2 = string.Format("{0}{1}", System.Configuration.ConfigurationManager.AppSettings["ApiDomain"], "/Api/ImageUpload/i?url={0}&type=3");
+
+    int catCount = ((List<CategoryViewModel>)(ViewBag.Categories)).Count;
+
+    int rowcount = catCount / 3;
+    int firstCount = rowcount + (catCount % 3);
+    int secondCount = firstCount + rowcount;
+
+    List<CategoryViewModel> CategoriesList = ((List<CategoryViewModel>)(ViewBag.Categories));
+    List<CategoryViewModel> firstList = CategoriesList.GetRange(0, firstCount);
+    List<CategoryViewModel> secondList = CategoriesList.GetRange(firstCount, rowcount);
+    List<CategoryViewModel> thirsdList = CategoriesList.GetRange(secondCount, rowcount);
+}
+
+
+@{
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+
+    var country = "KW";
+    var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    if (cookiecountry != null && cookiecountry.Value != null)
+    {
+        country = cookiecountry.Value;
+    }
+    else
+    {
+        HttpCookie newcookiecountry = new HttpCookie("Country");
+        newcookiecountry.Value = language;
+        Response.Cookies.Add(newcookiecountry);
+    }
+
+}
+
+
+@*<div class="col-md-2">
+        <ul>
+            @foreach (var item in firstList)
+            {
+                <li>
+                    <a href="@Url.RouteUrl("Search",new { language=language,country=country, CategoryId=item.Id,Category=item.Name })">
+                        <i class="fas fa-chevron-left"> @item.Name </i>
+
+                        <img @(string.IsNullOrWhiteSpace(item.CategoryLogo) ? "hidden=hidden" : "") width="30" height="20" src="@(string.Format("{0}/i?url={1}&type=1", apiUrl, item.CategoryLogo))" />
+
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>*@
+
+
+
+<!-- categories -->
+<section class="col-12 categories">
+    <div class="container" id="FeatureAddvertisements">
+
+        @{
+            int counter = 0;
+            foreach (var catindex in CategoriesList)
+            {
+                if (counter % 6 == 0 && counter != 0)
+                {
+                    @Html.Raw("</div>")
+                }
+                if (counter % 6 == 0)
+                {
+                    @Html.Raw("<div class='row'>")
+                }
+                <div class="col-md-2 col-sm-2 col-xs-2 navMenu">
+                    <a @(ViewBag.JSEnabled == false ? "href=" + @Url.RouteUrl("Search", new { CategoryId = catindex.Id, Category = catindex.Name, language = language, country = country }) : "class=category-pop-select data-index=" + catindex.Id + "")>
+
+                        @if (!string.IsNullOrWhiteSpace(catindex.CategoryLogo))
+                        {
+                            <img src="@(string.Format(apiUrl2, catindex.CategoryLogo))" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/products/w3.png" />
+                        }
+                        <p>@catindex.Name</p>
+                    </a>
+                </div>
+
+                counter++;
+            }
+            @Html.Raw("</div>")
+        }
+
+        @*<div class="row">
+                <div class="col-md-2 single-cat">
+                    <i class="fas fa-car"></i>
+                    <p>سيارات و مركبات</p>
+                </div>
+                <div class="col-md-2 single-cat">
+                    <i class="fas fa-car"></i>
+                    <p>سيارات و مركبات</p>
+                </div>
+                <div class="col-md-2 single-cat">
+                    <i class="fas fa-car"></i>
+                    <p>سيارات و مركبات</p>
+                </div>
+                <div class="col-md-2 single-cat">
+                    <i class="fas fa-car"></i>
+                    <p>سيارات و مركبات</p>
+                </div>
+                <div class="col-md-2 single-cat">
+                    <i class="fas fa-car"></i>
+                    <p>سيارات و مركبات</p>
+                </div>
+                <div class="col-md-2 single-cat">
+                    <i class="fas fa-car"></i>
+                    <p>سيارات و مركبات</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="hidden-row">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <i class="fas fa-circle"></i>
+                                <p>سيارات و مركبات</p>
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-circle"></i>
+                                <p>سيارات و مركبات</p>
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-circle"></i>
+                                <p>سيارات و مركبات</p>
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-circle"></i>
+                                <p>سيارات و مركبات</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 single-cat1">
+                    <i class="fas fa-car"></i>
+                    <p>سيارات و مركبات</p>
+                </div>
+                <div class="col-md-2 single-cat1">
+                    <i class="fas fa-car"></i>
+                    <p>سيارات و مركبات</p>
+                </div>
+                <div class="col-md-2 single-cat1">
+                    <i class="fas fa-car"></i>
+                    <p>سيارات و مركبات</p>
+                </div>
+                <div class="col-md-2 single-cat1">
+                    <i class="fas fa-car"></i>
+                    <p>سيارات و مركبات</p>
+                </div>
+                <div class="col-md-2 single-cat1">
+                    <i class="fas fa-car"></i>
+                    <p>سيارات و مركبات</p>
+                </div>
+                <div class="col-md-2 single-cat1">
+                    <i class="fas fa-car"></i>
+                    <p>سيارات و مركبات</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="hidden-row1">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <i class="fas fa-circle"></i>
+                                <p>سيارات و مركبات</p>
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-circle"></i>
+                                <p>سيارات و مركبات</p>
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-circle"></i>
+                                <p>سيارات و مركبات</p>
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-circle"></i>
+                                <p>سيارات و مركبات</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+</section>
+
+
+
+
+
+
+
+
+@*<div class="col-md-4">
+        <ul>
+            @foreach (var item in secondList)
+            {
+                <li><a href="@Url.RouteUrl("Search",new { language=language,country=country, CategoryId=item.Id,Category=item.Name })">
+                    <i class="fas fa-chevron-left"> @item.Name </i>
+                    <img @(string.IsNullOrWhiteSpace(item.CategoryLogo) ? "hidden='hidden'" : "") width="30" height="20" src="@(string.Format("{0}/i?url={1}&type=1", apiUrl, item.CategoryLogo))" />
+
+                </a></li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <ul>
+            @foreach (var item in thirsdList)
+            {
+                <li><a href="@Url.RouteUrl("Search",new { language=language,country=country,  CategoryId=item.Id,Category=item.Name })">
+                    <i class="fas fa-chevron-left"> @item.Name </i>
+
+                    <img @(string.IsNullOrWhiteSpace(item.CategoryLogo) ? "hidden='hidden'" : "") width="30" height="20" src="@(string.Format("{0}/i?url={1}&type=1", apiUrl, item.CategoryLogo))" />
+
+                </a></li>
+            }
+        </ul>
+    </div>*@

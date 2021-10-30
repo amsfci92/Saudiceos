@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+
+@{
+    ViewBag.Title = "About";
+
+
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+}
+
+
+@if (language == "ar")
+{
+    <!-- register Section -->
+    <section class="mainContent  text-right">
+        <div class="container">
+            <h1 class="headerPages">اتصل بنا</h1>
+            <div class="row">
+                <div class="col-md-6 login regPage ">
+                    تم استقبال رسالتكم وسيتم مراعاة آرائكم شكرا
+                </div>
+                <div class="col-md-6 register regPage contactSection">
+                    <div class="contactBox">
+                        <div class="contactIcon">
+                            <span class="fas fa-phone"></span>
+                        </div>
+                        <div class="contactDetails">
+                            <span><bdi> @ViewBag.Phone</bdi></span>
+                            <span><bdi> @ViewBag.Phone2</bdi></span>
+                        </div>
+                    </div>
+                    <div class="contactBox">
+                        <div class="contactIcon">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                        <div class="contactDetails">
+                            <span><bdi>@ViewBag.Email</bdi></span>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- register Section End -->
+}
+else
+{
+    <!-- register Section -->
+    <section class="mainContent  text-right">
+        <div class="container">
+            <h1 class="headerPages">Contact us</h1>
+            <div class="row">
+                <div class="col-md-6 login regPage ">
+                   your message recieved successfully, thank  you.
+                </div>
+                <div class="col-md-6 register regPage contactSection">
+                    <div class="contactBox">
+                        <div class="contactIcon">
+                            <span class="fas fa-phone"></span>
+                        </div>
+                        <div class="contactDetails">
+                            <span><bdi> @ViewBag.Phone</bdi></span>
+                            <span><bdi> @ViewBag.Phone2</bdi></span>
+                        </div>
+                    </div>
+                    <div class="contactBox">
+                        <div class="contactIcon">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                        <div class="contactDetails">
+                            <span><bdi>@ViewBag.Email</bdi></span>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- register Section End -->
+}

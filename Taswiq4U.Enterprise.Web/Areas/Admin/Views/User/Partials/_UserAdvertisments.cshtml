@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Cigarette.Enterprise.ViewModels.ViewModels.Advertisement.AdvertismentVM>
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+
+<table class="table table-striped table-bordered table-hover" width="100%" id="sample_Adv" style="width: 100%;">
+    <thead>
+        <tr role="row">
+            <th>@HomeResource.AdsDescription</th>
+            <th>@HomeResource.CategoryName</th>
+            <th>@HomeResource.AdsFree</th>
+            <th>@HomeResource.AdsCost</th>
+            <th>@HomeResource.AdsStartDate</th>
+            <th>@HomeResource.AdsViews</th>
+            <th>* </th>
+            <th>* </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var ad in Model)
+        {
+            <tr role="row" class="odd">
+                <td>@ad.ArabicDescription</td>
+                <td>@ad.Category.Name</td>
+                <td>@((ad.IsFree == true) ? "نعم" : "لا")</td>
+                <td>@ad.Price</td>
+                <td>@ad.CreationTime</td>
+                <td>@ad.ViewCount</td>
+                <td>
+                    <a href="/Admin/Ads/@ad.Id" class="btn btn-info btn-sm">
+                        <i class="fa fa-info"></i>
+                    </a>
+                </td>
+                <td>
+                    @if (ad.IsActive == true)
+                    {
+                        <a href="/Admin/Ads/@ad.Id" class="btn btn-danger btn-sm">
+                            @HomeResource.AdminBundleDeActivate
+                        </a>
+                    }
+                    else
+                    {
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

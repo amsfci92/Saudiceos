@@ -1,0 +1,64 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "AddReply";
+
+
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+
+    var country = "KW";
+    var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    if (cookiecountry != null && cookiecountry.Value != null)
+    {
+        country = cookiecountry.Value;
+    }
+    else
+    {
+        HttpCookie newcookiecountry = new HttpCookie("Country");
+        newcookiecountry.Value = language;
+        Response.Cookies.Add(newcookiecountry);
+    }
+}
+
+
+@if (language == "ar")
+{
+    <div class="jumbotron text-center">
+        <h1 class="display-3">شكرا لك!</h1>
+        <p class="lead"><strong>تم اضافة اعلانك بنجاح</strong> شكرا لاستخدامك تسويق فور يو.</p>
+        <hr>
+        <p>
+            اذا كان لديك اى مشكلة او استفسار ؟ <a href="@Url.RouteUrl("ContactUs", new { language = language, country = country})">اتصل بنا</a>
+        </p>
+        <p class="lead">
+            <a class="btn btn-primary btn-sm" href="@Url.RouteUrl("Details", new { language = language, country = country, id=ViewBag.AdId})" role="button">الذهاب للاعلان</a>
+        </p>
+    </div>
+}
+else
+{
+<div class="jumbotron text-center">
+    <h1 class="display-3">Thank You!</h1>
+    <p class="lead"><strong>Advertisement added successfully</strong> thanks for using our website Saudiceos.</p>
+    <hr>
+    <p>
+        Having trouble? <a href="@Url.RouteUrl("ContactUs", new { language = language, country = country})">Contact us</a>
+    </p>
+    <p class="lead">
+        <a class="btn btn-primary btn-sm" href="@Url.RouteUrl("Details", new { language = language, country = country, id=ViewBag.AdId})" role="button">الذهاب للاعلان</a>
+    </p>
+</div>
+}

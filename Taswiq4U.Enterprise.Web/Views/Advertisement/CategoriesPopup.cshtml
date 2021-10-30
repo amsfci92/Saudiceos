@@ -1,0 +1,353 @@
+﻿@model List<Cigarette.Enterprise.ViewModels.ViewModels.Category.CategoryVM>
+
+
+<!-- Advertisement Types Modal -->
+<div class="modal fade advTypesModal" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <!-- All Types -->
+                <div class="allTypes text-center">
+                    <div class="container-fluid">
+
+                        @{ int counter = 0; bool newRow = false;}
+                        @foreach (var item in Model)
+                        {
+
+                            if (counter % 6 == 0)
+                            {
+                                newRow = true;
+                            }
+                            else
+                            {
+                                newRow = false;
+                            }
+
+                            <div class="@(newRow)?row: ">
+
+                                <div class="col-md-2 col-sm-3 col-xs-12 type">
+                                    <a href="#">
+                                        <i class="fa fa-car darkorangeLabel"></i>
+                                        @*<p>سيارات ومركبات</p>*@
+                                        <p>@item.Name</p>
+                                    </a>
+                                </div>
+                                @*
+                                    <div class="col-md-2 col-sm-3 col-xs-12 type">
+                                        <a href="#">
+                                            <i class="fa fa-building-o"></i>
+                                            <p>عقارات</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2 col-sm-3 col-xs-12 type">
+                                        <a href="#">
+                                            <i class="fa fa-mobile purpleLabel"></i>
+                                            <p>موبايلات واكسسواراتها</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2 col-sm-3 col-xs-12 type">
+                                        <a href="#">
+                                            <i class="fa fa-desktop grayLabel"></i>
+                                            <p> الكترونيات وأجهزة منزلية </p>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2 col-sm-3 col-xs-12 type">
+                                        <a href="#">
+                                            <i class="fa fa-university greendarkLabel"></i>
+                                            <p>المنزل والحديقة</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2 col-sm-3 col-xs-12 type">
+                                        <a href="#">
+                                            <i class="fa fa-user-secret greenLightLabel"></i>
+                                            <p> الموضة والجمال </p>
+                                        </a>
+                                    </div>*@
+
+
+                            </div>
+
+
+                        }
+
+                        @*
+
+
+                            <div class="row">
+                                <div class="col-md-2 col-sm-3 col-xs-12 type">
+                                    <a href="#">
+                                        <i class="fa fa-paw blueLightLabel"></i>
+                                        <p> حيوانات أليفة </p>
+                                    </a>
+                                </div>
+                                <div class="col-md-2 col-sm-3 col-xs-12 type">
+                                    <a href="#">
+                                        <i class="fa fa-child checklteLabel"></i>
+                                        <p> مستلزمات أطفال </p>
+                                    </a>
+                                </div>
+                                <div class="col-md-2 col-sm-3 col-xs-12 type">
+                                    <a href="#">
+                                        <i class="fa fa-bicycle"></i>
+                                        <p> دراجات ومعدات رياضية </p>
+                                    </a>
+                                </div>
+                                <div class="col-md-2 col-sm-3 col-xs-12 type">
+                                    <a href="#">
+                                        <i class="fa fa-music redLabel"></i>
+                                        <p> موسيقى وفنون وكتب </p>
+                                    </a>
+                                </div>
+                                <div class="col-md-2 col-sm-3 col-xs-12 type">
+                                    <a href="#">
+                                        <i class="fa fa-briefcase purpleDarkLabel"></i>
+                                        <p>وظائف</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-2 col-sm-3 col-xs-12 type">
+                                    <a href="#">
+                                        <i class="fa fa-globe lightCheckloteLabel"></i>
+                                        <p> تجارة وصناعة </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 col-sm-3 col-xs-12 type">
+                                    <a href="#">
+                                        <i class="fa fa-support tealLabel"></i>
+                                        <p> خدمات </p>
+                                    </a>
+                                </div>
+                                <div class="col-md-2 col-sm-3 col-xs-12 type type2"></div>
+                                <div class="col-md-2 col-sm-3 col-xs-12 type type2"></div>
+                                <div class="col-md-2 col-sm-3 col-xs-12 type type2"></div>
+                                <div class="col-md-2 col-sm-3 col-xs-12 type type2"></div>
+                                <div class="col-md-2 col-sm-3 col-xs-12 type type2"></div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Advertisement Sub Types Modal -->
+<div class="modal fade advSubTypesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-xs-4 advHeading active1">
+                    <h3>صنف اعلانك</h3>
+                </div>
+                <div class="col-xs-4 advSubHeading">
+                    <h3 class="subTitleHding"></h3>
+                </div>
+                <div class="col-xs-3 advSubSubHeading">
+                    <h3 class="subSubTitleHding"></h3>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <!-- All Types -->
+                <div class="allSubTypes">
+                    <div class="container-fluid">
+                        <div class="row">
+
+
+
+                            <div class="col-xs-4 advTitle clicked">
+                                <ul id="ulLevel1">
+                                    @foreach (var item in Model)
+                                    {
+                                        <li>
+                                            <a href="#" class="list1 alevel1" name="alevel1" id="@item.Id">@item.Name</a>
+                                        </li>
+                                        @*<li>
+                                                <a href="#" class="list2">عقارات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list3">موبايلات واكسسواراتها</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list1">سيارات ومركبات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list2">عقارات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list3">موبايلات واكسسواراتها</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list1">سيارات ومركبات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list2">عقارات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list3">موبايلات واكسسواراتها</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list1">سيارات ومركبات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list2">عقارات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list3">موبايلات واكسسواراتها</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list1">سيارات ومركبات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list2">عقارات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list3">موبايلات واكسسواراتها</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list1">سيارات ومركبات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list2">عقارات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list3">موبايلات واكسسواراتها</a>
+                                            </li>*@
+                                    }
+                                </ul>
+                            </div>
+
+
+
+                            <div class="col-xs-4 advSubTitle">
+
+                                @*@foreach (var Sub1 in Model)
+                                    {*@
+                                <ul class="list1" id="ulLevel2">
+                                    @*@foreach (var item in Sub1.SubCategoriesLevel2s)
+                                        {*@
+                                    @*<li>
+                                            <a href="#">نمةىنم</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">منتنم</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">نمتةنم</a>
+                                        </li>*@
+                                    @*}*@
+                                </ul>
+                                @*}*@
+
+
+
+                                <!-- <ul class="list2">
+                                    <li>
+                                        <a href="#">عقار 1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">عقار 2</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">عقار 3</a>
+                                    </li>
+                                </ul>
+                                <ul class="list3">
+                                    <li>
+                                        <a href="#">موبايل 1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">موبايل 2</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">موبايل 3</a>
+                                    </li>
+                                </ul> -->
+                            </div>
+
+                            <div class="col-xs-4 advSubSubTitle">
+                                <ul id="ulLevel3">
+                                    @*@foreach (var Sub1 in Model)
+                                        {
+                                            foreach (var sub2 in Sub1.SubCategoriesLevel2s)
+                                            {
+                                                foreach (var item in sub2.SubCategoriesLevel3s)
+                                                {*@
+                                    @*<li>
+                                        <a href="#">نمةنم</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">نمةنم</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">نمةنم</a>
+                                    </li>*@
+                                    @*}
+                                            }
+                                        }*@
+                                </ul>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    
+        $(document).ready(function () {
+
+            $(".alevel1").click(function () {
+
+                //var CategoryId = $("#Category").find(":selected").val();
+                var CategoryId = $(this).prop("id");
+                console.log(CategoryId);
+                if (CategoryId > 0) {
+                    $.ajax({
+                        type: "get",
+                        url: '@Url.Action("GetActiveSubCountryCategories", "Advertisement")',
+                        data: { CategoryId: CategoryId },
+                        success: function (data) {
+                            $(".modal.advSubTypesModal .allSubTypes .advSubTitle ul").css("display", "block");
+                            $("#ulLevel2").html(data);
+                            $("#ulLevel3").html("");
+                            $(".subSubTitleHding").css("display", "none");
+                            $("#ulLevel2").css("display", "block");
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                }
+                else {
+                    $("#ulLevel2").html("");
+                }
+
+            });
+
+
+
+
+            
+
+
+            
+
+        });
+</script>
+
+

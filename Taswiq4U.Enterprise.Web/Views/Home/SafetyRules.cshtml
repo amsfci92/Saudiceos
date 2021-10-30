@@ -1,0 +1,88 @@
+﻿@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@{
+    ViewBag.Title = HomeResource.W_SafetyRules;
+
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+}
+
+
+
+
+@if (language == "ar")
+{
+    <!-- about us Section -->
+    <section class="aboutUs">
+        <div class="container">
+            <div class="row">
+                <!-- ***** FAQ Start ***** -->
+                <div class="col-md-12 offset-md-12">
+                    <div class="faq-title text-center pb-3">
+                        <h2>@HomeResource.W_SafetyRules</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="PageContent">
+                        @Html.Raw(ViewBag.SafetyRolesAr)
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="leftImgSection">
+                        <img src="~/Content/arabic/images/logo.png" class="img-fluid" alt="logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- about us Section End -->
+
+}
+else
+{
+    <!-- about us Section -->
+    <section class="aboutUs">
+        <div class="container">
+            <div class="row">
+                <!-- ***** FAQ Start ***** -->
+                <div class="col-md-12 offset-md-12">
+                    <div class="faq-title text-center pb-3">
+                        <h2>@HomeResource.W_SafetyRules</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="PageContent">
+
+                        @Html.Raw(ViewBag.SafetyRolesEn)
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="leftImgSection">
+                        <img src="~/Content/arabic/images/logo.png" class="img-fluid" alt="logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- about us Section End -->
+
+}
+

@@ -1,0 +1,504 @@
+﻿@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@using Microsoft.AspNet.Identity
+@using Saudiceos.Enterprise.Web.helper
+@using Saudiceos.Enterprise.Web.Managers
+@using Saudiceos.Enterprise.Web.Models
+
+@* Page Configurations *@
+@{
+    var pageTitle = ViewBag.Title ?? "";
+    var isEnglishActive = false;
+    var language = "ar";
+    var countery = "eg";
+
+    countery = CookieHelper.Instance(HttpContext.Current, HttpContext.Current.Response).CurrentCountry();
+    language = CookieHelper.Instance(HttpContext.Current, HttpContext.Current.Response).CurrentLanguage();
+    var aboutObject = GeneralManager.Instance().AboutObject(countery);
+    var hasFreAd = GeneralManager.Instance().HasFreeAds(User.Identity.GetUserName());
+}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+
+    <title>@($"{HomeResource.SystemPageTitle} . {pageTitle}") </title>
+    <!-- styles -->
+    <!-- bootstrap  4.3 css -->
+    <link rel="stylesheet" href="~/Content/arabic/css/bootstrap.min.css">
+    <!-- owl carousel style  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/Content/arabic/css/owl.carousel.min.css">
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+    <!-- your custom style -->
+    <link href="https://jeesite.gitee.io/front/jquery-select2/4.0/index_files/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    @if (language == "ar")
+    {
+        isEnglishActive = false;
+        <link rel="stylesheet" href="~/Content/arabic/css/style.css">
+    }
+    else
+    {
+        isEnglishActive = true;
+        <link rel="stylesheet" href="~/Content/ltr/css/styleLtr.css">
+    }
+    <!-- styles -->
+    @RenderSection("Styles", false)
+
+</head>
+<body>
+
+    <header class="header">
+        <div class="top_nav">
+            <div class="container topNavContainer">
+                <div class="row ">
+                    <div class="col-6 colNav lang" style="padding:5px;">
+
+                        @* change the language to Arabic  *@
+                        @if (!isEnglishActive)
+                        {
+                            <span><a href="@Url.RouteUrl("ChangeLanguage", new { returnUrl=Request.Url.PathAndQuery,language="en" })"> English  </a></span>
+                        }
+                        <span id="countries-main" data-url="@Url.Action("CountryList", "CountryWeb", new { language = language })"></span>
+
+                        @* change the language to english *@
+                        @if (isEnglishActive)
+                        {
+                            <span><a href="@Url.RouteUrl("ChangeLanguage", new { returnUrl=Request.Url.PathAndQuery,  language="ar" })">اللغة العربية</a></span>
+                        }
+
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("CountryAdmin"))
+                        {
+                            <span><a href="/admin/dashboard/details"><strong style="color:black;">Admin</strong></a></span>
+                        }
+                    </div>
+
+                    <div class="col-6 text-left colNav" style="padding:5px;">
+                        <div class="navLeftBox">
+                            @if (Request.IsAuthenticated)
+                            {
+                                <a class="dropdown-toggle social" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @User.Identity.GetFullName()
+                                </a>
+                            }
+                            @if (!Request.IsAuthenticated)
+                            {
+                                <a href="@Url.RouteUrl("Register")"> @HomeResource.W_Register_RegisterationOrLogin</a>
+                            }
+
+                            <a class="social" href="@aboutObject.FacebookPageLink"><span class="fab fa-facebook-f"></span></a>
+                            <a class="social" href="@aboutObject.TwiterAccountLink"><span class="fab fa-twitter"></span></a>
+                            <a class="social" href="@aboutObject.InstagramPageLink"><span class="fab fa-instagram"></span></a>
+
+                            @if (Request.IsAuthenticated)
+                            {
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="@Url.RouteUrl("DashSetting")">@HomeResource.W_Settings</a>
+                                    @*<a class="dropdown-item" href="@Url.RouteUrl("DashSetting")">  @HomeResource.W_EditPRofile</a>*@
+                                    <a class="dropdown-item" href="@Url.RouteUrl("UserProfile")"> @HomeResource.W_MyAds</a>
+                                    <a class="dropdown-item" href="@Url.RouteUrl("LogOff")"> @HomeResource.Logoff</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="@Url.RouteUrl("Home")"><img src="~/Content/arabic/images/logo.png" alt=""></a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (ViewBag.haseFreeAds == true)
+                    {
+                        <a class="btn btnaddPro add-btn open-ad-modal">
+                            <i class="fas fa-plus"></i> @HomeResource.W_AddAdvertisment
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="btn btnaddPro add-btn " data-toggle="modal" data-target="#hasNoFreeAds" data-placement="top">
+                            <i class="fas fa-plus"></i> @HomeResource.W_AddAdvertisment
+                        </a>
+                    }
+                }
+                else
+                {
+                    <a class="btn btnaddPro add-btn" href=@("/Register")>
+                        <i class="fas fa-plus"></i> @HomeResource.W_AddAdvertisment
+                    </a>
+                }
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item" id="raesiia">
+                            <a class="nav-link" href="@Url.RouteUrl("Home")"> <i class="fas fa-home"></i>  @HomeResource.W_HomePage <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item dropdown dropdown-large">
+                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-list"></i>  @HomeResource.Categories
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-large text-right" aria-labelledby=" ">
+                                <div class="row" id="categories-search-ad-main" data-url="#">
+
+
+
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.RouteUrl("Favorites")" id="mofdala">
+                                <i class="fa  fa-heart-o"></i>  @HomeResource.W_Favorite
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.RouteUrl("Offers")" id="offers">
+                                <i class="fa fa-info-circle"></i>  @HomeResource.W_Offers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            @*<a class="nav-link" href="chat.html">
+                        <i class="fa fa-envelope-o"></i> الرسائل
+                    </a>*@
+                            <a class="nav-link" href="@Url.RouteUrl("ContactUs" )" id="etslbna">
+                                <i class="fa fa-envelope-o"></i>  @HomeResource.W_ContactUs
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.RouteUrl("AboutUs")" id="mnnhn">
+                                <i class="fa fa-info-circle"></i>  @HomeResource.About
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                if (hasFreAd)
+                                {
+                            <a class="nav-link add-btn open-ad-modal">
+                                <i class="fas fa-plus"></i> @HomeResource.W_AddAdvertisment
+                            </a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link add-btn " data-toggle="modal" data-target="#hasNoFreeAds" data-placement="top">
+                                        <i class="fas fa-plus"></i> @HomeResource.W_AddAdvertisment
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+                                <a class="nav-link add-btn" href=@("/Register")>
+                                    <i class="fas fa-plus"></i> @HomeResource.W_AddAdvertisment
+                                </a>
+                            }
+
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    @Html.Partial("LayoutPartials/_GeneralMessages")
+
+    @Html.Partial("LayoutPartials/_MobileDownloadPartial")
+
+    @RenderBody()
+
+    <div class="d-flex justify-content-center spinner-cont-hide" id="spinner1">
+        <div class="spinner-border" style="color: forestgreen" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <!-- DOWNLOAAAAAD SECTION -->
+    <section class="download">
+        <div class="container">
+            <h3>@HomeResource.W_DownloadApp</h3>
+            <a href="#"><img src="~/Content/arabic/images/android.png"></a>
+            <a href="#"><img src="~/Content/arabic/images/ios.png"></a>
+        </div>
+    </section>
+
+
+    <!-- Fotter Section-->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="~/Content/arabic/images/footer-logo.png">
+                    <div class="social fotter-details">
+                        <a href="@aboutObject.InstagramPageLink"><i class="fab fa-instagram"></i></a>
+                        <a href="@aboutObject.FacebookPageLink"><i class="fab fa-facebook-f"></i></a>
+                        <a href="@aboutObject.TwiterAccountLink"><i class="fab fa-twitter"></i></a>
+                        <a href="@aboutObject.GooglePlusLink"><i class="fab fa-google-plus-g"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="footer-title">
+                        <i class="fas fa-home"></i>
+                        <a href="@Url.RouteUrl("Home")">@HomeResource.W_HomePage</a>
+                    </div>
+                    <div class="fotter-details">
+                        <a href="@Url.RouteUrl("Home")#categories"><i class="fas fa-chevron-left"></i> @HomeResource.W_AllCategories</a>
+                        <br>
+                        <a href="@Url.RouteUrl("Home")#FeatureAddvertisements"><i class="fas fa-chevron-left"></i> @HomeResource.W_FeaturedAds   </a>
+                        <br>
+                        <a href="@Url.RouteUrl("Home")#Addvertisements"><i class="fas fa-chevron-left"></i> @HomeResource.W_LatestAds   </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="footer-title">
+                        <i class="fas fa-list"></i>
+                        <a href="@Url.RouteUrl("Search")">@HomeResource.Categories</a>
+                    </div>
+                    <div class="row fotter-details" id="categories-footer-main" data-url="@Url.Action("CategoryListFooter", "Advertisement")">
+
+                        @**@
+                        @*<div class="col-6">
+                                <a href="index.html"><i class="fas fa-chevron-left"></i> سيارات و مركبات </a>
+                                <br>
+                                <a href="index.html"><i class="fas fa-chevron-left"></i> عقارات و مباني </a>
+                                <br>
+                                <a href="index.html"><i class="fas fa-chevron-left"></i> هواتف محموله </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="index.html"><i class="fas fa-chevron-left"></i> اجهزة كهربيه </a>
+                                <br>
+                                <a href="index.html"><i class="fas fa-chevron-left"></i> تجاره و صناعه </a>
+                                <br>
+                                <a href="index.html"><i class="fas fa-chevron-left"></i> خدمات اخرى </a>
+                            </div>*@
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="footer-title">
+                        <i class="fas fa-info-circle"></i>
+                        <a href="@Url.RouteUrl("AboutUs")"> @HomeResource.About  </a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="footer-title">
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="@Url.RouteUrl("ContactUs")">@HomeResource.Contact</a>
+                    </div>
+                    <p class="fotter-details">
+                        @aboutObject.Phone
+                    </p>
+                    <p class="fotter-details">
+                        @aboutObject.Phone2
+                    </p>
+                </div>
+            </div>
+            <hr style="background-color: #fff">
+            <div class="row">
+                <Div class="col-md-6 left-footer">
+                    <a href="@Url.RouteUrl("SafetyRules")" class="b">  @HomeResource.W_SafetyRules</a>
+                    <a href="@Url.RouteUrl("Privacy")" class="b"> @HomeResource.W_PrivacyPolicy</a>
+                    <a href="@Url.RouteUrl("TermsOfUse")"> @HomeResource.W_UseTerms  </a>
+
+                    <a href="@Url.RouteUrl("FAQ")"> @HomeResource.FaqTitile  </a>
+
+                </Div>
+                <Div class="col-md-6 right-footer">
+                    @HomeResource.W_AllRightsReserved @DateTime.Now.Year
+                </Div>
+            </div>
+        </div>
+    </footer>
+    <!-- quick view-->
+    <div class="modal fade product_view" id="product_view">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: right">
+                    <h3 class="modal-title">@HomeResource.WAdDetails</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row product" id="AdQucikView">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Commercial View -->
+    <div class="modal fade product_view" id="commercialInBetweenView">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: right">
+                    <h3 class="modal-title">@HomeResource.WAdDetails</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row" id="AdQucikCommercialView">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Commercial View-->
+    @if (!hasFreAd)
+    {
+    <!-- Have No Free Ads Popup -->
+    <div class="modal fade product_view" id="hasNoFreeAds">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: right">
+                    <h3 class="modal-title">@HomeResource.FreeAdsBalance</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <p> @HomeResource.HasNoFreeAds</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+    <!-- End Commercial View-->
+
+    <!-- jQuery 3.4 -->
+    <script src="~/Scripts/js/arabic/jQuery_3.4.1.js"></script>
+    <!-- popper -->
+    <script src="https://unpkg.com/popper.js"></script>
+    <!-- bootstrap 4.3 -->
+    <script src="~/Scripts/js/arabic/bootstrap.min.js"></script>
+    <!-- owl carousel js -->
+    <script src="~/Scripts/js/arabic/owl.carousel.min.js"></script>
+
+    <!-- toaster -->
+    <script src="~/Scripts/toastr.js"></script>
+
+    <!-- your custom js -->
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+    <!-- your custom js -->
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script src="https://jeesite.gitee.io/front/jquery-select2/4.0/index_files/select2.full.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <!-- your custom js -->
+    <script src="~/Scripts/js/arabic/custom.js"></script>
+
+    <script src="https://kit.fontawesome.com/cb6f815ae2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.11.0/underscore-min.js"></script>
+    <!--<script src="~/Scripts/js/site-js/site-general.js"></script>-->
+    @Html.InlineScripts("~/Scripts/general")
+
+    @RenderSection("Scripts", false);
+
+    <script>
+        $(document).ready(function () {
+            $('#countries-main').load($('#countries-main').attr('data-url'))
+            $('#categories-footer-main').load($('#categories-footer-main').attr('data-url'))
+        });
+
+            s_g_setup('@countery',
+                '@Url.RouteUrl("AddToFavorites")',
+                '@Url.RouteUrl("AddAndRemoveFavorites")')
+            // define spinner
+
+        var spinner = new Spinner();
+        $(document).ready(function () {
+           $.ajax({
+            type: "get",
+            url: '@Url.Action("CategoryList", "Advertisement")',
+            success: function (res) {
+            $('#categories-search-ad-main').html(res);
+              },
+             error: function (data) {
+
+                        }
+                    });
+    });
+
+    $(".add-fav-btn").click(function () {
+        var btn = $(this);
+        btn.prop('disabled', true);
+        var auth = @(User.Identity.IsAuthenticated ? "true" : "false");
+       // if (auth) {
+            $.ajax({
+                type: "post",
+                url: '@Url.RouteUrl("AddAndRemoveFavorites")?addvertisementId=' + btn.attr('data-adId'),
+                success: function (res) {
+                    btn.prop('disabled', false);
+                    if (res.data == true) {
+                        toastr.success('@HomeResource.WAddedSuccessfully')
+                        btn.removeClass('threebuttongreen');
+                        btn.addClass('threebuttonred');
+                        btn.html('<i class="fa  fa-heart text-danger" aria-hidden="true"></i>');
+                    }
+                    else {
+                        btn.removeClass('threebuttonred');
+                        btn.addClass('threebuttongreen');
+                        btn.html('<i class="fa  fa-heart-o text-default" aria-hidden="true"></i>');
+                    }
+                },
+                error: function (data) {
+                    btn.prop('disabled', false);
+                    toastr.error("حدث خطأ ما");
+                }
+            });
+        //} else {
+        //    toastr.info('سجل دخول لكي تتمكن من الإضافة للمفضله');
+        //}
+
+    });
+
+    $(".add-like-btn").click(function () {
+        var btn = $(this);
+        btn.prop('disabled', true);
+            $.ajax({
+                type: "get",
+                url: '/Offers/Like/' + btn.attr('data-adId'),
+                success: function (res) {
+                    btn.prop('disabled', false);
+                    if (res == true) {
+                         toastr.success('@HomeResource.LikedSuccessfully')
+                        btn.removeClass('threebuttongreen');
+                        btn.html('');
+
+                    }
+                },
+                error: function (data) {
+                    btn.prop('disabled', false);
+                    toastr.error("حدث خطأ ما");
+                }
+            });
+
+    });
+
+    </script>
+    <style>
+        .display-none {
+            display: none;
+        }
+    </style>
+
+    @Html.Partial("CommercialAdPopUp")
+    @Html.Partial("_ChooseCategoryPopUp")
+
+    @if (hasFreAd)
+    {
+        @Html.Partial("_AddAdvertismentPopup")
+    }
+   
+
+</body>
+</html>
+
+
+
+
+

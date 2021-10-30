@@ -1,0 +1,191 @@
+﻿@model Cigarette.Enterprise.ViewModels.ViewModels.Register.RegisterBM
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@using Cigarette.Enterprise.ViewModels.ViewModels.AdminViewModels.Country
+
+@{
+
+
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+    var countries = (List<CountryListItemViewModel>)ViewBag.Countries;
+    var isEnglishLang = language != "ar";
+
+    if (isEnglishLang)
+    {
+        ViewBag.Title = "Verfiy Your Phone Number ";
+    }
+    else
+    {
+        ViewBag.Title = "تفعيل رقم هاتفك ";
+
+    }
+
+    var country = "KW";
+    var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    if (cookiecountry != null && cookiecountry.Value != null)
+    {
+        country = cookiecountry.Value;
+    }
+    else
+    {
+        HttpCookie newcookiecountry = new HttpCookie("Country");
+        newcookiecountry.Value = language;
+        Response.Cookies.Add(newcookiecountry);
+    }
+}
+
+@if (isEnglishLang)
+{
+    <style type="text/css">
+        label {
+            text-align: left;
+            width: 100%;
+        }
+
+        div.form-group {
+            float: right !important;
+        }
+    </style>
+}
+
+<style>
+    div.form-group {
+        float: right !important;
+    }
+
+    .confirm-code {
+        width: 100%;
+    }
+
+    .code {
+        font-size: 20px;
+        text-align: center;
+    }
+</style>
+
+<!-- register Section -->
+<section class="mainContent  text-right">
+    <div class="container">
+        <div class="row">
+            <div class="vp-container col-md-12">
+                <h2 class="headerPages text-center">
+                    @(language == "ar" ?"تفعيل رقم الهاتف المسجل, أدخل الرقم المرسل اليك" :"Confirm Phone Number, Enter the sent code")
+                </h2>
+                <div class="form-group col-md-8 col-8">
+                    <input name="Code" type="text" class="form-control code" next="5" required="" aria-describedby="emailHelp" placeholder="-">
+                </div>
+                <div class="form-group col-md-4 col-4">
+                    <button class="btn btn-success confirm-code" placeholder=" @(language == "ar" ?" أدخل الرقم المرسل اليك" :"Enter the sent code")">
+                        @(language == "ar" ? "تاكيد": "Confirm")
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3 class="headerPages text-center">
+                    @(language == "ar"? "لم تتلق الكود؟" : "Didn't get the code")
+                    <a class="btn-link resend-code" href="#">@(language == "ar" ? "أعد الارسال" : "Resend") </a>
+                    <a class="counter" style="display: none">@(language == "ar" ? "اعاده الارساله مره اخري بعد " : "Resend again after")  <span>0</span> @(language == "ar" ? "ثانيه" : "sec")</a>
+                </h3>
+            </div>
+        </div>
+    </div>
+</section>
+@{
+    var successMessage = "لقد تم تفعيل رقم الهاتف سيتم توجيهك الي الصفحه الرئيسيه";
+    var errorMessage = "الكود المدخل غير صحيح, تاكده من ادخال الكود المرسل";
+    var successMessageResend = "تم اعاده ارسال الكود";
+    var errorMessageResend = "لم تتم اعاده الارسال حاول";
+    var phone = ViewBag.UserName ?? "";
+}
+@section Scripts {
+    <script type="text/javascript">
+        //
+        $(document).ready(function () {
+            $('.resend-code').click(function () {
+                $.ajax({
+                    url: `/ResendVerifyCode?phone=@phone`,
+                    method: 'post',
+                    success: function (data) {
+                        if (data.status == true) {
+                            var waitingTime = 1000 * 180;
+
+                            toastr.success('@successMessageResend', 'Success');
+
+                            $('.counter').show();
+                            var time = waitingTime;
+
+                            var timer = setInterval(function () {
+                                time = time - 1000;
+                                $('.counter span').html(time / 1000);
+                            }, 1000);
+
+                            $('.resend-code').hide();
+                            var timeout = setTimeout(function () {
+                                $('.resend-code').show();
+                                $('.counter').hide();
+                                $('.counter span').html(0);
+                                clearInterval(timer);
+                            }, waitingTime);
+                            // clear time out
+                            // clearTimeout(timeout);
+
+                        }
+                        else
+                            toastr.error('@errorMessageResend', 'Invalid')
+                    }
+                })
+            })
+            $(".confirm-code").click(function () {
+                var code = $(".code");
+                if (isNaN(code.val())) {
+                    code.val('');
+                    toastr.error('Not valid')
+                    return false;
+                }
+                if (code.val().length == 0) {
+                    toastr.error('Not valid')
+
+                    return false;
+                }
+                $.ajax({
+                    url: `/CheckVerifyPhone?token=${code.val()}&un=@ViewBag.UserName&l=@language`,
+                    method: 'post',
+                    success: function (data) {
+                        if (data.status == true) {
+                            toastr.success('@successMessage', 'Success');
+                            @if(ViewBag.ReturnUrl != null)
+                            {
+                                <text>window.location = '/register';</text>
+                            }else
+                            {
+                                <text>window.location = '@ViewBag.ReturnUrl';</text>
+
+                            }
+
+                        }
+                        else
+                            toastr.error('@errorMessage', 'Invalid')
+                    }
+                });
+
+            })
+        });
+    </script>
+}
+<!-- register Section End -->
+<!-- Button trigger modal -->

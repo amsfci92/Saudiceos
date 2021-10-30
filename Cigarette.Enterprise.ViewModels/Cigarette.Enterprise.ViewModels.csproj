@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{48B68AB3-3806-4411-8D4D-F45BFBE1CC76}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cigarette.Enterprise.ViewModels</RootNamespace>
+    <AssemblyName>Cigarette.Enterprise.ViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.8.1.3\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.Mvc, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.Mvc5.8.1.3\lib\net45\FluentValidation.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.ValidatorAttribute, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.ValidatorAttribute.8.1.3\lib\net45\FluentValidation.ValidatorAttribute.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.1\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.ComponentModel.Primitives, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Primitives.4.3.0\lib\net45\System.ComponentModel.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BindingModels\AdminBindingModels\Category\AddCategoryAdminBinidingModel.cs" />
+    <Compile Include="BindingModels\AdminBindingModels\City\AddCityAdminBindingModel.cs" />
+    <Compile Include="BindingModels\AdminBindingModels\Country\AddCountryBindingModel.cs" />
+    <Compile Include="BindingModels\AdminBindingModels\Country\BaseModel.cs" />
+    <Compile Include="BindingModels\AdminBindingModels\Role\RoleBindingModel.cs" />
+    <Compile Include="BindingModels\AdminBindingModels\SpecificationOption\AddSpecificationOptionAdminBindingModel.cs" />
+    <Compile Include="BindingModels\AdminBindingModels\Specification\AddSpecificationAdminBindingModel.cs" />
+    <Compile Include="BindingModels\AdminBindingModels\Specification\AddSpecificationVm.cs" />
+    <Compile Include="BindingModels\AdminBindingModels\State\AddStateAdminBindingModel.cs" />
+    <Compile Include="BindingModels\Advertisement\AdvertisementBindingModel.cs" />
+    <Compile Include="BindingModels\Advertisement_SpecificationAttribute\Advertisement_SpecificationAttributeBindingModel.cs" />
+    <Compile Include="BindingModels\Bundle\BundleBM.cs" />
+    <Compile Include="BindingModels\CommercialAdsCategory\CommercialAdsCategoryBM.cs" />
+    <Compile Include="BindingModels\CommercialAd\CommercialAdBM.cs" />
+    <Compile Include="BindingModels\CommercialAd\SystemDataFileBM.cs" />
+    <Compile Include="BindingModels\PaymentGateway\PaymentGatewayBM.cs" />
+    <Compile Include="BindingModels\PaymentTransaction\PaymentTransactionBM.cs" />
+    <Compile Include="BindingModels\UserBundle\UserBundleBM.cs" />
+    <Compile Include="BindingModels\UserInfo\ChangePasswordBindingModel.cs" />
+    <Compile Include="BindingModels\UserInfo\UserDataBindingModel.cs" />
+    <Compile Include="BindingModels\UserInfo\UserInfoBindingModel.cs" />
+    <Compile Include="BindingModels\WepAPIBindingModel\Advertisment\AddAdvertisementBM.cs" />
+    <Compile Include="BindingModels\WepAPIBindingModel\Advertisment\AdvancedSearchMainModel.cs" />
+    <Compile Include="BindingModels\WepAPIBindingModel\Advertisment\AdvancedSearchParametersBM.cs" />
+    <Compile Include="BindingModels\WepAPIBindingModel\Advertisment\AdvertismentPhotoBM.cs" />
+    <Compile Include="BindingModels\WepAPIBindingModel\Advertisment\AdvertismentSpecificationBM.cs" />
+    <Compile Include="BindingModels\WepAPIBindingModel\Advertisment\ContactMeWith.cs" />
+    <Compile Include="Pagination\LinkInfo.cs" />
+    <Compile Include="Pagination\PagedList.cs" />
+    <Compile Include="Pagination\PagingHeader.cs" />
+    <Compile Include="Pagination\PagingParams.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\About\AboutBM.cs" />
+    <Compile Include="ViewModels\About\AboutVM.cs" />
+    <Compile Include="ViewModels\About\AbuseReportVM.cs" />
+    <Compile Include="ViewModels\About\HomePageModel.cs" />
+    <Compile Include="ViewModels\AdminViewModels\Specification\SpecificationVm.cs" />
+    <Compile Include="ViewModels\Advertisement\AdvertismentVM.cs" />
+    <Compile Include="ViewModels\Bundle\BundleVM.cs" />
+    <Compile Include="ViewModels\Category\CategoryWithSubViewModel.cs" />
+    <Compile Include="ViewModels\Category_SpecificationAttribute\CategoryLastNode_SpecificationVM.cs" />
+    <Compile Include="ViewModels\CommercialAdsCategory\CommercialAdsCategoryVM.cs" />
+    <Compile Include="ViewModels\CommercialAd\CommercialAdsUserVM.cs" />
+    <Compile Include="ViewModels\CommercialAd\CommercialAdVM.cs" />
+    <Compile Include="ViewModels\CommercialAd\SystemDataFileVM.cs" />
+    <Compile Include="ViewModels\ContactUs\ContactUsBM.cs" />
+    <Compile Include="ViewModels\ContactUs\ContactVM.cs" />
+    <Compile Include="ViewModels\CountryAdmin\CountryAdminBM.cs" />
+    <Compile Include="ViewModels\CountryAdmin\CountryAdminVM.cs" />
+    <Compile Include="ViewModels\Faqs\FaqBM.cs" />
+    <Compile Include="ViewModels\Faqs\FaqVM.cs" />
+    <Compile Include="ViewModels\FeaturedAdvertisement\FeaturedAdvertisementBM.cs" />
+    <Compile Include="ViewModels\FeaturedAdvertisement\FeaturedAdvertisementVM.cs" />
+    <Compile Include="ViewModels\FeaturedAdvertisement\FeaturedAdvertismentVM.cs" />
+    <Compile Include="ViewModels\Advertisement\AdvertisementDetailsViewModel.cs" />
+    <Compile Include="Validation\AddStateAdminBindingModelValidator.cs" />
+    <Compile Include="Validation\AddSpecificationOptionAdminBindingModelValidator.cs" />
+    <Compile Include="Validation\AddSpecificationAdminBindingModelValidator.cs" />
+    <Compile Include="Validation\AddCityAdminBindingModelValidator.cs" />
+    <Compile Include="Validation\AddCountryBindinModel.cs" />
+    <Compile Include="Validation\CategoryValidator.cs" />
+    <Compile Include="Validation\RoleBindingModelValidator.cs" />
+    <Compile Include="ViewModels\AdminViewModels\Category\CategoryListItemViewModel.cs" />
+    <Compile Include="ViewModels\AdminViewModels\Role\RoleViewModel.cs" />
+    <Compile Include="ViewModels\AdminViewModels\SpecificationOption\SpecificaationOptionListItemViewModel.cs" />
+    <Compile Include="ViewModels\AdminViewModels\Specification\CategorySpecificationListItemViewModel.cs" />
+    <Compile Include="ViewModels\AdminViewModels\Specification\SpecificationListItemViewModel.cs" />
+    <Compile Include="ViewModels\AdminViewModels\State\StateListItemViewModel.cs" />
+    <Compile Include="ViewModels\AdminViewModels\City\CityListItemViewModel.cs" />
+    <Compile Include="ViewModels\AdminViewModels\Country\CountryListItemViewModel.cs" />
+    <Compile Include="ViewModels\AdminViewModels\Country\CountryDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Advertisement\AdvertisementOutputModel.cs" />
+    <Compile Include="ViewModels\Advertisement\AdvertisementPostViewModel.cs" />
+    <Compile Include="ViewModels\Advertisement\AdvertisementViewModel.cs" />
+    <Compile Include="ViewModels\AdvertismentImage\AdvertismentImageBM.cs" />
+    <Compile Include="ViewModels\Category\CategoriesListVm.cs" />
+    <Compile Include="ViewModels\Category\CategoriesAndSubCategories.cs" />
+    <Compile Include="ViewModels\Category_SpecificationAttribute\Category_SpecificationAttributeViewModel.cs" />
+    <Compile Include="ViewModels\Category\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\City\CityWithStatesViewModel.cs" />
+    <Compile Include="ViewModels\Country\CityWithStatesViewModel.cs" />
+    <Compile Include="ViewModels\Country\Country.cs" />
+    <Compile Include="ViewModels\CurrencyVm\CurrencyListVm.cs" />
+    <Compile Include="ViewModels\Generic\GenericOutputModel.cs" />
+    <Compile Include="ViewModels\AdminViewModels\Category\AddCategoryModel.cs" />
+    <Compile Include="ViewModels\LanguageVm\LanguageListVm.cs" />
+    <Compile Include="ViewModels\Login\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Notification\Notification.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeRequest\PaymentMethodsCodes.cs" />
+    <Compile Include="ViewModels\PaymentGateway\PaymentGatewayListItemVM.cs" />
+    <Compile Include="ViewModels\PaymentGateway\PaymentGateway.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeRequest\PaymentProcessBM.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeRequest\TapChargeCustomer.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeRequest\TapChargeMetaData.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeRequest\TapChargePhone.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeRequest\TapChargeReceipt.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeRequest\TapChargeReference.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeResponse\TapChargeRequestResponseVM.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeResponse\TapChargeResponseReceiptVM.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeResponse\TapChargeResponseReferenceVM.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeResponse\TapChargeResponseStatus.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeResponse\TapChargeResponseTransactionVM.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeResponse\TapChargeResponseVM.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeRequest\TapChargeUrl.cs" />
+    <Compile Include="ViewModels\PaymentGateway\TapChargeRequest\TapCharge.cs" />
+    <Compile Include="ViewModels\PaymentTransaction\PaymentTransactionVM.cs" />
+    <Compile Include="ViewModels\Product\ProductOutputModel.cs" />
+    <Compile Include="ViewModels\Product\ProductViewModel.cs" />
+    <Compile Include="ViewModels\Register\RegisterBM.cs" />
+    <Compile Include="ViewModels\Settings\SettingsModel.cs" />
+    <Compile Include="ViewModels\SmsGateway\SmsGatewayBM.cs" />
+    <Compile Include="ViewModels\SmsGateway\SmsGatewayVM.cs" />
+    <Compile Include="ViewModels\SpecificationAttributeOption\SpecificationAttributeOptionViewModel.cs" />
+    <Compile Include="ViewModels\UserBundle\UserBundleVM.cs" />
+    <Compile Include="ViewModels\UserInfo\UserDataBM.cs" />
+    <Compile Include="ViewModels\UserInfo\UserInfoViewModel.cs" />
+    <Compile Include="ViewModels\WepAPIViewModel\Advertisement\AdvertisementListVM.cs" />
+    <Compile Include="ViewModels\WepAPIViewModel\Advertisement\AdvertisementVM.cs" />
+    <Compile Include="ViewModels\WepAPIViewModel\Advertisement\AdsPagedtWithCommercialAdsListVM.cs" />
+    <Compile Include="ViewModels\WepAPIViewModel\Advertisement\AdvertisementWithCommercialAdsListVM.cs" />
+    <Compile Include="ViewModels\WepAPIViewModel\AdvertismentSpecificationOptions\AdvertismentSpecificationOptionVM.cs" />
+    <Compile Include="ViewModels\WepAPIViewModel\AdvertismentSpecification\AdvertismentSpecificationVM.cs" />
+    <Compile Include="ViewModels\WepAPIViewModel\CategorySpcificationOption\CategorySpecificationOptionVM.cs" />
+    <Compile Include="ViewModels\WepAPIViewModel\CategorySpecification\CategorySpecificationForSearchVM.cs" />
+    <Compile Include="ViewModels\WepAPIViewModel\CategorySpecification\CategorySpecificationVM.cs" />
+    <Compile Include="ViewModels\WepAPIViewModel\Category\CategoryVM.cs" />
+    <Compile Include="VM\Service\CategoryVM.cs" />
+    <Compile Include="VM\Service\ServiceVM.cs" />
+    <Compile Include="VM\Setting\SettingVM.cs" />
+    <Compile Include="VM\CEO\CEOAddEditRequestVM.cs" />
+    <Compile Include="VM\User\UserEditVM.cs" />
+    <Compile Include="VM\User\UserVM.cs" />
+    <Compile Include="VM\Banner\BannerVM.cs" />
+    <Compile Include="VM\Breadcrumb\BreadcrumbItem.cs" />
+    <Compile Include="VM\Breadcrumb\BreadcrumbVM.cs" />
+    <Compile Include="VM\CEO\CEOVM.cs" />
+    <Compile Include="VM\CEO\NewsVM1.cs" />
+    <Compile Include="VM\DashboardStat.cs" />
+    <Compile Include="VM\Inbox\InboxVM.cs" />
+    <Compile Include="VM\Report\ReportVM.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cigarette.Enterprise.DAL\Cigarette.Enterprise.DAL.csproj">
+      <Project>{521546d7-7053-43f1-bac1-b8f29d53b9de}</Project>
+      <Name>Cigarette.Enterprise.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cigarette.Enterprise.ResourceManager\Cigarette.Enterprise.ResourceManager.csproj">
+      <Project>{34ae1867-5313-4dba-9a2a-97f49ca1bbbe}</Project>
+      <Name>Cigarette.Enterprise.ResourceManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BindingModels\AdminBindingModels\SubCategory\" />
+    <Folder Include="BindingModels\AdminBindingModels\ThirdCategory\" />
+    <Folder Include="BindingModels\City\" />
+    <Folder Include="BindingModels\Country\" />
+    <Folder Include="ViewModels\AdminViewModels\NewFolder1\" />
+    <Folder Include="ViewModels\NewFolder1\" />
+    <Folder Include="ViewModels\NewFolder2\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

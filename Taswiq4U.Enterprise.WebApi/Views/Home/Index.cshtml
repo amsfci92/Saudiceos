@@ -1,0 +1,300 @@
+﻿@model Cigarette.Enterprise.ViewModels.Pagination.PagedList<Cigarette.Enterprise.ViewModels.ViewModels.CommercialAd.CommercialAdVM>
+
+@{
+    Layout = "~/Views/Shared/_Layout_.cshtml";
+}
+
+
+
+
+<!-- MULTIPLE SEARCH -->
+
+
+<section class="search-sec">
+    <div class="container">
+        <form action="#" method="post" novalidate="novalidate">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <input type="text" class="form-control search-slt" placeholder="عن ماذا تبحث">
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <select class="form-control search-slt" id="exampleFormControlSelect1">
+                                <option>اختر المحافظة</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <select class="form-control search-slt" id="exampleFormControlSelect1">
+                                <option>اختر القسم</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <button type="button" class="btn btn-success wrn-btn">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- advertising -->
+<section class="ads">
+    <div class="container">
+        <h1>
+            <i class="far fa-clock"></i>
+            العروض
+        </h1>
+        <hr>
+        <div class="row">
+            @foreach (var item in Model.List)
+            {
+                <div class="col-md-3">
+                    <article class="col-item">
+                        <div class="photo">
+                            <a href="productDetails.html"> <img height="100%" src="/Content/images/c3.png" class="/Content/img-responsive" alt="Product Image" /> </a>
+                        </div>
+                        <div class="info">
+                            <div class="price-details ">
+                                <h1>اسم العنوان</h1>
+                                <span class="price-new">$110.00</span>
+                                <div class="options">
+                                    <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                        <i class="fa fa-heart"></i>
+                                    </button>
+                                    <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            }
+
+            <div class="col-md-3">
+                <article class="col-item">
+                    <div class="photo">
+                        <div class="options">
+                            <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                <i class="fa fa-heart"></i>
+                            </button>
+                            <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <a href="productDetails.html"> <img src="/Content/images/c3.png" class="/Content/img-responsive" alt="Product Image" /> </a>
+                    </div>
+                    <div class="info">
+                        <div class="price-details ">
+                            <h1>اسم العنوان</h1>
+                            <span class="price-new">$110.00</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-md-3">
+                <article class="col-item">
+                    <div class="photo">
+                        <div class="options">
+                            <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                <i class="fa fa-heart"></i>
+                            </button>
+                            <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <a href="productDetails.html"> <img src="/Content/images/c3.png" class="/Content/img-responsive" alt="Product Image" /> </a>
+                    </div>
+                    <div class="info">
+                        <div class="price-details ">
+                            <h1>اسم العنوان</h1>
+                            <span class="price-new">$110.00</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-md-3">
+                <article class="col-item">
+                    <div class="photo">
+                        <div class="options">
+                            <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                <i class="fa fa-heart"></i>
+                            </button>
+                            <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <a href="productDetails.html"> <img src="/Content/images/c3.png" class="/Content/img-responsive" alt="Product Image" /> </a>
+                    </div>
+                    <div class="info">
+                        <div class="price-details ">
+                            <h1>اسم العنوان</h1>
+                            <span class="price-new">$110.00</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-md-3">
+                <article class="col-item">
+                    <div class="photo">
+                        <div class="options">
+                            <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                <i class="fa fa-heart"></i>
+                            </button>
+                            <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <a href="productDetails.html"> <img src="/Content/images/c3.png" class="/Content/img-responsive" alt="Product Image" /> </a>
+                    </div>
+                    <div class="info">
+                        <div class="price-details ">
+                            <h1>اسم العنوان</h1>
+                            <span class="price-new">$110.00</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-md-3">
+                <article class="col-item">
+                    <div class="photo">
+                        <div class="options">
+                            <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                <i class="fa fa-heart"></i>
+                            </button>
+                            <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <a href="productDetails.html"> <img src="/Content/images/c3.png" class="/Content/img-responsive" alt="Product Image" /> </a>
+                    </div>
+                    <div class="info">
+                        <div class="price-details ">
+                            <h1>اسم العنوان</h1>
+                            <span class="price-new">$110.00</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-md-3">
+                <article class="col-item">
+                    <div class="photo">
+                        <div class="options">
+                            <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                <i class="fa fa-heart"></i>
+                            </button>
+                            <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <a href="productDetails.html"> <img src="/Content/images/c3.png" class="/Content/img-responsive" alt="Product Image" /> </a>
+                    </div>
+                    <div class="info">
+                        <div class="price-details ">
+                            <h1>اسم العنوان</h1>
+                            <span class="price-new">$110.00</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-md-3">
+                <article class="col-item">
+                    <div class="photo">
+                        <div class="options">
+                            <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                <i class="fa fa-heart"></i>
+                            </button>
+                            <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <a href="productDetails.html"> <img src="/Content/images/c3.png" class="/Content/img-responsive" alt="Product Image" /> </a>
+                    </div>
+                    <div class="info">
+                        <div class="price-details ">
+                            <h1>اسم العنوان</h1>
+                            <span class="price-new">$110.00</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="pagination">
+            <a href="#">&laquo;</a>
+            <a href="#">1</a>
+            <a href="#" class="active">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">&raquo;</a>
+        </div>
+    </div>
+</section>
+<!-- DOWNLOAAAAAD SECTION -->
+<section class="download">
+    <div class="container">
+        <h3>حمل مجانا التطبيق الخاص بهاتفك</h3>
+        <a href="#"><img src="/Content/images/android.png"></a>
+        <a href="#"><img src="/Content/images/ios.png"></a>
+    </div>
+</section>
+
+
+<!-- quick view-->
+<div class="modal fade product_view" id="product_view">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row product">
+                        <div class="col-md-12 ">
+                            <img class="d-block w- 100" width="100%" src="/Content/images/products/c6.png" alt="First slide">
+                        </div>
+                        <div class="col-md-12 productContent">
+                            <h1 class="text-center">العنوان</h1>
+                            <div class="content">
+                                <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                    <i class="fa fa-heart"></i>
+                                    444
+                                </button>
+                                <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                    <i class="fas fa-eye"></i> 1212
+                                </button>
+                                <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                    <i class="fas fa-eye"></i> 1212
+                                </button>
+                                <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                    <i class="fas fa-eye"></i> 1212
+                                </button>
+                                <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                    <i class="fas fa-eye"></i> 1212
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

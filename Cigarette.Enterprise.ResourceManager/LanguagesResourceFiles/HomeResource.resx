@@ -1,0 +1,1032 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Country Contact Info</value>
+  </data>
+  <data name="AdminCategoryAddCategory" xml:space="preserve">
+    <value>Add New Category</value>
+  </data>
+  <data name="AdminCategoryAddCategoryChooseMessage" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="AdminCategoryAddCategoryCreateButton" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="AdminCategoryCountryCategoriesList" xml:space="preserve">
+    <value>Categories List For</value>
+  </data>
+  <data name="AdminCategoryCtegories" xml:space="preserve">
+    <value>Categories List</value>
+  </data>
+  <data name="AdminCategoryDetails" xml:space="preserve">
+    <value>Category Details</value>
+  </data>
+  <data name="AdminCategorySpecifications" xml:space="preserve">
+    <value>Category Specifications</value>
+  </data>
+  <data name="AdminCityAddNewCity" xml:space="preserve">
+    <value>Add New City</value>
+  </data>
+  <data name="AdminCityCities" xml:space="preserve">
+    <value>Cities List</value>
+  </data>
+  <data name="AdminCityCountryCities" xml:space="preserve">
+    <value>Cities For</value>
+  </data>
+  <data name="AdminCityDetails" xml:space="preserve">
+    <value>City Details</value>
+  </data>
+  <data name="AdminCountryAddCountry" xml:space="preserve">
+    <value>Add Country</value>
+  </data>
+  <data name="AdminCountryCountryDetails" xml:space="preserve">
+    <value>Country Details</value>
+  </data>
+  <data name="AdminCountryCountrylist" xml:space="preserve">
+    <value>Countries List</value>
+  </data>
+  <data name="AdminMessagesAddedSuccessfully" xml:space="preserve">
+    <value>Added Successfully</value>
+  </data>
+  <data name="AdminMessagesErrorHappened" xml:space="preserve">
+    <value>Error Happened</value>
+  </data>
+  <data name="asd" xml:space="preserve">
+    <value>as</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="CountryNameNotNull" xml:space="preserve">
+    <value>Country Name Not Null</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
+  <data name="HomeHeaderCategoriesLink" xml:space="preserve">
+    <value>Ctegories</value>
+  </data>
+  <data name="HomeHeaderFavoriteLink" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="HomeHeaderHomeLink" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="HomeHeaderMessagesLink" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>Home Page</value>
+  </data>
+  <data name="Home_" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Logoff" xml:space="preserve">
+    <value>Log off</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="AdminCityStates" xml:space="preserve">
+    <value>States List</value>
+  </data>
+  <data name="AdminAddNewState" xml:space="preserve">
+    <value>Add New State</value>
+  </data>
+  <data name="AdminNewCountryCurrency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="AdminNewCountryFlag" xml:space="preserve">
+    <value>Flag</value>
+  </data>
+  <data name="AdminNewCountryHeader" xml:space="preserve">
+    <value>Create New Country</value>
+  </data>
+  <data name="AdminNewCountryLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="AdminNewCountryNameAr" xml:space="preserve">
+    <value>Arabic Name</value>
+  </data>
+  <data name="AdminNewCountryNameEn" xml:space="preserve">
+    <value>English Name</value>
+  </data>
+  <data name="AdminNewCountryIsActive" xml:space="preserve">
+    <value>Is Active</value>
+  </data>
+  <data name="AdminNewCityNameAr" xml:space="preserve">
+    <value>Arabic Name</value>
+  </data>
+  <data name="AdminNewCityNameEn" xml:space="preserve">
+    <value>English Name</value>
+  </data>
+  <data name="AdminNewCitySubmit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="AdminNewStateAdd" xml:space="preserve">
+    <value>Add New State</value>
+  </data>
+  <data name="AdminNewStateNameAr" xml:space="preserve">
+    <value>Arabic Name</value>
+  </data>
+  <data name="AdminNewStateNameEn" xml:space="preserve">
+    <value>English Name</value>
+  </data>
+  <data name="AdminAddNewCategory" xml:space="preserve">
+    <value>Add New Category</value>
+  </data>
+  <data name="AdminCategoryListTitle" xml:space="preserve">
+    <value>Category List</value>
+  </data>
+  <data name="AdminTextFieldValidationMessage" xml:space="preserve">
+    <value>can not be null</value>
+  </data>
+  <data name="AdminSpecificationsList" xml:space="preserve">
+    <value>Sepcifications</value>
+  </data>
+  <data name="AdminNewSpecificationAllowFiltering" xml:space="preserve">
+    <value>Allow Filtering</value>
+  </data>
+  <data name="AdminNewSpecificationArabicName" xml:space="preserve">
+    <value>Arabic Name</value>
+  </data>
+  <data name="AdminNewSpecificationDetails" xml:space="preserve">
+    <value>Specification Details</value>
+  </data>
+  <data name="AdminNewSpecificationDisplayOrder" xml:space="preserve">
+    <value>Display Order</value>
+  </data>
+  <data name="AdminNewSpecificationEnglishName" xml:space="preserve">
+    <value>English Name</value>
+  </data>
+  <data name="AdminNewSpecificationErrorMessage" xml:space="preserve">
+    <value>Can not be empty</value>
+  </data>
+  <data name="AdminNewSpecificationFormTitle" xml:space="preserve">
+    <value>Add New Specification</value>
+  </data>
+  <data name="AdminNewSpecificationRequired" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="AdminNewSpecificationType" xml:space="preserve">
+    <value>Specification Type</value>
+  </data>
+  <data name="AdminNewSpecificationAddOptions" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="AdminNewSpecificationCategoryName" xml:space="preserve">
+    <value>Category Name</value>
+  </data>
+  <data name="AdminNewSpecificationID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="AdminFalse" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="AdminTrue" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="AdminNewSpecificationOption" xml:space="preserve">
+    <value>New Specification Option Details</value>
+  </data>
+  <data name="AdminNewSpecificationOptionHeader" xml:space="preserve">
+    <value>New Specification Option</value>
+  </data>
+  <data name="AdminSpecificationOptions" xml:space="preserve">
+    <value>Specification Options</value>
+  </data>
+  <data name="AdminSpecificationOptionsList" xml:space="preserve">
+    <value>Options List</value>
+  </data>
+  <data name="AdminCategoryDetailsA" xml:space="preserve">
+    <value>Category Details</value>
+  </data>
+  <data name="AdminCategoryDetailsTab" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="AdminCategorySpecificationDetailsTab" xml:space="preserve">
+    <value>Category Specifications</value>
+  </data>
+  <data name="AdminNewCategoryAddSubCategory" xml:space="preserve">
+    <value>Add SubCategory</value>
+  </data>
+  <data name="AdminSubCategoryDetailsTab" xml:space="preserve">
+    <value>Sub Categories</value>
+  </data>
+  <data name="AdminAddNewCategoryLogo" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="AdminNewSpecificationAddNew" xml:space="preserve">
+    <value>Add New</value>
+  </data>
+  <data name="AdminTableHeaderCurrency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="AdminTableHeaderFlag" xml:space="preserve">
+    <value>Flag</value>
+  </data>
+  <data name="AdminTableHeaderLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="AdminNewSpecificationOptionsAddNew" xml:space="preserve">
+    <value>Add New</value>
+  </data>
+  <data name="AdminCountryEditCountryTitle" xml:space="preserve">
+    <value>Edit Country Details</value>
+  </data>
+  <data name="AdminLoginPageAlertMessage" xml:space="preserve">
+    <value>Enter any Username Or Passwod</value>
+  </data>
+  <data name="AdminLoginPageCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AdminLoginPageForgetPassword" xml:space="preserve">
+    <value>Forget Passwod</value>
+  </data>
+  <data name="AdminLoginPageHeader" xml:space="preserve">
+    <value>Administrator Login Page</value>
+  </data>
+  <data name="AdminLoginPagePassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="AdminLoginPageRemmberMe" xml:space="preserve">
+    <value>Remember Me ?</value>
+  </data>
+  <data name="AdminLoginPageResetPasswordMessage" xml:space="preserve">
+    <value>Enter your e-mail address below to reset your password.</value>
+  </data>
+  <data name="AdminLoginPageSubmit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="AdminLoginPageUserName" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="LoginPageHeader" xml:space="preserve">
+    <value>Login To Your Account</value>
+  </data>
+  <data name="LoginPageTitle" xml:space="preserve">
+    <value>Saudiceos | Login Page</value>
+  </data>
+  <data name="DeleteButtonTitle" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DetailsButtonTitle" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="EditButtonTitle" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="Cities" xml:space="preserve">
+    <value>Cities</value>
+  </data>
+  <data name="States" xml:space="preserve">
+    <value>States</value>
+  </data>
+  <data name="AdminNewBundleAdsCount" xml:space="preserve">
+    <value>Ads Count</value>
+  </data>
+  <data name="AdminNewBundleCost" xml:space="preserve">
+    <value>Ads Cost</value>
+  </data>
+  <data name="AdminNewBundleCountry" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="AdminNewBundleList" xml:space="preserve">
+    <value>Bundle List</value>
+  </data>
+  <data name="AdminNewBundleMaxPeriod" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="AdminNewBundleMinPeriod" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="AdminNewBundleTitle" xml:space="preserve">
+    <value>Add New Bundle</value>
+  </data>
+  <data name="AdminNewCountryFeaturedAdCost" xml:space="preserve">
+    <value>Featured Ad Cost</value>
+  </data>
+  <data name="AdminNewCountryFreeAdCounts" xml:space="preserve">
+    <value>Free Ad Count</value>
+  </data>
+  <data name="AdminBundleActivate" xml:space="preserve">
+    <value>Activate</value>
+  </data>
+  <data name="AdminBundleDeActivate" xml:space="preserve">
+    <value>De Activate</value>
+  </data>
+  <data name="AdminEditBundleTitle" xml:space="preserve">
+    <value>Edit Bundle Details</value>
+  </data>
+  <data name="AdminAdsAddNew" xml:space="preserve">
+    <value>Add New Ad</value>
+  </data>
+  <data name="AdminAdsCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="AdminAdsCountry" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="AdminAdsCreationDate" xml:space="preserve">
+    <value>Creation Date</value>
+  </data>
+  <data name="AdminAdsDescription" xml:space="preserve">
+    <value>Ad Description</value>
+  </data>
+  <data name="AdminAdsDetails" xml:space="preserve">
+    <value>Ad Details</value>
+  </data>
+  <data name="AdminAdsEndDate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="AdminAdsImage" xml:space="preserve">
+    <value>Ad Image</value>
+  </data>
+  <data name="AdminAdsLink" xml:space="preserve">
+    <value>Ad Link</value>
+  </data>
+  <data name="AdminAdsType" xml:space="preserve">
+    <value>Ad Type</value>
+  </data>
+  <data name="AdminAdsTypeInBetween" xml:space="preserve">
+    <value>Between Ads</value>
+  </data>
+  <data name="AdminAdsTypeOffer" xml:space="preserve">
+    <value>Offer</value>
+  </data>
+  <data name="AdminAdsTypePopup" xml:space="preserve">
+    <value>Popup</value>
+  </data>
+  <data name="AdminAdsTypeSlider" xml:space="preserve">
+    <value>Slider</value>
+  </data>
+  <data name="AdminAdsNotification" xml:space="preserve">
+    <value>Notification Count</value>
+  </data>
+  <data name="AdminAdsStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="AdminAdsChooseCategory" xml:space="preserve">
+    <value>Choose Category</value>
+  </data>
+  <data name="AdminAdsChooseCountry" xml:space="preserve">
+    <value>Choose Country</value>
+  </data>
+  <data name="AdminAdsList" xml:space="preserve">
+    <value>Commercial Ads List</value>
+  </data>
+  <data name="AdminAddNewBundle" xml:space="preserve">
+    <value>New Bundle</value>
+  </data>
+  <data name="AdminAddNewSpecification" xml:space="preserve">
+    <value>New Specification</value>
+  </data>
+  <data name="SystemPageTitle" xml:space="preserve">
+    <value>Saudiceos</value>
+  </data>
+  <data name="W-AddAdvertisment" xml:space="preserve">
+    <value>Add Advertisment</value>
+  </data>
+  <data name="W-AdQuickView" xml:space="preserve">
+    <value>Advertisment Quick View</value>
+  </data>
+  <data name="W-AllCategories" xml:space="preserve">
+    <value>All Categories</value>
+  </data>
+  <data name="W-AllRightsReserved" xml:space="preserve">
+    <value>All rights reserved to Saudiceos</value>
+  </data>
+  <data name="W-ChooseCategory" xml:space="preserve">
+    <value>Choose Category</value>
+  </data>
+  <data name="W-ChooseCity" xml:space="preserve">
+    <value>Choose City</value>
+  </data>
+  <data name="W-ContactUs" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+  <data name="W-DownloadApp" xml:space="preserve">
+    <value>Download applicaion for free</value>
+  </data>
+  <data name="W-EditPRofile" xml:space="preserve">
+    <value>Edit Profile</value>
+  </data>
+  <data name="W-Favorite" xml:space="preserve">
+    <value>Favorite List</value>
+  </data>
+  <data name="W-FeaturedAds" xml:space="preserve">
+    <value>Featured Advertisments</value>
+  </data>
+  <data name="W-HomePage" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="W-LatestAds" xml:space="preserve">
+    <value>Latest Advertisments</value>
+  </data>
+  <data name="W-Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="W-Login-Facebook" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="W-Login-ForgetPassoword" xml:space="preserve">
+    <value>Forget Password ?</value>
+  </data>
+  <data name="W-Login-GooglePlus" xml:space="preserve">
+    <value>Google Plus</value>
+  </data>
+  <data name="W-Login-OrLoginWith" xml:space="preserve">
+    <value>Or Login With</value>
+  </data>
+  <data name="W-Login-RemmemberMe" xml:space="preserve">
+    <value>Remmember Me</value>
+  </data>
+  <data name="W-MyAds" xml:space="preserve">
+    <value>My Ads</value>
+  </data>
+  <data name="W-PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="W-Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="W-Register-ConfirmPassword" xml:space="preserve">
+    <value>Retype Password</value>
+  </data>
+  <data name="W-Register-Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="W-Register-Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="W-Register-Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="W-Register-Registeration" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="W-Register-RegisterationOrLogin" xml:space="preserve">
+    <value>Login - Register</value>
+  </data>
+  <data name="W-SafetyRules" xml:space="preserve">
+    <value>Saftey Rules</value>
+  </data>
+  <data name="W-SearchButton" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="W-Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="W-UseTerms" xml:space="preserve">
+    <value>Terms of use</value>
+  </data>
+  <data name="W_Registeration_Country" xml:space="preserve">
+    <value>Choose Country</value>
+  </data>
+  <data name="W_Registeration_Country_Required" xml:space="preserve">
+    <value>Country Required</value>
+  </data>
+  <data name="W_Registeration_FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="W_Registeration_FirstName_Required" xml:space="preserve">
+    <value>First Name Requried</value>
+  </data>
+  <data name="W_Registeration_Password" xml:space="preserve">
+    <value>Enter Password</value>
+  </data>
+  <data name="W_Registeration_PasswordConfirm_Required" xml:space="preserve">
+    <value>Confirm Password Required</value>
+  </data>
+  <data name="W_Registeration_PasswordNotvalid" xml:space="preserve">
+    <value>Password Not Valid</value>
+  </data>
+  <data name="W_Registeration_PasswordNotValid_Required" xml:space="preserve">
+    <value>{0} must be {1} or more charcters</value>
+  </data>
+  <data name="W_Registeration_Password_Confirm" xml:space="preserve">
+    <value>Confirm Password Required</value>
+  </data>
+  <data name="W_Registeration_Password_DonMatch" xml:space="preserve">
+    <value>Password Confrmation Don't Match the password</value>
+  </data>
+  <data name="W_Registeration_Password_Required" xml:space="preserve">
+    <value>Password Required</value>
+  </data>
+  <data name="W_Registeration_Phone_Required" xml:space="preserve">
+    <value>Phone Required</value>
+  </data>
+  <data name="W_Registeration_SecondName" xml:space="preserve">
+    <value>Second Name</value>
+  </data>
+  <data name="W_Registeration_SecondName_Required" xml:space="preserve">
+    <value>Second Name Required</value>
+  </data>
+  <data name="W_SearchForWhat" xml:space="preserve">
+    <value>Search for what you want</value>
+  </data>
+  <data name="W-Offers" xml:space="preserve">
+    <value>Companies Ads</value>
+  </data>
+  <data name="AdminNavigationAdmins" xml:space="preserve">
+    <value>System Admins</value>
+  </data>
+  <data name="AdminNavigationAdsSetting" xml:space="preserve">
+    <value>Advertisements</value>
+  </data>
+  <data name="AdminNavigationAdvs" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="AdminNavigationFeatures" xml:space="preserve">
+    <value>Featured Advs</value>
+  </data>
+  <data name="AdminNavigationHome" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="AdminNavigationUserIssues" xml:space="preserve">
+    <value>User Issues</value>
+  </data>
+  <data name="AdminNavigationUsersSetting" xml:space="preserve">
+    <value>Users </value>
+  </data>
+  <data name="AboutUsArabic" xml:space="preserve">
+    <value>About us Arabic</value>
+  </data>
+  <data name="AboutusEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="AboutUsEnglish" xml:space="preserve">
+    <value>About us English</value>
+  </data>
+  <data name="AboutusFaceboo" xml:space="preserve">
+    <value>Facebook Page</value>
+  </data>
+  <data name="AboutusInstagram" xml:space="preserve">
+    <value>Instagram Account</value>
+  </data>
+  <data name="AboutusPhone" xml:space="preserve">
+    <value>Phone Number 1</value>
+  </data>
+  <data name="AboutusPrivacyArabic" xml:space="preserve">
+    <value>Privacy &amp; Policy Arabic</value>
+  </data>
+  <data name="AboutusPrivacyEnglish" xml:space="preserve">
+    <value>Privacy &amp; Policy English</value>
+  </data>
+  <data name="AboutusTermsArabic" xml:space="preserve">
+    <value>Terms&amp;Conditions Arabic</value>
+  </data>
+  <data name="AboutusTermsEnglish" xml:space="preserve">
+    <value>Terms&amp;Conditions English</value>
+  </data>
+  <data name="AboutusTitle" xml:space="preserve">
+    <value>System Info</value>
+  </data>
+  <data name="AboutusTwitter" xml:space="preserve">
+    <value>Twitter Account</value>
+  </data>
+  <data name="AboutusYoutube" xml:space="preserve">
+    <value>Youtube Channel</value>
+  </data>
+  <data name="AddNewAdmin" xml:space="preserve">
+    <value>Add New Admin</value>
+  </data>
+  <data name="AdminList" xml:space="preserve">
+    <value>Admins List</value>
+  </data>
+  <data name="AdminNavigationAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AdminsList" xml:space="preserve">
+    <value>Admin List</value>
+  </data>
+  <data name="AdsCost" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="AdsCountryName" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="AdsDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="AdsDuration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="AdsEndDate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="AdsFree" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="AdsLink" xml:space="preserve">
+    <value>Ad Link</value>
+  </data>
+  <data name="AdsOwner" xml:space="preserve">
+    <value>Ad Owner</value>
+  </data>
+  <data name="AdsPhone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="AdsStartDate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="AdsType" xml:space="preserve">
+    <value>Ad Type</value>
+  </data>
+  <data name="AdsViews" xml:space="preserve">
+    <value>Views</value>
+  </data>
+  <data name="AdvertisementList" xml:space="preserve">
+    <value>Advertisements</value>
+  </data>
+  <data name="CategoryName" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="EditAdminDetails" xml:space="preserve">
+    <value>Edit Admin Details</value>
+  </data>
+  <data name="FaqAddNew" xml:space="preserve">
+    <value>Add New Question</value>
+  </data>
+  <data name="FaqAnswerAr" xml:space="preserve">
+    <value>Answer Arabic</value>
+  </data>
+  <data name="FaqAnswerEn" xml:space="preserve">
+    <value>Answer English</value>
+  </data>
+  <data name="FaqQuestionAe" xml:space="preserve">
+    <value>Question Arabic</value>
+  </data>
+  <data name="FaqQuestionEn" xml:space="preserve">
+    <value>Question English</value>
+  </data>
+  <data name="FaqTitile" xml:space="preserve">
+    <value>FAQs</value>
+  </data>
+  <data name="FeaturedAdsList" xml:space="preserve">
+    <value>Featured Advertisement List</value>
+  </data>
+  <data name="UserAds" xml:space="preserve">
+    <value>User Commercial Ads</value>
+  </data>
+  <data name="UserAdvertisement" xml:space="preserve">
+    <value>User Advertisements</value>
+  </data>
+  <data name="UserBudles" xml:space="preserve">
+    <value>User Bundles</value>
+  </data>
+  <data name="UserDetails" xml:space="preserve">
+    <value>User Details</value>
+  </data>
+  <data name="UserEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="UserFeaturedAds" xml:space="preserve">
+    <value>User Featured Ads</value>
+  </data>
+  <data name="UserFirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="UserLastName" xml:space="preserve">
+    <value>Second Name</value>
+  </data>
+  <data name="UserList" xml:space="preserve">
+    <value>Users List</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="UserPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="UserPhone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="UserUserName" xml:space="preserve">
+    <value>UserName</value>
+  </data>
+  <data name="SmsCountryCode" xml:space="preserve">
+    <value>Country Code</value>
+  </data>
+  <data name="SmsEdit" xml:space="preserve">
+    <value>Edit Country Sms Gateway Details</value>
+  </data>
+  <data name="SmsPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="SmsTitle" xml:space="preserve">
+    <value>Sms Gateways</value>
+  </data>
+  <data name="SmsUserName" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="AboutCountryEdit" xml:space="preserve">
+    <value>Edit Country Contact Info</value>
+  </data>
+  <data name="AboutGooglePlus" xml:space="preserve">
+    <value>Google Plus Url</value>
+  </data>
+  <data name="AboutPhone2" xml:space="preserve">
+    <value>Phone Number 2</value>
+  </data>
+  <data name="aboutTitle" xml:space="preserve">
+    <value>Country Contact Info</value>
+  </data>
+  <data name="AdminMultiSelectDropdonwList" xml:space="preserve">
+    <value>Multi Select</value>
+  </data>
+  <data name="WAddedSuccessfully" xml:space="preserve">
+    <value>Your Ad Added Successfully</value>
+  </data>
+  <data name="WMakeSureCompleteData" xml:space="preserve">
+    <value>Please complete all the required fields</value>
+  </data>
+  <data name="WNext" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="WPleaseAddPhoto" xml:space="preserve">
+    <value>At least one photo required</value>
+  </data>
+  <data name="WPrev" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="WRefreshPage" xml:space="preserve">
+    <value>Pleash refresh the page and try again</value>
+  </data>
+  <data name="WSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="CommVisitWebsite" xml:space="preserve">
+    <value>Visit Website</value>
+  </data>
+  <data name="AdminCountToDelete" xml:space="preserve">
+    <value>Ads Count to delete</value>
+  </data>
+  <data name="AdminDaysToDelete" xml:space="preserve">
+    <value>Days to delete</value>
+  </data>
+  <data name="AdminSearchForAll" xml:space="preserve">
+    <value>Add to search all</value>
+  </data>
+  <data name="NoAdsFound" xml:space="preserve">
+    <value>No Ads Found</value>
+  </data>
+  <data name="AdAdditionalDetails" xml:space="preserve">
+    <value>Location Details</value>
+  </data>
+  <data name="AdPrice" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="HasHorizontalMenu" xml:space="preserve">
+    <value>Horizontal Menu</value>
+  </data>
+  <data name="IsCommercialCategory" xml:space="preserve">
+    <value>Commercial Ad Category</value>
+  </data>
+  <data name="IsNogetable" xml:space="preserve">
+    <value>Nogitable</value>
+  </data>
+  <data name="UserAdvertisementTitle" xml:space="preserve">
+    <value>Ad Title</value>
+  </data>
+  <data name="AddFavorite" xml:space="preserve">
+    <value>Add Favorite</value>
+  </data>
+  <data name="RemoveAd" xml:space="preserve">
+    <value>Remove Ad</value>
+  </data>
+  <data name="RemoveFavorite" xml:space="preserve">
+    <value>Remove Favorite</value>
+  </data>
+  <data name="ReportAd" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="Translate" xml:space="preserve">
+    <value>Translate</value>
+  </data>
+  <data name="AbuseReport_Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="AbuseReport_Reason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="Abuse_Reports" xml:space="preserve">
+    <value>Abuse Reports</value>
+  </data>
+  <data name="NavigationCountryAdmins" xml:space="preserve">
+    <value>Country Admins</value>
+  </data>
+  <data name="W-Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="W_Add_Ad_Note" xml:space="preserve">
+    <value>Please don't Add a repeated Ads for the same product or the service that you has shared, All the repeated Ads will be deleted.</value>
+  </data>
+  <data name="W_PostAd" xml:space="preserve">
+    <value>Save Ad</value>
+  </data>
+  <data name="CommercailAds" xml:space="preserve">
+    <value>Commercial Ads</value>
+  </data>
+  <data name="contactus_please_add_message" xml:space="preserve">
+    <value>Please Add your message</value>
+  </data>
+  <data name="contact_message" xml:space="preserve">
+    <value>Write your message</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="email_invalid" xml:space="preserve">
+    <value>Email invalid</value>
+  </data>
+  <data name="required" xml:space="preserve">
+    <value>{0} is required</value>
+  </data>
+  <data name="accept_agreement" xml:space="preserve">
+    <value>Registeration on Saudiceos considered accepting for</value>
+  </data>
+  <data name="admin_privacy_policy_ar" xml:space="preserve">
+    <value>Privacy Ploicy in Arabic</value>
+  </data>
+  <data name="admin_privacy_policy_en" xml:space="preserve">
+    <value>Privacy Policy in English</value>
+  </data>
+  <data name="admin_safty_rules_ar" xml:space="preserve">
+    <value>Safty Rules in Arabic</value>
+  </data>
+  <data name="admin_safty_rules_en" xml:space="preserve">
+    <value>Safty Rules in English</value>
+  </data>
+  <data name="admin_term_use_ar" xml:space="preserve">
+    <value>Terms of Use in Arabic </value>
+  </data>
+  <data name="admin_term_use_en" xml:space="preserve">
+    <value>Terms of Use in English</value>
+  </data>
+  <data name="W_Registeration_Phone_NotValid" xml:space="preserve">
+    <value>Phone Number is not valid, Please use numbers only</value>
+  </data>
+  <data name="W_Registeration_Phone_Short" xml:space="preserve">
+    <value>Phone number is too short, please check the number</value>
+  </data>
+  <data name="WAdDetails" xml:space="preserve">
+    <value>Advertisment Quick Details</value>
+  </data>
+  <data name="LikedSuccessfully" xml:space="preserve">
+    <value>Advertisment Liked Successfully</value>
+  </data>
+  <data name="W-haveNoFreeAds" xml:space="preserve">
+    <value>You Consumed Your Free Ads This Month</value>
+  </data>
+  <data name="FreeAdsBalance" xml:space="preserve">
+    <value>Free Ads Balance</value>
+  </data>
+  <data name="HasNoFreeAds" xml:space="preserve">
+    <value>You Do Not Have Free Ads</value>
+  </data>
+  <data name="CannotFeatureMoreThanOneAddIn24Hour" xml:space="preserve">
+    <value>You Can not Feature More Than One Ad In 24 Hour</value>
+  </data>
+  <data name="OperationFailed" xml:space="preserve">
+    <value>Something Wrong</value>
+  </data>
+  <data name="OperationSuccess" xml:space="preserve">
+    <value>OPeration Done Successfully</value>
+  </data>
+  <data name="Feature" xml:space="preserve">
+    <value>Feature</value>
+  </data>
+  <data name="FeatureAdWillDeductTwoFreeAds" xml:space="preserve">
+    <value>Feature Ad Will Deduct Two Free Ads</value>
+  </data>
+  <data name="NoFreeAdsBalanceFound" xml:space="preserve">
+    <value>You do not have Free Ads Balance </value>
+  </data>
+</root>

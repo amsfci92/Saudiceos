@@ -1,0 +1,201 @@
+﻿@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+
+<div class="page-sidebar navbar-collapse collapse">
+    <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="true" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+        <li class="sidebar-toggler-wrapper hide">
+            <div class="sidebar-toggler"> </div>
+        </li>
+        <li class="nav-item start">
+            <a href="/admin/dashboard/details" class="nav-link nav-toggle">
+                <i class="icon-home"></i>
+                <span class="title font-white-hoki sbold">@HomeResource.AdminNavigationHome</span>
+                <span class="selected"></span>
+            </a>
+        </li>
+        @if (User.IsInRole("CountryAdmin"))
+        {
+            <li class="nav-item  ">
+                <a href="" class="nav-link ">
+                    <i class="fa fa-globe"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.AdminCountryCountrylist </span>
+                </a>
+            </li>
+
+            <li class="nav-item  ">
+                <a href="" class="nav-link ">
+                    <i class="fa fa-map-marker"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.Cities </span>
+                </a>
+            </li>
+
+            <li class="nav-item  ">
+                <a href="" class="nav-link ">
+                    <i class="fa fa-tree"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.Categories </span>
+                </a>
+            </li>
+             
+            <li class="nav-item  ">
+                <a href="" class="nav-link ">
+                    <i class="icon-social-youtube"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.AdminAdsList</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-social-youtube"></i>
+                    <span class="title font-white-hoki sbold"> @HomeResource.AdminNavigationAdsSetting </span>
+                    <i class="arrow"></i>
+                </a>
+                <ul class="sub-menu">
+
+                    <li class="nav-item  ">
+                        <a href="" class="nav-link ">
+                            <span class="title font-white-hoki sbold">@HomeResource.AdminNavigationAdvs</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item  ">
+                        <a href="" class="nav-link ">
+                            <span class="title font-white-hoki sbold"> @HomeResource.AdminNavigationFeatures</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+           
+ 
+
+
+            <li class="nav-item  ">
+                <a href="" class="nav-link ">
+                    <i class="fa fa-inbox"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.AdminNavigationUserIssues</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item  ">
+                <a href="" class="nav-link ">
+                    <i class="fa fa-inbox"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.Abuse_Reports</span>
+                </a>
+            </li>
+
+            <li class="nav-item  ">
+                <a href="" class="nav-link ">
+                    <i class="fa fa-info"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.About</span>
+                </a>
+            </li>
+
+        }
+        else
+        {
+            <li class="nav-item  ">
+                <a href="" class="nav-link ">
+                    <i class="fa fa-list"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.AdminCountryCountrylist</span>
+                </a>
+            </li>
+
+            @*<li class="nav-item  ">
+                <a href="@Url.RouteUrl("Admin.Bundle.List")" class="nav-link ">
+                    <i class="fa fa-gift"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.AdminNewBundleList</span>
+                </a>
+            </li>*@
+
+            <li class="nav-item  ">
+                <a href="" class="nav-link ">
+                    <i class="icon-social-youtube"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.AdminAdsList</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-social-youtube"></i>
+                    <span class="title font-white-hoki sbold"> @HomeResource.AdminNavigationAdsSetting </span>
+                    <i class="arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item  ">
+                        <a href="" class="nav-link ">
+                            <span class="title font-white-hoki sbold">@HomeResource.AdminNavigationAdvs</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item  ">
+                        <a href="" class="nav-link ">
+                            <span class="title font-white-hoki sbold"> @HomeResource.AdminNavigationFeatures</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            @*<li class="nav-item  ">
+                <a href="@Url.RouteUrl("Admin.Sms.Gatewaies")" class="nav-link ">
+                    <i class="fa fa-mail-forward"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.SmsTitle</span>
+                </a>
+            </li>*@
+
+
+            <li class="nav-item  ">
+                <a href="" class="nav-link ">
+                    <i class="fa fa-users"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.AdminNavigationUsersSetting</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item  ">
+                <a href=" " class="nav-link ">
+                    <i class="fa fa-user"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.AdminNavigationAdmins </span>
+                </a>
+            </li>
+
+            <li class="nav-item  ">
+                <a href=" " class="nav-link ">
+                    <i class="fa fa-user-secret"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.NavigationCountryAdmins </span>
+                </a>
+            </li>
+
+
+            @*<li class="nav-item  ">
+                <a href="@Url.RouteUrl("Admin.UserIssues.Issues")" class="nav-link ">
+                    <i class="fa fa-inbox"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.AdminNavigationUserIssues</span>
+                </a>
+            </li>*@
+
+
+            <li class="nav-item  ">
+                <a href=" " class="nav-link ">
+                    <i class="fa fa-inbox"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.Abuse_Reports</span>
+                </a>
+            </li>
+
+            <li class="nav-item  ">
+                <a href=" " class="nav-link ">
+                    <i class="fa fa-info"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.About</span>
+                </a>
+            </li>
+
+            <li class="nav-item  ">
+                <a href=" " class="nav-link ">
+                    <i class="fa fa-question"></i>
+                    <span class="title font-white-hoki sbold">@HomeResource.FaqTitile</span>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

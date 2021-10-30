@@ -1,0 +1,37 @@
+﻿
+@using Cigarette.Enterprise.ViewModels.ViewModels.Category
+@{
+    Layout = null;
+}
+
+@*@foreach (var item in (IEnumerable<CategoryViewModel>)ViewBag.ThirdCategories)
+{
+    <li>
+        <a href="#" value="@item.Id">@item.Name</a>
+    </li>
+}*@
+
+
+<select class="form-control" name="cat2" id="cat2">
+    <option>اختر التصنيف</option>
+    @foreach (var cat in ViewBag.ThirdCategories)
+    {
+        <option value="@cat.Id">@cat.Name</option>
+    }
+</select>
+
+@*<script>
+    $(".modal.advSubTypesModal .allSubTypes .advSubSubTitle ul li a").on("click", function (element) {
+        var blockContent = $(".modal.advTypesModal .type").html();
+        $("#span3").text($(this).text());
+        $("#advTypes").val($(this).attr("value"));
+        $(this).attr("data-dismiss", "modal");
+        $(".add_advertise .contnt .Inpt").css("display", "none");
+        $("#advTypes").css("display", "none");
+        //$(".add_advertise .contnt .Display").css("display","block");
+        //$(".add_advertise .contnt .Display").prepend(blockContent);
+        $("#pencildiv").css("display", "block");
+        //$("#pencildiv").prepend(blockContent);
+
+    });
+</script>*@

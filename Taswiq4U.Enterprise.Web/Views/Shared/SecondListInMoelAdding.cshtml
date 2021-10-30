@@ -1,0 +1,20 @@
+﻿@using Cigarette.Enterprise.ViewModels.ViewModels.Category
+@{ 
+    Layout = null;
+}
+
+@*@foreach (var item in (IEnumerable<CategoryViewModel>)ViewBag.SecondCategories)
+{
+    <li>
+        <a href="#" onclick="thirdModel(@item.Id,'@item.Name')">@item.Name</a>
+    </li>
+}*@
+
+
+<select class="form-control" name="cat2" id="cat2">
+    <option>اختر التصنيف</option>
+    @foreach (var cat in ViewBag.SecondCategories)
+    {
+        <option value="@cat.Id">@cat.Name</option>
+    }
+</select>

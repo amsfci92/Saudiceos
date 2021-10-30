@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3f9f7c3e0bac451d8ce8a3760241df4b" Name="Diagram1" ZoomLevel="91">
+        <EntityTypeShape EntityType="SaudiceosModel.AspNetRole" Width="1.5" PointX="5.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaudiceosModel.AspNetUserClaim" Width="1.5" PointX="5.375" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaudiceosModel.AspNetUserLogin" Width="1.5" PointX="5.375" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaudiceosModel.AspNetUser" Width="1.5" PointX="3.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaudiceosModel.ContactU" Width="1.5" PointX="5.375" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaudiceosModel.IndividualOpportunityDiscovery" Width="1.5" PointX="7.375" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaudiceosModel.KnowledgeCenter" Width="1.5" PointX="7.375" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaudiceosModel.News" Width="1.5" PointX="1.375" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="SaudiceosModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SaudiceosModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SaudiceosModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SaudiceosModel.CompanyAttractRequest" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SaudiceosModel.Report" Width="1.5" PointX="9.375" PointY="3.75" />
+        <EntityTypeShape EntityType="SaudiceosModel.Service" Width="1.5" PointX="9.375" PointY="7.375" />
+        <EntityTypeShape EntityType="SaudiceosModel.Banner" Width="1.5" PointX="1.375" PointY="4" />
+        <EntityTypeShape EntityType="SaudiceosModel.Setting" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SaudiceosModel.CEO" Width="1.5" PointX="1.375" PointY="7.625" />
+        <EntityTypeShape EntityType="SaudiceosModel.CEOAddEditRequest" Width="1.5" PointX="3.375" PointY="9" />
+        <AssociationConnector Association="SaudiceosModel.FK_CEOAddEditRequest_CEO" />
+        <AssociationConnector Association="SaudiceosModel.FK_News_CEO" />
+        <EntityTypeShape EntityType="SaudiceosModel.Category" Width="1.5" PointX="7.125" PointY="12" />
+        <AssociationConnector Association="SaudiceosModel.FK_Service_Category" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

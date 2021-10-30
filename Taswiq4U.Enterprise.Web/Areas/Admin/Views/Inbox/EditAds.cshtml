@@ -1,0 +1,427 @@
+﻿@model Cigarette.Enterprise.ViewModels.ViewModels.CommercialAd.CommercialAdBM
+
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@{
+    ViewBag.Title = "Edit Ads";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="~/Content/AdminResources/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/pages/css/profile-2.min.css" rel="stylesheet" type="text/css" />
+<link href="/Content/AdminResources/assets/pages/css/profile.min.css" rel="stylesheet" type="text/css" />
+<link href="/Content/AdminResources/assets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+<link href="/Content/AdminResources/assets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/icheck/skins/all.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/pages/css/profile-2.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/jcrop/css/jquery.Jcrop.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/pages/css/image-crop.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/pages/css/profile.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/icheck/skins/all.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
+
+@using (Html.BeginForm("Edit", "Ads", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.OldCategoryId)
+    @Html.HiddenFor(x => x.OldCountryId)
+    @Html.HiddenFor(x => x.CategoryId1)
+    @Html.HiddenFor(x => x.OldImageId)
+    <div class="portlet box white">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-gift"></i>   @HomeResource.AdminAdsDetails
+            </div>
+            <div class="tools">
+                <button id="btn_submit" class="btn btn-primary btn-sm" type="submit"><i class="icon-check"></i> @HomeResource.AdminNewCitySubmit</button>
+            </div>
+        </div>
+        <div class="portlet-body" style="display: block;margin-top:5px;">
+
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="font-blue-hoki sbold control-label col-md-3">@HomeResource.AdminAdsType</label>
+
+                    <div class="col-md-8">
+                        <select class="form-control" id="Type" name="Type">
+                            <option>@HomeResource.AdminAdsType</option>
+                            <option value="1">@HomeResource.AdminAdsTypePopup</option>
+                            <option value="2">@HomeResource.AdminAdsTypeSlider</option>
+                            <option value="3">@HomeResource.AdminAdsTypeOffer</option>
+                            <option value="4">@HomeResource.AdminAdsTypeInBetween</option>
+
+                        </select>
+                        @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 font-blue-hoki sbold">@HomeResource.AdminAdsDescription</label>
+
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = HomeResource.AdminAdsDescription } })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 font-blue-hoki sbold">@HomeResource.AdminAdsLink</label>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control", @placeholder = HomeResource.AdminAdsLink } })
+                        @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 font-blue-hoki sbold">Whatsapp</label>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.WhatsappLink, new { htmlAttributes = new { @class = "form-control", @placeholder = HomeResource.AdminAdsLink } })
+                        @Html.ValidationMessageFor(model => model.WhatsappLink, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 font-blue-hoki sbold">Instagram</label>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.InstagramLink, new { htmlAttributes = new { @class = "form-control", @placeholder = HomeResource.AdminAdsLink } })
+                        @Html.ValidationMessageFor(model => model.InstagramLink, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 font-blue-hoki sbold"></label>
+
+                    <div class="col-md-8">
+                        <img id="AdImage" src="" style="display: none;" class="img-responsive pic-bordered" width="100" height="100" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 font-blue-hoki sbold">@HomeResource.AdminAdsImage</label>
+                    <div class="col-md-8">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="input-group input-large">
+                                <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                    <span class="fileinput-filename"> </span>
+                                </div>
+                                <span class="input-group-addon btn default btn-file">
+                                    <span class="fileinput-new"> @CategoryResource.AdminNewCategorySelectLogo </span>
+                                    <span class="fileinput-exists"> @CategoryResource.AdminNewCategoryChangeLogo </span>
+                                    <input type="hidden"><input name="Image" id="Image" type="file" accept="image/*">
+                                </span>
+                                <a class="input-group-addon btn red fileinput-exists" href="javascript:;" data-dismiss="fileinput"> @CategoryResource.AdminNewCategoryRemoveLogo </a>
+                            </div>
+                        </div>
+                        <input name="imageId" id="imageId" value="@Model.imageId" type="hidden" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 font-blue-hoki sbold"></label>
+
+                    <div class="col-md-8">
+                        <img id="AdMobileImage" src="" style="display: none;" class="img-responsive pic-bordered" width="100" height="100" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 font-blue-hoki sbold">@HomeResource.AdminAdsImage</label>
+                    <div class="col-md-8">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="input-group input-large">
+                                <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                    <span class="fileinput-filename"> </span>
+                                </div>
+                                <span class="input-group-addon btn default btn-file">
+                                    <span class="fileinput-new"> @CategoryResource.AdminNewCategorySelectLogo </span>
+                                    <span class="fileinput-exists"> @CategoryResource.AdminNewCategoryChangeLogo </span>
+                                    <input type="hidden"><input name="MobileImage" id="MobileImage" type="file" accept="image/*">
+                                </span>
+                                <a class="input-group-addon btn red fileinput-exists" href="javascript:;" data-dismiss="fileinput"> @CategoryResource.AdminNewCategoryRemoveLogo </a>
+                            </div>
+                        </div>
+                        <input name="imageMobileId" id="imageMobileId" value="@Model.imageMobileId" type="hidden" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 font-blue-hoki sbold">@HomeResource.AdminAdsCreationDate</label>
+                    <div class="col-md-8">
+                        <div class="input-group input-large date-picker input-daterange" data-date-format="mm-dd-yyyy">
+                            <input type="text" class="form-control" value="@Model.CreationDate" name="CreationDate" id="CreationDate" autocomplete="off">
+                            <span class="input-group-addon"> @HomeResource.AdminAdsEndDate</span>
+                            <input type="text" class="form-control" name="EndDate" id="EndDate" value="@Model.EndDate" autocomplete="off">
+                        </div>
+                        @Html.ValidationMessageFor(model => model.CreationDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 font-blue-hoki sbold">@HomeResource.AdminAdsNotification</label>
+
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Notification, new { htmlAttributes = new { @class = "form-control", @placeholder = HomeResource.AdminAdsNotification } })
+                        @Html.ValidationMessageFor(model => model.Notification, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 font-blue-hoki sbold">@HomeResource.AdminAdsCountry</label>
+
+                    <div class="col-md-8">
+                        @Html.DropDownList("CountryId", null, HomeResource.AdminAdsChooseCountry, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 font-blue-hoki sbold">@HomeResource.AdminAdsCategory</label>
+
+                    <div class="col-md-8">
+                        <label class="control-label col-md-3 font-blue-hoki sbold">@Model.Category.ArabicDescription</label>
+                        <a id="change_ad_category" class="control-label col-md-3">@CategoryResource.AdminCategoryEditCategoryTitle</a>
+
+                    </div>
+                </div>
+
+                <div id="Cats" hidden>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 font-blue-hoki sbold">@HomeResource.AdminAdsCategory</label>
+
+                        <div class="col-md-8">
+                            <select name="CategoryIdEdit1" id="CategoryIdEdit1" class="form-control">
+                                <option> @HomeResource.AdminAdsChooseCategory</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.CategoryId1, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 font-blue-hoki sbold">@HomeResource.AdminAdsStatus</label>
+
+                    <div class="col-md-8">
+                        <div class="form-check">
+                            @Html.CheckBoxFor(x => x.Active, new { @class = "form-check-input" })
+
+                            <label class="form-check-label font-blue-hoki sbold" for="IsActive">
+                                @CategoryResource.AdminNewCategoryIsActive
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+@section preScripts
+{
+    <script src="/Content/AdminResources/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    @* Toaster *@
+    @Scripts.Render("~/bundles/jqueryval")
+    @* File Input *@
+    <script src="/Content/AdminResources/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    <script src="/Content/AdminResources/assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+}
+
+@section postScripts
+{
+    <script src="~/Content/AdminResources/assets/global/plugins/moment.min.js" type="text/javascript"></script>
+    <script src="~/Content/AdminResources/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
+    <script src="~/Content/AdminResources/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="~/Content/AdminResources/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+    <script src="~/Content/AdminResources/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="~/Content/AdminResources/assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
+    <script src="/Content/AdminResources/assets/pages/scripts/ui-toastr.min.js" type="text/javascript"></script>
+    <script src="/Content/AdminResources/assets/pages/scripts/form-image-crop.js" type="text/javascript"></script>
+
+    <script src="~/Content/AdminResources/assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+
+    <script src="~/Content/AdminResources/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+    <script src="~/Content/AdminResources/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="~/Content/AdminResources/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
+    <script src="~/Content/AdminResources/assets/global/plugins/icheck/icheck.min.js" type="text/javascript"></script>
+    <script src="~/Content/AdminResources/assets/pages/scripts/form-icheck.min.js" type="text/javascript"></script>
+
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="~/Content/AdminResources/assets/global/plugins/moment.min.js" type="text/javascript"></script>
+    <script src="~/Content/AdminResources/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
+    <script src="~/Content/AdminResources/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="~/Content/AdminResources/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+    <script src="~/Content/AdminResources/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="~/Content/AdminResources/assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <script src="~/Content/AdminResources/assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function CountryCats(url) {
+            $.get(url, function (data) {
+                $('#CategoryIdEdit1').html(data);
+            });
+        }
+
+
+        function LoadAdImage() {
+        var img = $('#imageId').val();
+        if(img!=null && img!=""){
+
+            $.ajax({
+                url: '@System.Configuration.ConfigurationManager.AppSettings["ApiDomain"]'+`/Api/ImageUpload/GetCommercialAdImage/${img}`,
+                type: "GET",
+                success: function (data) {
+               //     console.log(data);
+                    $('#AdImage').attr('src', data);
+                    $('#AdImage').attr('style', 'display: block;');
+                }
+            });
+             }
+        }
+
+       function LoadAdMobileImage() {
+       
+           var im2 = $('#imageMobileId').val();
+           debugger
+           if (im2 != null && im2 != "") {
+               $.ajax({
+                   url: '@System.Configuration.ConfigurationManager.AppSettings["ApiDomain"]' + `/Api/ImageUpload/GetCommercialAdImage/${im2}`,
+                   type: "GET",
+                   success: function (data) {
+                       //     console.log(data);
+                       $('#AdMobileImage').attr('src', data);
+                       $('#AdMobileImage').attr('style', 'display: block;');
+                   }
+               });
+           } else {
+               $('#imageMobileId').val($('#imageId').val());
+           }
+        }
+
+        $(document).ready(function () {
+
+            $('#Type').val(@Model.Type);
+            $('#CountryId').val(@Model.CountryId);
+            $('#Image').on('change', function () {
+                //alert('begin');
+                $('#btn_submit').attr('disabled', true);
+                formdata = new FormData();
+                if ($(this).prop('files').length > 0) {
+
+                    file = $(this).prop('files')[0];
+                    formdata.append("AdImages", file);
+                    //alert('start');
+                    console.log(formdata);
+                    $.ajax({
+                        url: '@System.Configuration.ConfigurationManager.AppSettings["ApiDomain"]'+'/Api/ImageUpload/AddCommercialAdImage',
+                        type: "POST",
+                        data: formdata,
+                        processData: false,
+                        contentType: false,
+                        success: function (result) {
+                            console.log(result);
+                            $('#imageId').val(result.id);
+                            $('#btn_submit').attr('disabled', false);
+                            //          alert(result);
+                        },
+                        error: function (xhr) {
+                            alert(xhr);
+                        }
+                    });
+                }
+            });
+
+        $('#MobileImage').on('change', function () {
+                //alert('begin');
+                $('#btn_submit').attr('disabled', true);
+                formdata = new FormData();
+                if ($(this).prop('files').length > 0) {
+
+                    file = $(this).prop('files')[0];
+                    formdata.append("AdImages", file);
+                    //alert('start');
+                    console.log(formdata);
+                    $.ajax({
+                        url: '@System.Configuration.ConfigurationManager.AppSettings["ApiDomain"]'+'/Api/ImageUpload/AddCommercialAdImage',
+                        type: "POST",
+                        data: formdata,
+                        processData: false,
+                        contentType: false,
+                        success: function (result) {
+                            console.log(result);
+                            $('#imageMobileId').val(result.id);
+                            $('#btn_submit').attr('disabled', false);
+                            //          alert(result);
+                        },
+                        error: function (xhr) {
+                            alert(xhr);
+                        }
+                    });
+                }
+            });
+
+            LoadAdImage();
+            LoadAdMobileImage();
+            $('#change_ad_category').click(function () {
+                $('#Cats').show();
+                var val = $('#CountryId').val();
+                if ($('#Type').val() == 4) {
+                    CountryCats(`/Admin/Ads/CountryInBetweenCats/${val}${'? isComm = false'}`);
+                } else {
+                    CountryCats(`/Admin/Ads/CountryCats/${val}${'? isComm = true'}`);
+                }
+            });
+
+ 
+            $('#CountryId').on('change', function () {
+                $('#Cats').show();
+                var val = $(this).val();
+                if ($('#Type').val() == 4) {
+                    CountryCats(`/Admin/Ads/CountryInBetweenCats/${val}${'?isComm=false'}`);
+                } else {
+                    CountryCats(`/Admin/Ads/CountryCats/${val}${'?isComm=true'}`);
+                }
+            });
+
+            $('#Type').on('change', function () {
+                $('#Cats').show();
+                var val = $(this).val();
+                if ($('#CountryId').val() != 0)
+                    if (val == 4) {
+                        CountryCats(`/Admin/Ads/CountryInBetweenCats/${$('#CountryId').val()}${'?isComm=false'}`);
+                } else {
+                    CountryCats(`/Admin/Ads/CountryCats/${$('#CountryId').val()}${'?isComm=true'}`);
+                }
+            });
+
+
+            //$('#CategoryIdEdit1').on('change', function () {
+            //    var val = $(this).val();
+            //    //alert(val);
+            //    SubCats(`/Admin/Ads/SubCats/${val}`);
+            //});
+
+            //$('#CategoryId2').on('change', function () {
+            //    var val = $(this).val();
+            //    //alert(val);
+            //    SubCats2(`/Admin/Ads/SubCats/${val}`);
+            //});
+
+
+        });
+    </script>
+}

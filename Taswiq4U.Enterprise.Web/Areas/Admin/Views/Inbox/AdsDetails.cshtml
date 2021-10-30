@@ -1,0 +1,89 @@
+﻿@model Cigarette.Enterprise.ViewModels.ViewModels.CommercialAd.CommercialAdVM
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@using Cigarette.Enterprise.DAL.Repository.CommercialAdsRep
+@{
+    ViewBag.Title = "Ads Details";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="portlet box white">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-gift"></i>@HomeResource.AdminAdsDetails
+        </div>
+        <div class="tools">
+        </div>
+
+    </div>
+    <div class="portlet-body" style="display: block;">
+        <div style="margin-bottom:10px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <ul class="list-unstyled profile-nav">
+                        <li>
+                            <img id="AdImage" src="" style="display: none;" width="350" height="300" class="img-responsive pic-bordered" alt="">
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12 profile-info">
+                            <h3 class="font-green sbold uppercase">
+                                @Model.Description
+                            </h3>
+                            <p>
+                                @((CommercialAdType)Model.Type)
+                            </p>
+                            <p>
+                                <a href="@Model.Link"> @Model.Link </a>
+                            </p>
+                            <ul class="list-inline">
+                                <li>
+                                    <i class="icon-pin"></i> @Model.Country.ArabicDescription
+                                </li>
+                                <li>
+                                    <i class="icon-calendar"></i> @Model.CreationDate.Value.ToShortDateString() to @Model.EndDate.Value.ToShortDateString()
+                                </li>
+                                <li>
+                                    <i class="icon-eye"></i> @Model.ViewsCount
+                                </li>
+                                <li>
+                                    <i class="icon-bell"></i> @Model.Notification
+                                </li>
+                                <li>
+                                    <i class="icon-like"></i> @Model.Likes
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+@section preScripts
+{
+
+}
+
+@section postScripts
+{
+    <script>
+        $(document).ready(function () {
+           // var url = @Model.SystemDataFile.Url;
+            $.ajax({
+                url: '@System.Configuration.ConfigurationManager.AppSettings["ApiDomain"]'+`/Api/ImageUpload/GetCommercialAdImage/${@Model.imageId}`,
+                type: "GET",
+                success: function (data) {
+                    console.log(data);
+                    $('#AdImage').attr('src', data);
+                    $('#AdImage').attr('style', 'display: block;');
+                }
+            });
+        });
+    </script>
+}

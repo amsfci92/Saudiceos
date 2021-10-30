@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Cigarette.Enterprise.ViewModels.ViewModels.Advertisement.AdvertisementDetailsViewModel>
+
+<!-- Product Details Modal -->
+<div class="modal fade prodDetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <!-- Details -->
+                <div class="adv_details">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="carousel slide col-md-6 prodtsSlider" data-ride="carousel">
+                                <div class="col-md-2 col-sm-2 col-xs-2 items">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators secondary_images">
+                                        <li data-target=".prodtsSlider" data-slide-to="0" class="active">
+                                            <img src="~/Content/images/products/c4.png" />
+                                        </li>
+                                        <li data-target=".prodtsSlider" data-slide-to="1">
+                                            <img src="~/Content/images/products/c3.png" />
+                                        </li>
+                                        <li data-target=".prodtsSlider" data-slide-to="2">
+                                            <img src="~/Content/images/products/c6.png" />
+                                        </li>
+                                        <li data-target=".prodtsSlider" data-slide-to="3">
+                                            <img src="~/Content/images/products/c5.png" />
+                                        </li>
+                                    </ol>
+                                </div>
+                                <div class="col-md-10 col-sm-10 col-xs-10">
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner primary_img" role="listbox">
+                                        <div class="item active" data-toggle="modal" data-target=".sliderZoomModal">
+                                            <img src="~/Content/images/products/c4.png" />
+                                        </div>
+                                        <div class="item" data-toggle="modal" data-target=".sliderZoomModal">
+                                            <img src="~/Content/images/products/c3.png" />
+                                        </div>
+                                        <div class="item" data-toggle="modal" data-target=".sliderZoomModal">
+                                            <img src="~/Content/images/products/c6.png" />
+                                        </div>
+                                        <div class="item" data-toggle="modal" data-target=".sliderZoomModal">
+                                            <img src="~/Content/images/products/c5.png" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Icons -->
+                                <div class="col-xs-12 icons">
+                                    <span class="actions">
+                                        <a data-toggle="tooltip" data-placement="bottom" title="أضف الاعلان الى المفضلة"><i class="fa fa-heart-o fa-lg"></i></a>
+                                    </span>
+                                    <span class="pull-left share">
+                                        <a href="#" class="facebook"><i class="fa fa-facebook fa-lg"></i> شاركنا على فيسبوك</a>
+                                        <a href="#" class="twitter"><i class="fa fa-twitter fa-lg"></i> شاركنا على تويتر</a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="details">
+                                    <!-- Heading -->
+                                    <div class="heading">
+                                        <h3>@Model.First().AdvertisementTitle</h3>
+                                        <hr />
+                                        <div class="paragraph">
+                                            <span>
+                                                @Model.First().AdvertisementDescription
+                                                <span class="more">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+                                            </span>
+                                            <span class="dots pull-left">...</span>
+                                        </div>
+                                    </div>
+                                    <!-- -->
+                                    <div class="prod-details">
+                                        <span>
+                                            <i class="fa fa-clock-o"></i> منذ @Model.First().AdvertisementCreationTime
+                                        </span>
+                                        <span>
+                                            <i class="fa fa-user"></i> معروض بواسطة : @Model.First().UserName
+                                        </span>
+                                        <span>
+                                            <i class="fa fa-eye"></i> عدد المشاهدات : @Model.First().Views
+                                        </span>
+                                    </div>
+                                    <!-- Info -->
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="price">
+                                                    @Html.Action("CountryCurrency", "Advertisement", new { language = "ar", country = ViewBag.Country, price = Model.First().AdvertisementPrice })
+                                                     
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 sub-info">
+                                                @foreach (var item in Model)
+                                                {
+                                                    if (@item.Advertisment_SpecificationAttributeCustomValue != null && @item.Category_SpecificationAttributeCustomValue != null)
+                                                    {
+                                                        <p>
+                                                            <i class="fa fa-chevron-left"></i>
+                                                            <span>@item.Advertisment_SpecificationAttributeCustomValue : @item.Category_SpecificationAttributeCustomValue</span>
+                                                        </p>
+                                                    }
+                                                    if (@item.Category_SpecificationAttributeName != null && @item.SpecificationAttributeOptionName != null)
+                                                    {
+                                                        <p>
+                                                            <i class="fa fa-chevron-left"></i>
+                                                            <span>@item.Category_SpecificationAttributeName : @item.SpecificationAttributeOptionName</span>
+                                                        </p>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

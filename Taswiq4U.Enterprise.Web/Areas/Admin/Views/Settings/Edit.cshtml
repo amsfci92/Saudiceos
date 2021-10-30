@@ -1,0 +1,295 @@
+﻿@using Cigarette.Enterprise.ViewModels.VM.Breadcrumb
+
+@model Cigarette.Enterprise.ViewModels.VM.Settings.SettingsVM
+@{
+    ViewBag.Title = "الاعدادات  ";
+
+    ViewBag.Breadcrumb = new BreadcrumbVM
+    {
+        Title = " الاعدادات",
+        BreadcrumbItems = new List<BreadcrumbItem>
+{ 
+            new BreadcrumbItem{Title = "  الاعدادات  ", Link = "/admin/settings/update", IsMuted = false},
+            new BreadcrumbItem{Title = "لوحة التحكم", Link =  "/admin/dashboard/details", IsMuted = true},
+        }
+    };
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout2.cshtml";
+}
+
+@section  Styles{
+    <!--begin::Page Vendor Stylesheets(used by this page)-->
+    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendor Stylesheets-->
+}
+
+<!--begin::Basic info-->
+<div class="card mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+        <!--begin::Card title-->
+        <div class="card-title m-0">
+            <h3 class="fw-bolder m-0">الاعدادات</h3>
+        </div>
+        <!--end::Card title-->
+    </div>
+    <!--begin::Card header-->
+    <!--begin::Content-->
+    <div id="kt_account_profile_details" class="collapse show">
+        <!--begin::Form-->
+        <form id="kt_account_profile_details_form" class="form" action="/admin/settings" method="post">
+            <!--begin::Card body-->
+            <div class="card-body border-top p-9">
+                <div class="text-danger">@Html.ValidationSummary()</div>
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">اسم الموقع</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <input type="text" name="SiteName" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="اسم الموقع" value="@Model.SiteName" />
+                                @Html.ValidationMessageFor(m => m.SiteName)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">العنوان</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <input type="text" name="Address" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="العنوان" value="@Model.Address" />
+                                @Html.ValidationMessageFor(m => m.Address)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">الهاتف</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <input type="text" name="Phone" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="الهاتف" value="@Model.Phone" />
+                                @Html.ValidationMessageFor(m => m.Phone)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">الهاتف النقال</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <input type="text" name="Mobile" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="الهاتف النقال" value="@Model.Mobile" />
+                                @Html.ValidationMessageFor(m => m.Mobile)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">وصف الموقع</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <textarea name="SiteDescription"  rows="5" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="وصف الموقع" value="">@Model.SiteDescription</textarea>
+                                @Html.ValidationMessageFor(m => m.SiteDescription)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">البريد الالكتروني</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <input type="text" name="SiteEmail" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="البريد الالكتروني" value="@Model.SiteEmail" />
+                                @Html.ValidationMessageFor(m => m.SiteEmail)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">فيس بوك</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <input type="text" name="SiteFacebook" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="فيس بوك" value="@Model.SiteFacebook" />
+                                @Html.ValidationMessageFor(m => m.SiteFacebook)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">انستجرام</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <input type="text" name="SiteInstagram" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="انستجرام" value="@Model.SiteInstagram" />
+                                @Html.ValidationMessageFor(m => m.SiteInstagram)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">لينكد ان</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <input type="text" name="SiteLinkedIn" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="لينكد ان" value="@Model.SiteLinkedIn" />
+                                @Html.ValidationMessageFor(m => m.SiteLinkedIn)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">تويتر</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <input type="text" name="SiteTwitter" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="تويتر" value="@Model.SiteTwitter" />
+                                @Html.ValidationMessageFor(m => m.SiteTwitter)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">نص الفوتر</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <textarea name="FooterSentence" rows="5" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="نص الفوتر" value=" " >@Model.FooterSentence</textarea>
+                                @Html.ValidationMessageFor(m => m.FooterSentence)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                
+            </div>
+            <!--end::Card body-->
+            <!--begin::Actions-->
+            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                <button type="reset" class="btn btn-light btn-active-light-primary me-2">الغاء</button>
+                <button type="submit" class="btn btn-primary">حفظ  </button>
+            </div>
+            <!--end::Actions-->
+        </form>
+        <!--end::Form-->
+    </div>
+    <!--end::Content-->
+</div>
+<!--end::Basic info-->
+
+@section Scripts {
+    <script>
+      
+    </script>
+}

@@ -1,0 +1,386 @@
+﻿@using Saudiceos.Enterprise.Web.helper
+@using Cigarette.Enterprise.ViewModels.ViewModels.WepAPIViewModel.Advertisement
+@using Cigarette.Enterprise.DAL
+@using Cigarette.Enterprise.ViewModels.ViewModels.Category
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@using Cigarette.Enterprise.ViewModels.ViewModels.CommercialAd;
+@using PagedList.Mvc
+@*@model  PagedList.IPagedList<AdvertisementListVM>*@
+@model  PagedList.IPagedList<AdsPagedtWithCommercialAdsListVM<AdvertisementListVM, CommercialAdVM>>
+
+@{
+    var baseApiUrl = System.Configuration.ConfigurationManager.AppSettings["ApiDomain"];
+
+    var adBaseUrl = string.Format("{0}{1}", baseApiUrl, "/Api/ImageUpload/image?url={0}&type=2");
+    var commBaseUrl = string.Format("{0}{1}", baseApiUrl, "/Api/ImageUpload/i?url={0}&type=1");
+    var apiUrl = string.Format("{0}{1}", baseApiUrl, "/Api/ImageUpload/i?url={0}&type=3");
+
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+
+    var country = "KW";
+    var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    if (cookiecountry != null && cookiecountry.Value != null)
+    {
+        country = cookiecountry.Value;
+    }
+    else
+    {
+        HttpCookie newcookiecountry = new HttpCookie("Country");
+        newcookiecountry.Value = language;
+        Response.Cookies.Add(newcookiecountry);
+    }
+
+}
+
+@if (language == "ar")
+{
+
+    <!-- CAROUUUUUSEEEEL -->
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @if (ViewBag.CommercialSliderAds != null)
+            {
+                var firstTime = true;
+                foreach (var item in ViewBag.CommercialSliderAds)
+                {
+
+                    <div class="carousel-item @(firstTime == true?"active":"")">
+                        <img comm-id="@item.Id" src="@string.Format(commBaseUrl, item.SystemDataFile != null?item.SystemDataFile.Url : "" )" class="d-block w-100 open-full-ad " alt="@item.Description">
+                    </div>
+                    firstTime = false;
+                }
+            }
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+    <!-- MULTIPLE SEARCH -->
+
+    @Html.Action("Searchproduct", "Advertisement")
+
+
+    <!-- categories -->
+    <section class="categories">
+        <div class="container" id="FeatureAddvertisements">
+
+
+            @if (ViewBag.CategoriesWithSub != null)
+            {
+                int counter = 0;
+                foreach (var cat in (IEnumerable<CategoryWithSubViewModel>)ViewBag.CategoriesWithSub)
+                {
+                    if (counter % 6 == 0 && counter != 0)
+                    {
+                        @Html.Raw("</div>")
+
+                    }
+
+                    if (counter % 6 == 0)
+                    {
+
+                        @Html.Raw("<div class='row'>")
+                    }
+                    <div class="col-md-2 col-sm-2 col-xs-2 single-cat open-cat-modal" data-url="" data-place="main-category" data-index="@cat.Id">
+                        <a>
+                            @if (!string.IsNullOrWhiteSpace(cat.CategoryLogo))
+                            {
+                                <img src="@(string.Format(apiUrl, cat.CategoryLogo))" />
+                            }
+                            else
+                            {
+                                <img src="~/Content/images/products/w3.png" />
+                            }
+
+                            <p>@cat.Name</p>
+                        </a>
+                    </div>
+
+                    counter++;
+                }
+                @Html.Raw("</div>")
+
+
+            }
+
+
+        </div>
+    </section>
+    <!-- slideeeeeeeeeer -->
+    if (((IEnumerable<AdvertisementListVM>)ViewBag.FeaturedAdvertisement).Any())
+    {
+        <section class="sliderr">
+            <div class="container" id="Addvertisements">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>
+                            @HomeResource.W_FeaturedAds
+                            <i class="fas fa-star"></i>
+                        </h1>
+                        <hr>
+                        @Html.Partial("_FeatureAdvertisementsList", (IEnumerable<AdvertisementListVM>)ViewBag.FeaturedAdvertisement)
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+
+    <!-- advertising -->
+    <section class="adss">
+        <div class="container">
+            <h1>
+                <i class="far fa-clock"></i>
+                @HomeResource.W_LatestAds
+            </h1>
+            <hr>
+
+            @Html.Partial("_AdvertisementsList", Model)
+
+        </div>
+    </section>
+
+
+
+
+
+
+}
+else
+{
+    <!-- CAROUUUUUSEEEEL -->
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @if (ViewBag.CommercialSliderAds != null)
+            {
+                var firstTime = true;
+                foreach (var item in ViewBag.CommercialSliderAds)
+                {
+                    <div class="carousel-item @(firstTime == true?"active":"")">
+                        <img comm-id="@item.Id" src="@string.Format(commBaseUrl, item.SystemDataFile.Url)" class="d-block w-100 open-full-ad " alt="...">
+
+                    </div>
+                    firstTime = false;
+                }
+            }
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+    <!-- MULTIPLE SEARCH -->
+
+    @Html.Action("Searchproduct", "Advertisement", new { country = ViewBag.Country, language = ViewBag.Language })
+
+
+    <!-- categories -->
+    <section class="categories">
+        <div class="container" id="FeatureAddvertisements">
+
+            @if (ViewBag.CategoriesWithSub != null)
+            {
+                int counter = 0;
+                foreach (var catindex in (IEnumerable<CategoryWithSubViewModel>)ViewBag.CategoriesWithSub)
+                {
+                    if (counter % 6 == 0 && counter != 0)
+                    {
+                        @Html.Raw("</div>")
+                    }
+                    if (counter % 6 == 0)
+                    {
+                        @Html.Raw("<div class='row'>")
+                    }
+                    <div class="col-md-2 single-cat open-cat-modal" data-url="" data-place="main-category" data-index="@catindex.Id">
+                        <a>
+                            @if (!string.IsNullOrWhiteSpace(catindex.CategoryLogo))
+                            {
+                                <img src="@(string.Format(apiUrl, catindex.CategoryLogo))" />
+                            }
+                            else
+                            {
+                                <img src="~/Content/images/products/w3.png" />
+                            }
+                            <p>@catindex.Name</p>
+                        </a>
+                    </div>
+
+                    counter++;
+                }
+                @Html.Raw("</div>")
+            }
+
+
+        </div>
+    </section>
+
+
+
+    <!-- slideeeeeeeeeer -->
+    <section class="sliderr">
+        <div class="container" id="Addvertisements">
+            <div class="row">
+                <div class="col-12">
+                    <h1>
+                        @HomeResource.W_FeaturedAds
+                        <i class="fas fa-star"></i>
+                    </h1>
+                    <hr>
+                    @Html.Partial("_FeatureAdvertisementsList", (IEnumerable<AdvertisementListVM>)ViewBag.FeaturedAdvertisement)
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- advertising -->
+    <section class="adss">
+        <div class="container">
+            <h1>
+                <i class="far fa-clock"></i>
+                @HomeResource.W_LatestAds
+            </h1>
+            <hr>
+
+            @Html.Partial("_AdvertisementsList", Model)
+
+        </div>
+    </section>
+
+}
+
+<script>
+    $(document).ready(function () {
+        $("#raesiia").addClass("active");
+
+
+    });
+
+    var sendRequest1 = function (element) {
+        $.get(element.src, function (data) {
+            element.src = data;
+        })
+    }
+    $(document).ready(function () {
+
+    })
+</script>
+<script>
+
+    $(document).ready(function () {
+
+
+        var closeModal = function () {
+            $('.modal-popup-ad').removeClass("is-open");
+        };
+        var openModal = function () {
+            $('.modal-popup-ad').addClass("is-open");
+        };
+
+        $(document).on('keydown', function (evt) {
+            evt = evt || window.event;
+            evt.keyCode === 27 ? closeModal() : false;
+        });
+
+        $('.close-button').on('click', closeModal);
+
+        // Storage Manager Object
+        var storageManager = new ViewedItemsManager()
+        var offerRequest = new OffersRequests()
+
+        $(document).on('click', '.commercial-ad-like', function () {
+            var _self = $(this);
+            var id = _self.attr('ad-id');
+            offerRequest.likeCommercialAd(id);
+        });
+
+        // set view for the ads
+        $(document).on('mouseover', '.card-1', function () {
+            var _self = $(this);
+            var id = _self.attr('comm-id');
+
+            // store the viewed items
+            storageManager.addItem(id, function () {
+                offerRequest.incrementViewCount(id);
+                console.log(id)
+            });
+        });
+
+
+        $(document).on('click', '.open-full-ad', function () {
+            var adId = $(this).attr('comm-id');
+            var storageManager = new ViewedItemsManager()
+
+            console.log('open-full-ad Clicked' + adId)
+
+            // store the viewed items
+            storageManager.addItem(adId, function () {
+                offerRequest.incrementViewCount(adId);
+                console.log(adId)
+            });
+
+            var data = offerRequest.getRequestData(adId, function (data) {
+                if (data != null) {
+                    $('.modal-popup-ad').addClass("is-open");
+                    $('.view-count').html(data.viewsCouns)
+                    $('.like-count').html(data.likes)
+                    $('.ad-description').html(data.description)
+                    $('.replace-image').attr('src', `http://api.Saudiceos.com/Api/ImageUpload/i?url=${data.image}&type=1`);
+                    console.log(data)
+                } else {
+                    //closeModal()
+                }
+
+            });
+
+        });
+
+
+    });
+
+    var sendRequest = function (element) {
+        element.style.background = `url(${element.getAttribute('url')})`;
+    }
+    $(document).ready(function () {
+        var images = $('.example-2 .wrapper');
+
+        if (images != null) {
+            for (var i = 0; i < images.length; i++) {
+                var element = images[i];
+                sendRequest(element)
+            }
+        }
+    })
+
+</script>
+
+
+
+
+
+

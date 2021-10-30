@@ -1,0 +1,136 @@
+﻿@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@model IEnumerable<Cigarette.Enterprise.ViewModels.ViewModels.WepAPIViewModel.Advertisement.AdvertisementListVM>
+@{
+    Layout = null;
+}
+
+@{
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+    var baseUrl = System.Configuration.ConfigurationManager.AppSettings["ApiDomain"] + "/DynamicResources/AdvertismentImages/";
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+
+    var country = "KW";
+    var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    if (cookiecountry != null && cookiecountry.Value != null)
+    {
+        country = cookiecountry.Value;
+    }
+    else
+    {
+        HttpCookie newcookiecountry = new HttpCookie("Country");
+        newcookiecountry.Value = language;
+        Response.Cookies.Add(newcookiecountry);
+    }
+
+}
+
+<div class="owl-carousel">
+    @foreach (var ad in Model)
+    {
+
+        <div class="item">
+            <article class="col-item">
+                <div class="photo">
+                    <div class="options">
+                        @if (@Request.IsAuthenticated)
+                        {
+                            @*<button class="btn btn-default add-fav-btn" data-adId="@ad.Id" type="submit" data-toggle="tooltip" data-placement="top" title="حذف من المفضلة">
+                <i class="fa fa-heart-o"></i>
+            </button>*@
+                            if (ad.IsFavorite == true)
+                            {
+                                <button class="btn btn-default add-fav-btn isFav" data-adId="@ad.Id" type="submit" data-toggle="tooltip" data-placement="top" title="حذف من المفضلة">
+                                    <i class="fa  fa-heart text-danger" aria-hidden="true"></i>
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-default add-fav-btn" data-adId="@ad.Id" type="submit" data-toggle="tooltip" data-placement="top" title="اضافة الى المفضلة">
+                                    <i class="fa fa-heart-o"></i>
+                                </button>
+                            }
+                        }
+                        <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="نظرة سريعة">
+                            <i class="fas fa-eye" onclick="quickView(@ad.Id)"></i>
+                        </button>
+                    </div>
+                    <a href="@Url.RouteUrl("Details", new { id = ad.Id, slug = ad.ArabicTitle.Replace(".","").Replace(' ', '-').Replace(".", "").Replace('/', '-').Replace('$', '-').Replace('#', '-')})">
+                    <img src="@(ad.AdvertismentImages.FirstOrDefault()==null?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+ad.AdvertismentImages.FirstOrDefault().Url))" class="img-responsive img-ad" name="@(ad.AdvertismentImages.FirstOrDefault()==null?"noimg":ad.AdvertismentImages.FirstOrDefault().Url)" height="210" width="200" alt="Product Image" /> </a>
+                </div>
+                <div class="info">
+                    <div class="price-details ">
+                        <h1>
+                            <a  href="@Url.RouteUrl("Details", new { id = ad.Id, slug = ad.ArabicTitle.Replace(".","").Replace(".", "").Replace(' ', '-').Replace('/', '-').Replace('$', '-').Replace('#', '-')})">
+                                @ad.ArabicTitle
+                            </a>
+                        </h1>
+
+                        <div class="price-new">
+                            <div class="price-new">
+                                @*@Html.Partial("CountryCurrency", ad.Price ?? 0)*@
+                                <h3 style="color: #55b655"> @(language == "ar" ? ad.PriceTextAr : ad.PriceTextEn)</h3>
+                            </div> 
+                        </div>
+                        <div class="text-center cats">
+                            <a href="@Url.RouteUrl("Search",new { CategoryId=ad.CategoryId })">@ad.CategoryName</a>
+                            @*-
+            <a href="">سيارات</a>*@
+                        </div>
+                        <div class="text-center date">
+                            @ad.CreationTime.Value.ToLongDateString()
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    }
+
+</div>
+
+<script src="~/Scripts/js/ltr/jQuery_3.4.1.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+    @*$('.img-ad').each(function () {
+
+        var imge = $(this);
+        var ImgName = $(imge).attr('name');
+        if (ImgName != "noimg")
+        {
+            var model = { ImageName: ImgName };
+
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "@System.Configuration.ConfigurationManager.AppSettings["ApiDomain"]"+"/Api/ImageUpload/GetAdImage",
+                "method": "POST",
+                "headers": {
+                    "Content-Type": "application/json",
+                    "cache-control": "no-cache",
+                },
+                "processData": false,
+                "data": "{\"ImageName\":\"" + ImgName + "\"}"
+            }
+
+            $.ajax(settings).done(function (response) {
+                $(imge).attr('src', response);
+            });
+        }
+        });*@
+    });
+
+
+</script>

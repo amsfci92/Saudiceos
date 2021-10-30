@@ -1,0 +1,657 @@
+﻿@using Cigarette.Enterprise.ViewModels.Pagination
+@{
+    /**/
+
+    /**/
+
+    ViewBag.Title = "DashSetting";
+
+
+
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+}
+
+
+@if (language == "ar")
+{
+
+    <!-- dashboard  Section -->
+
+    <section class="mainContent dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 userDetails">
+                    <div class="dashImg">
+                        @*<img class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQSlL7khGH-Z3o48IDosMRnocgQAMv7Dxg7qLwzb5vrWf8WR7vRA" alt="">*@
+                        <img class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTynSetkTudpJGPUFVGN6yT5jNS7D8JLD2bOBj6HqiYKlJ6QhKR" alt="">
+                    </div>
+                    <div class="details text-center user" id="divUserName">
+                        @ViewBag.UserName
+                    </div>
+                    @*<div class="details text-center" id="divEmail">
+                        @ViewBag.Email
+                    </div>*@
+                    <div class="details text-center" id="divPhone">
+                        @ViewBag.Phone
+                    </div>
+                </div>
+                <div class="col-md-9 dashContent">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">اعلاناتي</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">الباقة</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">الاعدادات</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        @Html.Action("DashSettingAdvertisement", "Advertisement", new { Page = ((PagingParams)ViewBag.pagingParams).Page, Size = ((PagingParams)ViewBag.pagingParams).Size, language = language, country = ViewBag.Country})
+                        @*<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="item col-md-4">
+                                        <article class="col-item">
+                                            <div class="photo">
+                                                <div class="options">
+                                                    <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="productDetails.html"> <img src="images/c4.png" class="img-responsive" alt="Product Image" /> </a>
+                                            </div>
+                                            <div class="info">
+                                                <div class="price-details ">
+                                                    <h1>اسم العنوان</h1>
+                                                    <span class="price-new">$110.00</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="item col-md-4">
+                                        <article class="col-item">
+                                            <div class="photo">
+                                                <div class="options">
+                                                    <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="productDetails.html"> <img src="images/c4.png" class="img-responsive" alt="Product Image" /> </a>
+                                            </div>
+                                            <div class="info">
+                                                <div class="price-details ">
+                                                    <h1>اسم العنوان</h1>
+                                                    <span class="price-new">$110.00</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="item col-md-4">
+                                        <article class="col-item">
+                                            <div class="photo">
+                                                <div class="options">
+                                                    <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="productDetails.html"> <img src="images/c4.png" class="img-responsive" alt="Product Image" /> </a>
+                                            </div>
+                                            <div class="info">
+                                                <div class="price-details ">
+                                                    <h1>اسم العنوان</h1>
+                                                    <span class="price-new">$110.00</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="item col-md-4">
+                                        <article class="col-item">
+                                            <div class="photo">
+                                                <div class="options">
+                                                    <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="productDetails.html"> <img src="images/c4.png" class="img-responsive" alt="Product Image" /> </a>
+                                            </div>
+                                            <div class="info">
+                                                <div class="price-details ">
+                                                    <h1>اسم العنوان</h1>
+                                                    <span class="price-new">$110.00</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="item col-md-4">
+                                        <article class="col-item">
+                                            <div class="photo">
+                                                <div class="options">
+                                                    <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="productDetails.html"> <img src="images/c4.png" class="img-responsive" alt="Product Image" /> </a>
+                                            </div>
+                                            <div class="info">
+                                                <div class="price-details ">
+                                                    <h1>اسم العنوان</h1>
+                                                    <span class="price-new">$110.00</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="item col-md-4">
+                                        <article class="col-item">
+                                            <div class="photo">
+                                                <div class="options">
+                                                    <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="productDetails.html"> <img src="images/c4.png" class="img-responsive" alt="Product Image" /> </a>
+                                            </div>
+                                            <div class="info">
+                                                <div class="price-details ">
+                                                    <h1>اسم العنوان</h1>
+                                                    <span class="price-new">$110.00</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            متبقى لك @ViewBag.FreeAdCount من الإعلانات المجانية
+
+                            @*<div class="dashbtnDiv">
+                                <a href="baqat.html">
+                                    <button class="btn dashBtn">
+                                        تفاصيل الباقات
+                                    </button>
+                                </a>
+                            </div>*@
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="dashForm">
+                                <form class="">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="name">الاسم الاول</label>
+                                                <input type="text" class="form-control" id="FirstName" aplaceholder="الاسم" value="@ViewBag.FirstName">
+                                            </div>
+                                        </div>
+                                        @*<div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="name">الاسم الاخير</label>
+                                                <input type="text" class="form-control" id="SecondName" aplaceholder="الاسم" value="@ViewBag.SecondName">
+                                            </div>
+                                        </div>*@
+                                        <div class="col-md-2">
+                                        </div>
+                                        @*<div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">البريد الالكتروني</label>
+                                                <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" value="@ViewBag.Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">رقم الهاتف</label>
+                                                <input type="tel" class="form-control" id="Phone" aria-describedby="emailHelp" value="@ViewBag.Phone">
+                                            </div>
+                                        </div>*@
+                                    </div>
+                                    <p id="message1" style="color:green">.</p>
+                                    <div class="dashbtnDiv">
+                                        <button type="button" class="btn dashBtn" id="UserDateSubmit">
+                                            حفظ
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="dashForm">
+                                <form class="">
+                                    <div class="row">
+                                        <h6 class="col-12 dashPassTitle">تغيير كلمة المرور</h6>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="name">كلمة المرور الحالية</label>
+                                                <input type="password" class="form-control"  id="OldPassword" placeholder="كلمة المرور الحالبة">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">كلمة المرور الجديدة</label>
+                                                <input type="password" class="form-control"  id="NewPassword" aria-describedby="emailHelp" placeholder="كلمة المرور الجديدة">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">تأكيد كلمة المرور الجديدة</label>
+                                                <input type="password" class="form-control"  id="ConfirmNewPassword" aria-describedby="emailHelp" placeholder="تاكيد كلمة المرور الجديدة">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p id="message2" style="color:green">.</p>
+                                    <div class="dashbtnDiv">
+                                        <button type="button" class="btn dashBtn" id="UserPasswordSubmit">
+                                            حفظ
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            @*<div class="deleteAcc">
+                                    <a href="#">حذف الحساب</a>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- dashboard  Section End -->
+
+}
+else
+{
+
+    <!-- dashboard  Section -->
+
+    <section class="mainContent dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 userDetails">
+                    <div class="dashImg">
+                        @*<img class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQSlL7khGH-Z3o48IDosMRnocgQAMv7Dxg7qLwzb5vrWf8WR7vRA" alt="">*@
+                        <img class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTynSetkTudpJGPUFVGN6yT5jNS7D8JLD2bOBj6HqiYKlJ6QhKR" alt="">
+                    </div>
+                    <div class="details text-center user" id="divUserName">
+                        @ViewBag.UserName
+                    </div>
+                    @*<div class="details text-center" id="divEmail">
+                        @ViewBag.Email
+                    </div>*@
+                    @*<div class="details text-center" id="divPhone">
+                        @ViewBag.Phone
+                    </div>*@
+                </div>
+                <div class="col-md-9 dashContent">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">My ads</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bouquet</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Settings</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        @Html.Action("DashSettingAdvertisement", "Advertisement", new { Page = ((PagingParams)ViewBag.pagingParams).Page, Size = ((PagingParams)ViewBag.pagingParams).Size, language, country = ViewBag.Country })
+                        @*<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="item col-md-4">
+                                        <article class="col-item">
+                                            <div class="photo">
+                                                <div class="options">
+                                                    <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="productDetails.html"> <img src="images/c4.png" class="img-responsive" alt="Product Image" /> </a>
+                                            </div>
+                                            <div class="info">
+                                                <div class="price-details ">
+                                                    <h1>اسم العنوان</h1>
+                                                    <span class="price-new">$110.00</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="item col-md-4">
+                                        <article class="col-item">
+                                            <div class="photo">
+                                                <div class="options">
+                                                    <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="productDetails.html"> <img src="images/c4.png" class="img-responsive" alt="Product Image" /> </a>
+                                            </div>
+                                            <div class="info">
+                                                <div class="price-details ">
+                                                    <h1>اسم العنوان</h1>
+                                                    <span class="price-new">$110.00</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="item col-md-4">
+                                        <article class="col-item">
+                                            <div class="photo">
+                                                <div class="options">
+                                                    <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="productDetails.html"> <img src="images/c4.png" class="img-responsive" alt="Product Image" /> </a>
+                                            </div>
+                                            <div class="info">
+                                                <div class="price-details ">
+                                                    <h1>اسم العنوان</h1>
+                                                    <span class="price-new">$110.00</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="item col-md-4">
+                                        <article class="col-item">
+                                            <div class="photo">
+                                                <div class="options">
+                                                    <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="productDetails.html"> <img src="images/c4.png" class="img-responsive" alt="Product Image" /> </a>
+                                            </div>
+                                            <div class="info">
+                                                <div class="price-details ">
+                                                    <h1>اسم العنوان</h1>
+                                                    <span class="price-new">$110.00</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="item col-md-4">
+                                        <article class="col-item">
+                                            <div class="photo">
+                                                <div class="options">
+                                                    <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="productDetails.html"> <img src="images/c4.png" class="img-responsive" alt="Product Image" /> </a>
+                                            </div>
+                                            <div class="info">
+                                                <div class="price-details ">
+                                                    <h1>اسم العنوان</h1>
+                                                    <span class="price-new">$110.00</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="item col-md-4">
+                                        <article class="col-item">
+                                            <div class="photo">
+                                                <div class="options">
+                                                    <button class="btn btn-default" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wish list">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="Compare">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="productDetails.html"> <img src="images/c4.png" class="img-responsive" alt="Product Image" /> </a>
+                                            </div>
+                                            <div class="info">
+                                                <div class="price-details ">
+                                                    <h1>اسم العنوان</h1>
+                                                    <span class="price-new">$110.00</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            remain @ViewBag.FreeAdCount free ads for you
+
+                            @*<div class="dashbtnDiv">
+                                <a href="baqat.html">
+                                    <button class="btn dashBtn">
+                                        Bouquet details
+                                    </button>
+                                </a>
+                            </div>*@
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="dashForm">
+                                <form class="">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="name">first name</label>
+                                                <input type="text" class="form-control" id="FirstName" value="@ViewBag.FirstName">
+                                            </div>
+                                        </div>
+                                        @*<div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="name">last name</label>
+                                                <input type="text" class="form-control" id="SecondName" value="@ViewBag.SecondName">
+                                            </div>
+                                        </div>*@
+                                        <div class="col-md-2">
+                                        </div>
+                                        @*<div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">email</label>
+                                                <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" value="@ViewBag.Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Phone number</label>
+                                                <input type="tel" class="form-control" id="Phone" aria-describedby="emailHelp" value="@ViewBag.Phone">
+                                            </div>
+                                        </div>*@
+                                    </div>
+                                    <p id="message1" style="color:green">.</p>
+                                    <div class="dashbtnDiv">
+                                        <button type="button" class="btn dashBtn" id="UserDateSubmit">
+                                            Save
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="dashForm">
+                                <form class="">
+                                    <div class="row">
+                                        <h6 class="col-12 dashPassTitle">change password</h6>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="name">current password</label>
+                                                <input type="password" class="form-control"  id="OldPassword" placeholder="current password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">new password</label>
+                                                <input type="password" class="form-control"  id="NewPassword" aria-describedby="emailHelp" placeholder="new password">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">confirm new password</label>
+                                                <input type="password" class="form-control"  id="ConfirmNewPassword" aria-describedby="emailHelp" placeholder="confirm new password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p id="message2" style="color:green">.</p>
+                                    <div class="dashbtnDiv">
+                                        <button type="button" class="btn dashBtn" id="UserPasswordSubmit">
+                                            save
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            @*<div class="deleteAcc">
+                                    <a href="#">حذف الحساب</a>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- dashboard  Section End -->
+
+}
+
+
+
+
+<script src="~/Scripts/js/arabic/jQuery_3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $("#UserDateSubmit").click(function () {
+            var FirstName = $("#FirstName").val();
+            var SecondName ='';
+            var Phone = '';
+            var Email = '';
+            
+            var model = {
+                FirstName: FirstName,
+                SecondName: SecondName,
+                Phone: Phone,
+                Email: Email
+            }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.RouteUrl("ChangeUserData")',
+                    data: JSON.stringify({ model: model }),
+                    contentType: 'application/json; charset=utf-8',
+                    datatype: 'json',
+                    success: function (response) {
+                        if (response.data == true) {
+                            @*window.location.href ='@Url.RouteUrl("AddReply")';*@
+                            $("#divUserName").html(FirstName + " " + SecondName);
+                            //$("#divEmail").html(Email);
+                            //$("#divPhone").html(Phone);
+                            $("#message1").css("color", "green");
+                            $("#message1").html("تم تعديل البيانات بنجاح");
+                            $("#navbarUserName").html(FirstName);
+                        }
+                        else {
+                            $("#message1").css("color","red");
+                            $("#message1").html("حدث خطأ ما");
+                        }
+
+                    },
+                    error: function (error) {
+                        $("#message1").css("color", "red");
+                        $("#message1").html("حدث خطأ ما");
+                    }
+                });
+
+            });
+
+
+
+
+
+        $("#UserPasswordSubmit").click(function () {
+            var OldPassword = $("#OldPassword").val();
+            var NewPassword = $("#NewPassword").val();
+            var ConfirmNewPassword = $("#ConfirmNewPassword").val();
+            if (OldPassword != "" && NewPassword != "" && ConfirmNewPassword != "") {
+                var model = {
+                    OldPassword: OldPassword,
+                    NewPassword: NewPassword,
+                    ConfirmNewPassword: ConfirmNewPassword,
+                }
+
+                if (NewPassword != ConfirmNewPassword) {
+                    $("#message2").css("color", "red");
+                    $("#message2").html("كلمتا السر غير متطبقتان");
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.RouteUrl("ChangePassword")',
+                        data: JSON.stringify({ model: model }),
+                        contentType: 'application/json; charset=utf-8',
+                        datatype: 'json',
+                        success: function (response) {
+                            if (response.data == true) {
+                                $("#OldPassword").val('');
+                                $("#NewPassword").val('');
+                                $("#ConfirmNewPassword").val('');
+                                $("#message2").css("color", "green");
+                                $("#message2").html("تم تعديل كلمة المرور بنجاح");
+                            }
+                            else {
+                                $("#message2").css("color", "red");
+                                $("#message2").html("كلمة المرور غير صحيحة");
+                            }
+
+                        },
+                        error: function (error) {
+                            $("#message2").css("color", "red");
+                            $("#message2").html("حدث خطأ ما");
+                        }
+                    });
+                }
+
+            } else {
+                $("#message2").css("color", "red");
+                $("#message2").html("تأكد من انك قد قمت بملئ جميع الخانات ");
+            }
+
+            });
+    });
+</script>

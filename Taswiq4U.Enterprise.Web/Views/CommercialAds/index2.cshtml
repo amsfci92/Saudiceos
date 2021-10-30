@@ -1,0 +1,532 @@
+﻿@using Cigarette.Enterprise.ViewModels.ViewModels.Category
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@using Saudiceos.Enterprise.Web.helper
+@model List<Cigarette.Enterprise.ViewModels.ViewModels.CommercialAd.CommercialAdVM>
+
+@{
+    ViewBag.Title = @HomeResource.W_Offers;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var adBaseUrl = "http://api.Saudiceos.com/Api/ImageUpload/image?url={0}&type=2";
+    var commBaseUrl = "http://api.Saudiceos.com/Api/ImageUpload/image?url={0}&type=1";
+    var cookieHelper = CookieHelper.Instance(HttpContext.Current, HttpContext.Current.Response);
+}
+
+<div class="container">
+    <div class="row">
+        <!-- ***** FAQ Start ***** -->
+        <div class="col-md-12 offset-md-12">
+            <div class="faq-title text-center pb-3">
+                <h2>@HomeResource.W_Offers</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <ul class="CategoryTabs nav nav-pills mb-4" id="pills-tab" role="tablist">
+                <i class="arrowLeftTab fa fa-chevron-left"></i>
+                <li class="nav-item ">
+                    <a class="nav-link comm-ads-category active" data-index="0" id="pills-one-tab-0" data-toggle="pill" href="#pills-one-0"
+                       role="tab" aria-controls="pills-one-0" aria-selected="true">
+                        @HomeResource.W_AllCategories
+                    </a>
+                </li>
+                @foreach (var item in ViewBag.CategoriesWithSub)
+                {
+
+                    <li class="nav-item">
+                        <a class="nav-link  @(item.Id == ViewBag.CategoryId ? " active" : "") comm-ads-category" data-index="@item.Id" id="pills-one-tab-@item.Id" data-toggle="pill" href="#pills-one-@item.Id"
+                           role="tab" aria-controls="pills-one-@item.Id" aria-selected="true">
+                            @item.Name
+                        </a>
+                    </li>
+                }
+                <i class="arrowRightTab fa fa-chevron-right"></i>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-one-0" role="tabpanel" aria-labelledby="pills-one-tab-0">
+                    <div class="row comm-ads-container comm-ads-container-0">
+                        @Html.Partial("GetCommAdByCategoryId", Model)
+                    </div>
+                    <div class="comm-ad-pagination-container-0"></div>
+                </div>
+                @foreach (var item in ViewBag.CategoriesWithSub)
+                {
+                    <div class="tab-pane fade show" id="pills-one-@item.Id" role="tabpanel" aria-labelledby="pills-one-tab-@item.Id">
+                        <div class="row comm-ads-container comm-ads-container-@item.Id">
+
+                        </div>
+                        <div class="comm-ad-pagination-container-@item.Id"></div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Styles {
+    <style>
+
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .header-title {
+            text-align:@(CookieHelper.IsArabic() ? "right" : "left");
+            margin-bottom:20px;
+        }
+
+          .header-title h3 {
+            margin-bottom:0;
+            color:#000;
+        }
+
+
+        .Shop_item {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border: 1px solid transparent;
+            background-color: #fbfbfb;
+            transition: all 0.5s ease-in-out;
+        }
+
+            .Shop_item:hover {
+                box-shadow: 0px 2px 10px #0000002e;
+                border-color: #fff;
+                background-color: #fbfbfb;
+            }
+
+                .Shop_item:hover .image .overlay {
+                    top: 0;
+                    opacity: 1;
+                    visibility: visible;
+                }
+
+            .Shop_item .image {
+                position: relative;
+                width: 100%;
+                height: 300px;
+                overflow: hidden;
+            }
+
+                .Shop_item .image img {
+                    width: 100%;
+                    height: 100%;
+                    cursor: pointer;
+                }
+
+
+
+                .Shop_item .image .overlay {
+                    top: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: top 0.5s ease-in-out,opacity 0.5s ease-in-out,visibility 0.5s ease-in-out;
+                }
+                    .Shop_item .image .overlay .SelectFav {
+                        margin-bottom:10px;
+                        text-align:center;
+                        display:flex;
+                        flex-direction:row;
+                        justify-content:center;
+                    }
+
+
+                    .Shop_item .image .overlay .SelectFav img {
+                        width: 60px !important;
+                        height: 60px !important;
+                        border-radius: 50%;
+                        display:block;
+                    }
+
+                     .Shop_item .image .overlay .SelectFav span {
+                       color:#FFF;
+                    }
+
+
+
+                .Shop_item .image .desc {
+                    padding: 0 5px;
+                }
+
+                    .Shop_item .image .desc p {
+                        font-size: 16px;
+                        color: #FFF;
+                    }
+                .Shop_item .image .visitBtn {
+                    text-align: center;
+                }
+
+                    .Shop_item .image .visitBtn a {
+                        width: 100%;
+                        margin: auto;
+                        background-color: #55b555 !important;
+                        color: #FFF !important;
+                        border-radius: 3px;
+                        padding: 5px;
+                        transition: all 0.2s ease-in-out;
+                    }
+
+                        .Shop_item .image .visitBtn button:hover {
+                            background-color: #59c759 !important;
+                        }
+
+
+
+
+
+
+
+
+        .nav-pills .nav-link.active,
+        .nav-pills .show > .nav-link {
+            border-color: #fff;
+            background-color: #fff;
+            color: #55b555 !important;
+        }
+
+        .nav-pills .nav-link {
+            color: #8e8e8e !important;
+            border: 2px solid transparent;
+            background-color: transparent;
+            margin-right: 10px;
+            border-radius: 3px;
+            font-size: 14px;
+            text-align: center;
+            padding: 0.3rem 1rem;
+        }
+
+        .CategoryTabs {
+            padding: 10px 20px;
+            width: 100%;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            height: 57px;
+            overflow: scroll;
+            overflow-y: hidden;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+            .CategoryTabs::-webkit-scrollbar {
+                height: 0px;
+            }
+
+            .CategoryTabs::-webkit-scrollbar-track {
+                background-color: #f4f4f4;
+            }
+
+            .CategoryTabs::-webkit-scrollbar-thumb {
+                background-color: #f4f4f4;
+            }
+
+            .CategoryTabs .arrowRightTab {
+                position: absolute;
+                right: 0%;
+                color: #fff;
+                padding: 9px 12px;
+                background-color: #c5c5c5;
+                border-radius: 3px;
+                text-align: center;
+                z-index: 1;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.2s ease-in-out;
+            }
+
+            .CategoryTabs .arrowLeftTab {
+                position: absolute;
+                left: 0%;
+                color: #fff;
+                padding: 9px 12px;
+                background-color: #c5c5c5;
+                border-radius: 3px;
+                text-align: center;
+                z-index: 1;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.2s ease-in-out;
+            }
+
+                .CategoryTabs .arrowRightTab:hover,
+                .CategoryTabs .arrowLeftTab:hover {
+                    background-color:#55b555;
+                    color: #fff;
+                }
+
+
+
+
+        .simple-pagination ul {
+            margin: 0 0 20px;
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+
+        .simple-pagination li {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+            .simple-pagination li a,
+            .simple-pagination li span {
+                color: #666;
+                padding: 5px 10px;
+                text-decoration: none;
+                background-color: #FFF;
+                border-radius: 0px;
+                box-shadow: none;
+                border: 1px solid #DDD;
+                outline: none;
+            }
+
+        .page-link:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .page-link:hover {
+            color: #FFF;
+            background: #55b555;
+            border-color: #FFF;
+        }
+
+        .simple-pagination .current {
+            color: #FFF;
+            background-color: #55b555;
+            border-color: #FFF;
+        }
+
+        .simple-pagination .prev.current,
+        .simple-pagination .next.current {
+            background: #FFF;
+            color: #55b555;
+            border: 1px solid #DDD;
+        }
+        .active .comm-ads-container{
+            min-height: 350px !important;
+        }
+    </style>
+}
+@section Scripts {
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.simplePagination.js"></script>
+
+
+    <script type="text/javascript">
+        $(".CategoryTabs").hover(function () {
+            $('.arrowLeftTab,.arrowRightTab').css({
+                'opacity': '1',
+                'visibility': 'visible'
+            });
+        }, function () {
+            $('.arrowLeftTab,.arrowRightTab').css({
+                'opacity': '0',
+                'visibility': 'hidden'
+            });
+        });
+
+        $('.arrowLeftTab').click(function () {
+            event.preventDefault();
+            $('.CategoryTabs').animate({
+                scrollLeft: "-=400px"
+            }, "slow");
+        });
+
+        $('.arrowRightTab').click(function () {
+            event.preventDefault();
+            $('.CategoryTabs').animate({
+                scrollLeft: "+=400px"
+            }, "slow");
+        });
+
+
+
+
+        /*********************/
+
+
+
+        /*****************/
+
+        $(function () {
+            $(".rateYo").rateYo({
+                starWidth: "15px",
+                rating: 3,
+                spacing: "1px",
+                ratedFill: "#55b555",
+                normalFill: "#DDD"
+            });
+        });
+
+        /***************/
+        function setPagination(ele, paginationContainer) {
+            var items = $(ele);
+            var numItems = items.length;
+            var perPage = 4;
+
+            items.slice(perPage).hide();
+
+            if (numItems > perPage) {
+                $(paginationContainer).pagination({
+                    items: numItems,
+                    itemsOnPage: perPage,
+                    prevText: "&laquo;",
+                    nextText: "&raquo;",
+                    onPageClick: function (pageNumber) {
+                        var showFrom = perPage * (pageNumber - 1);
+                        var showTo = showFrom + perPage;
+                        items.hide().slice(showFrom, showTo).show();
+                    }
+                });
+            }
+        }
+
+
+        $(document).ready(function () {
+            setPagination(`.comm-ad-card-0`, `.comm-ad-pagination-container-0`)
+
+            $('.comm-ads-category').click(function () {
+                var categoryId = this.dataset.index;
+                if (categoryId != null && categoryId != 0) {
+                    $.get(`/GetCommAdByCategoryId/${categoryId}`, function (data) {
+                        $(`.comm-ads-container-${categoryId}`).html(data);
+                        setPagination(`.comm-ad-card-${categoryId}`, `.comm-ad-pagination-container-${categoryId}`)
+                    })
+                }
+            })
+        })
+    </script>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var FavIcon = 0;
+                var offerRequest11 = new OffersRequests();
+                offerRequest11.likeCommercialAd(1);
+                $(document).on('click', '.Shop_item .image img.favShop', function () {
+
+
+
+                });
+                $(document).on('click', '.commercial-ad-like-offers', function () {
+                    var id = this.dataset.index;
+
+                    offerRequest11.likeCommercialAd(id);
+                });
+
+                if (FavIcon == 0) {
+                    $(this).attr('src', 'http://api.Saudiceos.com/Api/ImageUpload/i?url=favShopSelected.png&type=1');
+                    FavIcon = 1;
+                }
+                else if (FavIcon == 1) {
+                    $(this).attr('src', 'http://api.Saudiceos.com/Api/ImageUpload/i?url=favShop.png&type=1');
+                    FavIcon = 0;
+                }
+            });
+        </script>
+    }
+
+<script>
+
+    $(document).ready(function () {
+        var closeModal = function () {
+            $('.modal-popup-ad').removeClass("is-open");
+        };
+        var openModal = function () {
+            $('.modal-popup-ad').addClass("is-open");
+        };
+
+        $(document).on('keydown', function (evt) {
+            evt = evt || window.event;
+            evt.keyCode === 27 ? closeModal() : false;
+        });
+
+        $('.close-button').on('click', closeModal);
+
+        // Storage Manager Object
+        var storageManager = new ViewedItemsManager()
+        var offerRequest = new OffersRequests()
+
+        // set view for the ads
+        $(document).on('mouseover', '.Shop_item .overlay', function () {
+            var _self = $(this);
+            var id = this.dataset.index;
+
+            // store the viewed items
+            storageManager.addItem(id, function () {
+                offerRequest.incrementViewCount(id);
+            });
+        });
+
+
+        $(document).on('click', '.open-full-ad', function () {
+            var adId = this.dataset.index;
+            var storageManager = new ViewedItemsManager();
+            // store the viewed items
+            storageManager.addItem(adId, function () {
+                offerRequest.incrementViewCount(adId);
+            });
+
+            var data = offerRequest.getRequestData(adId, function (data) {
+                if (data != null) {
+                    $('.modal-popup-ad').addClass("is-open");
+
+                    $('.view-count').html(data.viewsCouns)
+                    $('.commercial-ad-like').attr('comm-id', data.id)
+
+                    $('.like-count').html(data.likes)
+                    if (data.link != null) {
+                        $('span.link').show();
+                        $('span.link a').attr('href', data.link);
+                    }  
+                    if (data.whatsappLink != null) { 
+                        $('span.whatsapp-link').show();
+                        $('span.whatsapp-link a').attr('href', data.whatsappLink);
+                    }
+                    if (data.instagramLink != null) { 
+
+                        $('span.instagram-link').show();
+                        $('span.instagram-link a').attr('href', data.instagramLink);
+                    } 
+                   
+                    $('.ad-description').html(data.description)
+
+                    $('.replace-image').attr('src', `http://api.Saudiceos.com/Api/ImageUpload/i?url=${data.image}&type=1`);
+                } else {
+                    //closeModal()
+                }
+
+            });
+
+        });
+
+
+    });
+
+
+</script>
+
+}

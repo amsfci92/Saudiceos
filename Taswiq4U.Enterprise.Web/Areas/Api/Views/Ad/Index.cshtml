@@ -1,0 +1,206 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+    </div>
+
+
+    <script>
+
+// const photos = document.querySelector('input[type="file"][multiple]');
+
+// formData.append('title', 'My Vegas Vacation');
+// for (let i = 0; i < photos.files.length; i++) {
+//   formData.append('photos', photos.files[i]);
+// }
+
+class RequestManager {
+  constructor(baseUrl, headers) {
+    this._baseUrl = baseUrl;
+    this._headers = headers;
+  }
+
+  /**
+  * Get Request
+  */
+  async get(url) {
+    return await fetch(`${this._baseUrl}${url}`,
+    {
+        headers: this._headers
+    })
+    .then(response => response.json());
+
+  }
+
+  /**
+  * Post Request
+  */
+  async post(url, body) {
+    let res = await fetch(`${this._baseUrl}${url}`,
+    {
+        method: 'POST',
+        body: body,
+        headers: this._headers
+
+  })
+  .then(response => response.json())
+    return await res;
+  }
+}
+
+class Advertisment {
+    constructor(
+        Id,
+        Title,
+        ArabicDescription,
+        EnglishDescription,
+        Price,
+        Phone,
+        Email,
+        IsNogitable,
+        CategoryId,
+        CountryId,
+        CityId,
+        StateId,
+        LocationLongtude,
+        LocationLatitude,
+        UserId,
+        IsNew,
+        ContactMe,
+        IsFree,
+        Photos,
+        Advertisment_Specification) {
+        this._Title                   = Title;
+        this._ArabicDescription  	   = ArabicDescription;
+        this._EnglishDescription 	   = EnglishDescription;
+        this._Price 				   = Price;
+        this._Phone 				   = Phone;
+        this._Email 				   = Email;
+        this._IsNogitable  			   = IsNogitable;
+        this._CategoryId  			   = CategoryId;
+        this._CountryId  			   = CountryId;
+        this._CityId  				   = CityId;
+        this._StateId  				   = StateId;
+        this._LocationLongtude  	   = LocationLongtude;
+        this._LocationLatitude  	   = LocationLatitude;
+        this._UserId  				   = UserId;
+        this._IsNew  				   = IsNew;
+        this._ContactMe  			   = ContactMe;
+        this._IsFree  				   = IsFree;
+        this._Photos  				   = Photos;
+        this._Advertisment_Specification= Advertisment_Specification;
+    }
+    get Id() { return this._Id }
+    get Title() { return this._Title }
+    get ArabicDescription() { return this._ArabicDescription }
+    get EnglishDescription() { return this._EnglishDescription }
+    get Price() { return this._Price }
+    get Phone() { return this._Phone }
+    get Email() { return this._Email }
+    get IsNogitable() { return this._IsNogitable }
+    get CategoryId() { return this._CategoryId }
+    get CountryId() { return this._CountryId }
+    get CityId() { return this._CityId }
+    get StateId() { return this._StateId }
+    get LocationLongtude() { return this._LocationLongtude }
+    get LocationLatitude() { return this._LocationLatitude }
+    get UserId() { return this._UserId }
+    get IsNew() { return this._IsNew }
+    get ContactMe() { return this._ContactMe }
+    get IsFree() { return this._IsFree }
+    get Photos() { return this._Photos }
+    get Advertisment_Specificatin() { return this._Advertisment_Specification }
+}
+class AdvertismentService {
+    constructor(requestManager) {
+        this._requestManager = requestManager;
+    }
+    getCountryData() {
+        let result = {};
+        this._requestManager.get('api/countryapi/GetCountryData')
+            .then(res => {
+                document.body.innerHTML = JSON.stringify(res);
+            })
+        .catch(error => console.log(error));
+        return result;
+    }
+    getCites(countryId) {
+        this._requestManager.get(`api/country/CitiesList/${countryId}`)
+        .then(res => {console.log( res)})
+        .catch(error => console.log(error));
+
+    }
+    getCategories(countryId) {
+        let result = [];
+        this._requestManager.get(`api/getCategories/${countryId}`)
+        .then(res => {result = res})
+        .catch(error => console.log(error));
+        return result;
+    }
+    getSpecefications(categoryId) {
+        let result = [];
+        this._requestManager.get(`api/getSpecification/${countryId}`)
+        .then(res => {result = res})
+        .catch(error => console.log(error));
+        return result;
+    }
+    getSpeceficationsValues(adId) {}
+    setSpecificationValues() {}
+    getAdvertismentDetails(adId) {}
+    appendAdvertismentImages() {}
+
+    uploadAdvertismentImage() {}
+    saveAdvertisment(advertisment) {}
+}
+
+
+
+
+
+
+const enviroment = {
+    BASE_URL: '/'
+};
+
+let headers = {
+    //"Authorization": "bearer PoQ7afTfcJbInQcVUv6Y7xy2mRtdgbx45l-yxvqTCkU-680gTW1-do9WLdTN6gvMo3-4_07vkVfRJiZAthq6tYiy2yqsdioxL4nnyJaFV77LC1w8UTqVLzs8lBpFGDxAwgkASv6DBXL1gudvrwm02LMiIBvX36AaPi2nRUW1HT7Y0TMwt6KZ0Ejx_71Ng9VY5SYx5YxYVmbBEZKQVwSVXIUEQQYdsFjF_YkapBIzyennNsiagbkvKiEIpmUc80rZ3Rxazfa9VRyU65jPJUVGsDxfPXeZdKwp3nOIGnZbVYeX-YEeyb1oj7KkV4dvZWlk6f24WqpUp4Co4CpgJoWHUN2NxpFdqVMzPZuVKq0cMzR-xkH3xifWLr9rCLYbbc8D8RDVuyDD85c-qo7tUUVKQL69Sa1BcG5YUj0ztl4gaw6_-UN-Hk60oFVAhPS1iA61CzC6WhCEuYUIKnXGg-SqYFNZ_zaUPPo5kkwKSznNUPNlcgpI2cQDY-0yD_odPmrPkGtEwy2LB66j0sV6ADwaZg",
+    "Content-Type": "application/json"
+    //'Access-Control-Allow-Origin': enviroment.BASE_URL
+};
+
+const requestManager = new RequestManager(enviroment.BASE_URL, headers);
+let advertismentService = new AdvertismentService(requestManager);
+
+console.log(advertismentService.getCountryData());
+
+
+
+// // insert post
+// requestManager.post('posts', JSON.stringify({
+//             title: 'foo',
+//             body: 'bar',
+//             userId: 1
+//         }))
+//         .then(result => {
+//             console.log(JSON.stringify(result));
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//         });
+
+
+
+
+    </script>
+</body>
+</html>

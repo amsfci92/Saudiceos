@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Cigarette.Enterprise.ViewModels.ViewModels.AdminViewModels.Category.CategoryListItemViewModel>
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+<option value="0"> @HomeResource.AdminAdsChooseCategory</option>
+
+@foreach (var cat in Model)
+{
+    <option value="@cat.Id">@cat.ArabicDescription </option>
+}

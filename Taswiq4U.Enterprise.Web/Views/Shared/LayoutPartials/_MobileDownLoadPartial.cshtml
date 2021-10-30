@@ -1,0 +1,18 @@
+﻿@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@using Microsoft.AspNet.Identity
+@using Saudiceos.Enterprise.Web.helper
+@using Saudiceos.Enterprise.Web.Managers
+
+
+@if (Saudiceos.Enterprise.Web.Managers.GeneralManager.BrowserIsMobile())
+{
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button"><span aria-hidden="true">×</span></button>
+        <p>@HomeResource.W_DownloadApp<a class="btn btn-success" href="/" target="_blank"> @HomeResource.W_Download </a>.</p>
+    </div>
+    @*<style>
+            .navbar {
+                margin-top: 94px !important;
+            }
+        </style>*@
+}

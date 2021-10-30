@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "Saudiceos-14d5a",
+  "private_key_id": "28cc1dde9762b3190e7f89fbb459d6fe649f1228",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC0QC/sq8dE095g\nzgBsEoQELS2ZaI8GPsaOip6ohSYPFl61dpj9ga/mlgAtnrBcPdF2jFjgR6ng8eFH\ncIK+se3fxRl3UgwLtptYVHwT7fCozQtU62BWnkAL5Dg1J3scgyH5H+iYbokLoFBc\ny3L5NqHom+5AoytqyD12S/6IuoRH+sExyYl+uR0YEY0y0+Ewo26Cl4YVSjFPtIee\ndzN4FdLAxK/d5xH1HO9Nay/7Qm5KKV9+FoWdjDI3prd2IY2ctPuLu9OWn75zg13h\n9FIMK0sKR12mkmEo8YdLWdWjuQoo+pU19vUPwPsLPd38NF6g76yS/sIdhKpazvbw\nxk+oD/upAgMBAAECggEAWNWFiQPD6pTsdRMxvBGIBLLrVT7ltjM8EkYZGX69mhPx\nS0eO8Ol4cpEct18NFfjVgbJ7ntVS0O0ElPvLRAZW8MCn41mJXEB74RWKLRxITjj3\ny7tROH83m2S3muLBVvT9ylTCglV/rz4sPP97w3z8YLJwwmRoYnEbcXDUmjgqN3p2\n8pMt+Baq9QaNAtnm9N9zMy/aG+INxzirhBbW2q8HqhOM1UrBR4Rd7399p19PdLaG\ntVFhBt0M2ORQ7ChPtyjhFgqoZ9bH6KeDdY4ipMu84zwu5I2FvSKGcnHZLaRVKP9p\ncpdgDtCtttN06/Bre9YXzcK4o504bK8WAIIthP0N7QKBgQDbNccq33Dsyer1JEWS\n+eRAMs5Oy9q4mcVk7jHdyU03fKBqufkxk63oUOaV/sifJs/eIn5jNeKLKZgmXf58\nVlWxrI0l1kqGgFlIrd465QyJxSAn9sKK/KyLRo2IlKRT+D3FBgo+bk72rc0XBoJ0\ngF5rUAC2POs9qr2YqjUqBucKQwKBgQDSgIu83AmGnQB+Ya0JMlAfPUlUG5EUiFMf\nk1ikiq6PIXbHpGl4FsIeiRLAh/sI+TcoqvCwLqih5UTKJDbaBPh2n08n2ruTf7xM\nuWFMUhFazcOehnmLaQUMl5WLLbXrQobZkk2IFIAc9IgKtSKud3R2fEz6SXn7Zy1F\nI0V2QkIRowKBgQDOKyglFH2a1tWatgCRmWGpV59d0LDnighzQuu3koqDMz2U41CR\n5jlcFCqqzDRYKyK542tHV/i3tekZvLGKs5BpSMZ/3am+EpzmlFA8yAwgzzvNGnIi\nUj7dxv96g4KCTymZUnL0AL9XlmMb0s2DUPB8sYPZ4jXFi/5BxWO3IULPDQKBgGMm\nYyt45Q+/4dyle1CKn0ynnGN+fI6US7rit20BWYlXdNBCc985sQObAvcm1ap7YGzK\nX4ZM4+cly4n/FssIblPJZApcr9+g2fu1kcvWGBCSPOLtalCtDdDJkYm15StD8aqH\ni/dd2J5K281XVlehMn0gvU1i0I8HIT6gh3ZVbTNLAoGAQOPceFu9oTPPM/jsIEFL\n5MaYL/uCXlcjoXCpFU6lkf4kZi/gN+TG50jpt8SwWFtaqGBajlW2H8bmCL8k//Gs\nepoRB/pRpQJsElsY9dM8EFkS9AZMEQ1j7kocdZiW68kV/QMsR4hD/gaEbMJImPxE\nfgRVF0w7s7ZPqPt5hIDQHe8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "Saudiceos@Saudiceos-14d5a.iam.gserviceaccount.com",
+  "client_id": "104060885358421154325",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/Saudiceos%40Saudiceos-14d5a.iam.gserviceaccount.com"
+}

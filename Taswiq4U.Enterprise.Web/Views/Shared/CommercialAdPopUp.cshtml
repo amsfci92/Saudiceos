@@ -1,0 +1,104 @@
+﻿
+<div class="modal-popup-ad">
+    <div class="modal-container">
+        <div class="modal-right">
+            <img class="replace-image" src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dfd2ec5a01006fd8c4d7592a381d3776&auto=format&fit=crop&w=1000&q=80" alt="">
+            <div>
+                <h2 class="title-popup ad-description">Title of the Adds</h2>
+                <h2 class="title-popup">
+                    <span class="fa fa-eye "> </span>
+                    <span class=" view-count"> 0 </span> |
+                    <span class="fa fa-heart commercial-ad-like"> </span>
+                    <span class="like-count"> 0 </span> |
+                    <span class="whatsapp-link display-none"><a><span class="fa fa-whatsapp"></span></a> </span>
+                    <span class="instagram-link  display-none"> <a><span class="fa fa-instagram" ></span></a> </span>
+                    <span class="link  display-none"> <a><span class="fa fa-circle"></span></a> </span>
+                </h2>
+            </div>
+        </div>
+        <button class="icon-button close-button"> <i class="fa fa-close"></i></button>
+    </div>
+    @*<button class="modal-button"><i class="fa fa-stack-exchange"></i></button>*@
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+
+        var closeModal1 = function () {
+            $('.modal-popup-ad').removeClass("is-open");
+        };
+        var openModal = function () {
+            $('.modal-popup-ad').addClass("is-open");
+        };
+
+        $(document).on('keydown', function (evt) {
+            evt = evt || window.event;
+            evt.keyCode === 27 ? closeModal1() : false;
+        });
+
+        $('.close-button').on('click', closeModal1);
+
+        // Storage Manager Object
+        var storageManager1 = new ViewedItemsManager()
+        var offerRequest1 = new OffersRequests()
+
+        $(document).on('click', '.commercial-ad-like', function () {
+            var _self = $(this);
+            var id = _self.attr('comm-id');
+            offerRequest1.likeCommercialAd(id);
+            this.style.color = 'red';
+        });
+
+        // set view for the ads
+        $(document).on('mouseover', '.card-1', function () {
+            var _self = $(this);
+            var id = _self.attr('comm-id');
+
+            // store the viewed items
+            storageManager1.addItem(id, function () {
+                offerRequest1.incrementViewCount(id);
+                console.log(id)
+            });
+            
+        });  
+
+            var storageManager1 = new ViewedItemsManager()
+
+            offerRequest1.getPopUpRequestData( function (data) {
+                if (data != null) {
+                    $('.view-count').html(data.viewsCouns)
+                    $('.like-count').html(data.likes)
+                    $('.ad-description').html(data.description) 
+                     
+                    $('.replace-image').attr('src', 'http://api.Saudiceos.com/Api/ImageUpload/i?url=' + data.image + '&type=1'); 
+                     var isViewed = localStorage.getItem('popup-ad');
+                         Date.prototype.addHours = function(h) {
+                          this.setTime(this.getTime() + (h*60*60*1000));
+                          return this;
+                        } 
+
+                    if (data.image != null && data.image != '') {
+                        if (isViewed == null) {
+                            localStorage.setItem('popup-ad', new Date(Date.now()).addHours(3));
+                            offerRequest1.incrementViewCount(data.id);
+
+                            $('.modal-popup-ad').addClass("is-open");
+                        } else {
+                            if (new Date(isViewed) < new Date(Date.now())) {
+                                localStorage.removeItem('popup-ad');
+                                localStorage.setItem('popup-ad', new Date(Date.now()).addHours(3));
+                                $('.modal-popup-ad').addClass("is-open");
+
+                                offerRequest1.incrementViewCount(data.id);
+                            }
+                        }
+                    } 
+                }
+            });
+    });
+     
+
+</script>

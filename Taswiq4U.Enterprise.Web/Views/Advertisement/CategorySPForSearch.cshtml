@@ -1,0 +1,373 @@
+﻿@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@using Cigarette.Enterprise.ViewModels.ViewModels.Category_SpecificationAttribute
+@model IEnumerable<CategoryLastNode_SpecificationVM>
+@{
+    Layout = null;
+}
+
+@{
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+
+    var country = "KW";
+    var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    if (cookiecountry != null && cookiecountry.Value != null)
+    {
+        country = cookiecountry.Value;
+    }
+    else
+    {
+        HttpCookie newcookiecountry = new HttpCookie("Country");
+        newcookiecountry.Value = language;
+        Response.Cookies.Add(newcookiecountry);
+    }
+
+}
+
+@if (language == "ar")
+{
+    foreach (var item in Model)
+    {
+        switch (item.Specification.SpeceficationType)
+        {
+            case 1:
+                {
+                    @*<div class="form-group">
+                            <label>@item.ArabicName:</label>
+                            <input type="text" name="@("textBox,"+@item.Id)" class="form-control" @(item.Required == true ? "required" : "") />
+                        </div>*@
+
+
+                    <div class="col-md-3  col-12">
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label for="exampleInputEmail1">@item.ArabicName</label>
+                                <input type="text" class="form-control" name="@("textBox,"+@item.Id)" id="exampleInputEmail1" @(item.Required == true ? "required" : "") placeholder="@item.ArabicName">
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+                break;
+
+            case 2:
+                {
+                    @*<div class="form-group">
+                            <label>@item.ArabicName:</label>
+                            <select class="form-control" name="@("selectedList,"+item.Id)" @(item.Required == true ? "required" : "")>
+                                <option>@AdvertisementResource.Choose @item.ArabicName</option>
+                                @foreach (var op in item.Specification_Options)
+                                {
+                                    <option value="@op.Id">@op.ArabicName</option>
+                                }
+                            </select>
+                        </div>*@
+
+                     
+                    <div class="col-md-3  col-12">
+                        <div class="form-group">
+                            <label>@item.ArabicName </label>
+                            <select class="form-control" name="@("selectedList,"+item.Id)" @(item.Required == true ? "required" : "") id="exampleFormControlSelect1">
+                                <option>@AdvertisementResource.Choose @item.ArabicName</option>
+                                @foreach (var op in item.Specification_Options)
+                                {
+                                    if (op.IsDeleted != true)
+                                    {
+                                        <option value="@op.Id">@(language == "ar" ? op.ArabicName : op.EnglishName)</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+                }
+                break;
+
+            case 3:
+                {
+                    @*<div class="form-group">
+                            <fieldset id="group" @item.Id>
+                                <label>@item.ArabicName:</label>
+                                @foreach (var op in item.Specification_Options)
+                                {
+                                    <label class="col-md-3">
+                                        @op.ArabicName
+                                        <input type="checkbox" value="@op.Id" name="@("checkBox,"+@item.Id)" @(item.Required == true ? "required" : "")>
+                                    </label>
+                                }
+                            </fieldset>
+                        </div>*@
+
+
+                    <div class="col-md-3  col-12">
+                        <div class="form-group">
+                            <fieldset id="group" @item.Id>
+                                <label>@item.ArabicName </label>
+                                <div class="form-group">
+                                    @foreach (var op in item.Specification_Options)
+                                    {
+                                        <label>
+                                            @op.ArabicName
+                                            <input type="checkbox" value="@op.Id" name="@("checkBox,"+@item.Id)" @(item.Required == true ? "required" : "")>
+                                        </label>
+                                    }
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                }
+                break;
+
+            case 4:
+                {
+                    @*<div class="form-group">
+                            <fieldset id="group" @item.Id name="@("radioButton"+@item.Id)">
+                                <label>@item.ArabicName:</label>
+                                @foreach (var op in item.Specification_Options)
+                                {
+                                    <label class="col-md-3">
+                                        @op.ArabicName
+                                        <input type="radio" value="@op.Id" name="@("radioButton,"+@item.Id)" @(item.Required == true ? "required" : "")>
+                                    </label>
+                                }
+                            </fieldset>
+                        </div>*@
+
+
+                    <div class="col-md-3  col-12">
+                        <div class="form-group">
+                            <fieldset id="group" @item.Id name="@("radioButton"+@item.Id)">
+                                <label>@item.ArabicName </label>
+                                @foreach (var op in item.Specification_Options)
+                                {
+                                    <label>
+                                        @op.ArabicName
+                                        <input type="radio" value="@op.Id" name="@("radioButton,"+@item.Id)" @(item.Required == true ? "required" : "")>
+                                    </label>
+                                }
+                            </fieldset>
+                        </div>
+                    </div>
+
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+}
+else
+{
+    foreach (var item in Model)
+    {
+        switch (item.Specification.SpeceficationType)
+        {
+            case 1:
+                {
+                    @*<div class="form-group">
+                            <label>@item.ArabicName:</label>
+                            <input type="text" name="@("textBox,"+@item.Id)" class="form-control" @(item.Required == true ? "required" : "") />
+                        </div>*@
+
+
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label for="exampleInputEmail1">@item.EnglishName</label>
+                                <input type="text" class="form-control" name="@("textBox,"+@item.Id)" id="exampleInputEmail1" @(item.Required == true ? "required" : "") placeholder="@item.EnglishName">
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+                break;
+
+            case 2:
+                {
+                    @*<div class="form-group">
+                            <label>@item.ArabicName:</label>
+                            <select class="form-control" name="@("selectedList,"+item.Id)" @(item.Required == true ? "required" : "")>
+                                <option>@AdvertisementResource.Choose @item.ArabicName</option>
+                                @foreach (var op in item.Specification_Options)
+                                {
+                                    <option value="@op.Id">@op.ArabicName</option>
+                                }
+                            </select>
+                        </div>*@
+
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>@item.EnglishName </label>
+                            <select class="form-control" name="@("selectedList,"+item.Id)" @(item.Required == true ? "required" : "") id="exampleFormControlSelect1">
+                                <option>@AdvertisementResource.Choose @item.EnglishName</option>
+                                @foreach (var op in item.Specification_Options)
+                                {
+                                    <option value="@op.Id">@op.EnglishName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+                }
+                break;
+
+            case 3:
+                {
+                    @*<div class="form-group">
+                            <fieldset id="group" @item.Id>
+                                <label>@item.ArabicName:</label>
+                                @foreach (var op in item.Specification_Options)
+                                {
+                                    <label class="col-md-3">
+                                        @op.ArabicName
+                                        <input type="checkbox" value="@op.Id" name="@("checkBox,"+@item.Id)" @(item.Required == true ? "required" : "")>
+                                    </label>
+                                }
+                            </fieldset>
+                        </div>*@
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <fieldset id="group" @item.Id>
+                                <label>@item.EnglishName </label>
+                                <div class="form-group">
+                                    @foreach (var op in item.Specification_Options)
+                                    {
+                                        <label>
+                                            @op.EnglishName
+                                            <input type="checkbox" value="@op.Id" name="@("checkBox,"+@item.Id)" @(item.Required == true ? "required" : "")>
+                                        </label>
+                                    }
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                }
+                break;
+
+            case 4:
+                {
+                    @*<div class="form-group">
+                            <fieldset id="group" @item.Id name="@("radioButton"+@item.Id)">
+                                <label>@item.ArabicName:</label>
+                                @foreach (var op in item.Specification_Options)
+                                {
+                                    <label class="col-md-3">
+                                        @op.ArabicName
+                                        <input type="radio" value="@op.Id" name="@("radioButton,"+@item.Id)" @(item.Required == true ? "required" : "")>
+                                    </label>
+                                }
+                            </fieldset>
+                        </div>*@
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <fieldset id="group" @item.Id name="@("radioButton"+@item.Id)">
+                                <label>@item.EnglishName </label>
+                                @foreach (var op in item.Specification_Options)
+                                {
+                                    <label>
+                                        @op.EnglishName
+                                        <input type="radio" value="@op.Id" name="@("radioButton,"+@item.Id)" @(item.Required == true ? "required" : "")>
+                                    </label>
+                                }
+                            </fieldset>
+                        </div>
+                    </div>
+
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+}
+
+
+
+
+
+
+
+@*<div class="col-md-4">
+        <div class="row">
+            <div class="form-group col-6">
+                <label for="exampleInputEmail1">السعر</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="من">
+            </div>
+            <div class="form-group col-6">
+                <label style="visibility: hidden;" for="exampleInputEmail1">السعر</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="الى">
+            </div>
+        </div>
+    </div>*@
+@*<div class="col-md-4">
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">اللون </label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <option>ابيض</option>
+                <option>احمر</option>
+            </select>
+        </div>
+    </div>*@
+@*<div class="col-md-4">
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">  الموديل </label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <option>2019</option>
+                <option>2016</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="exampleFormControlSelect1"> الماركة  </label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <option>  رينو </option>
+                <option> كيا   </option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">    الفئة    </label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <option> جديد  </option>
+                <option> مستعمل   </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="exampleFormControlSelect1"> ترتيب  </label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <option>الاقل سعرًا</option>
+                <option>الاعلي سعرًا </option>
+            </select>
+        </div>
+    </div>*@
+
+

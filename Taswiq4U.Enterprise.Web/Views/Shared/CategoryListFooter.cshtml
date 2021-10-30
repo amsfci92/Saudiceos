@@ -1,0 +1,71 @@
+﻿@using Cigarette.Enterprise.ViewModels.ViewModels.Category
+@{
+    Layout = null;
+    int counter = 0;
+}
+@{
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+
+    var country = "KW";
+    var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    if (cookiecountry != null && cookiecountry.Value != null)
+    {
+        country = cookiecountry.Value;
+    }
+    else
+    {
+        HttpCookie newcookiecountry = new HttpCookie("Country");
+        newcookiecountry.Value = language;
+        Response.Cookies.Add(newcookiecountry);
+    }
+
+}
+
+<div class="col-6">
+    @foreach (var item in (IEnumerable<CategoryViewModel>)ViewBag.Categories)
+    {
+        <a href="@Url.RouteUrl("Search",new { language=language,country=country, CategoryId=item.Id,Category=item.Name })"><i class="fas fa-chevron-left"></i> @item.Name </a>
+        <br>
+
+        if (++counter >= 3)
+        {
+            break;
+        }
+    }
+</div>
+<div class="col-6">
+    @foreach (var item in (IEnumerable<CategoryViewModel>)ViewBag.Categories)
+    {
+        if (counter <= 5)
+        {
+            if (counter++ <= 5)
+            {
+
+                continue;
+            }
+        }
+
+
+        <a href="@Url.RouteUrl("Search",new { language=language,country=country, CategoryId=item.Id,Category=item.Name })"><i class="fas fa-chevron-left"></i> @item.Name </a>
+        <br>
+
+        if (counter++ >= 8)
+        {
+            break;
+        }
+    }
+</div>
+

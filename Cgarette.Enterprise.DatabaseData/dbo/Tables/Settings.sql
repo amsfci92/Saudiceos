@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[Settings] (
+    [Id]                  INT            IDENTITY (1, 1) NOT NULL,
+    [SiteName]            NVARCHAR (500) NULL,
+    [SiteEmail]           NVARCHAR (500) NULL,
+    [SiteFax]             NVARCHAR (500) NULL,
+    [Phone]               NVARCHAR (500) NULL,
+    [Mobile]              NVARCHAR (500) NULL,
+    [Address]             NVARCHAR (500) NULL,
+    [FooterSentence]      NVARCHAR (MAX) NULL,
+    [SiteKeywords]        NVARCHAR (MAX) NULL,
+    [SiteDescription]     NVARCHAR (MAX) NULL,
+    [SiteFacebook]        NVARCHAR (500) NULL,
+    [SiteTwitter]         NVARCHAR (500) NULL,
+    [SiteSnapchat]        NVARCHAR (500) NULL,
+    [SiteFlicker]         NVARCHAR (500) NULL,
+    [SiteGoogle]          NVARCHAR (500) NULL,
+    [SiteLinkedIn]        NVARCHAR (500) NULL,
+    [SiteInstagram]       NVARCHAR (500) NULL,
+    [SiteViemo]           NVARCHAR (500) NULL,
+    [ShareCode]           NVARCHAR (MAX) NULL,
+    [GoogleAnalytics]     NVARCHAR (MAX) NULL,
+    [GoogleMaps]          NVARCHAR (MAX) NULL,
+    [SiteHomeDescription] NVARCHAR (MAX) NULL,
+    CONSTRAINT [PK_Settings] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+

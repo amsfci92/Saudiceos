@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Cigarette.Enterprise.ViewModels.ViewModels.AdminViewModels.Country.CountryListItemViewModel>
+
+@{
+    Layout = null;
+    var cookieCountry = HttpContext.Current.Request.Cookies["Country"];
+    if (cookieCountry == null)
+    {
+        string CountryAbbrevation = "EG"; 
+        HttpCookie cookie = new HttpCookie("Country");
+        cookie.Value = CountryAbbrevation;
+        Response.Cookies.Add(cookie);
+    }
+
+    var countryText = "";
+    var selectedCountry = Model.FirstOrDefault(m => m.Abbr.ToLower() == cookieCountry.Value.ToLower());
+}
+
+
+@*@if (ViewBag.Language != "ar")
+    {
+        <span>@(selectedCountry?.EnglishDescription)</span>
+    }
+
+        @foreach (var item in Model)
+
+            {
+                countryText = ViewBag.Language == "ar" ? item.ArabicDescription : item.EnglishDescription;
+
+                <span class="country">
+                    <a href="@Url.RouteUrl("ChangeCountry", new {  returnUrl = Request.Url.PathAndQuery, country = item.Abbr, language = ViewBag.Language })">
+                        <img src="~/Content/AdminResources/assets/flags/@item.Flag"
+                             style="@(cookieCountry.Value.ToLower() == item.Abbr.ToLower()?"border: 2px #96d195 dotted; border-radius: 24px;":"")"
+                             alt="@countryText">
+                    </a>
+                </span>
+            }
+
+        @if (ViewBag.Language == "ar")
+            {
+                <span>@(selectedCountry?.ArabicDescription)</span>
+            }*@
+
+
+
+@if (ViewBag.Language == "ar")
+{
+    <a class="dropdown-toggle social" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="~/Content/AdminResources/assets/flags/@(selectedCountry?.Flag)" alt="@(selectedCountry?.ArabicDescription)">
+        @(selectedCountry?.ArabicDescription)
+    </a>
+}
+else
+{
+    <a class="dropdown-toggle social" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="~/Content/AdminResources/assets/flags/@(selectedCountry?.Flag)" alt="@(selectedCountry?.EnglishDescription)">
+        @(selectedCountry?.EnglishDescription)
+    </a>
+}
+<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+    @foreach (var item in Model)
+
+    {
+        countryText = ViewBag.Language == "ar" ? item.ArabicDescription : item.EnglishDescription;
+
+        <a class="dropdown-item" href="@Url.RouteUrl("ChangeCountry", new {  returnUrl = Request.Url.PathAndQuery, country = item.Abbr, language = ViewBag.Language })">
+            <img src="~/Content/AdminResources/assets/flags/@item.Flag" alt="@countryText">
+            @countryText
+        </a>
+
+    }
+
+</div>

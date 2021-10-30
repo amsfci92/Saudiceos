@@ -1,0 +1,197 @@
+﻿@using Cigarette.Enterprise.ViewModels.VM.Breadcrumb
+@model  Cigarette.Enterprise.ViewModels.VM.DashboardStat
+@{
+    ViewBag.Title = "الاحصائيـــات";    
+    ViewBag.Breadcrumb = new BreadcrumbVM
+    {
+        Title = "الاحصائيـــات",
+        BreadcrumbItems = new List<BreadcrumbItem>
+        {
+            new BreadcrumbItem{Title = "الإحصائيات", Link = "", IsMuted = false},
+            new BreadcrumbItem{Title = "لوحة التحكم", Link = "/admin/dashboard/details", IsMuted = true},
+        }
+    };
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout2.cshtml";
+
+}
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
+            <!--begin::Row-->
+            <div class="w-100 h-10px"></div>
+            <div class="row g-10">
+                <!--begin::Col-->
+                <div class="col-xl-3">
+                    <div class="d-flex h-100 align-items-center">
+                        <!--begin::Option-->
+                        <div class="w-100 d-flex flex-column flex-center rounded-3 bg-success bg-opacity-55 py-15 px-10">
+                            <!--begin::Heading-->
+                            <div class="mb-7 text-center">
+                                <!--begin::Title-->
+                                <h1 class="text-light mb-5 fw-boldest">دليل التنفيذيون</h1>
+                                <!--end::Title-->
+                                <!--begin::Description-->
+                                <div class="text-gray-400 fw-bold mb-5">
+
+                                </div>
+                                <!--end::Description-->
+                                <!--begin::Price-->
+                                <div class="text-center">
+                                    <span class="fs-3x fw-bolder text-light" data-kt-plan-price-month="39" data-kt-plan-price-annual="399">@Model.CEOCount</span>
+                                </div>
+                                <!--end::Price-->
+                            </div>
+                            <!--end::Heading-->
+                            <!--begin::Select-->
+                            @if (User.IsRolesAny(Permissions.CEO_ADD)) {
+
+                            <a href="/admin/ceo/new" class="btn btn-md btn-light w-100">أضــــــافه</a>
+                             }<!--end::Select-->
+                        </div>
+                        <!--end::Option-->
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3">
+                    <div class="d-flex h-100 align-items-center">
+                        <!--begin::Option-->
+                        <div class="w-100 d-flex flex-column flex-center rounded-3 bg-primary bg-opacity-75 py-15 px-10">
+                            <!--begin::Heading-->
+                            <div class="mb-7 text-center">
+                                <!--begin::Title-->
+                                <h1 class="text-light mb-5 fw-boldest">الأخبــــار</h1>
+                                <!--end::Title-->
+                                <!--begin::Description-->
+                                <div class="text-gray-400 fw-bold mb-5">
+
+                                </div>
+                                <!--end::Description-->
+                                <!--begin::Price-->
+                                <div class="text-center">
+                                    <span class="fs-3x fw-bolder text-light" data-kt-plan-price-month="39" data-kt-plan-price-annual="399">@Model.NewsCount</span>
+                                </div>
+                                <!--end::Price-->
+                            </div>
+                            <!--end::Heading-->
+                            <!--begin::Select-->
+                            @if (User.IsRolesAny(Permissions.News_ADD)) { 
+
+                            <a href="/admin/news/new" class="btn btn-md btn-light w-100">أضــــــافه</a>
+                            }<!--end::Select-->
+                        </div>
+                        <!--end::Option-->
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3">
+                    <div class="d-flex h-100 align-items-center">
+                        <!--begin::Option-->
+                        <div class="w-100 d-flex flex-column flex-center rounded-3 bg-warning bg-opacity-75 py-15 px-10">
+                            <!--begin::Heading-->
+                            <div class="mb-7 text-center">
+                                <!--begin::Title-->
+                                <h1 class="text-light mb-5 fw-boldest">الخدمـــــــات</h1>
+                                <!--end::Title-->
+                                <!--begin::Description-->
+                                <div class="text-gray-400 fw-bold mb-5">
+
+                                </div>
+                                <!--end::Description-->
+                                <!--begin::Price-->
+                                <div class="text-center">
+                                    <span class="fs-3x fw-bolder text-light" data-kt-plan-price-month="39" data-kt-plan-price-annual="399">@Model.ServiceCount</span>
+                                </div>
+                                <!--end::Price-->
+                            </div>
+                            <!--end::Heading-->
+                            <!--begin::Select-->
+                            @if (User.IsRolesAny(Permissions.Service_ADD)) {
+
+                            <a href="/admin/service/new" class="btn btn-md btn-light w-100">أضــــــافه</a>
+                             }<!--end::Select-->
+                        </div>
+                        <!--end::Option-->
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3">
+                    <div class="d-flex h-100 align-items-center">
+                        <!--begin::Option-->
+                        <div class="w-100 d-flex flex-column flex-center rounded-3 bg-danger bg-opacity-75 py-15 px-10">
+                            <!--begin::Heading-->
+                            <div class="mb-7 text-center">
+                                <!--begin::Title-->
+                                <h1 class="text-light mb-5 fw-boldest">التقاريـــــر  </h1>
+                                <!--end::Title-->
+                                <!--begin::Description-->
+                                <div class="text-gray-400 fw-bold mb-5">
+
+                                </div>
+                                <!--end::Description-->
+                                <!--begin::Price-->
+                                <div class="text-center">
+                                    <span class="fs-3x fw-bolder text-light" data-kt-plan-price-month="39" data-kt-plan-price-annual="399">@Model.ReportsCount</span>
+                                </div>
+                                <!--end::Price-->
+                            </div>
+                            <!--end::Heading-->
+                            <!--begin::Select-->
+                            @if (User.IsRolesAny(Permissions.Report_ADD)) { 
+
+                            <a href="/admin/report/new" class="btn btn-md btn-light w-100">أضــــــافه</a>
+                            }<!--end::Select-->
+                        </div>
+                        <!--end::Option-->
+                    </div>
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <div class="w-100 h-30px"></div>
+            <!--begin::Row-->
+            <div class="row g-10">
+                <!--begin::Col-->
+                <div class="col-xl-3">
+                    <div class="d-flex h-100 align-items-center">
+                        <!--begin::Option-->
+                        <div class="w-100 d-flex flex-column flex-center rounded-3 bg-dark bg-opacity-55 py-15 px-10">
+                            <!--begin::Heading-->
+                            <div class="mb-7 text-center">
+                                <!--begin::Title-->
+                                <h1 class="text-light mb-5 fw-boldest">الأعلانــــــات</h1>
+                                <!--end::Title-->
+                                <!--begin::Description-->
+                                <div class="text-gray-400 fw-bold mb-5">
+
+                                </div>
+                                <!--end::Description-->
+                                <!--begin::Price-->
+                                <div class="text-center">
+                                    <span class="fs-3x fw-bolder text-light" data-kt-plan-price-month="39" data-kt-plan-price-annual="399">@Model.BannerCount</span>
+                                </div>
+                                <!--end::Price-->
+                            </div>
+                            <!--end::Heading-->
+                            <!--begin::Select-->
+                            @if (User.IsRolesAny(Permissions.Banner_ADD)) { 
+
+                            <a href="/admin/banner/new" class="btn btn-md btn-light w-100">أضــــــافه</a>
+                            }<!--end::Select-->
+                        </div>
+                        <!--end::Option-->
+                    </div>
+                </div>
+                <!--end::Col--> 
+            </div>
+            <!--end::Row-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+</div>

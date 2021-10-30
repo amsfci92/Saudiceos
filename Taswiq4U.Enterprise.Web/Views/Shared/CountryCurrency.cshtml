@@ -1,0 +1,21 @@
+﻿@using Saudiceos.Enterprise.Web.helper
+@model decimal
+
+@{
+    Layout = null;
+
+    var cookieHelper = CookieHelper.Instance(HttpContext.Current, HttpContext.Current.Response);
+
+}
+
+@if (CookieHelper.IsArabic())
+{
+    <h3 style="color: #55b655">@string.Format("{0} {1}", ViewBag.CountryDetails.Currency.Abbr, Model)</h3>
+}
+else
+{
+    <h3 style="color: #55b655">@string.Format("{0} {1}",Model,ViewBag.CountryDetails.Currency.Abbr) </h3>
+}
+
+
+

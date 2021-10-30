@@ -1,0 +1,305 @@
+﻿@using Cigarette.Enterprise.ViewModels.VM.Breadcrumb
+
+@model Cigarette.Enterprise.ViewModels.VM.CEO.CEOVM
+@{
+    ViewBag.Title = "إضافة تنفيذي جديد";
+
+    ViewBag.Breadcrumb = new BreadcrumbVM
+    {
+        Title = "إضافة تنفيذي جديد",
+        BreadcrumbItems = new List<BreadcrumbItem>
+{
+            new BreadcrumbItem{Title = "إضافة تنفيذي جديد", Link = "", IsMuted = false},
+            new BreadcrumbItem{Title = "  التنفيذيون  ", Link = "/admin/ceo/all", IsMuted = false},
+            new BreadcrumbItem{Title = "لوحة التحكم", Link =  "/admin/dashboard/details", IsMuted = true},
+        }
+    };
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout2.cshtml";
+}
+
+@section  Styles{
+    <!--begin::Page Vendor Stylesheets(used by this page)-->
+    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendor Stylesheets-->
+}
+
+<!--begin::Basic info-->
+<div class="card mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+        <!--begin::Card title-->
+        <div class="card-title m-0">
+            <h3 class="fw-bolder m-0">إضافة تنفيذي</h3>
+        </div>
+        <!--end::Card title-->
+    </div>
+    <!--begin::Card header-->
+    <!--begin::Content-->
+    <div id="kt_account_profile_details" class="collapse show">
+        <!--begin::Form-->
+        <form id="kt_account_profile_details_form" class="form" action="/admin/ceo/new" method="post">
+            <!--begin::Card body-->
+            <div class="card-body border-top p-9">
+                <div class="text-danger">@Html.ValidationSummary()</div>
+                <input type="hidden" id="CVUrl" name="CVUrl" value="@Model.CVUrl" />
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">صورة التنفيذي</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Image input-->
+                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(../../../../Content/assets/media/avatars/blank.png)">
+                            <!--begin::Preview existing avatar-->
+                            <div class="image-input-wrapper w-250px h-350px" style="background-repeat: no-repeat;background-size: contain;background-image:url(../../../../Content/Data/Ceo/ImagesTMP/@Model.ImageUrl)"></div>
+                            <!--end::Preview existing avatar-->
+                            <!--begin::Label-->
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="  تغيير الصورة">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+                                <!--begin::Inputs-->
+                                <input class="upl-img" data-utype="0" data-image-url="/Content/Data/Ceo/ImagesTMP/" data-url-id="#ImageUrl" type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                <input type="hidden" name="avatar_remove" />
+                                <input type="hidden" value="@Model.ImageUrl" name="ImageUrl"  id="ImageUrl" required />
+                                <!--end::Inputs-->
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Cancel-->
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="  الغاء">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                            <!--end::Cancel-->
+                            <!--begin::Remove-->
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="  حذف">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                            <!--end::Remove-->
+                        </div>
+                        <!--end::Image input-->
+                        <!--begin::Hint-->
+                        <div class="form-text">الملفات المسموح بها: png, jpg, jpeg.</div>
+                        <!--end::Hint-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">ارفاق ملف</label>
+                    <div class="col-lg-8">
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-8">
+                            <!--begin::Dropzone-->
+                            <div class="dropzone" id="kt_modal_create_project_settings_logo">
+                                <!--begin::Message-->
+                                <div class="dz-message needsclick">
+                                    <!--begin::Icon-->
+                                    <!--begin::Svg Icon | path: icons/duotune/files/fil010.svg-->
+                                    <span class="svg-icon svg-icon-3hx svg-icon-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM16 12.6L12.7 9.3C12.3 8.9 11.7 8.9 11.3 9.3L8 12.6H11V18C11 18.6 11.4 19 12 19C12.6 19 13 18.6 13 18V12.6H16Z" fill="black" />
+                                            <path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="black" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                    <!--end::Icon-->
+                                    <!--begin::Info-->
+                                    <div class="ms-4">
+                                        <h3 class="dfs-3 fw-bolder text-gray-900 mb-1">يمكنك ادراج ملف هنا او الضغط واختيار الملف المناسب.</h3>
+                                        <span class="fw-bold fs-4 text-muted">يمكنك تحميل ملف واحد فقط من نوع PDF او Word</span>
+                                    </div>
+                                    <!--end::Info-->
+                                </div>
+                            </div>
+                            <!--end::Dropzone-->
+                        </div>
+                        <!--end::Input group-->
+                    </div>
+                </div>
+                <!--begin::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">الاسم</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <input type="text" name="Name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="الاسم" value="@Model.Name" />
+                                @Html.ValidationMessageFor(m => m.Name)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">المنصب</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" name="Position" class="form-control form-control-lg form-control-solid" placeholder="المنصب" value="@Model.Position" />
+                        @Html.ValidationMessageFor(m => m.Position)
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">الشركه</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" name="Company" class="form-control form-control-lg form-control-solid" placeholder="الشركه" value="@Model.Company" />
+                        @Html.ValidationMessageFor(m => m.Company)
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">الموقع</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" name="Location" class="form-control form-control-lg form-control-solid" placeholder="الموقع" value="@Model.Location" />
+                        @Html.ValidationMessageFor(m => m.Location)
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">البريد الالكتروني</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" name="Email" class="form-control form-control-lg form-control-solid" placeholder="البريد الالكتروني" value="@Model.Email" />
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">ملحوظات السيرة الذاتية</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <textarea type="text" name="CVNote" class="ck-editor-element form-control form-control-lg form-control-solid" placeholder="ملحوظات السيرة الذاتية">@Model.CVNote</textarea>
+                        @Html.ValidationMessageFor(m => m.CVNote)
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->  <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">وصف السيرة الذاتية</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <textarea type="text" name="CVDescription" class="ck-editor-element form-control form-control-lg form-control-solid" placeholder="وصف السيره الذاتي" value="">@Model.CVDescription</textarea>
+                        @Html.ValidationMessageFor(m => m.CVDescription)
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group--> 
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">تويتر</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" name="Twitter" class="form-control form-control-lg form-control-solid" placeholder="تويتر" value="@Model.Twitter" />
+                        @Html.ValidationMessageFor(m => m.Twitter)
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">لينكد ان</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" name="LinkedIn" class="form-control form-control-lg form-control-solid" placeholder="لينكد ان" value="@Model.LinkedIn" />
+                        @Html.ValidationMessageFor(m => m.LinkedIn)
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-0">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">معروض ؟</label>
+                    <!--begin::Label-->
+                    <!--begin::Label-->
+                    <div class="col-lg-8 d-flex align-items-center">
+                        <div class="form-check form-check-solid form-switch fv-row">
+                            <input name="Active" class="form-check-input w-45px h-30px" type="checkbox" checked="checked" value="true" />
+                            <input name="Active" class="form-check-input w-45px h-30px" type="hidden" value="false" />
+                            <label class="form-check-label"></label>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Active)
+                    <!--begin::Label-->
+                </div>
+                <!--end::Input group-->
+            </div>
+            <!--end::Card body-->
+            <!--begin::Actions-->
+            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                <button type="reset" class="btn btn-light btn-active-light-primary me-2">الغاء</button>
+                <button type="submit" class="btn btn-primary">حفظ  </button>
+            </div>
+            <!--end::Actions-->
+        </form>
+        <!--end::Form-->
+    </div>
+    <!--end::Content-->
+</div>
+<!--end::Basic info-->
+
+
+@section Scripts {
+    <!--begin::Page Custom Javascript(used by this page)-->
+
+    <script>
+        var myDropzone = new Dropzone("#kt_modal_create_project_settings_logo", {
+            url: "/uploader/file?type=0", // Set the url for your upload script location
+            paramName: "file", // The name that will be used to transfer the file
+            maxFiles: 1,
+            maxFilesize: 30, // MB
+            addRemoveLinks: true,
+            accept: function (file, done) {
+                debugger;
+                if (file.name == "justinbieber.jpg") {
+                    done("Naha, you don't.");
+                } else {
+                    done();
+                }
+            },
+            init: function () {
+                this.on("success", function (file, responseText) {
+                    $('#CVUrl').val(responseText);
+                });
+            }
+        });
+    </script>
+    <script src="assets/js/custom/pages/projects/settings/settings.js"></script>
+    <!--end::Page Custom Javascript-->
+}

@@ -1,0 +1,130 @@
+﻿@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@{
+    Layout = null;
+}
+
+@{
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+
+    var country = "KW";
+    var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    if (cookiecountry != null && cookiecountry.Value != null)
+    {
+        country = cookiecountry.Value;
+    }
+    else
+    {
+        HttpCookie newcookiecountry = new HttpCookie("Country");
+        newcookiecountry.Value = language;
+        Response.Cookies.Add(newcookiecountry);
+    }
+
+}
+
+<section class="search-sec searchproduct">
+    <div class="container" id="categories">
+        <form method="get" novalidate="novalidate">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <input id="Term" type="text" class="form-control search-slt" placeholder="@HomeResource.W_SearchForWhat">
+                        </div>
+
+                        @*cities*@
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+
+                            <select class="form-control search-slt" id="SearchProductCity">
+                                <option>  @HomeResource.W_ChooseCity</option>
+
+                                @if (language == "ar")
+                                {
+                                    foreach (var city in ViewBag.Cities)
+                                    {
+                                        <option value="@city.Id" name="@city.Name">@city.ArabicName</option>
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (var city in ViewBag.Cities)
+                                    {
+                                        <option value="@city.Id" name="@city.Name">@city.EnglishName</option>
+                                    }
+                                }
+
+
+                            </select>
+
+                        </div>
+                        @*categories*@
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <select class="form-control search-slt" id="SearchProductCategory">
+                                <option> @HomeResource.W_ChooseCategory</option>
+
+                                @foreach (var category in ViewBag.Categories)
+                                {
+                                    <option value="@category.Id" name="@category.Name">@category.Name</option>
+                                }
+
+
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <button type="button" id="btnsearch" class="btn btn-success wrn-btn">@HomeResource.W_SearchButton</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+
+
+<script src="~/Scripts/js/arabic/jQuery_3.4.1.js"></script>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#btnsearch").click(function () {
+            var cityId = $("#SearchProductCity").find(":selected").val();
+            var categoryId = $("#SearchProductCategory").find(":selected").val();
+            var cityname = $("#SearchProductCity").find(":selected").attr("name");
+            var categoryname = $("#SearchProductCategory").find(":selected").attr("name");
+            var Term = $("#Term").val();
+
+            var url = "/Search/?";
+            if (cityId > 0)
+                url = url + 'CityId=' + cityId + '&City=' + cityname;
+            if (categoryId > 0)
+                url = url + '&CategoryId=' + categoryId + '&Category=' + categoryname;
+            if (!isNullOrWhiteSpace(Term))
+                url = url + '&Term=' + Term;
+
+            window.location.href = url;
+
+        });
+
+        function isNullOrWhiteSpace(str) {
+            return (!str || str.length === 0 || /^\s*$/.test(str))
+        }
+
+
+    });
+</script>

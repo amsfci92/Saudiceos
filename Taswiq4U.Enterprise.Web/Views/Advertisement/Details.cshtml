@@ -1,0 +1,1222 @@
+﻿@using Cigarette.Enterprise.ViewModels.ViewModels.AdvertismentImage
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+
+@model IEnumerable<Cigarette.Enterprise.ViewModels.ViewModels.Advertisement.AdvertisementDetailsViewModel>
+
+@{
+    ViewBag.Title = Model.First().AdvertisementTitle;
+    var Description = Model.First().AdvertisementTitle + " " + Model.First().AdvertisementDescription;
+    ViewBag.Description = Description;
+    var keywords = Model.First().CategoryDescription;
+    ViewBag.keywords = keywords;
+
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+    var baseUrl = System.Configuration.ConfigurationManager.AppSettings["ApiDomain"] + "/DynamicResources/AdvertismentImages/";
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+
+    var country = "KW";
+    var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    if (cookiecountry != null && cookiecountry.Value != null)
+    {
+        country = cookiecountry.Value;
+    }
+    else
+    {
+        HttpCookie newcookiecountry = new HttpCookie("Country");
+        newcookiecountry.Value = language;
+        Response.Cookies.Add(newcookiecountry);
+    }
+
+}
+
+
+
+
+
+<style>
+    .threebuttongreen {
+        background-color: #28a745;
+    }
+
+    .threebuttonred {
+        background-color: rgb(194, 25, 25);
+    }
+
+    .threebuttonblack {
+        background-color: #000;
+    }
+
+    .threebutton {
+        border: none;
+        color: white;
+        padding: 5px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+
+
+@{
+    var addToFavText = "";
+    var removeFromfavText = "";
+
+    if (language == "ar")
+    {
+        addToFavText = "اضف الى المفضلة";
+        removeFromfavText = "حذف من المفضلة";
+    }
+    else
+    {
+        addToFavText = "Add to favorites";
+        removeFromfavText = "Remove from favorites";
+    }
+}
+
+@if (language == "ar")
+{
+
+    @Html.Action("Searchproduct", "Advertisement", new { language = language, country = country })
+
+    <!-- about us Section -->
+    <section class="aboutUs">
+        <div class="container">
+            <div class="row pageTitle">
+                <div class="col-6 pageTitle">
+                    تفاصيل الاعلان
+                </div>
+                <div class="col-6 pageTitle text-left">
+                    الرئيسية | تفاصيل الاعلان
+                </div>
+            </div>
+            <div class="row product">
+                <div class="col-md-6 ">
+                    <div id="carouselExampleIndicators" class="carousel slide row" data-ride="carousel">
+                        <div class="col-2">
+                            <ol class="carousel-indicators productimgSelect">
+                                @{
+                                    int ccoouunntt = 0;
+                                }
+
+                                @foreach (var item in (List<AdvertismentImageBM>)ViewBag.AdImages)
+                                {
+
+                                    if (item.IsImage == false)
+                                    {
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="@ccoouunntt" class="@(ccoouunntt++ == 0?"active":"")">
+                                            <video width="400" controls>
+                                                <source class="img-fluid img-ad" src="~/Content/arabic/images/defaultimage.jpg" type="video/mp4">
+                                                <source src="mov_bbb.ogg" type="video/ogg">
+                                                Your browser does not support HTML video.
+                                            </video>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="@ccoouunntt" class="@(ccoouunntt++ == 0?"active":"")">
+                                            <img class="img-fluid img-ad" name="@(string.IsNullOrWhiteSpace(item.Url)?"noimg":item.Url)" src="@(string.IsNullOrWhiteSpace(item.Url)?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+item.Url))">
+                                        </li>
+                                    }
+
+
+                                }
+                            </ol>
+                        </div>
+                        <div class="col-10">
+                            <div class="carousel-inner">
+                                @{
+                                    ccoouunntt = 0;
+                                }
+                                @foreach (var item in (List<AdvertismentImageBM>)ViewBag.AdImages)
+                                {
+                                    if (item.IsImage != null && item.IsImage == false)
+                                    {
+
+                                        <div class="carousel-item @(ccoouunntt++ == 0 ? "active" : "")">
+                                            <video width="400" style="display: block; margin-left: auto; margin-right: auto;width:auto" controls data-toggle="modal" data-target="#product_single_view" alt="Second slide">
+                                                <source class="img-fluid img-ad" src="~/Content/arabic/images/defaultimage.jpg" name="@(string.IsNullOrWhiteSpace(item.Url) ? "noimg" : item.Url)" type="video/mp4">
+                                                <source src="mov_bbb.ogg" type="video/ogg">
+                                                Your browser does not support HTML video.
+                                            </video>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="carousel-item @(ccoouunntt++ == 0 ? "active" : "")">
+                                            <img class="d-block img-ad" name="@(string.IsNullOrWhiteSpace(item.Url) ? "noimg" : item.Url)" src="@(string.IsNullOrWhiteSpace(item.Url)?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+item.Url))" style="display: block; margin-left: auto; margin-right: auto;width:auto" data-toggle="modal" data-target="#product_single_view" alt="First slide">
+                                        </div>
+                                    }
+
+
+                                }
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    @if (ViewBag.IsLogin == true)
+                    {
+                        <div class="col-12 buttonProduct row">
+                            <div class="">
+                                @if (ViewBag.IsOwner == true)
+                                {
+                                    <button class="threebutton threebuttonred" type="button" data-toggle="modal" data-target="#exampleModal">
+                                        <i class="fa  fa-remove" aria-hidden="true"></i>
+                                        @HomeResource.RemoveAd
+                                    </button>
+                                }
+
+                                @if (ViewBag.IsOwner == true)
+                                {
+                                    if (ViewBag.IsFav == true)
+                                    {
+                                        <button class="threebutton threebuttonblack" id="addToFavbtn" type="button">
+                                            <i class="fa  fa-heart-o" aria-hidden="true"></i>
+                                            @HomeResource.RemoveFavorite
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="threebutton threebuttongreen" id="addToFavbtn" type="button">
+                                            <i class="fa  fa-heart-o" aria-hidden="true"></i>
+                                            @HomeResource.AddFavorite
+                                        </button>
+                                    }
+                                    if (ViewBag.IsFeatured != true)
+                                    {
+                                        <button class="threebuttonblue" id="featureBtn" type="button" data-toggle="modal" data-target="#featuredModal" title="@HomeResource.Feature">
+                                            <i class="fas fa-feather-alt" aria-hidden="true" onclick="showFeaturedModal()"></i>@HomeResource.Feature
+                                        </button>
+                                    }
+                                }
+
+                                @if (ViewBag.IsOwner != true)
+                                {
+                                    <button class="threebutton threebuttonred" type="button">
+                                        <i class="fa fa-file" aria-hidden="true"></i>
+                                        @HomeResource.ReportAd
+                                    </button>
+                                }
+
+                            </div>
+                        </div>
+
+                    }
+                    <div class="row col-lg-12" style="clear:both">&nbsp;</div>
+
+                </div>
+                <div class="col-md-6 productContent">
+                    @if (ViewBag.IsFeatured == true)
+                    {
+                        <h1 class="arabic-description">@Model.First().AdvertisementTitle <span class="badge badge-secondary">مميز</span></h1>
+                        <h1 style="display: none" class="english-description">@Model.First().AdvertisementTitleEn <span class="badge badge-secondary">Featured</span></h1>
+                    }
+                    else
+                    {
+                        <h1 class="arabic-description">@Model.First().AdvertisementTitle <span style="display:none" id="featuredBadgeAr" class="badge badge-secondary">مميز</span></h1>
+                        <h1 style="display: none" class="english-description">@Model.First().AdvertisementTitleEn <span style="display:none" id="featuredBadgeEn" class="badge badge-secondary">Featured</span></h1>
+                    }
+
+
+                    <div class="content">
+                        <a class="btn btn-sm btn-primary description-translate">@HomeResource.Translate</a>
+                        <p class="arabic-description">@Model.First().AdvertisementDescription </p>
+                        <p style="display: none" class="english-description">@Model.First().AdvertisementEnglishDescription </p>
+
+                        @if (!string.IsNullOrWhiteSpace(Model.First().Phone))
+                        {
+
+                            <a class="link-phone" data-phone=""><span>رقم التواصل </span> <span class="number-content">@Model.First().Phone</span></a>
+
+                        }
+
+                    </div>
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-6">
+                                <span class="productIcon">
+                                    <i class="far fa-clock"></i>
+                                </span>
+                                <span class="proDetails">
+                                    منذ @Model.First().AdvertisementCreationTime
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span class="productIcon">
+                                    <i class="far fa-eye"></i>
+                                </span>
+                                <span class="proDetails">
+                                    عدد المشاهدات : @Model.First().Views
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-6">
+                                <span class="productIcon">
+                                    <i class="far fa-clock"></i>
+                                </span>
+                                <span class="proDetails">
+                                    @Html.Raw(Model.First().IsNogitable == true ? "قابل للتفاوض" : "غير قابل للتفاوض")
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-6">
+                                <span class="productIcon">
+                                    <i class="far fa-map"></i>
+                                </span>
+                                <span class="proDetails">
+                                    @Model.FirstOrDefault().CityName > @Model.FirstOrDefault().StateName
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span class="productIcon">
+                                    <i class="far fa-user"></i>
+                                </span>
+                                <span class="proDetails">
+                                    @Model.FirstOrDefault().FullName
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-4 productPrice">
+                            @if ((Model.First().AdvertisementPrice ?? 0) == 0)
+                            {
+                                @(language == "ar" ? "التواصل مع المعلن" : "Contact the Ad Owner");
+                            }
+                            else
+                            {
+                                <h3 style="color: #55b655"> @(language == "ar" ? Model.First().PriceTextAr : Model.First().PriceTextEn)</h3>
+                            }
+
+                        </div>
+
+
+                        <div class="col-6  productCat">
+                            <ul>
+
+
+
+                                @foreach (var item in Model)
+                                {
+                                    if (item.Advertisment_SpecificationAttributeCustomValue != null && item.Category_SpecificationAttributeName != null)
+                                    {
+                                        <li>@item.Category_SpecificationAttributeName : @item.Advertisment_SpecificationAttributeCustomValue </li>
+                                    }
+                                    if (item.Category_SpecificationAttributeName != null && item.SpecificationAttributeOptionName != null)
+                                    {
+                                        <li>@item.Category_SpecificationAttributeName : @item.SpecificationAttributeOptionName</li>
+                                    }
+                                }
+
+                            </ul>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- quick view-->
+    <div class="modal fade product_view" id="product_single_view">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: right">
+                    <h6 class="modal-title">تفاصيل الاعلان</h6>
+                </div>
+                <div class="text-left container">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row product">
+                            <div class="col-md-9 ">
+                                <div id="carouselExampleIndicatorsde" class="carousel slide row" data-ride="carousel">
+                                    <div class="col-12">
+                                        <div class="carousel-inner">
+
+                                            @{
+                                                int qcount1 = 0;
+                                            }
+                                            @foreach (var item in (List<AdvertismentImageBM>)ViewBag.AdImages)
+                                            {
+                                                if (qcount1++ == 0)
+                                                {
+                                                    <div class="carousel-item active">
+                                                        <img class="img-fluid d-block   img-ad" style="display: block; margin-left: auto; margin-right: auto;width:auto; max-height: 350px; min-height: 350px;" src="@(string.IsNullOrWhiteSpace(item.Url)?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+item.Url))" data-toggle="modal" data-target="#product_single_view" name="@(string.IsNullOrWhiteSpace(item.Url)?"noimg":item.Url)" alt="Second slide">
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="carousel-item">
+                                                        <img class="img-fluid d-block w- 100 img-ad" style="display: block; margin-left: auto; margin-right: auto;width:auto; max-height: 350px; min-height: 350px;" src="@(string.IsNullOrWhiteSpace(item.Url)?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+item.Url))" data-toggle="modal" data-target="#product_single_view" name="@(string.IsNullOrWhiteSpace(item.Url)?"noimg":item.Url)" alt="Third slide">
+                                                    </div>
+                                                }
+
+
+                                            }
+
+
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carouselExampleIndicatorsde" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselExampleIndicatorsde" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-12">
+                                        <ol class="carousel-indicators productimgSelect">
+
+                                            @{
+                                                int qcount2 = 0;
+                                            }
+                                            @foreach (var item in (List<AdvertismentImageBM>)ViewBag.AdImages)
+                                            {
+                                                if (qcount2++ == 0)
+                                                {
+                                                    <li data-target="#carouselExampleIndicatorsde" data-slide-to="@qcount2" class="active"><img class="img-fluid img-ad" src="@(string.IsNullOrWhiteSpace(item.Url)?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+item.Url))" name="@(string.IsNullOrWhiteSpace(item.Url)?"noimg":item.Url)"></li>
+                                                }
+                                                else
+                                                {
+                                                    <li data-target="#carouselExampleIndicatorsde" data-slide-to="@qcount2"><img class="img-fluid img-ad" src="@(string.IsNullOrWhiteSpace(item.Url)?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+item.Url))" name="@(string.IsNullOrWhiteSpace(item.Url)?"noimg":item.Url)"></li>
+                                                }
+
+
+                                            }
+
+
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="col-12 buttonProduct row">
+                                </div>
+                            </div>
+                            <div class="col-md-3 productContent">
+                                <h1 class="arabic-description">@Model.First().AdvertisementTitle</h1>
+                                <h1 style="display: none" class="english-description">@Model.First().AdvertisementTitleEn</h1>
+                                <div class="content">
+                                    <a class="btn btn-sm btn-primary description-translate">@HomeResource.Translate</a>
+                                    <p class="arabic-description">@Model.First().AdvertisementDescription </p>
+                                    <p style="display: none" class="english-description">@Model.First().AdvertisementEnglishDescription </p>
+
+                                    @if (!string.IsNullOrWhiteSpace(Model.First().Phone))
+                                    {
+
+                                        <a class="link-phone" data-phone=""><span>رقم التواصل </span> <span class="number-content">@Model.First().Phone</span></a>
+
+                                    }
+
+                                </div>
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <span class="productIcon">
+                                                <i class="far fa-clock"></i>
+                                            </span>
+                                            <span class="proDetails">
+                                                منذ @Model.First().AdvertisementCreationTime
+                                            </span>
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="productIcon">
+                                                <i class="far fa-eye"></i>
+                                            </span>
+                                            <span class="proDetails">
+                                                عدد المشاهدات : @Model.First().Views
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <span class="productIcon">
+                                                <i class="far fa-clock"></i>
+                                            </span>
+                                            <span class="proDetails">
+                                                @Html.Raw(Model.First().IsNogitable == true ? "قابل للتفاوض" : "غير قابل للتفاوض")
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <span class="productIcon">
+                                                <i class="far fa-map"></i>
+                                            </span>
+                                            <span class="proDetails">
+                                                @Model.FirstOrDefault().CityName > @Model.FirstOrDefault().StateName
+                                            </span>
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="productIcon">
+                                                <i class="far fa-user"></i>
+                                            </span>
+                                            <span class="proDetails">
+                                                @Model.FirstOrDefault().FullName
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-4 productPrice">
+                                        @if ((Model.First().AdvertisementPrice ?? 0) == 0)
+                                        {
+                                            @(language == "ar" ? "التواصل مع المعلن" : "Contact the Ad Owner");
+                                        }
+                                        else
+                                        {
+                                            <h3 style="color: #55b655"> @(language == "ar" ? Model.First().PriceTextAr : Model.First().PriceTextEn)</h3>
+                                        }
+
+
+                                    </div>
+                                    <div class="col-6  productCat">
+                                        <ul>
+
+
+                                            @*<li>
+                                                    <i class="fas fa-arrow-left"></i>
+                                                    غرف النوم : 3
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-arrow-left"></i>
+                                                    المساحة : 120 متر
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-arrow-left"></i>
+                                                    غرف النوم : 2
+                                                </li>*@
+
+
+                                            @foreach (var item in Model)
+                                            {
+                                                if (item.Advertisment_SpecificationAttributeCustomValue != null && item.Category_SpecificationAttributeName != null)
+                                                {
+                                                    <li>@item.Category_SpecificationAttributeName : @item.Advertisment_SpecificationAttributeCustomValue </li>
+                                                }
+                                                if (item.Category_SpecificationAttributeName != null && item.SpecificationAttributeOptionName != null)
+                                                {
+                                                    <li>@item.Category_SpecificationAttributeName : @item.SpecificationAttributeOptionName</li>
+                                                }
+                                            }
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@HomeResource.RemoveAd</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger">@HomeResource.RemoveAd ? </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="deletebtn" class="btn btn-danger">@HomeResource.RemoveAd</button>
+                    <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">لا</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Featured Modal -->
+    <div class="modal fade" id="featuredModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@AdvertisementResource.FeaturedAd</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success">@HomeResource.FeatureAdWillDeductTwoFreeAds </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="featuredConfirmBtn" class="btn btn-success">@AdvertisementResource.Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+else
+{
+    @Html.Action("Searchproduct", "Advertisement")
+
+    <!-- about us Section -->
+    <section class="aboutUs">
+        <div class="container">
+            <div class="row pageTitle">
+                <div class="col-6 pageTitle">
+                    Ad details
+                </div>
+                <div class="col-6 pageTitle text-left">
+                    Home | Ad details
+                </div>
+            </div>
+            <div class="row product">
+                <div class="col-md-6 ">
+                    <div id="carouselExampleIndicators" class="carousel slide row" data-ride="carousel">
+                        <div class="col-2">
+                            <ol class="carousel-indicators productimgSelect">
+
+                                @{
+                                    int ccoouunntt = 0;
+                                }
+                                @foreach (var item in (List<AdvertismentImageBM>)ViewBag.AdImages)
+                                {
+                                    if (ccoouunntt++ == 0)
+                                    {
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="@ccoouunntt" class="active"><img class="img-fluid img-ad" name="@(string.IsNullOrWhiteSpace(item.Url)?"noimg":item.Url)" src="@(string.IsNullOrWhiteSpace(item.Url)?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+item.Url))"></li>
+                                    }
+                                    else
+                                    {
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="@ccoouunntt"><img class="img-fluid img-ad" name="@(string.IsNullOrWhiteSpace(item.Url)?"noimg":item.Url)" src="@(string.IsNullOrWhiteSpace(item.Url)?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+item.Url))"></li>
+                                    }
+                                }
+
+
+                            </ol>
+                        </div>
+                        <div class="col-10">
+                            <div class="carousel-inner">
+
+
+                                @{
+                                    int ccoouunntt2 = 0;
+                                }
+                                @foreach (var item in (List<AdvertismentImageBM>)ViewBag.AdImages)
+                                {
+                                    if (ccoouunntt2++ == 0)
+                                    {
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-1 00 img-ad" style="display: block; margin-left: auto; margin-right: auto;width:auto" name="@(string.IsNullOrWhiteSpace(item.Url)?"noimg":item.Url)" src="@(string.IsNullOrWhiteSpace(item.Url)?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+item.Url))" data-toggle="modal" data-target="#product_single_view" alt="First slide">
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="carousel-item">
+                                            <img class="d-block w-1 00 img-ad" style="display: block; margin-left: auto; margin-right: auto;width:auto" name="@(string.IsNullOrWhiteSpace(item.Url)?"noimg":item.Url)" src="@(string.IsNullOrWhiteSpace(item.Url)?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+item.Url))" data-toggle="modal" data-target="#product_single_view" alt="Second slide">
+                                        </div>
+                                    }
+
+                                }
+
+
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+
+
+                    @if (ViewBag.IsLogin == true)
+                    {
+                        <div class="col-12 buttonProduct row">
+                            <div class="">
+                                @if (ViewBag.IsOwner == true)
+                                {
+                                    <button class="threebutton threebuttonred" type="button" data-toggle="modal" data-target="#exampleModal">
+                                        <i class="fa  fa-remove" aria-hidden="true"></i>
+                                        @HomeResource.RemoveAd
+                                    </button>
+                                }
+                                @if (ViewBag.IsOwner == true)
+                                {
+                                    if (ViewBag.IsFav == true)
+                                    {
+                                        <button class="threebutton threebuttonred" id="addToFavbtn" type="button">
+                                            <i class="fa  fa-heart-o" aria-hidden="true"></i>
+                                            @HomeResource.RemoveFavorite
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="threebutton threebuttongreen" id="addToFavbtn" type="button">
+                                            <i class="fa  fa-heart-o" aria-hidden="true"></i>
+                                            @HomeResource.AddFavorite
+                                        </button>
+                                    }
+                                    if (ViewBag.IsFeatured != true)
+                                    {
+                                        <button class="threebuttonblue" id="featureBtn" type="button" data-toggle="modal" data-target="#featuredModal" title="@HomeResource.Feature">
+                                            <i class="fas fa-feather-alt" aria-hidden="true" onclick="showFeaturedModal()"></i>@HomeResource.Feature
+                                        </button>
+                                    }
+                                    <a class="btn btn-primary" href="@Url.RouteUrl("Edit", new { id = Model.First().Id, slug = Model.First().AdvertisementTitle.Replace(' ', '-').Replace('/', '-').Replace('$', '-').Replace('#', '-')})">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                }
+                                @if (ViewBag.IsOwner == true)
+                                {
+                                    <button class="threebutton threebuttonred" type="button">
+                                        <i class="fa fa-file" aria-hidden="true"></i>
+                                        @HomeResource.ReportAd
+                                    </button>
+                                }
+                            </div>
+                        </div>
+
+                    }
+                    <div class="row col-lg-12" style="clear:both">&nbsp;</div>
+
+                </div>
+                <div class="col-md-6 productContent">
+                    @if (ViewBag.IsFeatured == true)
+                    {
+                    <h1 style="display: none" class="arabic-description">@Model.First().AdvertisementTitle <span class="badge badge-secondary">مميز</span></h1>
+                    <h1  class="english-description">@Model.First().AdvertisementTitleEn <span class="badge badge-secondary">Featured</span></h1>
+                    }
+                    else
+                    {
+                    <h1 style="display: none" class="arabic-description">@Model.First().AdvertisementTitle <span style="display:none" id="featuredBadgeAr" class="badge badge-secondary">مميز</span></h1>
+                    <h1  class="english-description">@Model.First().AdvertisementTitleEn <span style="display:none" id="featuredBadgeEn" class="badge badge-secondary">Featured</span></h1>
+                    }
+                    <div class="content">
+                        <a class="btn btn-sm btn-primary description-translate">@HomeResource.Translate</a>
+                        <p class="arabic-description">@Model.First().AdvertisementDescription </p>
+                        <p style="display: none" class="english-description">@Model.First().AdvertisementEnglishDescription </p>
+
+                        @if (!string.IsNullOrWhiteSpace(Model.First().Phone))
+                        {
+
+                            <a class="link-phone" data-phone=""><span> @HomeResource.UserPhone </span> <span class="number-content">@Model.First().Phone</span></a>
+
+                        }
+
+                    </div>
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-6">
+                                <span class="productIcon">
+                                    <i class="far fa-clock"></i>
+                                </span>
+                                <span class="proDetails">
+                                    from @Model.First().AdvertisementCreationTime
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span class="productIcon">
+                                    <i class="far fa-eye"></i>
+                                </span>
+                                <span class="proDetails">
+                                    Views : @Model.First().Views
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-6">
+                                <span class="productIcon">
+                                    <i class="far fa-clock"></i>
+                                </span>
+                                <span class="proDetails">
+                                    @Html.Raw(Model.First().IsNogitable == true ? "Nogitable" : "Not Nogitable")
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-6">
+                                <span class="productIcon">
+                                    <i class="far fa-map"></i>
+                                </span>
+                                <span class="proDetails">
+                                    @Model.FirstOrDefault().CityName > @Model.FirstOrDefault().StateName
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span class="productIcon">
+                                    <i class="far fa-user"></i>
+                                </span>
+                                <span class="proDetails">
+                                    @Model.FirstOrDefault().FullName
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-4 productPrice">
+
+                            <h3 style="color: #55b655"> @(language == "ar" ? Model.First().PriceTextAr : Model.First().PriceTextEn)</h3>
+
+                        </div>
+                        <div class="col-6  productCat">
+                            <ul>
+
+                                @foreach (var item in Model)
+                                {
+                                    if (item.Advertisment_SpecificationAttributeCustomValue != null && item.Category_SpecificationAttributeName != null)
+                                    {
+                                        <li>@item.Category_SpecificationAttributeName : @item.Advertisment_SpecificationAttributeCustomValue </li>
+                                    }
+                                    if (item.Category_SpecificationAttributeName != null && item.SpecificationAttributeOptionName != null)
+                                    {
+                                        <li>@item.Category_SpecificationAttributeName : @item.SpecificationAttributeOptionName</li>
+                                    }
+                                }
+                                @*<li>
+                        <i class="fas fa-arrow-left"></i>
+                        غرف النوم : 3
+                    </li>
+                    <li>
+                        <i class="fas fa-arrow-left"></i>
+                        المساحة : 120 متر
+                    </li>
+                    <li>
+                        <i class="fas fa-arrow-left"></i>
+                        غرف النوم : 2
+                    </li>*@
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- quick view-->
+    <div class="modal fade product_view" id="product_single_view">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: right">
+                    <h6 class="modal-title">@HomeResource.DetailsButtonTitle</h6>
+                </div>
+                <div class="text-left container">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row product">
+                            <div class="col-md-9 ">
+                                <div id="carouselExampleIndicatorsde" class="carousel slide row" data-ride="carousel">
+                                    <div class="col-12">
+                                        <div class="carousel-inner">
+
+                                            @{
+                                                int qcount1 = 0;
+                                            }
+                                            @foreach (var item in (List<AdvertismentImageBM>)ViewBag.AdImages)
+                                            {
+                                                if (qcount1++ == 0)
+                                                {
+                                                    <div class="carousel-item active">
+                                                        <img class="img-fluid d-block w- 100 img-ad" style="display: block; margin-left: auto; margin-right: auto;width:auto; max-height: 350px; min-height: 350px;" src="@(string.IsNullOrWhiteSpace(item.Url)?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+item.Url))" data-toggle="modal" data-target="#product_single_view" name="@(string.IsNullOrWhiteSpace(item.Url)?"noimg":item.Url)" alt="Second slide">
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="carousel-item">
+                                                        <img class="img-fluid d-block  img-ad" style="display: block; margin-left: auto; margin-right: auto;width:auto; max-height: 350px; min-height: 350px;" src="@(string.IsNullOrWhiteSpace(item.Url)?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+item.Url))" data-toggle="modal" data-target="#product_single_view" name="@(string.IsNullOrWhiteSpace(item.Url)?"noimg":item.Url)" alt="Third slide">
+                                                    </div>
+                                                }
+
+
+                                            }
+
+
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carouselExampleIndicatorsde" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselExampleIndicatorsde" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-12">
+                                        <ol class="carousel-indicators productimgSelect">
+
+                                            @{
+                                                int qcount2 = 0;
+                                            }
+                                            @foreach (var item in (List<AdvertismentImageBM>)ViewBag.AdImages)
+                                            {
+                                                if (qcount2++ == 0)
+                                                {
+                                                    <li data-target="#carouselExampleIndicatorsde" data-slide-to="@qcount2" class="active"><img class="img-fluid img-ad" src="@(string.IsNullOrWhiteSpace(item.Url)?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+item.Url))" name="@(string.IsNullOrWhiteSpace(item.Url)?"noimg":item.Url)"></li>
+                                                }
+                                                else
+                                                {
+                                                    <li data-target="#carouselExampleIndicatorsde" data-slide-to="@qcount2"><img class="img-fluid img-ad" src="@(string.IsNullOrWhiteSpace(item.Url)?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+item.Url))" name="@(string.IsNullOrWhiteSpace(item.Url)?"noimg":item.Url)"></li>
+                                                }
+
+
+                                            }
+
+
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="col-12 buttonProduct row">
+                                </div>
+                            </div>
+                            <div class="col-md-3 productContent">
+                                <h1 class="arabic-description">@Model.First().AdvertisementTitle</h1>
+                                <h1 style="display: none" class="english-description">@Model.First().AdvertisementTitleEn</h1>
+                                <div class="content">
+                                    <a class="btn btn-sm btn-primary description-translate">@HomeResource.Translate</a>
+                                    <p class="arabic-description">@Model.First().AdvertisementDescription </p>
+                                    <p style="display: none" class="english-description">@Model.First().AdvertisementEnglishDescription </p>
+
+                                    @if (!string.IsNullOrWhiteSpace(Model.First().Phone))
+                                    {
+
+                                        <a class="link-phone" data-phone=""><span>رقم التواصل </span> <span class="number-content">@Model.First().Phone</span></a>
+
+                                    }
+
+                                </div>
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <span class="productIcon">
+                                                <i class="far fa-clock"></i>
+                                            </span>
+                                            <span class="proDetails">
+                                                منذ @Model.First().AdvertisementCreationTime
+                                            </span>
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="productIcon">
+                                                <i class="far fa-eye"></i>
+                                            </span>
+                                            <span class="proDetails">
+                                                عدد المشاهدات : @Model.First().Views
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <span class="productIcon">
+                                                <i class="far fa-clock"></i>
+                                            </span>
+                                            <span class="proDetails">
+                                                @Html.Raw(Model.First().IsNogitable == true ? "قابل للتفاوض" : "غير قابل للتفاوض")
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <span class="productIcon">
+                                                <i class="far fa-map"></i>
+                                            </span>
+                                            <span class="proDetails">
+                                                @Model.FirstOrDefault().CityName > @Model.FirstOrDefault().StateName
+                                            </span>
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="productIcon">
+                                                <i class="far fa-user"></i>
+                                            </span>
+                                            <span class="proDetails">
+                                                @Model.FirstOrDefault().FullName
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-4 productPrice">
+                                        @if ((Model.First().AdvertisementPrice ?? 0) == 0)
+                                        {
+                                            @(language == "ar" ? "التواصل مع المعلن" : "Contact the Ad Owner");
+                                        }
+                                        else
+                                        {
+                                            <h3 style="color: #55b655"> @(language == "ar" ? Model.First().PriceTextAr : Model.First().PriceTextEn)</h3>
+                                        }
+                                    </div>
+                                    <div class="col-6  productCat">
+                                        <ul>
+
+                                            @foreach (var item in Model)
+                                            {
+                                                if (item.Advertisment_SpecificationAttributeCustomValue != null && item.Category_SpecificationAttributeName != null)
+                                                {
+                                                    <li>@item.Category_SpecificationAttributeName : @item.Advertisment_SpecificationAttributeCustomValue </li>
+                                                }
+                                                if (item.Category_SpecificationAttributeName != null && item.SpecificationAttributeOptionName != null)
+                                                {
+                                                    <li>@item.Category_SpecificationAttributeName : @item.SpecificationAttributeOptionName</li>
+                                                }
+                                            }
+
+                                            @*<li>
+                                                    <i class="fas fa-arrow-left"></i>
+                                                    غرف النوم : 3
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-arrow-left"></i>
+                                                    المساحة : 120 متر
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-arrow-left"></i>
+                                                    غرف النوم : 2
+                                                </li>*@
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Remove add</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger">Are you sure ?</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="deletebtn" class="btn btn-danger">Delete</button>
+                    <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">لا</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Featured Modal -->
+    <div class="modal fade" id="featuredModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@AdvertisementResource.FeaturedAd</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success">@HomeResource.FeatureAdWillDeductTwoFreeAds  </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="featuredConfirmBtn" class="btn btn-success">@AdvertisementResource.Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<input hidden id="AdId" value="@ViewBag.AdId" />
+
+<script src="~/Scripts/js/ltr/jQuery_3.4.1.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $("#deletebtn").click(function () {
+            var id = $("#AdId").val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.RouteUrl("DeleteAd")',
+                data: JSON.stringify({ id: id }),
+                contentType: 'application/json; charset=utf-8',
+                datatype: 'json',
+                success: function (response) {
+                    if (response.data == true) {
+                        window.location.href = '@Url.RouteUrl("Home")';
+                    }
+                    else {
+                        toastr.error("حدث خطأ ما ! ");
+                    }
+
+                },
+                error: function (error) {
+                    toastr.error("حدث خطأ ما ! ");
+                }
+            });
+
+        });
+
+
+
+        $("#addToFavbtn").click(function () {
+            var btn = $(this);
+            btn.prop('disabled', true);
+            $.ajax({
+                type: "post",
+                url: '@Url.RouteUrl("AddAndRemoveFavorites")?addvertisementId=' + '@ViewBag.AdId',
+                success: function (res) {
+                    btn.prop('disabled', false);
+                    if (res.data == true) {
+                        btn.removeClass('threebuttongreen');
+                        btn.addClass('threebuttonblack');
+                        btn.html('<i class="fa  fa-heart-o" aria-hidden="true"></i>' + '@removeFromfavText');
+                    }
+                    else {
+                        btn.removeClass('threebuttonblack');
+                        btn.addClass('threebuttongreen');
+                        btn.html('<i class="fa  fa-heart-o" aria-hidden="true"></i>' + '@addToFavText');
+                    }
+                },
+                error: function (data) {
+                    btn.prop('disabled', false);
+                    toastr.error("حدث خطأ ما");
+                }
+            });
+        });
+
+
+        $('.description-translate').click(function () {
+            if ($('.arabic-description')[0].style.display == 'none') {
+                $('.arabic-description').show();
+                $('.english-description').hide();
+            } else {
+                $('.arabic-description').hide();
+                $('.english-description').show();
+            }
+        })
+
+        $('.show-number').click(function () {
+            var phone = $('.link-phone').attr('data-phone');
+            $('.number-content').html(phone);
+            $(this).hide();
+        })
+
+     $("#featuredConfirmBtn").click(function () {
+         var id = $("#AdId").val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/Advertisement/AddFeaturedAd?adId='+id,
+                //data: JSON.stringify({ adId: id }),
+                contentType: 'application/json; charset=utf-8',
+                datatype: 'json',
+                success: function (response) {
+                    if (response.result == "Done") {
+                        $('#featureBtn').hide();
+                        toastr.success('@HomeResource.OperationSuccess');
+                        $("#featuredBadgeAr").css("display", "inline-block");
+                        $("#featuredBadgeEn").css("display", "inline-block");
+                        $("#featuredModal").modal('hide');
+                    }
+                    else if (response.result == "NotAllowed") {
+                        toastr.error('@HomeResource.CannotFeatureMoreThanOneAddIn24Hour');
+                        $("#featuredModal").modal('hide');
+                    } else if (response.result == "NoBalance") {
+                         toastr.error('@HomeResource.NoFreeAdsBalanceFound');
+                        $("#featuredModal").modal('hide');
+                    }
+
+                },
+                error: function (error) {
+                    toastr.error('@HomeResource.OperationFailed');
+                    $("#featuredModal").modal('hide');
+                }
+            });
+
+    });
+     });
+</script>
+
+
+

@@ -1,0 +1,51 @@
+﻿@using Cigarette.Enterprise.ViewModels.ViewModels.UserInfo
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@model IEnumerable<UserInfoViewModel>
+
+<table class="table table-striped table-bordered table-hover" width="100%" id="sample_3" style="width: 100%;">
+    <thead>
+        <tr role="row">
+            <th>@HomeResource.UserName<</th>
+            <th>@HomeResource.UserUserName</th>
+            <th>@HomeResource.UserPhone</th>
+            <th>@HomeResource.UserEmail</th>
+            <th>*</th>
+            <th>*</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr role="row" class="odd">
+                <td>@user.FirstName @user.SecondName </td>
+                <td>@user.UserName </td>
+                <td>@user.PhoneNumber</td>
+                <td>@user.Email</td>
+                <td>
+                    <a href="/Admin/SystemAdmins/Add/@user.UserName" class="btn btn-info btn-sm">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                </td>
+
+                <td>
+                    @if (user.IsActive == true)
+                    {
+                        <button onclick="InActivateUser('/Admin/User/InActive/@user.UserName','@user.Name')"
+                                class="btn btn-danger btn-sm">
+                            الغاء تفعيل
+                        </button>
+                    }
+                    else
+                    {
+                        <butto onclick="ActivateUser('/Admin/User/Activate/@user.UserName','@user.Name')"
+                               class="btn btn-success btn-sm">
+                            @HomeResource.AdminBundleActivate
+                        </butto>
+                    }
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

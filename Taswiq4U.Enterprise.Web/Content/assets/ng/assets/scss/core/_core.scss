@@ -1,0 +1,9 @@
+$fontName: Tajawal;
+$font-family: '#{$fontName}', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=#{$fontName}:wght@300;400;500;700;800&display=swap');
+
+$font-size: 15px;
+$transition: .5s;
+
+@import '../color';
+@import '../core/genral';

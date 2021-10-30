@@ -1,0 +1,266 @@
+﻿@using Saudiceos.Enterprise.Web.helper
+@using Cigarette.Enterprise.ViewModels.ViewModels.WepAPIViewModel.Advertisement
+@using Cigarette.Enterprise.ViewModels.ViewModels.Advertisement
+@using Cigarette.Enterprise.ViewModels.ViewModels.Category
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@model List<Cigarette.Enterprise.ViewModels.ViewModels.CommercialAd.CommercialAdVM>
+
+@{
+        var adBaseUrl = "http://api.Saudiceos.com/Api/ImageUpload/image?url={0}&type=2";
+    var commBaseUrl = "http://api.Saudiceos.com/Api/ImageUpload/image?url={0}&type=1";
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        ViewBag.Title = HomeResource.HomePage;
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+} 
+ 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @section Styles {
+        <link rel="stylesheet" href="/Content/pr/css/magnific-popup.css">
+        <link rel="stylesheet" href="/Content/pr/css/jquery-ui.css">
+        <link rel="stylesheet" href="/Content/pr/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="/Content/pr/css/owl.theme.default.min.css">
+
+        <link rel="stylesheet" href="/Content/pr/css/lightgallery.min.css">
+
+        <link rel="stylesheet" href="/Content/pr/css/bootstrap-datepicker.css">
+
+        <link rel="stylesheet" href="/Content/pr/fonts/flaticon/font/flaticon.css">
+
+        <link rel="stylesheet" href="/Content/pr/css/swiper.css">
+
+        <link rel="stylesheet" href="/Content/pr/css/aos.css">
+
+        <link rel="stylesheet" href="/Content/pr/css/style.css">
+        <link rel="stylesheet" href="~/Content/ltr/css/styleLtr.css">
+  
+    }
+
+
+</head>
+<body>
+    <!-- slideeeeeeeeeer -->
+    <section class="sliderr">
+        <div class="container" id="Addvertisements">
+            <div class="row">
+                <div class="col-12">
+                    <h1>
+                        @HomeResource.W_Offers من فضلك اختر التصنيف المناسب
+                        <i class="fas fa-star"></i>
+                    </h1>
+                    <hr>
+
+                    <div class="row row-c" dir="rtl">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            @foreach (var item in ViewBag.CategoriesWithSub)
+                            {
+                                if (item.Id == ViewBag.CatId)
+                                {
+                                    <a href="/Offers?categoryId=@item.Id" class="font-white btn  btn-primary ">@item.Name</a>
+                                }
+                                else
+                                {
+                                    <a href="/Offers?categoryId=@item.Id" class="font-white btn  btn-info ">@item.Name</a>
+                                }
+                            }
+                        </div>
+                        <div class="col-md-1"></div>
+
+                    </div>
+                    <div class="row row-c margin-top-10"> 
+                        <div class="col-md-12">
+                            @if (Model.Count() == 0)
+                            {
+                                <h3>لا يوجد اعلانات</h3>
+                            }
+
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-md-3 example-2 card-1" comm-id="@item.Id">
+
+                                    <div class="wrapper" url="http://api.Saudiceos.com/Api/ImageUpload/i?url=@item.SystemDataFile.Url&type=1">
+                                        <div class="header">
+                                            @*<div class="date">
+                                                <span class="day">12</span>
+                                                <span class="month">Aug</span>
+                                                <span class="year">2016</span>
+                                            </div>*@
+                                            <ul class="menu-content">
+                                                <li>
+                                                    @*<a href="#" class="fa fa-bookmark-o"></a>*@
+                                                </li>
+                                                <li><a href="#" class="fa fa-heart-o"><span>@item.Likes</span></a></li>
+                                                <li><a href="#" class="fa fa-eye"><span>@item.ViewsCount</span></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="data">
+                                            <div class="content">
+
+                                                <h3 class="title "><a class=""><i class="fa fa-eye"></i></a></h3>
+
+
+                                                <p class="text">
+                                                    @item.Description
+                                                    @if (item.Link != null)
+                                                    {
+                                                        <a href="@item.Link">تصفح الرابط</a>
+                                                    }
+                                                </p>
+
+                                                <a class="btn btn-primary open-full-ad" comm-id="@item.Id">تفاصيل </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div> 
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+
+
+
+    @section Scripts {
+        <script src="/Content/pr/js/jquery-3.3.1.min.js"></script>
+        <script src="/Content/pr/js/jquery-migrate-3.0.1.min.js"></script>
+        <script src="/Content/pr/js/jquery-ui.js"></script>
+        <script src="/Content/pr/js/popper.min.js"></script>
+        <script src="/Content/pr/js/bootstrap.min.js"></script>
+        <script src="/Content/pr/js/owl.carousel.min.js"></script>
+        <script src="/Content/pr/js/jquery.stellar.min.js"></script>
+        <script src="/Content/pr/js/jquery.countdown.min.js"></script>
+        <script src="/Content/pr/js/jquery.magnific-popup.min.js"></script>
+        <script src="/Content/pr/js/bootstrap-datepicker.min.js"></script>
+        <script src="/Content/pr/js/swiper.min.js"></script>
+        <script src="/Content/pr/js/aos.js"></script>
+
+        <script src="/Content/pr/js/picturefill.min.js"></script>
+        <script src="/Content/pr/js/lightgallery-all.min.js"></script>
+        <script src="/Content/pr/js/jquery.mousewheel.min.js"></script>
+
+        <script src="/Content/pr/js/main.js"></script>
+
+        <script>
+
+            $(document).ready(function () {
+
+
+                var closeModal = function () {
+                    $('.modal-popup-ad').removeClass("is-open");
+                };
+                var openModal = function () {
+                    $('.modal-popup-ad').addClass("is-open");
+                };
+
+                $(document).on('keydown', function (evt) {
+                    evt = evt || window.event;
+                    evt.keyCode === 27 ? closeModal() : false;
+                });
+
+                $('.close-button').on('click', closeModal);
+
+                // Storage Manager Object
+                var storageManager = new ViewedItemsManager()
+                var offerRequest = new OffersRequests()
+
+                $(document).on('click', '.commercial-ad-like', function () {
+                    var _self = $(this);
+                    var id = _self.attr('ad-id');
+                    offerRequest.likeCommercialAd(id);
+                });
+
+                // set view for the ads
+                $(document).on('mouseover', '.card-1', function () {
+                    var _self = $(this);
+                    var id = _self.attr('comm-id');
+
+                    // store the viewed items
+                    storageManager.addItem(id, function () {
+                        offerRequest.incrementViewCount(id);
+                        console.log(id)
+                    });
+                });
+
+
+                $(document).on('click', '.open-full-ad', function () {
+                    var adId = $(this).attr('comm-id');
+                    var storageManager = new ViewedItemsManager()
+
+                    console.log('open-full-ad Clicked' + adId)
+
+                    // store the viewed items
+                    storageManager.addItem(adId, function () {
+                        offerRequest.incrementViewCount(adId);
+                        console.log(adId)
+                    });
+
+                    var data = offerRequest.getRequestData(adId, function (data) {
+                        if (data != null) {
+                            $('.modal-popup-ad').addClass("is-open");
+
+                            $('.view-count').html(data.viewsCouns)
+                            $('.like-count').html(data.likes)
+                            $('.ad-description').html(data.description) 
+                            $('.replace-image').attr('src', `http://api.Saudiceos.com/Api/ImageUpload/i?url=${data.image}&type=1`); 
+                            console.log(data)
+                        } else {
+                            //closeModal()
+                        }
+             
+                    });
+
+                });
+
+
+            });
+
+            var sendRequest = function (element) { 
+                element.style.background = `url(${element.getAttribute('url')})`; 
+            }
+            $(document).ready(function () {
+                var images = $('.example-2 .wrapper');
+
+                if (images != null) {
+                    for (var i = 0; i < images.length; i++) {
+                        var element = images[i];
+                        sendRequest(element)
+                    }
+                }
+            })
+
+        </script>
+    }
+
+
+</body>
+</html>
+
+
+
+
+
+
+

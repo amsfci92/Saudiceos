@@ -1,0 +1,546 @@
+﻿@using Cigarette.Enterprise.ViewModels.VM.Breadcrumb
+
+@model Cigarette.Enterprise.ViewModels.VM.Service.ServiceVM
+@{
+    ViewBag.Title = " تعديل خدمــه  ";
+
+    ViewBag.Breadcrumb = new BreadcrumbVM
+    {
+        Title = " تعديل خدمــه ",
+        BreadcrumbItems = new List<BreadcrumbItem>
+{
+            new BreadcrumbItem{Title = "تعديل خدمــه  ", Link = "", IsMuted = false},
+            new BreadcrumbItem{Title = "  الخدمات  ", Link = "/admin/service/all", IsMuted = false},
+            new BreadcrumbItem{Title = "لوحة التحكم", Link =  "/admin/dashboard/details", IsMuted = true},
+        }
+    };
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout2.cshtml";
+}
+
+@section  Styles{
+    <!--begin::Page Vendor Stylesheets(used by this page)-->
+    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendor Stylesheets-->
+}
+
+<!--begin::Basic info-->
+<div class="card mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+        <!--begin::Card title-->
+        <div class="card-title m-0">
+            <h3 class="fw-bolder m-0">تعديل خدمة  </h3>
+        </div>
+        <!--end::Card title-->
+    </div>
+    <!--begin::Card header-->
+    <!--begin::Content-->
+    <div id="kt_account_profile_details" class="collapse show">
+        <!--begin::Form-->
+        <form id="kt_account_profile_details_form" class="form" action="/admin/service/edit" method="post">
+            <!--begin::Card body-->
+            <div class="card-body border-top p-9">
+                <div class="text-danger">@Html.ValidationSummary()</div>
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <input type="hidden" name="DateCreated" value="@Model.DateCreated" />
+                <div class="row mb-6">
+                    <div class="fv-row fv-plugins-icon-container fv-plugins-bootstrap5-row-valid">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-5 fw-bold mb-4">
+                            <span class="required">اختر التصنيف  </span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Specify your apps framework" aria-label="Specify your apps framework"></i>
+                        </label>
+                        <div class="col-6 all-category">
+                            <!--end::Label-->
+                            @foreach (var item in Model.Categories)
+                            {
+                                <!--begin:Option-->
+                                <label class="d-flex flex-stack cursor-pointer mb-5">
+
+                                    <!--begin:Label-->
+                                    <span class="d-flex align-items-center me-2">
+                                        <span class="btn btn-sm btn-danger remove-cat" data-id="@item.Id">
+                                            ازاله
+                                        </span>
+                                        <!--begin:Icon-->
+                                        <span class="symbol symbol-50px me-6">
+                                            @if (item.ImageUrl != null)
+                                            {
+                                                <img width="20" height="30" src="/Content/Data/Service/Images/@item.ImageUrl" />
+                                            }
+                                            else
+                                            {
+                                                <span class="symbol-label bg-light-warning">
+                                                    <i class="fab fa-html5 text-warning fs-2x"></i>
+                                                </span>
+                                            }
+
+                                        </span>
+                                        <!--end:Icon-->
+                                        <!--begin:Info-->
+                                        <span class="d-flex flex-column">
+                                            <span class="fw-bolder fs-6">@item.Name</span>
+                                        </span>
+                                        <!--end:Info-->
+                                    </span>
+                                    <!--end:Label-->
+                                    <!--begin:Input-->
+                                    <span class="form-check form-check-custom form-check-solid is-valid">
+                                        <input class="form-check-input" type="radio" @(item.Id == Model.CategoryId ? "checked=checked":"") name="CategoryId" value="@item.Id">
+                                    </span>
+                                    <!--end:Input-->
+                                </label>
+                                <!--end::Option-->
+                            }
+                        </div>
+
+                        <!--begin:Option-->
+                        <label class="d-flex flex-stack cursor-pointer mb-5">
+                            <!--begin:Label-->
+                            <span class="d-flex align-items-center me-2">
+                                <!--begin:Icon-->
+                                <span class="symbol sym bol-50px me-6">
+                                    <!--begin::Action-->
+                                    <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">  اضــافه تصنيف</a>
+                                </span>
+                                <!--end:Icon-->
+                            </span>
+                            <!--end:Label-->
+                        </label>
+                        <!--end::Option-->
+                    </div>
+
+                </div>
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">الشعار  </label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Image input-->
+                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
+                            <!--begin::Preview existing avatar-->
+                            <div class="image-input-wrapper  w-250px h-350px" style="background-repeat: no-repeat;background-image:url(../../../../Content/Data/Service/ImagesTMP/@Model.LogoUrl)"></div>
+                            <!--end::Preview existing avatar-->
+                            <!--begin::Label-->
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="  تغيير الصورة">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+                                <!--begin::Inputs-->
+                                <input class="upl-img" data-utype="5" data-image-url="/Content/Data/Service/ImagesTMP/"  data-url-id="#LogoUrl" type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                <input type="hidden" name="avatar_remove" />
+                                <input type="hidden" value="@Model.LogoUrl" name="LogoUrl" id="LogoUrl" required />
+                                <!--end::Inputs-->
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Cancel-->
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="  الغاء">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                            <!--end::Cancel-->
+                            <!--begin::Remove-->
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="  حذف">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                            <!--end::Remove-->
+                        </div>
+                        <!--end::Image input-->
+                        <!--begin::Hint-->
+                        <div class="form-text">الملفات المسموح بها: png, jpg, jpeg.</div>
+                        <!--end::Hint-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-1">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">صورة  </label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-11">
+                        <div class="row">
+                            <div class="col col-md-3">
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
+                                    <!--begin::Preview existing avatar-->
+                                    <div class="image-input-wrapper h-150px w-200px" style="background-repeat: no-repeat;background-image:url(../../../../Content/Data/Service/ImagesTMP/@Model.Image1)"></div>
+                                    <!--end::Preview existing avatar-->
+                                    <!--begin::Label-->
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="  تغيير الصورة">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <!--begin::Inputs-->
+                                        <input class="upl-img" data-utype="5" data-image-url="/Content/Data/Service/ImagesTMP/"  data-url-id="#Image1" type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                        <input type="hidden" name="avatar_remove" />
+                                        <input type="hidden" value="@Model.Image1" name="Image1" id="Image1" required />
+                                        <!--end::Inputs-->
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Cancel-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="  الغاء">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Cancel-->
+                                    <!--begin::Remove-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="  حذف">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Remove-->
+                                </div>
+                                <!--end::Image input-->
+                            </div>
+                            <div class="col col-md-3">
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
+                                    <!--begin::Preview existing avatar-->
+                                    <div class="image-input-wrapper  h-150px w-200px" style="background-repeat: no-repeat;background-image:url(../../../../Content/Data/Service/ImagesTMP/@Model.Image2)"></div>
+                                    <!--end::Preview existing avatar-->
+                                    <!--begin::Label-->
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="  تغيير الصورة">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <!--begin::Inputs-->
+                                        <input class="upl-img" data-utype="5" data-image-url="/Content/Data/Service/ImagesTMP/"  data-url-id="#Image2" type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                        <input type="hidden" name="avatar_remove" />
+                                        <input type="hidden" value="@Model.Image2" name="Image2" id="Image2" required />
+                                        <!--end::Inputs-->
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Cancel-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="  الغاء">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Cancel-->
+                                    <!--begin::Remove-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="  حذف">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Remove-->
+                                </div>
+                                <!--end::Image input-->
+                            </div>
+                            <div class="col col-md-3">
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
+                                    <!--begin::Preview existing avatar-->
+                                    <div class="image-input-wrapper  w h-150px w-200px" style="background-repeat: no-repeat;background-image:url(../../../../Content/Data/Service/ImagesTMP/@Model.Image3)"></div>
+                                    <!--end::Preview existing avatar-->
+                                    <!--begin::Label-->
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="  تغيير الصورة">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <!--begin::Inputs-->
+                                        <input class="upl-img" data-utype="5" data-image-url="/Content/Data/Service/ImagesTMP/"  data-url-id="#Image3" type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                        <input type="hidden" name="avatar_remove" />
+                                        <input type="hidden" value="@Model.Image3" name="Image3" id="Image3" required />
+                                        <!--end::Inputs-->
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Cancel-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="  الغاء">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Cancel-->
+                                    <!--begin::Remove-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="  حذف">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Remove-->
+                                </div>
+                                <!--end::Image input-->
+                            </div>
+                            <div class="col col-md-3">
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
+                                    <!--begin::Preview existing avatar-->
+                                    <div class="image-input-wrapper  h-150px w-200px" style="background-repeat: no-repeat;background-image:url(../../../../Content/Data/Service/ImagesTMP/@Model.Image4)"></div>
+                                    <!--end::Preview existing avatar-->
+                                    <!--begin::Label-->
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="  تغيير الصورة">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <!--begin::Inputs-->
+                                        <input class="upl-img" data-utype="5"  data-image-url="/Content/Data/Service/ImagesTMP/" data-url-id="#Image4" type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                        <input type="hidden" name="avatar_remove" />
+                                        <input type="hidden" value="@Model.Image4" name="Image4" id="Image4" required />
+                                        <!--end::Inputs-->
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Cancel-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="  الغاء">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Cancel-->
+                                    <!--begin::Remove-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="  حذف">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Remove-->
+                                </div>
+                                <!--end::Image input-->
+                            </div>
+                        </div>
+                        <!--begin::Hint-->
+                        <div class="form-text">الملفات المسموح بها: png, jpg, jpeg.</div>
+                        <!--end::Hint-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">الاسم</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <input type="text" name="Title" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="العنوان" value="@Model.Title" />
+                                <span class="text-danger">@Html.ValidationMessageFor(m => m.Title)</span>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">الوصف</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <input type="text" name="Description" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="الوصف" value="@Model.Description" />
+                                <span class="text-danger">@Html.ValidationMessageFor(m => m.Description)</span>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6"> الرابط  </label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" name="Link" class="form-control form-control-lg form-control-solid" placeholder="الرابط" value="@Model.Link" />
+                        <span class="text-danger"> @Html.ValidationMessageFor(m => m.Link)</span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">كود الخصم</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" name="Code" class="form-control form-control-lg form-control-solid" placeholder="كود الخصم" value="@Model.Code" />
+                        <span class="text-danger"> @Html.ValidationMessageFor(m => m.Code)</span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-0">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">معروض ؟</label>
+                    <!--begin::Label-->
+                    <!--begin::Label-->
+                    <div class="col-lg-8 d-flex align-items-center">
+                        <div class="form-check form-check-solid form-switch fv-row">
+                            <input name="Active" class="form-check-input w-45px h-30px" type="checkbox" @(Model.Active == true ? "checked=checked" : "") value="true" />
+                            <input name="Active" class="form-check-input w-45px h-30px" type="hidden" value="false" />
+                            <label class="form-check-label"></label>
+                        </div>
+                    </div>
+                    <span class="text-danger">
+                        @Html.ValidationMessageFor(m => m.Active)
+                    </span>
+                    <!--begin::Label-->
+                </div>
+                <!--end::Input group-->
+            </div>
+            <!--end::Card body-->
+            <!--begin::Actions-->
+            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                <button type="reset" class="btn btn-light btn-active-light-primary me-2">الغاء</button>
+                <button type="submit" class="btn btn-primary">حفظ  </button>
+            </div>
+            <!--end::Actions-->
+        </form>
+        <!--end::Form-->
+    </div>
+    <!--end::Content-->
+</div>
+<!--end::Basic info-->
+<!--begin::Modal - New Card-->
+<div class="modal fade" id="kt_modal_new_card" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header">
+                <!--begin::Modal title-->
+                <h2>إضافة تصنيف جديد</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <!--begin::Form-->
+                <form id="kt_modal_new_card_form" class="form" action="#">
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-7 fv-row">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                            <span class="required">الاسم</span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="ادخل الاسم"></i>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" id="category_name" class="form-control form-control-solid" placeholder="" name="category_name" value="" />
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-7 fv-row">
+                        <!--begin::Label-->
+                        <label class="required fs-6 fw-bold form-label mb-2">الصورة</label>
+
+                        <!--end::Label-->
+                        <!--begin::Input wrapper-->
+                        <div class="position-relative">
+                            <!--begin::Col-->
+                            <div class="col-lg-8">
+                                <!--begin::Image input-->
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
+                                    <!--begin::Preview existing avatar-->
+                                    <div class="image-input-wrapper  w-250px h-350px" style="background-repeat: no-repeat;"></div>
+                                    <!--end::Preview existing avatar-->
+                                    <!--begin::Label-->
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="  تغيير الصورة">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <!--begin::Inputs-->
+                                        <input class="upl-img" data-utype="5" data-image-url="/Content/Data/Service/ImagesTMP/"  data-url-id="#CategoryImage" type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                        <input type="hidden" name="avatar_remove" />
+                                        <input type="hidden"   name="CategoryImage" id="CategoryImage" required />
+
+                                        <!--end::Inputs-->
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Cancel-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="  الغاء">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Cancel-->
+                                    <!--begin::Remove-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="  حذف">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Remove-->
+                                </div>
+                                <!--end::Image input-->
+                                <!--begin::Hint-->
+                                <div class="form-text">الملفات المسموح بها: png, jpg, jpeg.</div>
+                                <!--end::Hint-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input wrapper-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+                    <div class="text-center pt-15">
+                        <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+                            <span class="indicator-label">حفظ</span>
+                            <span class="indicator-progress">
+                                Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+<!--end::Modal - New Card-->
+@section Scripts {
+    <!--begin::Page Custom Javascript(used by this page)-->
+    <script src="assets/js/custom/modals/new-card.js"></script>
+    <script>
+
+        function loadCats() {
+            $.ajax({
+                url: `/admin/service/cats`,
+                type: "get",
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                    $('.all-category').html(result);
+                },
+                error: function (xhr) {
+                    alert(xhr);
+                }
+            });
+        }
+        $(document).on('click', '.remove-cat', function () {
+            console.log($(this).attr('data-id'));
+            var id = $(this).attr('data-id');
+            // Show popup confirmation
+            Swal.fire({
+                text: "هل انت متاكد من الحذف؟",
+                icon: "warning",
+                buttonsStyling: false,
+                confirmButtonText: "حسنا",
+                cancelButtonText: "الغاء",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/admin/service/delcat?id=${id}`,
+                        type: "get",
+                        processData: false,
+                        contentType: false,
+                        success: function (result) {
+                            loadCats();
+                        },
+                        error: function (xhr) {
+
+                        }
+                    });
+
+                }
+            });
+
+        })
+    </script>
+    <!--end::Page Custom Javascript-->
+}

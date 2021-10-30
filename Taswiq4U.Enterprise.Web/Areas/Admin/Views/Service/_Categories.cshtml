@@ -1,0 +1,41 @@
+﻿@model List<Cigarette.Enterprise.DAL.Category>
+@foreach (var item in Model)
+{
+    <!--begin:Option-->
+    <label class="d-flex flex-stack cursor-pointer mb-5">
+        <!--begin:Label-->
+        <span class="d-flex align-items-center me-2">
+            <span class="d-flex flex-column">
+                <span  class="btn btn-light remove-cat" data-id="@item.Id">
+                    ازاله
+                </span>
+            </span>
+            <!--begin:Icon-->
+            <span class="symbol symbol-50px me-6">
+                @if (item.ImageUrl != null)
+                {
+                    <img width="20" height="30" src="/Content/Data/Service/Images/@item.ImageUrl" />
+                }
+                else
+                {
+                    <span class="symbol-label bg-light-warning">
+                        <i class="fab fa-html5 text-warning fs-2x"></i>
+                    </span>
+                }
+            </span>
+            <!--end:Icon-->
+            <!--begin:Info-->
+            <span class="d-flex flex-column">
+                <span class="fw-bolder fs-6">@item.Name</span>
+            </span>
+            <!--end:Info-->
+        </span>
+        <!--end:Label-->
+        <!--begin:Input-->
+        <span class="form-check form-check-custom form-check-solid is-valid">
+            <input class="form-check-input" type="radio" checked="checked" name="CategoryId" value="@item.Id">
+        </span>
+        <!--end:Input-->
+    </label>
+    <!--end::Option-->
+}

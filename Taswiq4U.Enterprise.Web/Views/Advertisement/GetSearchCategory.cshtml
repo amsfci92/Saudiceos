@@ -1,0 +1,18 @@
+﻿@using Saudiceos.Enterprise.Web.helper
+@using Cigarette.Enterprise.DAL 
+@using PagedList.Mvc
+@using Cigarette.Enterprise.ViewModels.ViewModels.WepAPIViewModel.Advertisement
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@using Cigarette.Enterprise.ResourceManager.Helpers
+@model List<Cigarette.Enterprise.ViewModels.ViewModels.Category.CategoryViewModel>
+ 
+@foreach (var item in Model)
+{
+    <span class="breadcrumb-item">
+        @(ViewBag.Language != null && ViewBag.Language == "ar" ? item.NameAr : item.NameEn)
+        @if (item.CategoryLogo != null)
+        {
+            <img width="20" height="20" src="http://api.Saudiceos.com/Api/ImageUpload/i?url=@item.CategoryLogo&type=3" />
+        }
+    </span>
+}

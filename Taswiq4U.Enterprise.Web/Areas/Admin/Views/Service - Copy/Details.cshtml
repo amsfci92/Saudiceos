@@ -1,0 +1,167 @@
+﻿@using Cigarette.Enterprise.ViewModels.VM.Breadcrumb
+
+@model Cigarette.Enterprise.DAL.Service
+@{
+    ViewBag.Title = "تفاصيل الخدمة - ";
+
+    ViewBag.Breadcrumb = new BreadcrumbVM
+    {
+        Title = "تفاصيل الخدمة",
+        BreadcrumbItems = new List<BreadcrumbItem>
+{
+            new BreadcrumbItem{Title = "تفاصيل الخدمة", Link = "", IsMuted = false},
+            new BreadcrumbItem{Title = "الخدمات", Link = "/admin/service/all", IsMuted = true},
+            new BreadcrumbItem{Title = "لوحة التحكم", Link =  "/admin/dashboard/details", IsMuted = true},
+        }
+    };
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout2.cshtml";
+}
+
+@section  Styles{
+    <!--begin::Page Vendor Stylesheets(used by this page)-->
+    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendor Stylesheets-->
+}
+
+<!--begin::Navbar-->
+<div class="card mb-5 mb-xl-10">
+    <div class="card-body pt-9 pb-0">
+        <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-250px" style="background-image:url('/Content/Data/Report/Images/@Model.ImageUrl'); background-size: contain;"></div>
+         
+    </div>
+</div>
+<!--end::Navbar-->
+<!--begin::details View-->
+<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+    <!--begin::Card header-->
+    <div class="card-header cursor-pointer">
+        <!--begin::Card title-->
+        <div class="card-title m-0">
+            <h3 class="fw-bolder m-0">البيانات التفصيلية</h3>
+        </div>
+        <!--end::Card title-->
+        <!--begin::Actions-->
+        <div class="d-flex my-4"> 
+            <a href="/admin/service/edit/@General.Base64Encode($"{Model.Id}")" class="btn btn-primary me-3">تعديل</a>
+        </div>
+        <!--end::Actions-->
+    </div>
+    <!--begin::Card header-->
+    <!--begin::Card body-->
+    <div class="card-body p-9">
+        <!--begin::Row-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">الشعار</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                <!--begin::Preview existing avatar-->
+                <div class="image-input-wrapper  w-250px h-350px" style="background-size:contain;background-image:url(../../../../Content/Data/Service/Images/@Model.LogoUrl)"></div>
+                <!--end::Preview existing avatar-->
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--begin::Row-->
+        @if (Model.ImageUrl != null)
+        {
+            <!--begin::Row-->
+            <div class="row mb-7">
+                <!--begin::Label-->
+                <label class="col-lg-4 fw-bold text-muted">الصورة</label>
+                <!--end::Label-->
+                <!--begin::Col-->
+                <div class="col-lg-8">
+                    <!--begin::Preview existing avatar-->
+                    <div class="image-input-wrapper w-250px h-350px" style="background-size:contain;background-image:url(../../../../Content/Data/Service/Images/@Model.ImageUrl)"></div>
+                    <!--end::Preview existing avatar-->
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--begin::Row-->
+        }
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">العنوان</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                <span class="fw-bolder fs-6 text-gray-800">@Model.Title  </span>
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Row-->
+        <!--begin::Row-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">الوصف</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                <span class="fw-bolder fs-6 text-gray-800">@Model.Description  </span>
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Row-->
+        <!--begin::Row-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">كود الخصم  </label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                <span class="fw-bolder fs-6 text-gray-800">@Model.Code</span>
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--begin::Row-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">الرابط</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                <span class="fw-bolder fs-6 text-gray-800">@Model.Link</span>
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--begin::Row-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">تاريخ النشر</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                <span class="fw-bolder fs-6 text-gray-800">@(Model.DateCreated?.ToLongDateString())  </span>
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Row-->
+        <!--begin::Input group-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">
+                حاله العرض
+                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""></i>
+            </label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8 d-flex align-items-center">
+                <span class="badge @(Model.Active == true ? "badge-success" : "badge-danger" ) fw-bolder my-2">@(Model.Active == true ? "معروض" : "غير معروض")</span>
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+
+    </div>
+    <!--end::Card body-->
+</div>
+<!--end::details View-->
+
+
+@section Scripts
+{
+    <script>
+
+    </script>
+}

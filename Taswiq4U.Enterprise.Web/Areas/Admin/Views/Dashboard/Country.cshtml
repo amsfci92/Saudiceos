@@ -1,0 +1,176 @@
+﻿@model  Cigarette.Enterprise.ViewModels.ViewModels.About.HomePageModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- BEGIN PAGE BAR -->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="index.html">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>Dashboard</span>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
+            <i class="icon-calendar"></i>&nbsp;
+            <span class="thin uppercase hidden-xs"></span>&nbsp;
+            <i class="fa fa-angle-down"></i>
+        </div>
+    </div>
+</div>
+<!-- BEGIN PAGE TITLE-->
+<h3 class="page-title">
+    @(Model.Country != null ? Model.Country.Name : "") Dashboard & Statistics
+</h3>
+<!-- END PAGE TITLE-->
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat blue">
+            <div class="visual">
+                <i class="fa fa-comments"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="@Model.CitiesCount">@Model.CitiesCount</span>
+                </div>
+                <div class="desc"> Cities </div>
+            </div>
+            <a class="more" href="@Url.RouteUrl("Admin.Country.AdminCountryCity")">
+                View more
+                <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat red">
+            <div class="visual">
+                <i class="fa fa-bar-chart-o"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="@Model.CategoriesCount">@Model.CategoriesCount</span>
+                </div>
+                <div class="desc"> Categories </div>
+            </div>
+            <a class="more" href="@Url.RouteUrl("Admin.Category.AdminCategoriesList")">
+                View more
+                <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat green">
+            <div class="visual">
+                <i class="fa fa-shopping-cart"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="@Model.AdvertisementCount">@Model.AdvertisementCount</span>
+                </div>
+                <div class="desc"> Advertisement </div>
+            </div>
+            <a class="more" href="@Url.RouteUrl("Admin.Advertisment.CountryList")">
+                View more
+                <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat purple">
+            <div class="visual">
+                <i class="fa fa-globe"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+
+                    <span data-counter="counterup" data-value="@Model.UsersCount">@Model.UsersCount</span>
+                </div>
+                <div class="desc"> Users </div>
+            </div>
+            <a class="more" href="@Url.RouteUrl("Admin.User.CountryUserList")">
+                View more
+                <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- BEGIN DASHBOARD STATS 2-->
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat blue">
+            <div class="visual">
+                <i class="fa fa-comments"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="@Model.FeaturedCount">@Model.FeaturedCount</span>
+                </div>
+                <div class="desc"> Featured Advertisement </div>
+            </div>
+            <a class="more" href="@Url.RouteUrl("Admin.Advertisment.CountryFeaturedList")">
+                View more
+                <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat red">
+            <div class="visual">
+                <i class="fa fa-bar-chart-o"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="@Model.BundlesCount">@Model.BundlesCount</span>
+                </div>
+                <div class="desc"> Bundles </div>
+            </div>
+            <a class="more" href="@Url.RouteUrl("Admin.Bundle.CountryList")">
+                View more
+                <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat green">
+            <div class="visual">
+                <i class="fa fa-shopping-cart"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    <span data-counter="counterup" data-value="@Model.CommercialAdsCount">@Model.CommercialAdsCount</span>
+                </div>
+                <div class="desc"> Commercial Ads </div>
+            </div>
+            <a class="more" href="@Url.RouteUrl("Admin.Ads.CountryList")">
+                View more
+                <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat purple">
+            <div class="visual">
+                <i class="fa fa-globe"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+
+                    <span data-counter="counterup" data-value="@Model.FaqsCount">@Model.FaqsCount</span>
+                </div>
+                <div class="desc"> FAQs </div>
+            </div>
+            <a class="more" href="@Url.RouteUrl("Admin.Faq.List")">
+                View more
+                <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>

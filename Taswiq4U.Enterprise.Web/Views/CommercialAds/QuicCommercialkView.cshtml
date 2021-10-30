@@ -1,0 +1,188 @@
+﻿@model Cigarette.Enterprise.ViewModels.ViewModels.CommercialAd.CommercialAdVM
+@{
+    Layout = null;
+    var baseUrl = System.Configuration.ConfigurationManager.AppSettings["ApiDomain"] + "/DynamicResources/CommercialAdsImages/";
+}
+
+@if (Model != null)
+{
+
+    var language = Saudiceos.Enterprise.Web.helper.CookieHelper.IsArabic();
+
+    if (language == true)
+    {
+        <div class="col-md-6">
+            <div style="margin-top:20px;margin-bottom:20px;">
+                @Model.Description
+
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-6">
+                        <span class="productIcon">
+                            <i class="far fa-clock"></i>
+                        </span>
+                        <span class="proDetails">
+                            منذ @Model.CreationDate
+                        </span>
+                    </div>
+                    <div class="col-6">
+                        <span class="productIcon">
+                            <i class="far fa-eye"></i>
+                        </span>
+                        <span class="proDetails">
+                            عدد المشاهدات : @Model.ViewsCount
+                        </span>
+                    </div>
+                </div>
+                @if (Request.IsAuthenticated)
+                {
+                <div class="row">
+                    <div class="col-6">
+                        <span class="productIcon">
+                            <i class="fa fa-external-link"></i>
+                        </span>
+                        <span class="proDetails">
+                            رابط الموقع : <a href="@Model.Link">@Model.Link</a>
+                        </span>
+                    </div>
+                    <div class="col-6">
+                        <span class="productIcon">
+                            <i class="fa fa-whatsapp"></i>
+                        </span>
+                        <span class="proDetails">
+                            الواتس اب :<a href="@Model.WhatsappLink">@Model.WhatsappLink</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <span class="productIcon">
+                            <i class="fa fa-instagram"></i>
+                        </span>
+                        <span class="proDetails">
+                            الانستجرام  :<a href="@Model.InstagramLink">@Model.InstagramLink</a>
+                        </span>
+                    </div>
+                    <div class="col-6">
+                        <span class="productIcon">
+                            <i class="fa fa-heart fa-lg text-danger"></i>
+                        </span>
+                        <span class="proDetails">
+                            الاعجابات  : @Model.Likes
+                        </span>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+
+    }
+    else
+    {
+        <div class="col-md-6">
+            <div style="margin-top:20px;margin-bottom:20px;">
+                @Model.Description
+
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-6">
+                        <span class="productIcon">
+                            <i class="fa fa-clock"></i>
+                        </span>
+                        <span class="proDetails">
+                            Since : @Model.CreationDate
+                        </span>
+                    </div>
+                    <div class="col-6">
+                        <span class="productIcon">
+                            <i class="fa fa-eye"></i>
+                        </span>
+                        <span class="proDetails">
+                            Views : @Model.ViewsCount
+                        </span>
+                    </div>
+                </div>
+                @if (Request.IsAuthenticated)
+                {
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="productIcon">
+                                <i class="fa fa-external-link"></i>
+                            </span>
+                            <span class="proDetails">
+                                Website: <a href="@Model.Link">@Model.Link</a>
+                            </span>
+                        </div>
+                        <div class="col-6">
+                            <span class="productIcon">
+                                <i class="fa fa-whatsapp"></i>
+                            </span>
+                            <span class="proDetails">
+                                Whats App : <a href="@Model.WhatsappLink">@Model.WhatsappLink</a>
+                            </span>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-6">
+                        <span class="productIcon">
+                            <i class="fa fa-instagram"></i>
+                        </span>
+                        <span class="proDetails">
+                            Instgram   :<a href="@Model.InstagramLink">@Model.InstagramLink</a>
+                        </span>
+                    </div>
+                    <div class="col-6">
+                        <span class="productIcon">
+                            <i class="fa fa-heart fa-lg text-dangere"></i>
+                        </span>
+                        <span class="proDetails">
+                            Likes  : @Model.Likes
+                        </span>
+                    </div>
+                </div>
+                }
+            </div>
+           
+        </div>
+    }
+}
+
+
+
+<script src="~/Scripts/js/ltr/jQuery_3.4.1.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        @*$('.img-ad').each(function () {
+
+            var imge = $(this);
+            var ImgName = $(imge).attr('name');
+            if (ImgName != "noimg") {
+                var model = { ImageName: ImgName };
+
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "@System.Configuration.ConfigurationManager.AppSettings["ApiDomain"]"+"/Api/ImageUpload/GetAdImage",
+                    "method": "POST",
+                    "headers": {
+                        "Content-Type": "application/json",
+                        "cache-control": "no-cache",
+                    },
+                    "processData": false,
+                    "data": "{\"ImageName\":\"" + ImgName + "\"}"
+                }
+
+                $.ajax(settings).done(function (response) {
+                    $(imge).attr('src', response);
+                });
+            }
+        });*@
+    });
+
+
+</script>
+

@@ -1,0 +1,194 @@
+﻿@using Cigarette.Enterprise.ViewModels.ViewModels.Category
+@{
+    Layout = null;
+
+    string heading = "test";
+    foreach (var cat in (IEnumerable<CategoryViewModel>)ViewBag.Categories)
+    {
+        {
+            if (cat.Id == (int)ViewBag.SelectedCategory)
+            {
+                heading = cat.Name;
+            }
+        }
+    }
+}
+
+
+    <!-- Advertisement Sub Types Modal -->
+    @*<div class="modal fade advSubTypesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">*@
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="col-xs-4 advHeading">
+                        <h3>صنف اعلانك</h3>
+                    </div>
+                    <div class="col-xs-4 advSubHeading">
+                        <h3 @*class="subTitleHding"*@ id="headTitle">@Html.Raw(heading)</h3>
+                    </div>
+                    <div class="col-xs-4 advSubSubHeading">
+                        @*<h3 class="subSubTitleHding"></h3>*@
+                    </div>
+                    @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                </div>
+                <div class="modal-body">
+                    <!-- All Types -->
+                    <div class="allSubTypes">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xs-4 advTitle clicked">
+                                    <ul>
+                                        @foreach (var cat in (IEnumerable<CategoryViewModel>)ViewBag.Categories)
+                                        {
+                                            <li>
+                                                <a href="#" class="list1" onclick="secondModel(@cat.Id,'@cat.Name')">@cat.Name</a>
+                                            </li>
+                                        }
+
+                                        @*<li>
+                                                <a href="#" class="list2">عقارات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list3">موبايلات واكسسواراتها</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list1">سيارات ومركبات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list2">عقارات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list3">موبايلات واكسسواراتها</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list1">سيارات ومركبات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list2">عقارات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list3">موبايلات واكسسواراتها</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list1">سيارات ومركبات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list2">عقارات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list3">موبايلات واكسسواراتها</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list1">سيارات ومركبات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list2">عقارات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list3">موبايلات واكسسواراتها</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list1">سيارات ومركبات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list2">عقارات</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="list3">موبايلات واكسسواراتها</a>
+                                            </li>*@
+                                    </ul>
+                                </div>
+                                <div class="col-xs-4 advSubTitle">
+                                    <ul class="list1" id="secondListInModel">
+
+                                        @foreach (var item in (IEnumerable<CategoryViewModel>)ViewBag.SecondCategories)
+                                        {
+                                            <li>
+                                                <a href="#" onclick="thirdModel(@item.Id,'@item.Name')">@item.Name</a>
+                                            </li>
+                                        }
+
+
+                                        @*<li>
+            <a href="#">عربة 2</a>
+        </li>
+        <li>
+            <a href="#">عربة 3</a>
+        </li>*@
+
+
+                                    </ul>
+                                </div>
+                                <div class="col-xs-4 advSubSubTitle">
+                                    <ul id="thirdListInModelAdding">
+                                        @*<li>
+                                                <a href="#">عربة 1</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">عربة 2</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">عربة 3</a>
+                                            </li>*@
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @*</div>*@
+
+<script>
+    function secondModel(CategoryId,name) {
+        
+                if (CategoryId > 0) {
+                    $.ajax({
+                        type: "get",
+                        url: '@Url.Action("SecondListInMoelAdding", "Advertisement")',
+                        data: { id: CategoryId },
+                        success: function (data) {
+                            $("#secondListInModel").html(data);
+                            $("#thirdListInModelAdding").html("");
+                            $("#headTitle").text(name);
+                            $("#span1").text(name + " >> ");
+                        },
+                        error: function () {
+                            
+                        }
+                    });
+                }
+                else {
+                    $("#secondListInModel").html("");
+                    $("#thirdListInModelAdding").html("");
+                    $("#headTitle").text("");
+                    $("#span1").text("");
+                }
+    }
+
+    
+
+
+    function thirdModel(CategoryId, name) {
+        
+                if (CategoryId > 0) {
+                    $.ajax({
+                        type: "get",
+                        url: '@Url.Action("ThirdListInModelAdding", "Advertisement")',
+                        data: { id: CategoryId },
+                        success: function (data) {
+                            $("#thirdListInModelAdding").html(data);
+                            $("#span2").text(name + " >> ");
+                        },
+                        error: function () {
+                            
+                        }
+                    });
+                }
+                else {
+                    $("#thirdListInModelAdding").html("");
+                    $("#span2").text("");
+                }
+    }
+</script>

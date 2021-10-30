@@ -1,0 +1,396 @@
+﻿@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@using Cigarette.Enterprise.ViewModels.ViewModels.Category_SpecificationAttribute
+@model IEnumerable<CategoryLastNode_SpecificationVM>
+
+@{
+    Layout = null;
+}
+
+@{
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+
+    var country = "KW";
+    var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    if (cookiecountry != null && cookiecountry.Value != null)
+    {
+        country = cookiecountry.Value;
+    }
+    else
+    {
+        HttpCookie newcookiecountry = new HttpCookie("Country");
+        newcookiecountry.Value = language;
+        Response.Cookies.Add(newcookiecountry);
+    }
+
+}
+
+
+
+
+@*<div class="row" id="CategorySpecifications" style="
+        padding: 20px;
+        background-color: #f7f7f7;
+    ">
+
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <label>Color:<span>*</span></label>
+                <input type="text" name="textBox,1008" class="form-control" required="" placeholder="Color">
+            </div>
+        </div>
+
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <label>Color:<span>*</span></label>
+                <input type="text" name="textBox,1008" class="form-control" required="" placeholder="Color">
+            </div>
+        </div>
+
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <label>Model:<span>*</span></label>
+                <input type="text" name="textBox,1009" class="form-control" required="" placeholder="Model">
+            </div>
+        </div>
+
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <label>Speed:<span>*</span></label>
+                <input type="text" name="textBox,1010" class="form-control" required="" placeholder="Speed">
+            </div>
+        </div>
+
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <label>Price:<span>*</span></label>
+                <input type="text" name="textBox,1011" class="form-control" required="" placeholder="Price">
+            </div>
+        </div>
+
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <fieldset id="group" 1046="" name="radioButton1046">
+                    <label>status:<span>*</span></label>
+                    <label class="col-md-3">
+                        new
+                        <input type="radio" value="1008" name="radioButton,1046" required="">
+                    </label>
+                    <label class="col-md-3">
+                        Used
+                        <input type="radio" value="1009" name="radioButton,1046" required="">
+                    </label>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <fieldset id="group" 1047="">
+                    <label>Motion vector:<span>*</span></label>
+                    <label class="col-md-3">
+                        Automatic
+                        <input type="checkbox" value="1010" name="checkBox,1047" required="">
+                    </label>
+                    <label class="col-md-3">
+                        manual
+                        <input type="checkbox" value="1011" name="checkBox,1047" required="">
+                    </label>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <label>payment way:<span>*</span></label>
+                <select class="form-control" name="selectedList,1048" required="">
+                    <option value="">Choose payment way</option>
+                    <option value="1012">installment</option>
+                    <option value="1013">Exchangeable</option>
+                    <option value="1014">Cache</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <label>Structure type:<span>*</span></label>
+                <select class="form-control" name="selectedList,1049" required="">
+                    <option value="">Choose Structure type</option>
+                    <option value="1015">Sedan</option>
+                    <option value="1016">Cabriolet</option>
+                    <option value="1017">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <fieldset id="group" 1050="" name="radioButton1050">
+                    <label>Ad Type:<span>*</span></label>
+                    <label class="col-md-3">
+                        For buy
+                        <input type="radio" value="1018" name="radioButton,1050" required="">
+                    </label>
+                    <label class="col-md-3">
+                        For Sell
+                        <input type="radio" value="1019" name="radioButton,1050" required="">
+                    </label>
+                </fieldset>
+            </div>
+        </div>
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <select id="country" placeholder="Select Text" multiple>
+                    <option value="php">Php</option>
+                    <option value="bootstrap">Bootstrap</option>
+                    <option value="sql">sql</option>
+                    <option value="nodejs">Node Js</option>
+                    <option value="laravel">Laravel</option>
+                    <option value="Jquery">Jquery</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <select id="single" placeholder="Select Text">
+                    <option value="php">Php</option>
+                    <option value="bootstrap">Bootstrap</option>
+                    <option value="sql">sql</option>
+                    <option value="nodejs">Node Js</option>
+                    <option value="laravel">Laravel</option>
+                    <option value="Jquery">Jquery</option>
+                </select>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>*@
+
+
+@{
+    foreach (var item in Model)
+    {
+        switch (item.Specification.SpeceficationType)
+        {
+            case 1:
+                {
+                    <div class="col-md-3 col-12">
+                        <div class="form-group">
+                            <label><span class="text-danger">@(item.Required == true ? "*" : "")</span></label>
+                            <input type="text" data-type="1" data-index="@item.Id" class="form-control" @(item.Required == true ? "required" : "") placeholder="@(language == "ar"?item.ArabicName:item.EnglishName)" />
+                        </div>
+                    </div>
+
+                }
+                break;
+
+            case 2:
+                {
+                    <div class="col-md-3 col-12">
+                        <div class="form-group">
+                            <label @*class="col-md-2"*@>@AdvertisementResource.Choose @(language == "ar"?item.ArabicName:item.EnglishName) <span>@(item.Required == true ? "*" : "")</span></label>
+
+                            <select class="form- control   multi-select2" style="width: 100%" name="status@(item.Id)" data-type="2" data-index="@item.Id" @(item.Required == true ? "required" : "") @(item.MuliSelect == true ? "multiple=multiple" : "") placeholder=@(language == "ar"?item.ArabicName:item.EnglishName)>
+
+                                @if (item.MuliSelect != true)
+                                {
+                                    <option value="">@AdvertisementResource.Choose @(language == "ar"?item.ArabicName:item.EnglishName)</option>
+                                }
+                                @foreach (var op in item.Specification_Options)
+                                {
+                                    if (op.IsDeleted != true)
+                                    {
+                                        <option value="@op.Id">@(language == "ar" ? op.ArabicName : op.EnglishName)</option>
+                                    }
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+
+                }
+                break;
+
+            case 3:
+                {
+                    <div class="form-group">
+                        <fieldset id="group" @item.Id>
+                            <label @*class="col-md-2"*@>@(language == "ar"?item.ArabicName:item.EnglishName):<span>@(item.Required == true ? "*" : "")</span></label>
+                            @foreach (var op in item.Specification_Options)
+                            {
+                                <label class="col-md-3">
+                                    @(language == "ar"?op.ArabicName:op.EnglishName)
+                                    <input type="checkbox" value="@op.Id" name="@("checkBox,"+@item.Id)" @(item.Required == true ? "required" : "")>
+                                </label>
+                            }
+                        </fieldset>
+                    </div>
+                }
+                break;
+
+            case 4:
+                {
+                    <div class="form-group">
+                        <fieldset id="group" @item.Id name="@("radioButton"+@item.Id)">
+                            <label @*class="col-md-2"*@>@(language == "ar"?item.ArabicName:item.EnglishName):<span>@(item.Required == true ? "*" : "")</span></label>
+                            @foreach (var op in item.Specification_Options)
+                            {
+                                <label class="col-md-3">
+                                    @(language == "ar"?op.ArabicName:op.EnglishName)
+                                    <input type="radio" value="@op.Id" name="@("radioButton,"+@item.Id)" @(item.Required == true ? "required" : "")>
+                                </label>
+                            }
+                        </fieldset>
+                    </div>
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+}
+
+@*<script src="~/Scripts/js/ltr/jQuery_3.4.1.js"></script>*@
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+<script src="https://jeesite.gitee.io/front/jquery-select2/4.0/index_files/select2.full.js"></script>
+<script src="~/Scripts/js/arabic/bootstrap.min.js"></script>
+<style>
+    .select2-selection__choice__remove {
+        display: inline-block !important;
+    }
+    .select2-results {
+        max-height: 120px !important;
+        overflow: auto;
+    }
+</style>
+<script>
+        $(document).ready(function () {
+            $('.multi-select2').select2({ allowClear: true, placeholder: '@(language == "ar"?"أختر...":"Choose...")'});
+            $('.js-example-basic-multiple').select2();
+
+        });
+</script>
+
+
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            let branch_all = [];
+
+            function formatResult(state) {
+                if (!state.id) {
+                    var btn = $(`<div class="text-right">
+                                    <button id="all-branch" style="margin-right: 10px;" class="btn btn-default">Select All</button>
+                                    <button id="clear-branch" class="btn btn-default">Clear All</button>
+                                  </div>`)
+                    return btn;
+                }
+                //'  <input id="checkbox-1" name="checkbox" type="checkbox">'
+                branch_all.push(state.id);
+                var id = 'state' + state.id;
+                var checkbox = $('<div class="checkbox"><input id="' + id + '" type="checkbox" ' + (state.selected ? 'checked' : '') + '><label for="checkbox1">' + state.text + '</label></div>', { id: id });
+                return checkbox;
+            }
+
+            function arr_diff(a1, a2) {
+                var a = [], diff = [];
+                for (var i = 0; i < a1.length; i++) {
+                    a[a1[i]] = true;
+                }
+                for (var i = 0; i < a2.length; i++) {
+                    if (a[a2[i]]) {
+                        delete a[a2[i]];
+                    } else {
+                        a[a2[i]] = true;
+                    }
+                }
+                for (var k in a) {
+                    diff.push(k);
+                }
+                return diff;
+            }
+
+            let optionSelect2 = {
+                templateResult: formatResult,
+                closeOnSelect: false,
+                width: '100%'
+            };
+
+            let $select2 = $(".select2-m").select2(optionSelect2);
+            let $select = $(".select2").select2();
+
+            var scrollTop;
+
+            $select2.on("select2:selecting", function (event) {
+                var $pr = $('#' + event.params.args.data._resultId).parent();
+                scrollTop = $pr.prop('scrollTop');
+            });
+
+            $select2.on("select2:select", function (event) {
+                $(window).scroll();
+
+                var $pr = $('#' + event.params.data._resultId).parent();
+                $pr.prop('scrollTop', scrollTop);
+
+                $(this).val().map(function (index) {
+                    $("#state" + index).prop('checked', true);
+                });
+            });
+
+            $select2.on("select2:unselecting", function (event) {
+                var $pr = $('#' + event.params.args.data._resultId).parent();
+                scrollTop = $pr.prop('scrollTop');
+            });
+
+            $select2.on("select2:unselect", function (event) {
+                $(window).scroll();
+
+                var $pr = $('#' + event.params.data._resultId).parent();
+                $pr.prop('scrollTop', scrollTop);
+
+                var branch = $(this).val() ? $(this).val() : [];
+                var branch_diff = arr_diff(branch_all, branch);
+                branch_diff.map(function (index) {
+                    $("#state" + index).prop('checked', false);
+                });
+            });
+
+            $(document).on("click", "#all-branch", function () {
+                $(".select2-multi > option").not(':first').prop("selected", true);// Select All Options
+                $(".select2-multi").trigger("change")
+                $(".select2-results__option").not(':first').attr("aria-selected", true);
+                $("[id^=state]").prop("checked", true);
+                $(window).scroll();
+            });
+
+            $(document).on("click", "#clear-branch", function () {
+                $(".select2-multi > option").not(':first').prop("selected", false);
+                $(".select2-multi").trigger("change");
+                $(".select2-results__option").not(':first').attr("aria-selected", false);
+                $("[id^=state]").prop("checked", false);
+                $(window).scroll();
+            });
+        });
+    </script>*@

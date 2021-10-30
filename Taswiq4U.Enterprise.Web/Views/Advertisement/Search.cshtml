@@ -1,0 +1,910 @@
+﻿@using Saudiceos.Enterprise.Web.helper
+@using Cigarette.Enterprise.DAL
+@*@model  PagedList.IPagedList<Cigarette.Enterprise.DAL.Advertisement>*@
+@using PagedList.Mvc
+@using Cigarette.Enterprise.ViewModels.ViewModels.Category
+@using Cigarette.Enterprise.ViewModels.ViewModels.WepAPIViewModel.Advertisement
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@using Cigarette.Enterprise.ViewModels.ViewModels.AdminViewModels.Category
+@model PagedList.IPagedList<Cigarette.Enterprise.ViewModels.ViewModels.WepAPIViewModel.Advertisement.AdvertisementListVM>
+
+
+@*@model Cigarette.Enterprise.ViewModels.ViewModels.Generic.GenericOutputModel<AdvertisementListVM>*@
+
+@{
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+    var cookieHelper = CookieHelper.Instance(HttpContext.Current, HttpContext.Current.Response);
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+
+    var country = "KW";
+    var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    if (cookiecountry != null && cookiecountry.Value != null)
+    {
+        country = cookiecountry.Value;
+    }
+    else
+    {
+        HttpCookie newcookiecountry = new HttpCookie("Country");
+        newcookiecountry.Value = language;
+        Response.Cookies.Add(newcookiecountry);
+    }
+
+    ViewBag.Language = language;
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<style type="text/css">
+
+
+    .select2-selection__choice__remove {
+        display: none !important;
+    }
+
+    label {
+        margin-left: 10px;
+        display: inline-block;
+        margin-bottom: 0px;
+    }
+
+    .select2-container--default .select2-results__option--highlighted[aria-selected] {
+        background-color: #28A745;
+    }
+
+        .select2-container--default .select2-results__option--highlighted[aria-selected] label {
+            color: #FFF;
+        }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 26px;
+        position: absolute;
+        top: 8px;
+        right: 1px;
+        width: 20px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: #444;
+        line-height: 40px;
+    }
+
+    .select2-container--default .select2-selection--single {
+        border: 1px solid #ececec;
+        border-radius: 3px;
+        padding: 0px;
+        background-color: #FFF;
+        font-size: 14px;
+        height: 40px;
+    }
+
+    input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+    }
+
+        input[type="checkbox"] + label:before {
+            content: '';
+            background: #fff;
+            border-radius: 10%;
+            border: 1.5px solid #c9cdd2;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            position: relative;
+            margin-right: 8px;
+            vertical-align: sub;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        input[type="checkbox"]:checked + label {
+            color: #000;
+        }
+
+            input[type="checkbox"]:checked + label:before {
+                background-color: #007bff;
+                border-color: #007bff;
+                box-shadow: inset 0 0 0 2px #ffffff;
+            }
+
+        input[type="checkbox"]:disabled + label:before {
+            box-shadow: inset 0 0 0 4px #c9cdd2;
+            border-color: #838d98;
+            background: #838d98;
+        }
+</style>
+@functions
+{
+    string titlefun()
+    {
+        string title = "";
+        if (!string.IsNullOrWhiteSpace(ViewBag.Term))
+        {
+            title = ViewBag.Term;
+            if (!string.IsNullOrWhiteSpace(ViewBag.City))
+            {
+                title = title + " > ";
+                title = title + ViewBag.City;
+            }
+        }
+        return title;
+    }
+}
+
+<form id="form">
+    <section class="filterSearch">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-12">
+                    <div class="row">
+                        <div class="form-group col-12">
+                            @if (ViewBag.Term != null)
+                            {
+                                <input type="text" class="form-control" value="@ViewBag.Term">
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control" placeholder="search about" id="Term">
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-12">
+                    <input type="hidden" id="category-id" value="@(ViewBag.CategoryId != null?ViewBag.CategoryId : "")" />
+
+                    <a class="search-cat-list btn btn-primary open-cat-modal" @(language == "ar" ? " style=text-align:right" : "text-align:left") data-url="#category-id">
+                        @if (ViewBag.CategorySeries != null)
+                        {
+                            @Html.Partial("GetSearchCategory", (List<CategoryViewModel>)ViewBag.CategorySeries)
+                        }
+                        else
+                        {
+                            @HomeResource.W_ChooseCategory
+                        }
+
+                    </a>
+                </div>
+                <div class="col-md-2 col-sm-6 col-12">
+                    <div class="form-group">
+
+                        @if (ViewBag.CityId != null)
+                        {
+                            @Html.DropDownList("Cities", (SelectList)ViewBag.CitiesSelected, @HomeResource.W_ChooseCity, new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            <select class="form-control select2" data-live-search=”true” id="Cities">
+                                <option>@HomeResource.W_ChooseCity</option>
+                                @foreach (var city in ViewBag.CitiesList)
+                                {
+                                    <option value="@city.Id">@(language == "ar" ? city.ArabicName : city.EnglishName)</option>
+                                }
+
+                            </select>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-6 col-12">
+                    <div class="form-group">
+                        <button type="sub mit" class="SearchBtn btn btn-success  btn-search" id="submit">@HomeResource.W_SearchButton</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-12">
+                    @if (ViewBag.HorizontalMenu != null)
+                    {
+                        <ul class="CategoryTabs nav nav-pills mb-4" id="pills-tab" role="tablist">
+                            <i class="arrowLeftTab fa fa-chevron-left"></i>
+
+                            @foreach (var item in (List<CategoryListItemViewModel>)ViewBag.HorizontalMenu)
+                            {
+
+                                <li class="nav-item category-id-horz" data-index="@item.Id">
+                                    <a class="nav-link  @(item.Id == ViewBag.CategoryId ? " active" : "") comm-ads-category" data-index="@item.Id" id="pills-one-tab-@item.Id" data-toggle="pill" href="#pills-one-@item.Id"
+                                       role="tab" aria-controls="pills-one-@item.Id" aria-selected="true">
+                                        @item.Name
+                                    </a>
+                                </li>
+                            }
+                            <i class="arrowRightTab fa fa-chevron-right"></i>
+                        </ul>
+                    }
+                </div>
+
+            </div>
+
+            <div class="row" id="CategorySpecifications" style="padding: 20px; background-color: #f7f7f7;">
+
+            </div>
+
+        </div>
+    </section>
+</form>
+<!-- about us Section -->
+<section class="aboutUs">
+    <div class="container">
+        <h3 class="head erPages" style="font-size: 15px; color:gray; padding: 15px;">
+            @titlefun()
+        </h3>
+        <div class="r ow" id="searchResultAd">
+
+            @Html.Partial("_SearchResultAdvertisementsList", Model)
+
+            <input type="hidden" id="category" />
+            <div class="row col-lg-12" style="clear:both">&nbsp;</div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Scripts/js/ltr/jQuery_3.4.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+
+
+
+@section Styles {
+    <style>
+
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .header-title {
+            text-align:@(CookieHelper.IsArabic() ? "right" : "left");
+            margin-bottom:20px;
+        }
+
+          .header-title h3 {
+            margin-bottom:0;
+            color:#000;
+        }
+
+
+        .Shop_item {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border: 1px solid transparent;
+            background-color: #fbfbfb;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .Shop_item:hover {
+            box-shadow: 0px 2px 10px #0000002e;
+            border-color: #fff;
+            background-color: #fbfbfb;
+        }
+
+            .Shop_item:hover .image .overlay {
+                top: 0;
+                opacity: 1;
+                visibility: visible;
+            }
+
+        .Shop_item .image {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .Shop_item .image img {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+
+
+        .Shop_item .image .overlay {
+            top: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: top 0.5s ease-in-out,opacity 0.5s ease-in-out,visibility 0.5s ease-in-out;
+        }
+        .Shop_item .image .overlay .SelectFav {
+            margin-bottom:10px;
+            text-align:center;
+            display:flex;
+            flex-direction:row;
+            justify-content:center;
+        }
+
+
+        .Shop_item .image .overlay .SelectFav img {
+            width: 60px !important;
+            height: 60px !important;
+            border-radius: 50%;
+            display:block;
+        }
+
+            .Shop_item .image .overlay .SelectFav span {
+            color:#FFF;
+        }
+
+        .Shop_item .image .desc {
+            padding: 0 5px;
+        }
+
+            .Shop_item .image .desc p {
+                font-size: 16px;
+                color: #FFF;
+            }
+        .Shop_item .image .visitBtn {
+            text-align: center;
+        }
+
+        .Shop_item .image .visitBtn a {
+            width: 100%;
+            margin: auto;
+            background-color: #55b555 !important;
+            color: #FFF !important;
+            border-radius: 3px;
+            padding: 5px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .Shop_item .image .visitBtn button:hover {
+            background-color: #59c759 !important;
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .show > .nav-link {
+            border-color: #fff;
+            background-color: #fff;
+            color: #55b555 !important;
+        }
+
+        .nav-pills .nav-link {
+
+            color: #55b655 !important;
+            border: 2px solid #88797900;
+            background-color: #ab8e8e17;
+            margin-right: 10px;
+            border-radius: 41px;
+            font-size: 14px;
+            text-align: center;
+            padding: 0.3rem 1rem;
+        }
+
+        .CategoryTabs {
+            padding: 10px 20px;
+            width: 100%;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            height: 57px;
+            overflow: scroll;
+            overflow-y: hidden;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .CategoryTabs::-webkit-scrollbar {
+            height: 0px;
+        }
+
+        .CategoryTabs::-webkit-scrollbar-track {
+            background-color: #f4f4f4;
+        }
+
+        .CategoryTabs::-webkit-scrollbar-thumb {
+            background-color: #f4f4f4;
+        }
+
+        .CategoryTabs .arrowRightTab {
+            position: absolute;
+            right: 0%;
+            color: #fff;
+            padding: 9px 12px;
+            background-color: #c5c5c5;
+            border-radius: 3px;
+            text-align: center;
+            z-index: 1;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .CategoryTabs .arrowLeftTab {
+            position: absolute;
+            left: 0%;
+            color: #fff;
+            padding: 9px 12px;
+            background-color: #c5c5c5;
+            border-radius: 3px;
+            text-align: center;
+            z-index: 1;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .CategoryTabs .arrowRightTab:hover,
+        .CategoryTabs .arrowLeftTab:hover {
+            background-color:#55b555;
+            color: #fff;
+        }
+
+        .simple-pagination ul {
+            margin: 0 0 20px;
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+
+        .simple-pagination li {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .simple-pagination li a,
+        .simple-pagination li span {
+            color: #666;
+            padding: 5px 10px;
+            text-decoration: none;
+            background-color: #FFF;
+            border-radius: 0px;
+            box-shadow: none;
+            border: 1px solid #DDD;
+            outline: none;
+        }
+
+        .page-link:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .page-link:hover {
+            color: #FFF;
+            background: #55b555;
+            border-color: #FFF;
+        }
+
+        .simple-pagination .current {
+            color: #FFF;
+            background-color: #55b555;
+            border-color: #FFF;
+        }
+
+        .simple-pagination .prev.current,
+        .simple-pagination .next.current {
+            background: #FFF;
+            color: #55b555;
+            border: 1px solid #DDD;
+        }
+        .active .comm-ads-container {
+            min-height: 350px !important;
+        }
+    </style>
+}
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.simplePagination.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        // Select setttings
+        let branch_all = [];
+
+        function formatResult(state) {
+            if (!state.id) {
+                var btn = $('<div class="text-right"><button id="all-branch" style="margin-right: 10px;" class="btn btn-default">Select All</button><button id="clear-branch" class="btn btn-default">Clear All</button></div>')
+                return btn;
+            }
+            //'  <input id="checkbox-1" name="checkbox" type="checkbox">'
+            branch_all.push(state.id);
+            var id = 'state' + state.id;
+            var checkbox = $('<div class="checkbox"><input id="' + id + '" type="checkbox" ' + (state.selected ? 'checked' : '') + '><label for="checkbox1">' + state.text + '</label></div>', { id: id });
+            return checkbox;
+        }
+        function arr_diff(a1, a2) {
+            var a = [], diff = [];
+            for (var i = 0; i < a1.length; i++) {
+                a[a1[i]] = true;
+            }
+            for (var i = 0; i < a2.length; i++) {
+                if (a[a2[i]]) {
+                    delete a[a2[i]];
+                } else {
+                    a[a2[i]] = true;
+                }
+            }
+            for (var k in a) {
+                diff.push(k);
+            }
+            return diff;
+        }
+        let optionSelect2 = {
+            templateResult: formatResult,
+            closeOnSelect: false,
+            width: '100%'
+        };
+        let $select2 = $("#country").select2(optionSelect2);
+        let $select = $("#single").select2(optionSelect2);
+        var scrollTop;
+        $select2.on("select2:selecting", function (event) {
+            var $pr = $('#' + event.params.args.data._resultId).parent();
+            scrollTop = $pr.prop('scrollTop');
+        });
+
+        $select2.on("select2:select", function (event) {
+            $(window).scroll();
+
+            var $pr = $('#' + event.params.data._resultId).parent();
+            $pr.prop('scrollTop', scrollTop);
+
+            $(this).val().map(function (index) {
+                $("#state" + index).prop('checked', true);
+            });
+        });
+
+        $select2.on("select2:unselecting", function (event) {
+            var $pr = $('#' + event.params.args.data._resultId).parent();
+            scrollTop = $pr.prop('scrollTop');
+        });
+
+        $select2.on("select2:unselect", function (event) {
+            $(window).scroll();
+
+            var $pr = $('#' + event.params.data._resultId).parent();
+            $pr.prop('scrollTop', scrollTop);
+
+            var branch = $(this).val() ? $(this).val() : [];
+            var branch_diff = arr_diff(branch_all, branch);
+            branch_diff.map(function (index) {
+                $("#state" + index).prop('checked', false);
+            });
+        });
+
+        $(document).on("click", "#all-branch", function () {
+            $("#country > option").not(':first').prop("selected", true);// Select All Options
+            $("#country").trigger("change")
+            $(".select2-results__option").not(':first').attr("aria-selected", true);
+            $("[id^=state]").prop("checked", true);
+            $(window).scroll();
+        });
+
+        $(document).on("click", "#clear-branch", function () {
+            $("#country > option").not(':first').prop("selected", false);
+            $("#country").trigger("change");
+            $(".select2-results__option").not(':first').attr("aria-selected", false);
+            $("[id^=state]").prop("checked", false);
+            $(window).scroll();
+        });
+            var firstLoad = true;
+        // Search
+        $("#category-id").click();
+        $("#navbarDropdown").css("color", "#5ab75a");
+        $("#category-id").click(function () {
+            spinner.show();
+            var CategoryId = parseInt(this.value);
+            if (firstLoad == false) {
+                $('.CategoryTabs').hide();
+            }
+            // set firstLoad false
+            firstLoad = false;
+
+            if (CategoryId > 0) {
+                $.get(`/Advertisement/GetSearchCategory/${CategoryId}?language=@cookieHelper.CurrentLanguage()`, function (data) {
+                    if (data != null) {
+                        $('.open-cat-modal').html(data)
+                    }
+                });
+                $.ajax({
+                    type: "get",
+                    url: '@Url.RouteUrl("CategorySP")',
+                    data: { id: CategoryId },
+                    success: function (data) {
+
+                        $("#CategorySpecifications").html(data);
+                        $("#submit").click();
+
+                        //spinner.hide();
+                    },
+                    error: function () {
+                        toastr.error("حد خطأ ما");
+                        $('#CategorySpecifications').html("")
+                        spinner.hide();
+                    }
+                });
+            }
+            else {
+                $("#CategorySpecifications").html("");
+            }
+            spinner.hide();
+        });
+
+        $(".category-id-horz").click(function () {
+            var CategoryId = parseInt(this.dataset.index);
+            spinner.show();
+            if (CategoryId > 0) {
+                $.get(`/Advertisement/GetSearchCategory/${CategoryId}?language=@cookieHelper.CurrentLanguage()`, function (data) {
+                    if (data != null) {
+                        $('.open-cat-modal').html(data)
+                        $('#category-id').val(CategoryId)
+                    }
+                });
+                $.ajax({
+                    type: "get",
+                    url: '@Url.RouteUrl("CategorySP")',
+                    data: { id: CategoryId },
+                    success: function (data) {
+                        $("#CategorySpecifications").html(data);
+                        spinner.hide();
+                        $("#submit").click();
+                    },
+                    error: function () {
+                        toastr.error("حد خطأ ما");
+                        spinner.hide();
+
+                        $('#CategorySpecifications').html("")
+                    }
+                });
+            }
+            else {
+                $("#CategorySpecifications").html("");
+            }
+        });
+
+        $("#submit").click(function (e) {
+            e.preventDefault();
+            var cityId = $("#Cities").find(":selected").val();
+            var cityname = $("#Cities").find(":selected").text();
+
+            var categoryId = $("#category-id").val();
+
+            var Level = 2;
+
+            var Term = $("#Term").val();
+
+            //var url = "/SearchAdv/?";
+           // var url = "/SearchAdv?";
+            var url = "/SearchAdvWithCategoryAndSubCategory?";
+            if (cityId > 0)
+                url = url + 'CityId=' + cityId + '&City=' + cityname;
+            if (categoryId > 0)
+                url = url + '&CategoryId=' + categoryId + '&Category=';
+            if (!isNullOrWhiteSpace(Term))
+                url = url + '&Term=' + Term;
+
+            url = url + '&Level=' + Level;
+
+
+
+            var data = $("#form").serializeArray();
+
+            var array = [];
+            for (var i = 0; i < data.length; i++) {
+                array.push({ IdAndType: data[i].name, Value: data[i].value });
+            }
+            var modelSearch = { array: array }
+
+            $.ajax({
+                type: 'Post',
+                url: url,
+                data: JSON.stringify({ modelSearch: modelSearch }),
+                contentType: 'application/json; charset=utf-8',
+                datatype: 'json',
+                success: function (response) {
+                    $('#searchResultAd').html(response)
+
+                },
+                error: function (error) {
+                    $('#searchResultAd').html("")
+                }
+            });
+
+        });
+
+         $(document).on('change', '#category-id', function () {
+            var catName = $('span.breadcrumb-item').first().text().trim();
+
+            window.history.replaceState({}, `@(language == "ar" ? "ابحث في تسويق فور يو . ${catName}" : "Seach on Saudiceos . ${catName}") `,
+                `@($"/search?categoryId=")${CategoryId}${catName == null ? '' : '&Category=' + catName}`
+            )
+            document.getElementsByTagName("title").innerHtml = `@(language == "ar" ? "ابحث في تسويق فور يو . ${catName}" : "Seach on Saudiceos . ${catName}")`;
+        });
+        function isNullOrWhiteSpace(str) {
+            return (!str || str.length === 0 || /^\s*$/.test(str))
+        }
+        $("#category-id").click();
+    });
+
+    var onSuccess = function (response) {
+        $('#searchResultAd').html(response)
+    };
+
+        $(".CategoryTabs").hover(function () {
+            $('.arrowLeftTab,.arrowRightTab').css({
+                'opacity': '1',
+                'visibility': 'visible'
+            });
+        }, function () {
+            $('.arrowLeftTab,.arrowRightTab').css({
+                'opacity': '0',
+                'visibility': 'hidden'
+            });
+        });
+
+        $('.arrowLeftTab').click(function () {
+            event.preventDefault();
+            $('.CategoryTabs').animate({
+                scrollLeft: "-=400px"
+            }, "slow");
+        });
+
+        $('.arrowRightTab').click(function () {
+            event.preventDefault();
+            $('.CategoryTabs').animate({
+                scrollLeft: "+=400px"
+            }, "slow");
+        });
+
+        $(function () {
+            $(".rateYo").rateYo({
+                starWidth: "15px",
+                rating: 3,
+                spacing: "1px",
+                ratedFill: "#55b555",
+                normalFill: "#DDD"
+            });
+        });
+
+        /***************/
+        function setPagination(ele, paginationContainer) {
+            var items = $(ele);
+            var numItems = items.length;
+            var perPage = 4;
+
+            items.slice(perPage).hide();
+
+            if (numItems > perPage) {
+                $(paginationContainer).pagination({
+                    items: numItems,
+                    itemsOnPage: perPage,
+                    prevText: "&laquo;",
+                    nextText: "&raquo;",
+                    onPageClick: function (pageNumber) {
+                        var showFrom = perPage * (pageNumber - 1);
+                        var showTo = showFrom + perPage;
+                        items.hide().slice(showFrom, showTo).show();
+                    }
+                });
+            }
+        }
+
+        $(document).ready(function () {
+            setPagination(`.comm-ad-card-0`, `.comm-ad-pagination-container-0`)
+
+            $('.comm-ads-category').click(function () {
+                var categoryId = this.dataset.index;
+                if (categoryId != null && categoryId != 0) {
+                    $.get(`/GetCommAdByCategoryId/${categoryId}`, function (data) {
+                        $(`.comm-ads-container-${categoryId}`).html(data);
+                        setPagination(`.comm-ad-card-${categoryId}`, `.comm-ad-pagination-container-${categoryId}`)
+                    })
+                }
+            })
+
+            var closeModal = function () {
+                $('.modal-popup-ad').removeClass("is-open");
+            };
+            var openModal = function () {
+                $('.modal-popup-ad').addClass("is-open");
+            };
+
+            $(document).on('keydown', function (evt) {
+                evt = evt || window.event;
+                evt.keyCode === 27 ? closeModal() : false;
+            });
+
+            $('.close-button').on('click', closeModal);
+
+            // Storage Manager Object
+            var storageManager = new ViewedItemsManager()
+            var offerRequest = new OffersRequests()
+
+            // set view for the ads
+            $(document).on('mouseover', '.Shop_item .overlay', function () {
+                var _self = $(this);
+                var id = this.dataset.index;
+
+                // store the viewed items
+                storageManager.addItem(id, function () {
+                    offerRequest.incrementViewCount(id);
+                });
+            });
+
+
+            $(document).on('click', '.open-full-ad', function () {
+                var adId = this.dataset.index;
+                var storageManager = new ViewedItemsManager()
+
+                console.log('open-full-ad Clicked' + adId)
+
+                // store the viewed items
+                storageManager.addItem(adId, function () {
+                    offerRequest.incrementViewCount(adId);
+                });
+
+                var data = offerRequest.getRequestData(adId, function (data) {
+                    if (data != null) {
+                        $('.modal-popup-ad').addClass("is-open");
+
+                        $('.view-count').html(data.viewsCouns)
+                        $('.commercial-ad-like').attr('comm-id', data.id)
+
+                        $('.like-count').html(data.likes)
+                        $('.ad-description').html(data.description)
+                        $('.replace-image').attr('src', `http://api.Saudiceos.com/Api/ImageUpload/i?url=${data.image}&type=1`);
+                        console.log(data)
+                    } else {
+                        //closeModal()
+                    }
+
+                });
+
+            });
+
+        });
+
+
+    </script>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var FavIcon = 0;
+                var offerRequest11 = new OffersRequests();
+                offerRequest11.likeCommercialAd(1);
+                $(document).on('click', '.Shop_item .image img.favShop', function () {
+
+
+
+                });
+                $(document).on('click', '.commercial-ad-like-offers', function () {
+                    var id = this.dataset.index;
+
+                    offerRequest11.likeCommercialAd(id);
+                });
+
+                if (FavIcon == 0) {
+                    $(this).attr('src', 'http://api.Saudiceos.com/Api/ImageUpload/i?url=favShopSelected.png&type=1');
+                    FavIcon = 1;
+                }
+                else if (FavIcon == 1) {
+                    $(this).attr('src', 'http://api.Saudiceos.com/Api/ImageUpload/i?url=favShop.png&type=1');
+                    FavIcon = 0;
+                }
+            });
+        </script>
+    }
+
+}

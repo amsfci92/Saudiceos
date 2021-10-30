@@ -1,0 +1,141 @@
+﻿@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@{
+    ViewBag.Title = "Country Admin List";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_AdminLayout.cshtml";
+}
+
+@* Styles *@
+<link href="~/Content/AdminResources/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/pages/css/profile-2.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/pages/css/profile.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/AdminResources/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/Content/AdminResources/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+<link href="/Content/AdminResources/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css" rel="stylesheet" type="text/css" />
+
+<div class="portlet box white">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-gift"></i> Country Admins List
+        </div>
+        <div class="tools">
+            <button class="btn btn-primary btn-sm" onclick="NewCountryAdmin()"><i class="icon-plus"></i> Add</button>
+        </div>
+
+    </div>
+
+    <div class="portlet-body" style="display: block;">
+        <div class="tabbable-custom ">
+            <input value="@ViewBag.CountryId" id="CountryId" type="hidden" />
+
+            <div id="admins" class="tab-content">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section preScripts
+{
+    <script src="/Content/AdminResources/assets/global/scripts/datatable.js" type="text/javascript"></script>
+    <script src="/Content/AdminResources/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="/Content/AdminResources/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+
+}
+
+@section postScripts
+{
+    <script src="/Content/AdminResources/assets/pages/scripts/table-datatables-responsive.min.js" type="text/javascript"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js" integrity="sha256-JirYRqbf+qzfqVtEE4GETyHlAbiCpC005yBTa4rj6xg=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        //   alert('hereeeee');
+        function NewCountryAdmin() {
+            var cou = $('#CountryId').val();
+            var url = `/Admin/CountryAdmins/Add/${cou}/0`;
+            window.location.href = url;
+        }
+        function InActivateUser(url, name) {
+            swal({
+                title: " هل انت متأكد من الغاء تفعيل العميل  " + name,
+                text: "الغاء تفعيل",
+                type: "info",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "! نعم",
+                cancelButtonText: "لا, الغي !",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        $.get(url, function (data) {
+                            if (data == "Success") {
+                                swal("تم !", "تم الغاء التفعيل بنجاح", "success");
+                                window.location = window.location.href;
+                            }
+                            else {
+                                swal("حدث خطاء", "حدث خطاء اثناء العمليه", "error");
+                            }
+                        });
+                    } else {
+                        swal("تم الالغاء", "تم الالغاء  ", "error");
+                    }
+                });
+        }
+
+        function ActivateUser(url, name) {
+            swal({
+                title: " هل انت متأكد من تفعيل العميل  " + name,
+                text: " تفعيل",
+                type: "info",
+                showCancelButton: true,
+                confirmButtonClass: "btn-info",
+                confirmButtonText: "! نعم",
+                cancelButtonText: "لا, الغي !",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        $.get(url, function (data) {
+                            if (data == "Success") {
+                                swal("تم !", "تم التفعيل بنجاح", "success");
+                                window.location = window.location.href;
+                            }
+                            else {
+                                swal("حدث خطاء", "حدث خطاء اثناء العمليه", "error");
+                            }
+                        });
+                    } else {
+                        swal("تم الالغاء", "تم الالغاء  ", "error");
+                    }
+                });
+        }
+
+        function CountryAdmins(url) {
+            $.ajax({
+                url: url,
+                method: 'Get',
+                success: function (data) {
+                    $('#admins').html(data);
+                    $('#sample_3').DataTable();
+                },
+                error: function (err) {
+                    alert('Error');
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $('.dt-buttons').hide();
+            var cou = $('#CountryId').val();
+            CountryAdmins(`/Admin/User/CountryAdmins/${cou}`);
+        });
+    </script>
+}

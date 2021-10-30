@@ -1,0 +1,68 @@
+﻿@using Cigarette.Enterprise.ViewModels.ViewModels.Category
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@model List<Cigarette.Enterprise.ViewModels.ViewModels.CommercialAd.CommercialAdVM>
+
+@{
+    Layout = null;
+}
+@if (Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-6 col-12 ">
+            <div class="Shop_item comm-ad-card-@ViewBag.CategoryId" data-index="@item.Id">
+                <div class="image">
+                    <img src="http://api.Saudiceos.com/Api/ImageUpload/i?url=@(item.SystemDataFile?.Url)&type=1" alt="">
+                    <div class="overlay " data-index="@item.Id">
+                        <div class="SelectFav">
+                            <div>
+                                <img class="favShop commercial-ad-like-offers" data-index="@item.Id" src="http://api.Saudiceos.com/Api/ImageUpload/i?url=favShop.png&type=1" alt=""><span>@item.Likes</span>
+                            </div>
+                            <div>
+                                <img class="cartShop commercial-ad-view-offers" src="http://api.Saudiceos.com/Api/ImageUpload/i?url=Eye.png&type=1" alt=""><span>@item.ViewsCount</span>
+                            </div>
+                        </div>
+                        <div class="desc">
+                            <p>@(item.Description ?? "")</p>
+                        </div>
+                        @if (!string.IsNullOrWhiteSpace(item.Link))
+                        {
+                            <div class="visitBtn">
+                                <a href="@item.Link" class="btn">@HomeResource.CommVisitWebsite</a>
+                            </div>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(item.InstagramLink))
+                        {
+                            <div class="visitBtn">
+                                <a href="https://www.instagram.com/@item.InstagramLink" class="btn"><span class="fa fa-instagram"></span></a>
+                            </div>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(item.Link))
+                        {
+                            <div class="visitBtn">
+                                <a href="https://wa.me/@item.WhatsappLink" class="btn"><span class="fa fa-whatsapp"></span></a>
+                            </div>
+                        }
+
+                        <div class="visitBtn">
+                            <a href="#" class="btn open-full-ad" data-index="@item.Id">@HomeResource.DetailsButtonTitle</a>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    }
+}
+else
+{
+    <div class="row">
+        <div class="col-12">
+            <h2 class="no-results">  @HomeResource.NoAdsFound</h2>
+        </div>
+    </div>
+}
+

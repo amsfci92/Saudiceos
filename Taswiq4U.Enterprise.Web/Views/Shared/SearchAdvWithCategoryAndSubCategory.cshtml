@@ -1,0 +1,218 @@
+﻿@using Saudiceos.Enterprise.Web.helper
+@using Cigarette.Enterprise.DAL
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@*@model  PagedList.IPagedList<Cigarette.Enterprise.DAL.Advertisement>*@
+@using Cigarette.Enterprise.ViewModels.ViewModels.WepAPIViewModel.Advertisement;
+@using Cigarette.Enterprise.ViewModels.ViewModels.CommercialAd;
+
+@model  PagedList.IPagedList<AdsPagedtWithCommercialAdsListVM<Cigarette.Enterprise.DAL.Advertisement, CommercialAdVM>>
+@using PagedList.Mvc
+@{
+    /**/
+
+    Layout = null;
+}
+
+@{
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+    var baseUrl = System.Configuration.ConfigurationManager.AppSettings["ApiDomain"] + "/DynamicResources/AdvertismentImages/";
+    var commercialUrl = System.Configuration.ConfigurationManager.AppSettings["ApiDomain"] + "/DynamicResources/CommercialAdsImages/";
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+
+    var country = "KW";
+    var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    if (cookiecountry != null && cookiecountry.Value != null)
+    {
+        country = cookiecountry.Value;
+    }
+    else
+    {
+        HttpCookie newcookiecountry = new HttpCookie("Country");
+        newcookiecountry.Value = language;
+        Response.Cookies.Add(newcookiecountry);
+    }
+
+}
+
+<div class="row">
+
+
+    @if (Model.Any())
+    {
+        foreach (var ad in Model.ToList())
+        {
+            if (ad.isCommercial == false)
+            {
+                <div class="item col-md-3">
+                    <article class="col-item">
+                        <div class="photo">
+                            <div class="options">
+                                @if (@Request.IsAuthenticated)
+                                {
+                                    <button class="btn btn-default add-favorite" data-index="@ad.Advertisement.Id" title="اضافة الى المفضلة">
+                                        <i class="fa fa-heart" onclick="AddToFav(@ad.Advertisement.Id)"></i>
+                                    </button>
+                                }
+                                <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#product_view" data-placement="top" title="نظرة سريعة">
+                                    <i class="fas fa-eye" onclick="quickView(@ad.Advertisement.Id)"></i>
+                                </button>
+                            </div>
+                            <a href="@Url.RouteUrl("Details", new { language = language, country = country, id = ad.Advertisement.Id, slug = ad.Advertisement.ArabicTitle.Replace(".","").Replace(' ', '-').Replace('/', '-').Replace('$', '-').Replace('#', '-') })">
+                                <img src="@(ad.Advertisement.AdvertismentImages.FirstOrDefault()==null?"~/Content/arabic/images/defaultimage.jpg":(baseUrl+ad.Advertisement.AdvertismentImages.FirstOrDefault().Url))" class="img-responsive img-ad" name="@(ad.Advertisement.AdvertismentImages.FirstOrDefault() == null ? "noimg" : ad.Advertisement.AdvertismentImages.FirstOrDefault().Url)" height="150" width="200" alt="Product Image" />
+                            </a>
+                        </div>
+                        <div class="info">
+                            <div class="price-details ">
+                                <h1>
+                                    <a href="@Url.RouteUrl("Details", new { language = language, country = country, id = ad.Advertisement.Id, slug = ad.Advertisement.ArabicTitle.Replace(".","").Replace(' ', '-').Replace('/', '-').Replace('$', '-').Replace('#', '-') })">
+                                        @ad.Advertisement.ArabicTitle
+                                    </a>
+                                </h1>
+                                <div class="price-new">
+                                    <h3 style="color: #55b655"> @(language == "ar" ? ad.Advertisement.PriceTextAr : ad.Advertisement.PriceTextEn)</h3>
+                                </div>
+                                <div class="text-center cats">
+                                </div>
+                                <div class="text-center date">
+                                    @ad.Advertisement.CreationTime.Value.ToLongDateString()
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            }
+            else if (ad.isCommercial == true && ad.CommercialAd != null)
+            {
+                <div class="col-md-3">
+                    <article class="col-item">
+                        <div class="photo">
+                            <div class="options">
+                                @if (Request.IsAuthenticated && ad.CommercialAd.isLiked == false)
+                                {
+                                    <button class="btn btn-default add-like-btn isLike" data-adId="@ad.CommercialAd.Id" type="submit" data-toggle="tooltip" data-placement="top" title="اعجاب">
+                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                    </button>
+                                }
+                                <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#commercialInBetweenView" data-placement="top" title="نظرة سريعة">
+                                    <i class="fas fa-eye" onclick="quickCommercialView(@ad.CommercialAd.Id)"></i>
+                                </button>
+                            </div>
+                            <a href="#">
+
+                                <img src="@(ad.CommercialAd.SystemDataFile.Url !=null?commercialUrl+ad.CommercialAd.SystemDataFile.Url: "~/Content/arabic/images/defaultimage.jpg")" class="img-responsive img-ad" name="@("Commercial")" height="250" width="200" alt="Commercial Image" />
+
+                            </a>
+                        </div>
+                        <div class="info">
+                            <div class="price-details ">
+                                <h1>Commercial</h1>
+
+                                <div class="price-new">
+                                    <p style="color: #55b655"> @(ad.CommercialAd !=null? ad.CommercialAd.Description:"")</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            }
+        }
+    }
+    else
+    {
+        <h3>@Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles.HomeResource.NoAdsFound</h3>
+    }
+</div>
+<div class="row col-lg-12">
+    @Html.PagedListPager(Model, page => Url.Action("SearchAdvWithCatAndSubCatPagedList", new
+    {
+        page,
+    CityId = ViewBag.CityId,
+    City = ViewBag.City,
+    CategoryId = ViewBag.CategoryId,
+    Category = ViewBag.Category,
+    Term = ViewBag.Term,
+    language = language,
+    country = country,
+    Level = ViewBag.Level,
+    arrayString = ViewBag.arrayString,
+})
+               ,
+                       PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions
+                       {
+                           HttpMethod = "POST",
+                           UpdateTargetId = "searchResultAd"
+                       }))
+</div>
+
+
+<script>
+
+
+    $(document).ready(function () {
+
+
+    });
+
+    function quickView(adId) {
+        $.ajax({
+            type: "get",
+            url: '@Url.RouteUrl("QuickView")?id=' + adId,
+            success: function (data) {
+                $("#AdQucikView").html(data);
+            },
+            error: function (data) {
+                $("#AdQucikView").html("");
+            }
+        });
+    }
+
+    function quickCommercialView(comId) {
+        $.ajax({
+                        type: "get",
+            url: '@Url.RouteUrl("QuicCommercialkView")?id=' + comId,
+                        success: function (data) {
+                            $("#AdQucikCommercialView").html(data);
+                        },
+                        error: function (data) {
+                            $("#AdQucikCommercialView").html("");
+                        }
+                    });
+    }
+
+    $(".add-like-btn").click(function () {
+        var btn = $(this);
+        btn.prop('disabled', true);
+            $.ajax({
+                type: "get",
+                url: '/Offers/Like/' + btn.attr('data-adId'),
+                success: function (res) {
+                    btn.prop('disabled', false);
+                    if (res == true) {
+                         toastr.success('@HomeResource.LikedSuccessfully')
+                        btn.removeClass('threebuttongreen');
+                        btn.html('');
+
+                    }
+                },
+                error: function (data) {
+                    btn.prop('disabled', false);
+                    toastr.error("حدث خطأ ما");
+                }
+            });
+
+    });
+</script>
+

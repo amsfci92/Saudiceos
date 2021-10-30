@@ -1,0 +1,21 @@
+﻿@using Saudiceos.Enterprise.Web.helper
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@model Cigarette.Enterprise.ViewModels.ViewModels.Product.ProductOutputModel
+@{
+    ViewBag.Title = ProductResource.Products;
+}
+
+<h2>@ProductResource.Products</h2>
+
+@foreach (var item in Model.Items)
+{
+
+
+    <p>@item.Name</p>
+    @Html.RouteLink("details", "ProductDetails", new { id=item.Id, slug=item.Name.Replace(' ','-') })
+}
+
+
+    <div style="text-align:center;">
+        @Html.Pagination(Model)
+    </div>

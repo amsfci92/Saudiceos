@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Cigarette.Enterprise.ViewModels.ViewModels.FeaturedAdvertisement.FeaturedAdvertisementVM>
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+
+
+<table class="table table-striped table-bordered table-hover" width="100%" id="sample_Fea" style="width: 100%;">
+    <thead>
+        <tr role="row">
+            <th>@HomeResource.AdsDescription</th>
+            <th>@HomeResource.AdsDuration</th>
+            <th>@HomeResource.AdsStartDate</th>
+            <th> @HomeResource.AdsEndDate</th>
+            <th> *</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var ad in Model)
+        {
+            <tr role="row" class="odd">
+                <td>@ad.Advertisement.ArabicDescription</td>
+                <td>@ad.Duration</td>
+                <td>@ad.StartDate</td>
+                <td>@ad.EndDate</td>
+                <td>
+                    <a href="/Admin/Ads/@ad.Id" class="btn btn-info btn-sm">
+                        <i class="fa fa-info"></i>
+                    </a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

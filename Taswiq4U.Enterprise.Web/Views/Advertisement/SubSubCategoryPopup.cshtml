@@ -1,0 +1,64 @@
+﻿
+@model List<Cigarette.Enterprise.ViewModels.ViewModels.Category.CategoryVM>
+
+<ul class="list1" id="ulLevel3">
+    @foreach (var item in Model)
+    {
+        <li>
+            <a href="#" class="list1 alevel3" name="alevel3" id="@item.Id">@item.Name</a>
+        </li>
+    }
+</ul>
+
+
+
+
+<script src="~/Scripts/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+
+
+
+        $(".alevel3").click(function () {
+
+            //var blockContent = $(".modal.advTypesModal .type").html();
+            var blockContent = $(".modal.advTypesModal .type").html($(this).text());
+            $(this).attr("data-dismiss", "modal");
+            $(".add_advertise .contnt .Inpt").css("display", "none");
+            $(".add_advertise .contnt .Display").css("display", "block");
+            $(".add_advertise .contnt .Display").html($(this).text());
+
+
+
+            //var CategoryId = $("#Category").find(":selected").val();
+            var CategoryId = $(this).prop("id");
+            $("#advTypes").val(CategoryId);
+            console.log("advTypes" + $("#advTypes").val());
+                if (CategoryId > 0) {
+                    $.ajax({
+                        type: "get",
+                        url: '@Url.Action("CategorySP", "Advertisement")',
+                        data: { Id: CategoryId },
+                        success: function (data) {
+                            $("#catsp").html(data);
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                }
+                else {
+                    $("#catsp").html("");
+            }
+
+
+        });
+
+
+
+
+    });
+</script>

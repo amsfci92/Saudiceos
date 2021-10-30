@@ -1,0 +1,213 @@
+﻿@model Cigarette.Enterprise.ViewModels.ViewModels.Register.RegisterBM
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@using Cigarette.Enterprise.ViewModels.ViewModels.AdminViewModels.Country
+
+@{
+
+
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+    var countries = (List<CountryListItemViewModel>
+    )ViewBag.Countries;
+    var isEnglishLang = language != "ar";
+
+    if (isEnglishLang)
+    {
+        ViewData["Title"] = "Register or Login ";
+    }
+    else
+    {
+        ViewData["Title"] = "التسجيل أو تسجيل الدخول ";
+
+    }
+
+    var country = "KW";
+    var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    if (cookiecountry != null && cookiecountry.Value != null)
+    {
+        country = cookiecountry.Value;
+    }
+    else
+    {
+        HttpCookie newcookiecountry = new HttpCookie("Country");
+        newcookiecountry.Value = language;
+        Response.Cookies.Add(newcookiecountry);
+    }
+}
+
+@if (isEnglishLang)
+{
+    <style type="text/css">
+        label {
+            text-align: left;
+            width: 100%;
+        }
+    </style>
+}
+
+
+<!-- register Section -->
+<section class="mainContent  text-right">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 login regPage">
+                <h2 class="headerPages text-center">
+                    @HomeResource.W_Login
+                </h2>
+                @if (ViewBag.LoginFailure != null)
+                {
+                    <bdi style="color:red;">@ViewBag.LoginFailure</bdi>
+                }
+                @if (TempData["LoginMessage"] != null)
+                {
+                    <bdi style="color:red;">@TempData["LoginMessage"]</bdi>
+                    TempData["LoginMessage"] = null;
+                }
+                <form id="loginForm" class="" action="@Url.RouteUrl("Login",new { returnUrl=ViewBag.ReturnUrl })" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label for="phone">@HomeResource.W_Register_Phone</label>
+                        <input name="Phone" type="text" class="form-control" required id="phone" aria-describedby="emailHelp" placeholder="@HomeResource.W_Register_Phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">@HomeResource.W_Register_Password</label>
+                        <input name="Password" type="password" class="form-control" required id="password" aria-describedby="emailHelp" placeholder="***********">
+                    </div>
+                    <div class="custom-control custom-checkbox mr-sm-2 remember">
+                        <input name="RememberMe" type="checkbox" class="custom-control-input" value="false" id="RememberMe" />
+
+                        <label class="custom-control-label" for="RememberMe">@HomeResource.W_Login_RemmemberMe</label>
+                        <a href="@Url.RouteUrl("ForgetPassword")" style="float:left;">
+                            @HomeResource.W_Login_ForgetPassoword
+                        </a>
+                    </div>
+                    <div class="btnSubmit">
+                        <button type="submit" class="btn forgetBtn">
+                            @HomeResource.W_Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 register regPage">
+                <h2 class="headerPages text-center">
+                    @HomeResource.W_Register
+                </h2>
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <form class="" action="@Url.RouteUrl("Register",new { returnUrl=ViewBag.ReturnUrl, language=language, country=ViewBag.Country})" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+
+                        <label for="exampleInputEmail1">   @Html.DisplayNameFor(n => n.FirstName) </label>
+                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.FirstName) })
+                        @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">   @Html.DisplayNameFor(n => n.Phone) </label>
+                        @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.Phone) })
+                        @Html.ValidationMessageFor(x => x.Phone, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">   @Html.DisplayNameFor(n => n.CountryId) </label>
+                        <select name="CountryId" class="form-control" required id="exampleFormControlSelect1">
+                            <option> @Html.DisplayNameFor(n => n.CountryId)</option>
+                            @foreach (var item in countries)
+                            {
+                                <option value="@item.CountryId">@item.Name</option>
+                            }
+
+
+                        </select>
+                    </div>
+                    <div class="form-group  ">
+                        <label for="exampleInputEmail1">   @Html.DisplayNameFor(n => n.Password) </label>
+                        @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.Password) })
+                        @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group  ">
+                        <label for="exampleInputEmail1">   @Html.DisplayNameFor(n => n.ConfirmPassword) </label>
+                        @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.ConfirmPassword) })
+                        @Html.ValidationMessageFor(x => x.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="btnSubmit">
+                        <button type="submit" class="btn forgetBtn">
+                            @HomeResource.W_Register_Registeration
+                        </button>
+                    </div>
+                    <div class="text-center hint">
+                        @HomeResource.accept_agreement <a href="/termsofuse">@HomeResource.W_UseTerms</a>
+                    </div>
+
+                    @*<div class="text-center hint">
+                            او الاشتراك من خلال
+                        </div>
+                        <div class="text-center row loginBtn">
+                            <div class="col-6">
+                                <button type="submit" class="btn faceBookBtn">
+                                    <i class="fab fa-facebook-f"></i>
+                                    الفيس بوك
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn googleBtn">
+                                    <i class="fab fa-google"></i>
+                                    حساب جوجل
+                                </button>
+                            </div>
+                        </div>*@
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- register Section End -->
+<!-- Button trigger modal -->
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#RememberMe').change(function () {
+                if (this.checked)
+                    $(this).val(true);
+                else
+                    $(this).val(false);
+
+            })
+
+            //$("form").submit(function (e) {
+            //    e.preventDefault();
+            //    $.ajax({
+            //        type: "get",
+            //        url: `/CountryWeb/CheckCountryPhone`,
+            //        data: { countryId: $("#exampleFormControlSelect1 option:selected").val(), mobileNumber: $("#phone").val() },
+            //        success: function (data) {
+            //            $(".validation-summary-valid").find("ul").find('.phoneRGX').remove();
+            //            if (data == "") {
+            //                return true;
+            //            } else {
+            //                $(".validation-summary-valid").find("ul").append("<li class='phoneRGX'>"+data.message+"</li>");
+            //            }
+
+            //        },
+            //        error: function () {
+            //            console.log("حد خطأ ما");
+            //        }
+            //    });
+
+            //})
+        })
+    </script>
+}

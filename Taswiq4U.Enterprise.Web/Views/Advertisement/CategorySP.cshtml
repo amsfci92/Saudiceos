@@ -1,0 +1,145 @@
+﻿@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@using Cigarette.Enterprise.ViewModels.ViewModels.Category_SpecificationAttribute
+@using Saudiceos.Enterprise.Web.helper
+@model IEnumerable<CategoryLastNode_SpecificationVM>
+
+@{
+    Layout = null;
+}
+
+@{
+    var language = "ar";
+    var country = "EG";
+    country = CookieHelper.Instance(HttpContext.Current, HttpContext.Current.Response).CurrentCountry();
+    language = CookieHelper.Instance(HttpContext.Current, HttpContext.Current.Response).CurrentLanguage();
+
+    CookieHelper.Instance(HttpContext.Current, HttpContext.Current.Response).CurrentCountry();
+    //var language = "ar";
+    //var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    //if (cookie != null && cookie.Value != null)
+    //{
+    //    language = cookie.Value;
+    //}
+    //else
+    //{
+    //    HttpCookie newcookie = new HttpCookie("Language");
+    //    newcookie.Value = language;
+    //    Response.Cookies.Add(newcookie);
+    //}
+
+    //var country = "KW";
+    //var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    //if (cookiecountry != null && cookiecountry.Value != null)
+    //{
+    //    country = cookiecountry.Value;
+    //}
+    //else
+    //{
+    //    HttpCookie newcookiecountry = new HttpCookie("Country");
+    //    newcookiecountry.Value = language;
+    //    Response.Cookies.Add(newcookiecountry);
+    //}
+
+}
+    @foreach (var item in Model)
+    {
+        switch (item.Specification.SpeceficationType)
+        {
+            case 1:
+                {
+                    <div class="col-md-3  col-12">
+                        <div class="form-group">
+                            <label @*class="col-md-2"*@>@(language == "ar" ? item.ArabicName : item.EnglishName): </label>
+                            <input type="text" name="@("textBox," + @item.Id)" class="form-control" @(item.Required == true ? "required" : "") placeholder="@(language == "ar" ? item.ArabicName : item.EnglishName)" />
+                            @*@foreach (var op in item.Specification_Options)
+                                {
+                                    <input type="text" name="@("textBox"+op.Id)" class="col-md-2" @(item.Required == true ? "required" : "") />
+                                }*@
+                        </div>
+                    </div>
+                }
+                break;
+
+            case 2:
+                {
+                    <div class="col-md-3  col-12">
+                        <div class="form-group">
+                            <label @*class="col-md-2"*@>@(language == "ar" ? item.ArabicName : item.EnglishName): </label>
+                            <select class="form-control multi-select2" multiple=multiple placeholder=@(language == "ar" ? item.ArabicName : item.EnglishName) name="@("selectedList," + item.Id)" @(item.Required == true ? "required" : "")>
+
+                                @foreach (var op in item.Specification_Options)
+                                {
+                                    if (op.IsDeleted != true)
+                                    {
+                                        <option value="@op.Id">@(language == "ar" ? op.ArabicName : op.EnglishName)</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                }
+                break;
+
+            case 3:
+                {
+                    <div class="col-md-3  col-12">
+                        <div class="form-group">
+                            <fieldset id="group" @item.Id>
+                                <label @*class="col-md-2"*@>@item.ArabicName:<span>@(item.Required == true ? "*" : "")</span></label>
+                                @foreach (var op in item.Specification_Options)
+                                {
+                                    <label class="col-md-3">
+                                        @op.ArabicName
+                                        <input type="checkbox" value="@op.Id" name="@("checkBox," + @item.Id)" @(item.Required == true ? "required" : "")>
+                                    </label>
+                                }
+                            </fieldset>
+                        </div>
+                    </div>
+
+
+                }
+                break;
+
+            case 4:
+                {<div class="col-md-3  col-12">
+                        <div class="form-group">
+                            <fieldset id="group" @item.Id name="@("radioButton" + @item.Id)">
+                                <label @*class="col-md-2"*@>@item.ArabicName:<span>@(item.Required == true ? "*" : "")</span></label>
+                                @foreach (var op in item.Specification_Options)
+                                {
+                                    <label class="col-md-3">
+                                        @op.ArabicName
+                                        <input type="radio" value="@op.Id" name="@("radioButton," + @item.Id)" @(item.Required == true ? "required" : "")>
+                                    </label>
+                                }
+                            </fieldset>
+                        </div>
+                    </div>
+
+
+                }
+                break;
+
+            default:
+                break;
+        }
+    } 
+
+    <script src="https://jeesite.gitee.io/front/jquery-select2/4.0/index_files/select2.full.js"></script>
+    <script src="~/Scripts/js/arabic/bootstrap.min.js"></script>
+<style>
+    .select2-selection__choice__remove {
+        display: inline-block !important;
+    }
+</style>
+    <script>
+        $(document).ready(function () {
+            $('.multi-select2').select2({ allowClear: true, placeholder: '@(language == "ar"?"أختر...":"Choose...")'});
+            $('.js-example-basic-multiple').select2();
+             
+        });
+    </script>

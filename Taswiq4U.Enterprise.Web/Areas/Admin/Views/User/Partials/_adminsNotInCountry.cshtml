@@ -1,0 +1,51 @@
+﻿@using Cigarette.Enterprise.ViewModels.ViewModels.UserInfo
+@using Cigarette.Enterprise.ResourceManager.LanguagesResourceFiles
+@model IEnumerable<UserInfoViewModel>
+
+<div class="Delete-country-modal modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-attention-animation="false">
+    <form action="/Admin/Country/Delete" id="edit-dues-form" class="horizontal-form form" method="post">
+
+        <div class="modal-body">
+
+            <div class="portlet light">
+
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-speech"></i>
+                        <span class="caption-subject red bold uppercase">Assign Admin To Country</span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div class="form-body">
+
+                        <input id="CountryId" name="CountryId" value="@ViewBag.CountryId" />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 font-blue-hoki sbold">Admin</label>
+                            <div class="col-md-9">
+                                <select class="form-control">
+                                    @foreach (var ad in Model)
+                                    {
+                                        <option value="@ad.Id">@ad.FirstName @ad.SecondName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                   
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+
+            <button type="submit" id="btn_editDue" class="btn blue">
+                <i class="fa fa-check"></i> Submit
+            </button>
+            <button type="button" data-dismiss="modal" class="btn btn-outline dark">Cancel</button>
+        </div>
+    </form>
+
+</div>
+

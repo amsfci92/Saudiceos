@@ -1,0 +1,159 @@
+﻿@using Cigarette.Enterprise.ViewModels.VM.Breadcrumb
+
+@model Cigarette.Enterprise.DAL.CEOAddEditRequest
+@{
+    ViewBag.Title = "تفاصيل الطلب     - " + Model.Name;
+
+    ViewBag.Breadcrumb = new BreadcrumbVM
+    {
+        Title = "تفاصيل الطلب",
+        BreadcrumbItems = new List<BreadcrumbItem>
+{
+            new BreadcrumbItem{Title = "تفاصيل   الطلب  ", Link = "", IsMuted = false},
+            new BreadcrumbItem{Title = "التنفيذيون", Link = "/admin/ceo/all", IsMuted = true},
+            new BreadcrumbItem{Title = "لوحة التحكم", Link =  "/admin/dashboard/details", IsMuted = true},
+        }
+    };
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout2.cshtml";
+}
+
+@section  Styles{
+    <!--begin::Page Vendor Stylesheets(used by this page)-->
+    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendor Stylesheets-->
+}
+ 
+<!--begin::details View-->
+<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+    <!--begin::Card header-->
+    <div class="card-header cursor-pointer">
+        <!--begin::Card title-->
+        <div class="card-title m-0">
+            <h3 class="fw-bolder m-0">البيانات التفصيلية</h3>
+        </div>
+        <!--end::Card title-->
+ 
+    </div>
+    <!--begin::Card header-->
+    <!--begin::Card body-->
+    <div class="card-body p-9">
+        @if (Model.NationalIdImageUrl != null)
+        {
+            <!--begin::Row-->
+            <div class="row mb-7">
+                <!--begin::Label-->
+                <label class="col-lg-4 fw-bold text-muted">صورة الهويه</label>
+                <!--end::Label-->
+                <!--begin::Col-->
+                <div class="col-lg-8">
+                    <img width="250" height="350" src="/Content/Data/Service/Images/@Model.NationalIdImageUrl" />
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+        }
+        <!--begin::Row-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">الاسم</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                <span class="fw-bolder fs-6 text-gray-800">@Model.Name  </span>
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Row-->
+        <!--begin::Row-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">البريد الالكتروني</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                <span class="fw-bolder fs-6 text-gray-800">@Model.Email  </span>
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Row-->
+        <!--begin::Row-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">وصف السيرة الذاتية</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                <span class="fw-bolder fs-6 text-gray-800">@Model.CVDescription  </span>
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Row-->
+        <!--begin::Row-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">المنصب</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                <span class="fw-bolder fs-6 text-gray-800">@Model.Position  </span>
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Row-->
+        <!--begin::Row-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">تاريخ الانشاء</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                <span class="fw-bolder fs-6 text-gray-800">@Model.DateCreated.Value.ToLongDateString()  </span>
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Row-->
+        <!--end::Input group-->
+        @if (Model.CVUrl != null)
+        {
+            <!--begin::Notice-->
+            <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
+                <!--begin::Icon-->
+                <!--begin::Svg Icon | path: icons/duotune/general/gen044.svg-->
+                <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />
+                        <rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="black" />
+                        <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="black" />
+                    </svg>
+                </span>
+                <!--end::Svg Icon-->
+                <!--end::Icon-->
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-stack flex-grow-1">
+                    <!--begin::Content-->
+                    <div class="fw-bold">
+                        <h4 class="text-gray-900 fw-bolder">تحميل السيرة الذاتية</h4>
+                        <div class="fs-6 text-gray-700">
+                            <a class="fw-bolder" target="_blank" href="/Content/Data/Ceo/File/@Model.CVUrl">تحميل</a>    تحميل السيرة الذاتية لـ @Model.Name
+                        </div>
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Wrapper-->
+
+
+            </div>
+            <!--end::Notice-->
+        }
+    </div>
+    <!--end::Card body-->
+</div>
+<!--end::details View-->
+
+
+@section Scripts
+{
+    <script>
+
+    </script>
+}

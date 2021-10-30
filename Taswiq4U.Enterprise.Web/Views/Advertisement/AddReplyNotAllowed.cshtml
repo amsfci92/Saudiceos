@@ -1,0 +1,58 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "AddReply";
+
+
+    var language = "ar";
+    var cookie = HttpContext.Current.Request.Cookies["Language"];
+
+    if (cookie != null && cookie.Value != null)
+    {
+        language = cookie.Value;
+    }
+    else
+    {
+        HttpCookie newcookie = new HttpCookie("Language");
+        newcookie.Value = language;
+        Response.Cookies.Add(newcookie);
+    }
+
+    var country = "KW";
+    var cookiecountry = HttpContext.Current.Request.Cookies["Country"];
+
+    if (cookiecountry != null && cookiecountry.Value != null)
+    {
+        country = cookiecountry.Value;
+    }
+    else
+    {
+        HttpCookie newcookiecountry = new HttpCookie("Country");
+        newcookiecountry.Value = language;
+        Response.Cookies.Add(newcookiecountry);
+    }
+}
+
+
+@if (language == "ar")
+{
+    <div class="jumbotron text-center">
+        <h1 class="display-3">عفوا!</h1>
+        <p class="lead"><strong>لا يمكن اضافة اعلان الا فى الدولة الخاصة بك قم باختيار دولتك للتمكن من اضافة اعلان</strong> شكرا لاستخدامك تسويق فور يو.</p>
+        <hr>
+        <p>
+            اذا كان لديك اى مشكلة او استفسار ؟ <a href="@Url.RouteUrl("ContactUs", new { language = language, country = country})">اتصل بنا</a>
+        </p>
+    </div>
+}
+else
+{
+<div class="jumbotron text-center">
+    <h1 class="display-3">Sorry!</h1>
+    <p class="lead"><strong>It is not possible to add an ad in another country. Choose your country to be able to add an ad</strong> thanks for using our website Saudiceos.</p>
+    <hr>
+    <p>
+        Having trouble? <a href="@Url.RouteUrl("ContactUs", new { language = language, country = country})">Contact us</a>
+    </p>
+</div>
+}

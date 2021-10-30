@@ -1,0 +1,28 @@
+﻿@using Saudiceos.Enterprise.Web.Models; 
+
+
+<div class="top-menu">
+    <ul class="nav navbar-nav pull-right">
+
+        <li class="dropdown dropdown-user">
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                <img alt="" class="img-circle" src="/Content/AdminResources/assets/layouts/layout/img/avatar3_small.jpg" />
+                <span class="username username-hide-on-mobile">  @User.Identity.GetFullName() </span>
+                <i class="icon-arrow-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+
+                <li>
+                    <a href="#">
+                         @User.Identity.GetFullName()
+                    </a> 
+                </li>
+                <li>
+                    <a href="/LogOff">
+                        <i class="icon-key"></i> Log Out
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

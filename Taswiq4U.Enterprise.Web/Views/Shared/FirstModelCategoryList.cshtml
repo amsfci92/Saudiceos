@@ -1,0 +1,54 @@
+﻿@using Cigarette.Enterprise.ViewModels.ViewModels.Category
+@{
+    Layout = null;
+}
+
+
+
+@if (ViewBag.Categories != null)
+{
+    int counter = 0;
+    foreach (var cat in (IEnumerable<CategoryViewModel>)ViewBag.Categories)
+    {
+        if (counter % 6 == 0 && counter != 0)
+        {
+            @Html.Raw("</div>")
+        }
+        if (counter % 6 == 0)
+        {
+            @Html.Raw("<div class='row'>")
+        }
+
+        <div class="col-md-2 col-sm-3 col-xs-12 type">
+            <a href="#" onclick="secondModel(@cat.Id)">
+                <i class="fa fa-car darkorangeLabel"></i>
+                <p>@cat.Name</p>
+            </a>
+        </div>
+
+        counter++;
+    }
+    @Html.Raw("</div>")
+}
+
+<script>
+    function secondModel(CategoryId) {
+        
+                if (CategoryId > 0) {
+                    $.ajax({
+                        type: "get",
+                        url: '@Url.Action("SecondModelAdding", "Advertisement")',
+                        data: { id: CategoryId },
+                        success: function (data) {
+                            $("#secondModel").html(data);
+                        },
+                        error: function () {
+                            
+                        }
+                    });
+                }
+                else {
+                    $("#secondModel").html("");
+                }
+    }
+</script>
