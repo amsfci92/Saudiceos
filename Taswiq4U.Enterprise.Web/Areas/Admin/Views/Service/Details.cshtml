@@ -54,12 +54,12 @@
         <!--begin::Row-->
         <div class="row mb-7">
             <!--begin::Label-->
-            <label class="col-lg-4 fw-bold text-muted">الشعار</label>
+            <label class="col-lg-1 fw-bold text-muted">الشعار</label>
             <!--end::Label-->
             <!--begin::Col-->
-            <div class="col-lg-8">
+            <div class="col-lg-11">
                 <!--begin::Preview existing avatar-->
-                <div class="image-input-wrapper  w-250px h-350px" style="background-size:contain;background-image:url(../../../../Content/Data/Service/Images/@Model.LogoUrl)"></div>
+                <div class="image-input-wrapper  w-1000px h-150px" style="background-repeat: no-repeat;background-size:contain;background-image:url(../../../../Content/Data/Service/Images/@Model.LogoUrl)"></div>
                 <!--end::Preview existing avatar-->
             </div>
             <!--end::Col-->
@@ -77,25 +77,25 @@
                     @if (!string.IsNullOrWhiteSpace(vm.Image1))
                     {
                         <!--begin::Preview existing avatar-->
-                        <div class="col-3 image-input-wrapper w-200px h-300px" style="background-size:contain;background-image:url(../../../../Content/Data/Service/Images/@vm.Image1)"></div>
+                        <div class="col-3 image-input-wrapper w-200px h-300px" style="background-repeat: no-repeat;background-size:contain;background-size:contain;background-image:url(../../../../Content/Data/Service/Images/@vm.Image1)"></div>
                         <!--end::Preview existing avatar-->
                     }
                     @if (!string.IsNullOrWhiteSpace(vm.Image2))
                     {
                         <!--begin::Preview existing avatar-->
-                        <div class="col-3 image-input-wrapper w-200px h-300px" style="background-size:contain;background-image:url(../../../../Content/Data/Service/Images/@vm.Image2)"></div>
+                        <div class="col-3 image-input-wrapper w-200px h-300px" style="background-repeat: no-repeat;background-size:contain;background-image:url(../../../../Content/Data/Service/Images/@vm.Image2)"></div>
                         <!--end::Preview existing avatar-->
                     }
                     @if (!string.IsNullOrWhiteSpace(vm.Image3))
                     {
                         <!--begin::Preview existing avatar-->
-                        <div class="col-3 image-input-wrapper w-200px h-300px" style="background-size:contain;background-image:url(../../../../Content/Data/Service/Images/@vm.Image3)"></div>
+                        <div class="col-3 image-input-wrapper w-200px h-300px" style="background-repeat: no-repeat;background-size:contain;background-image:url(../../../../Content/Data/Service/Images/@vm.Image3)"></div>
                         <!--end::Preview existing avatar-->
                     }
                     @if (!string.IsNullOrWhiteSpace(vm.Image4))
                     {
                         <!--begin::Preview existing avatar-->
-                        <div class="col-3 image-input-wrapper w-200px h-300px" style="background-size:contain;background-image:url(../../../../Content/Data/Service/Images/@vm.Image4)"></div>
+                        <div class="col-3 image-input-wrapper w-200px h-300px" style="background-repeat: no-repeat;background-size:contain;background-image:url(../../../../Content/Data/Service/Images/@vm.Image4)"></div>
                         <!--end::Preview existing avatar-->
                     }
                 </div>
@@ -136,7 +136,7 @@
             <!--end::Label-->
             <!--begin::Col-->
             <div class="col-lg-8">
-                <span class="fw-bolder fs-6 text-gray-800">@Model.Description  </span>
+               @Html.Raw( Model.Description)  
             </div>
             <!--end::Col-->
         </div>

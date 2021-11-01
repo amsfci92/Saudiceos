@@ -201,8 +201,8 @@
             <label class="col-lg-4 fw-bold text-muted">وصف السيرة الذاتية</label>
             <!--end::Label-->
             <!--begin::Col-->
-            <div class="col-lg-8">
-                <span class="fw-bolder fs-6 text-gray-800">@Model.CVDescription  </span>
+            <div class="col-lg-8"> 
+                @Html.Raw(Model.CVDescription)
             </div>
             <!--end::Col-->
         </div>
@@ -213,8 +213,8 @@
             <label class="col-lg-4 fw-bold text-muted">ملاحظات السيرة الذاتية</label>
             <!--end::Label-->
             <!--begin::Col-->
-            <div class="col-lg-8">
-                <span class="fw-bolder fs-6 text-gray-800">@Model.CVNote  </span>
+            <div class="col-lg-8"> 
+                @Html.Raw(Model.CVNote)
             </div>
             <!--end::Col-->
         </div>

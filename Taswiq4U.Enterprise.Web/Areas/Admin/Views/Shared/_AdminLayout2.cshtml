@@ -44,6 +44,7 @@ License: For each use you must have a valid license purchased only from above li
             font-family: 'Cairo', sans-serif !important;
         }
     </style>
+    <script async charset="utf-8" src="//cdn.embedly.com/widgets/platform.js"></script>
     <!--end::Fonts-->
     <!--begin::Page Vendor Stylesheets(used by this page)-->
     <link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
@@ -57,9 +58,10 @@ License: For each use you must have a valid license purchased only from above li
         <link href="assets/css/style.dark.bundle.rtl.css" rel="stylesheet" />
     }
     else
-    { 
-        <link href="assets/css/style.bundle.rtl.css" rel="stylesheet" /> 
-    } 
+    {
+        <link href="assets/css/style.bundle.rtl.css" rel="stylesheet" />
+
+    }
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -92,7 +94,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Info-->
                                 <div class="flex-grow-1 me-2">
                                     <!--begin::Username-->
-                                    <a  class="text-white text-hover-primary fs-6 fw-bold">@User.Identity.GetFullName()</a>
+                                    <a class="text-white text-hover-primary fs-6 fw-bold">@User.Identity.GetFullName()</a>
                                     <!--end::Username-->
                                 </div>
                                 <!--end::Info-->
@@ -116,7 +118,7 @@ License: For each use you must have a valid license purchased only from above li
                                             <div class="menu-content d-flex align-items-center px-3">
                                                 <!--begin::Avatar-->
                                                 <div class="symbol symbol-50px me-5">
-                                                   
+
                                                     @if (userImage != null)
                                                     {
                                                         <img alt="Logo" src="@userImage" />
@@ -126,7 +128,7 @@ License: For each use you must have a valid license purchased only from above li
                                                 <!--begin::Username-->
                                                 <div class="d-flex flex-column">
                                                     <div class="fw-bolder d-flex align-items-center fs-5">
-                                                      @User.Identity.GetFullName()
+                                                        @User.Identity.GetFullName()
                                                     </div>
 
                                                 </div>
@@ -139,8 +141,8 @@ License: For each use you must have a valid license purchased only from above li
                                         <!--end::Menu separator-->
                                         <!--begin::Menu item-->
                                         @*<div class="menu-item px-5 my-1">
-                                            <a href="/admin/settings" class="menu-link px-5">اعدادات</a>
-                                        </div>*@
+                                                <a href="/admin/settings" class="menu-link px-5">اعدادات</a>
+                                            </div>*@
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5">
@@ -151,15 +153,15 @@ License: For each use you must have a valid license purchased only from above li
                                         <div class="separator my-2"></div>
                                         <!--end::Menu separator-->
                                         <!--begin::Menu item-->
-                                         <div class="menu-item px-5">
+                                        <div class="menu-item px-5">
                                             <div class="menu-content px-5">
                                                 <label class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="kt_user_menu_dark_mode_toggle">
-                                                    <input class="form-check-input w-30px h-20px" type="checkbox" value="1" name="mode" id="kt_user_menu_dark_mode_toggle_custom" data-kt-url="/admin/settings/tdm?returnUrl=@Request.RawUrl" @(darkModeCookie != null && darkModeCookie.Value == "Yes" ? "checked":"")/>
+                                                    <input class="form-check-input w-30px h-20px" type="checkbox" value="1" name="mode" id="kt_user_menu_dark_mode_toggle_custom" data-kt-url="/admin/settings/tdm?returnUrl=@Request.RawUrl" @(darkModeCookie != null && darkModeCookie.Value == "Yes" ? "checked" : "") />
                                                     <span class="pulse-ring ms-n1"></span>
                                                     <span class="form-check-label text-gray-600 fs-7">الوضع الليلي</span>
                                                 </label>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <!--end::Menu item-->
                                     </div>
                                     <!--end::Menu-->
@@ -204,7 +206,7 @@ License: For each use you must have a valid license purchased only from above li
                                         </span>
                                         <span class="menu-title">إحصائيات</span>
                                     </a>
-                                </div> 
+                                </div>
                             }
                             @* CEOs *@
                             @if (User.IsRolesAny(Permissions.CEO_All))
@@ -724,7 +726,6 @@ License: For each use you must have a valid license purchased only from above li
                         </div>
                         <!--end::Copyright-->
                         <!--begin::Menu-->
-                        
                         <!--end::Menu-->
                     </div>
                     <!--end::Container-->
@@ -1117,7 +1118,7 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--end::Description-->
                                 </div>
                                 <!--end::Timeline heading-->
-                      
+
                             </div>
                             <!--end::Timeline content-->
                         </div>
@@ -1690,7 +1691,6 @@ License: For each use you must have a valid license purchased only from above li
     </div>
     <!--end::Chat drawer-->
     <!--begin::Exolore drawer toggle-->
-   
     <!--end::Exolore drawer toggle-->
     <!--begin::Exolore drawer-->
     <div id="kt_explore" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="explore" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'350px', 'lg': '475px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_explore_toggle" data-kt-drawer-close="#kt_explore_close">
@@ -3869,49 +3869,68 @@ License: For each use you must have a valid license purchased only from above li
     <!--begin::Javascript-->
     <!--begin::Global Javascript Bundle(used by all pages)-->
     <script src="assets/plugins/global/plugins.bundle.js"></script>
-    <script src="assets/js/scripts.bundle.js"></script>  
+    <script src="assets/js/scripts.bundle.js"></script>
     <!--end::Global Javascript Bundle-->
     <script src="/Content/assets/plugins/ckeditor5-31.0.0-jonbalw5wk1w/build/ckeditor.js"></script>
     @RenderSection("Scripts", false)
 
     <script>
-        var ckEditoer = $('.ck-editor-element');
-        if (ckEditoer != null) {
-            for (var i = 0; i < ckEditoer.length; i++) {
-                ClassicEditor
-                    .create(ckEditoer[i], {
-                        language: {
-                            // The UI will be English.
-                            ui: 'ar',
+        var KTCkeditorDocument = function () {
+            // Private functions
+            var demo = function () {
+                var ckEditoer = $('.ck-editor-element');
+                if (ckEditoer != null) {
+                    for (var i = 0; i < ckEditoer.length; i++) {
+                        ClassicEditor
+                            .create(ckEditoer[i], {
+                                language: {
+                                    // The UI will be English.
+                                    ui: 'ar',
+                                    // But the content will be edited in Arabic.
+                                    content: 'ar'
+                                },
+                                mediaEmbed: {
+                                    previewsInData: true
+                                }
+                            })
+                            .then(editor => {
+                                console.log(editor);
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    }
 
-                            // But the content will be edited in Arabic.
-                            content: 'ar'
-                        }
-                    })
-                    .then(editor => {
-                        console.log(editor);
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
+                }
             }
-            
-        }
+
+            return {
+                // public functions
+                init: function () {
+                    demo();
+                }
+            };
+        }();
+
+        jQuery(document).ready(function () {
+            KTCkeditorDocument.init();
+        });
+
         var _URL = window.URL || window.webkitURL;
-          $('#kt_user_menu_dark_mode_toggle_custom').change(function () {
+        $('#kt_user_menu_dark_mode_toggle_custom').change(function () {
             var url = $(this).attr('data-kt-url');
-            
+
             if (this.checked) {
                 var newUrl = url + '&darkMode=1';
                 window.location.href = newUrl;
             } else {
-                   var newUrl = url + '&darkMode=0';
+                var newUrl = url + '&darkMode=0';
                 window.location.href = newUrl;
             }
         });
         $('.upl-img').on('change', function () {
             debugger;
-            
+
             var type = $(this).attr('data-utype');
             var urlInput = $(this).attr('data-url-id');
             var imageUrl = $(this).attr('data-image-url');
@@ -3935,39 +3954,39 @@ License: For each use you must have a valid license purchased only from above li
                 var objectUrl = _URL.createObjectURL(file);
                 image.onload = function () {
                     debugger;
-//                    if (this.width / this.height != width / height) {
-//                        Swal.fire({
-//                            text: `لابد ان تكون الابعاد كالتالي: العرض = ${width} و الارتفاع = ${height}
-//او ان تكون النسبه العرض / الارتفاع = ${width / height} `,
-//                            icon: "error",
-//                            buttonsStyling: false,
-//                            confirmButtonText: "حسنا!",
-//                            customClass: {
-//                                confirmButton: "btn btn-primary"
-//                            }
-//                        });
-//                    } else {
-                        formdata.append("AdImages", file);
-                        $.ajax({
-                            url: `/admin/uploader/img?type=${type}&r=1&h=${height}&w=${width}`,
-                            type: "POST",
-                            data: formdata,
-                            processData: false,
-                            contentType: false,
-                            success: function (result) {
-                                $(urlInput).val(result);
-                                var image = $(urlInput).parent().parent().find('.image-input-wrapper')[0];
-                                if (image != null) {
-                                    if (imageUrl != null) {
-                                        image.style.backgroundImage = `url(${imageUrl}${result})`;
-                                    } 
+                    //                    if (this.width / this.height != width / height) {
+                    //                        Swal.fire({
+                    //                            text: `لابد ان تكون الابعاد كالتالي: العرض = ${width} و الارتفاع = ${height}
+                    //او ان تكون النسبه العرض / الارتفاع = ${width / height} `,
+                    //                            icon: "error",
+                    //                            buttonsStyling: false,
+                    //                            confirmButtonText: "حسنا!",
+                    //                            customClass: {
+                    //                                confirmButton: "btn btn-primary"
+                    //                            }
+                    //                        });
+                    //                    } else {
+                    formdata.append("AdImages", file);
+                    $.ajax({
+                        url: `/admin/uploader/img?type=${type}&r=1&h=${height}&w=${width}`,
+                        type: "POST",
+                        data: formdata,
+                        processData: false,
+                        contentType: false,
+                        success: function (result) {
+                            $(urlInput).val(result);
+                            var image = $(urlInput).parent().parent().find('.image-input-wrapper')[0];
+                            if (image != null) {
+                                if (imageUrl != null) {
+                                    image.style.backgroundImage = `url(${imageUrl}${result})`;
                                 }
-                            },
-                            error: function (xhr) {
-                                alert(xhr);
                             }
-                        });
-                   // }
+                        },
+                        error: function (xhr) {
+                            alert(xhr);
+                        }
+                    });
+                    // }
                     _URL.revokeObjectURL(objectUrl);
                 };
                 image.src = objectUrl;
@@ -4008,10 +4027,10 @@ License: For each use you must have a valid license purchased only from above li
             var role = $(this).attr('data-c-role');
             var userId = $(this).attr('data-userid');
             var checked = $(this)[0].checked;
-              
+
             $.ajax({
                 url: `/admin/user/assign/${userId}/${checked}?model=${role}`,
-                type: "POST", 
+                type: "POST",
                 processData: false,
                 contentType: false,
                 success: function (result) {
@@ -4023,7 +4042,7 @@ License: For each use you must have a valid license purchased only from above li
             });
 
         });
-      
+
     </script>
 
     <!--end::Javascript-->

@@ -113,7 +113,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="Note" class="ck-editor-element form-control form-control-lg form-control-solid" placeholder="ملاحظات" value="@Model.Note" />
+                        <textarea type="hidden" id="Description" name="Description" class="ck-editor-element form-control form-control-lg form-control-solid" placeholder="الوصف">@Model.Description</textarea>
                         @Html.ValidationMessageFor(m => m.Note)
                     </div>
                     <!--end::Col-->

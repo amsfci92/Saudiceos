@@ -247,7 +247,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <textarea type="text" name="CVNote" rows="5" class="ck-editor-element form-control form-control-lg form-control-solid" placeholder="ملحوظات السيرة الذاتية">@Model.CVNote</textarea>
+                         <textarea type="hidden" id="CVNote"  name="CVNote" rows="5" class="ck-editor-element form-control form-control-lg form-control-solid" placeholder="ملحوظات السيرة الذاتية">@Model.CVNote</textarea>
                         @Html.ValidationMessageFor(m => m.CVNote)
                     </div>
                     <!--end::Col-->
@@ -260,7 +260,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <textarea type="text" name="CVDescription" rows="5" class="ck-editor-element form-control form-control-lg form-control-solid" placeholder="وصف السيره الذاتي" value="">@Model.CVDescription</textarea>
+                       <textarea type="hidden" id="CVDescription"  name="CVDescription" rows="5" class="ck-editor-element form-control form-control-lg form-control-solid" placeholder="وصف السيره الذاتي" value="">@Model.CVDescription</textarea>
                         @Html.ValidationMessageFor(m => m.CVDescription)
                     </div>
                     <!--end::Col-->

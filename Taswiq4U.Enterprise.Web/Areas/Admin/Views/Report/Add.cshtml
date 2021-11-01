@@ -150,8 +150,8 @@
                         <div class="row">
                             <!--begin::Col-->
                             <div class="col-lg-12 fv-row">
-                                <input type="text" name="Description" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="الوصف" value="@Model.Description" />
-                                <span class="text-danger">@Html.ValidationMessageFor(m => m.Description)</span>
+                                <textarea type="hidden" id="Description" name="Description" class="ck-editor-element form-control form-control-lg form-control-solid" placeholder="الوصف">@Model.Description</textarea>
+                                 <span class="text-danger">@Html.ValidationMessageFor(m => m.Description)</span>
                             </div>
                             <!--end::Col-->
                         </div>

@@ -73,7 +73,7 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
             return View("Edit", vm);
         }
 
-        [Route("")]
+        [Route("update")]
         [HttpPost]
         public ActionResult Edit(SettingsVM model)
         {

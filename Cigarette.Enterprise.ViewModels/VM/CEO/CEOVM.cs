@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Cigarette.Enterprise.ViewModels.VM.CEO
 {
@@ -15,11 +16,12 @@ namespace Cigarette.Enterprise.ViewModels.VM.CEO
         public string Position { get; set; }
         public string LinkedIn { get; set; }
         public string Twitter { get; set; }
-        public string SnapChat { get; set; } 
+        public string SnapChat { get; set; }
+        [AllowHtml]
         public string CVNote { get; set; }
         [Required(ErrorMessage = "الصورة مطلوبه")] 
         public string ImageUrl { get; set; }
-
+        [AllowHtml]
         public string CVDescription { get; set; }
         public string Company { get; set; }
         public string Email { get; set; }

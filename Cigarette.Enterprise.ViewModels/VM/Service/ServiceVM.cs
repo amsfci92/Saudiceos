@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Cigarette.Enterprise.ViewModels.VM.Service
 {
@@ -18,7 +19,7 @@ namespace Cigarette.Enterprise.ViewModels.VM.Service
         [Required(ErrorMessage = "العنوان مطلوب")]
         public string Title { get; set; }
         [Required(ErrorMessage = "الوصف مطلوب")]
-
+        [AllowHtml]
         public string Description { get; set; } 
 
         public string ImageUrl { get; set; }

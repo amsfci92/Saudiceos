@@ -36,7 +36,7 @@
     <!--begin::Content-->
     <div id="kt_account_profile_details" class="collapse show">
         <!--begin::Form-->
-        <form id="kt_account_profile_details_form" class="form" action="/admin/settings" method="post">
+        <form id="kt_account_profile_details_form" class="form" action="/admin/settings/update" method="post">
             <!--begin::Card body-->
             <div class="card-body border-top p-9">
                 <div class="text-danger">@Html.ValidationSummary()</div>
@@ -136,7 +136,7 @@
                         <div class="row">
                             <!--begin::Col-->
                             <div class="col-lg-12 fv-row">
-                                <textarea name="SiteDescription"  rows="5" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="وصف الموقع" value="">@Model.SiteDescription</textarea>
+                                <textarea id="SiteDescription" name="SiteDescription"  rows="5" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="وصف الموقع" >@Model.SiteDescription</textarea>
                                 @Html.ValidationMessageFor(m => m.SiteDescription)
                             </div>
                             <!--end::Col-->
@@ -262,7 +262,7 @@
                         <div class="row">
                             <!--begin::Col-->
                             <div class="col-lg-12 fv-row">
-                                <textarea name="FooterSentence" rows="5" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="نص الفوتر" value=" " >@Model.FooterSentence</textarea>
+                                <textarea name="FooterSentence" id="FooterSentence" rows="5" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="نص الفوتر"   >@Model.FooterSentence</textarea>
                                 @Html.ValidationMessageFor(m => m.FooterSentence)
                             </div>
                             <!--end::Col-->

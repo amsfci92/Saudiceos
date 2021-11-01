@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Cigarette.Enterprise.ViewModels.VM.News
 {
@@ -9,7 +10,8 @@ namespace Cigarette.Enterprise.ViewModels.VM.News
         public long Id { get; set; }
         [Required(ErrorMessage = "العنوان مطلوب")]
         public string Title { get; set; }
-        [Required(ErrorMessage = "الوصف مطلوب")]
+        [Required(ErrorMessage = "الملخص مطلوب")]
+        [AllowHtml]
         public string Description { get; set; } 
         public string Note { get; set; }
         [Required(ErrorMessage = "الصورة مطلوبه")]
