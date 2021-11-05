@@ -32,7 +32,18 @@
             <h3 class="fw-bolder m-0">البيانات التفصيلية</h3>
         </div>
         <!--end::Card title-->
- 
+        <div class="">
+            @if (Model.CEOId != null)
+            {
+                <a href="/admin/ceo/edit/@General.Base64Encode($"{Model.CEOId}")?updateRequestId=@Model.Id" class="btn btn-primary  ">نشر التعديل</a>
+            }
+            else
+            {
+                <a href="/admin/ceo/new?addRequestId=@Model.Id" class="btn btn-primary">نشر التنفيذي</a>
+
+            }
+
+        </div>
     </div>
     <!--begin::Card header-->
     <!--begin::Card body-->
@@ -46,7 +57,22 @@
                 <!--end::Label-->
                 <!--begin::Col-->
                 <div class="col-lg-8">
-                    <img width="250" height="350" src="/Content/Data/Service/Images/@Model.NationalIdImageUrl" />
+                    <img width="250" height="350" src="/Content/Data/CeoAPI/ImagesTMP/@Model.NationalIdImageUrl" />
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+        }
+        @if (Model.ImageUrl != null)
+        {
+            <!--begin::Row-->
+            <div class="row mb-7">
+                <!--begin::Label-->
+                <label class="col-lg-4 fw-bold text-muted">صورة التنفيذي</label>
+                <!--end::Label-->
+                <!--begin::Col-->
+                <div class="col-lg-8">
+                    <img width="250" height="350" src="/Content/Data/CeoAPI/ImagesTMP/@Model.ImageUrl" />
                 </div>
                 <!--end::Col-->
             </div>
@@ -113,7 +139,7 @@
         </div>
         <!--end::Row-->
         <!--end::Input group-->
-        @if (Model.CVUrl != null)
+        @if (!string.IsNullOrWhiteSpace(Model.CVUrl))
         {
             <!--begin::Notice-->
             <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
@@ -134,7 +160,7 @@
                     <div class="fw-bold">
                         <h4 class="text-gray-900 fw-bolder">تحميل السيرة الذاتية</h4>
                         <div class="fs-6 text-gray-700">
-                            <a class="fw-bolder" target="_blank" href="/Content/Data/Ceo/File/@Model.CVUrl">تحميل</a>    تحميل السيرة الذاتية لـ @Model.Name
+                            <a class="fw-bolder" target="_blank" href="/Content/Data/CeoAPI/FileTMP/@Model.CVUrl">تحميل</a>    تحميل السيرة الذاتية لـ @Model.Name
                         </div>
                     </div>
                     <!--end::Content-->

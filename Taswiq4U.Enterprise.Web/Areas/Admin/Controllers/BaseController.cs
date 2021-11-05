@@ -126,16 +126,22 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
         {
             string pathFrom = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{imageType.ToString()}/FileTMP"), fileName);
             string pathTo = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{imageType.ToString()}/File"), fileName);
-            System.IO.File.Copy(pathFrom, pathTo, true);
-            System.IO.File.Delete(pathFrom);
+            if (System.IO.File.Exists(pathFrom))
+            {
+                System.IO.File.Copy(pathFrom, pathTo, true);
+                System.IO.File.Delete(pathFrom);
+            }
         }
 
         protected void SaveImageThenClearTemp(string fileName, ImageType imageType)
         { 
             string pathFrom = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{imageType.ToString()}/imagesTMP"), fileName);
             string pathTo = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{imageType.ToString()}/images"), fileName);
-            System.IO.File.Copy(pathFrom, pathTo, true);
-            System.IO.File.Delete(pathFrom); 
+            if (System.IO.File.Exists(pathFrom))
+            {
+                System.IO.File.Copy(pathFrom, pathTo, true);
+                System.IO.File.Delete(pathFrom);
+            }
         }
 
         protected void DeleteImage(string fileName, ImageType imageType)
@@ -150,9 +156,29 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
             {
                 string pathFrom = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{imageType.ToString()}/images"), fileName);
                 string pathTo = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{imageType.ToString()}/imagesTMP"), fileName);
-                System.IO.File.Copy(pathFrom, pathTo, true); 
+                
+                if (System.IO.File.Exists(pathFrom))
+                    System.IO.File.Copy(pathFrom, pathTo, true); 
             }
             catch(Exception e)
+            {
+
+            }
+        }
+        protected void SaveImageToTemp(string fileName, ImageType fromType, ImageType fromType2, ImageType toType)
+        {
+            try
+            {
+                string pathFrom = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{fromType.ToString()}/imagesTMP"), fileName);
+                string pathFrom2 = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{fromType2.ToString()}/images"), fileName);
+                
+                string pathTo = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{toType.ToString()}/imagesTMP"), fileName);
+                if (System.IO.File.Exists(pathFrom))
+                    System.IO.File.Copy(pathFrom, pathTo, true);
+                if (System.IO.File.Exists(pathFrom2))
+                    System.IO.File.Copy(pathFrom2, pathTo, true);
+            }
+            catch (Exception e)
             {
 
             }
@@ -163,7 +189,26 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
             {
                 string pathFrom = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{imageType.ToString()}/File"), fileName);
                 string pathTo = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{imageType.ToString()}/FileTMP"), fileName);
-                System.IO.File.Copy(pathFrom, pathTo, true);
+                
+                if (System.IO.File.Exists(pathFrom))
+                    System.IO.File.Copy(pathFrom, pathTo, true);
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+        protected void SaveFileToTemp(string fileName, FileType fromType, FileType fromType2, FileType toType)
+        {
+            try
+            {
+                string pathFrom = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{fromType.ToString()}/FileTMP"), fileName);
+                string pathFrom2 = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{fromType2.ToString()}/File"), fileName);
+                string pathTo = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{toType.ToString()}/FileTMP"), fileName);
+                if (System.IO.File.Exists(pathFrom))
+                    System.IO.File.Copy(pathFrom, pathTo, true);
+                if (System.IO.File.Exists(pathFrom2))
+                    System.IO.File.Copy(pathFrom2, pathTo, true);
             }
             catch (Exception e)
             {

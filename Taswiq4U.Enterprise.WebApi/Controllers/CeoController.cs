@@ -139,6 +139,7 @@ namespace Saudiceos.Enterprise.WebApi.Controllers
                 CEOId = ceo.CEOId,
                 Name = ceo.Name,
                 Phone = ceo.Phone,
+                NationalIdImageUrl = ceo.NationalIDImageUrl,
                 CVDescription = ceo.CVDescription,
                 Position = ceo.Position,
                 ImageUrl = ceo.ImageUrl,

@@ -108,16 +108,35 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
         [Route("new")]
         [Authorize(Roles = Permissions.CEO_ADD)]
 
-        public ActionResult New()
+        public ActionResult New(long addRequestId)
         {
-            var model = new CEOVM();
-            return View("Add", model);
+            var updateRequest = _addEditService.Get(addRequestId);
+
+            var ceoVm = new CEOVM();
+            if (updateRequest.Succeeded)
+            { 
+                ceoVm = new CEOVM
+                {
+                    Name = updateRequest.Data.Name, 
+                    Position = updateRequest.Data.Position,
+                    Email = updateRequest.Data.Email,
+                    CVDescription = updateRequest.Data.CVDescription,
+                    CVUrl = updateRequest.Data.CVUrl,
+                    ImageUrl = updateRequest.Data.ImageUrl,
+                };
+          
+                if (!string.IsNullOrWhiteSpace(updateRequest.Data.ImageUrl))
+                    SaveImageToTemp(updateRequest.Data.ImageUrl, ImageType.CeoAPI, ImageType.Ceo, ImageType.Ceo);
+
+                if (!string.IsNullOrWhiteSpace(updateRequest.Data.CVUrl))
+                    SaveFileToTemp(updateRequest.Data.CVUrl, FileType.CeoAPI, FileType.Ceo, FileType.Ceo);
+            }
+            return View("Add", ceoVm);
         }
 
         [Route("new")]
         [HttpPost]
         [Authorize(Roles = Permissions.CEO_ADD)]
-
         public ActionResult New(CEOVM ceoVm)
         {
             if (!ModelState.IsValid)
@@ -155,8 +174,7 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
 
         [Route("edit/{encodedId}")]
         [Authorize(Roles = Permissions.CEO_Update)]
-
-        public ActionResult Edit(string encodedId)
+        public ActionResult Edit(string encodedId, long updateRequestId = 0)
         {
             var id = GetId(encodedId);
             if (id == 0)
@@ -164,6 +182,7 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
+            var updateRequest = _addEditService.Get(updateRequestId);
             var model = _ceoService.Get(id);
             if (model == null)
             {
@@ -173,15 +192,17 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
             var ceoVm = new CEOVM
             {
                 Id = model.Id,
-                Name = model.Name,
-                Position = model.Position,
-                Email = model.Email,
+                Name = updateRequest.Succeeded ? updateRequest.Data.Name : model.Name,
+                Position = updateRequest.Succeeded ? updateRequest.Data.Position : model.Position,
+                Email = updateRequest.Succeeded ? updateRequest.Data.Email : model.Email,
                 Company = model.Company,
                 Active = model.Active,
-                CVNote = model.CVNote,
-                CVDescription = model.CVDescription,
-                CVUrl = model.CVUrl,
-                ImageUrl = model.ImageUrl,
+                CVNote =   model.CVNote,
+                CVDescription = updateRequest.Succeeded ? updateRequest.Data.CVDescription : model.CVDescription,
+                CVUrl = updateRequest.Succeeded ? (!string.IsNullOrWhiteSpace(updateRequest.Data.CVUrl) ?
+                updateRequest.Data.CVUrl : model.CVUrl) : model.CVUrl,
+                ImageUrl = updateRequest.Succeeded ? (!string.IsNullOrWhiteSpace(updateRequest.Data.ImageUrl) ? 
+                updateRequest.Data.ImageUrl : model.ImageUrl) : model.ImageUrl,
                 LinkedIn = model.LinkedIn,
                 Location = model.Location,
                 SnapChat = model.SnapChat,
@@ -190,13 +211,23 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
                 CreatedDate = model.CreatedDate
             };
 
-            if (ceoVm.ImageUrl != null)
-                SaveImageToTemp(ceoVm.ImageUrl, ImageType.Ceo);
+            if (updateRequest.Succeeded)
+            {
+                if (!string.IsNullOrWhiteSpace(updateRequest.Data.ImageUrl))
+                    SaveImageToTemp(updateRequest.Data.ImageUrl, ImageType.CeoAPI, ImageType.Ceo, ImageType.Ceo);
 
+                if (!string.IsNullOrWhiteSpace(updateRequest.Data.CVUrl))
+                    SaveFileToTemp(updateRequest.Data.CVUrl, FileType.CeoAPI, FileType.Ceo, FileType.Ceo);
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(ceoVm.ImageUrl))
+                    SaveImageToTemp(ceoVm.ImageUrl, ImageType.Ceo);
 
-            if (ceoVm.CVUrl != null)
-                SaveFileToTemp(ceoVm.CVUrl, FileType.Ceo);
-
+                if (!string.IsNullOrWhiteSpace(ceoVm.CVUrl))
+                    SaveFileToTemp(ceoVm.CVUrl, FileType.Ceo);
+            }
+           
             return View("Edit", ceoVm);
         }
 

@@ -2040,6 +2040,7 @@
     <Content Include="Content\assets\ng\signup-bg.jpg" />
     <Content Include="Content\assets\ng\styles.css" />
     <Content Include="Content\assets\ng\white-bg.jpg" />
+    <Content Include="Content\assets\plugins\ckeditor5-31.0.0-jonbalw5wk1w\build\ckeditor.js" />
     <Content Include="Content\assets\plugins\custom\ckeditor\ckeditor-balloon-block.bundle.js" />
     <Content Include="Content\assets\plugins\custom\ckeditor\ckeditor-balloon.bundle.js" />
     <Content Include="Content\assets\plugins\custom\ckeditor\ckeditor-classic.bundle.js" />

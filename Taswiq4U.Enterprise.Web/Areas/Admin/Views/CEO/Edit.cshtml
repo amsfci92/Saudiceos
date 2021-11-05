@@ -160,7 +160,7 @@
                 </div>
                 <!--end::Input group-->
 
-                @if (Model.CVUrl != null)
+                @if (!string.IsNullOrWhiteSpace(Model.CVUrl))
                 {
                     <!--begin::Input group-->
                     <div class="row mb-6 ">

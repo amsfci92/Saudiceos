@@ -26,6 +26,6 @@ namespace Cigarette.Enterprise.DAL
         public string CVUrl { get; set; }
         public string NationalIdImageUrl { get; set; }
     
-        public virtual CEO CEO { get; set; } 
+        public virtual CEO CEO { get; set; }
     }
 }

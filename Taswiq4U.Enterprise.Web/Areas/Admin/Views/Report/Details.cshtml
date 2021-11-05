@@ -85,7 +85,20 @@
             <!--end::Label-->
             <!--begin::Col-->
             <div class="col-lg-8">
-                @Html.Raw(Model.Description)  
+                @Html.Raw(Model.Description)
+
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Row-->
+        <!--begin::Row-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">الرابط</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                @Html.Raw(Model.Issuer)
 
             </div>
             <!--end::Col-->
@@ -100,7 +113,7 @@
                 <!--end::Label-->
                 <!--begin::Col-->
                 <div class="col-lg-8">
-                   <a target="_blank" class="btn btn-light-success" href="/Content/Data/Report/File/@Model.FileUrl">تحميل الملف</a>
+                    <a target="_blank" class="btn btn-light-success" href="/Content/Data/Report/File/@Model.FileUrl">تحميل الملف</a>
                 </div>
                 <!--end::Col-->
             </div>

@@ -35,15 +35,19 @@ namespace Cigarette.Enterprise.Extentions.ExtentionMethods.HttpFileBase
         {
             return file != null && file.ContentLength > 0;
         }
+        public static bool HasFile(this HttpPostedFile file)
+        {
+            return file != null && file.ContentLength > 0;
+        }
         public static string SaveFile(this HttpPostedFileBase file, List<string> errors, FileType fileType)
         {
-             
+
             var validExt = new[] { "pdf", "doc", "docx" };
             var mappedPath = System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{fileType.ToString()}/FileTMP");
-             
+
             var valid = validExt.Contains(Path.GetExtension(file.FileName).Substring(1)?.ToLower());
             var r = Path.GetExtension(file.FileName).Substring(1)?.ToLower();
-            if (!valid  )
+            if (!valid)
             {
                 errors.Add("صيغه الملف غير مدعومه");
                 return null;
@@ -62,7 +66,7 @@ namespace Cigarette.Enterprise.Extentions.ExtentionMethods.HttpFileBase
 
 
                 string path = Path.Combine(mappedPath, newFileName);
-                 
+
                 file.SaveAs(path);
 
                 return newFileName;
@@ -73,24 +77,62 @@ namespace Cigarette.Enterprise.Extentions.ExtentionMethods.HttpFileBase
                 return null;
             }
         }
-        public static string SaveImage(this HttpPostedFileBase file, List<string> errors, ImageType imageType, int r = 0, int h = 0, int w =0)
+        public static string SaveFile(this HttpPostedFile file, List<string> errors, FileType fileType)
         {
 
-            var supportedVideoTypes = new[] { "mp4"};
+            var validExt = new[] { "pdf", "doc", "docx" };
+            var mappedPath = System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{fileType.ToString()}/FileTMP");
+
+            var valid = validExt.Contains(Path.GetExtension(file.FileName).Substring(1)?.ToLower());
+            var r = Path.GetExtension(file.FileName).Substring(1)?.ToLower();
+            if (!valid)
+            {
+                errors.Add("صيغه الملف غير مدعومه");
+                return null;
+            }
+
+            if (file.ContentLength > 30 * 1024 * 1024)
+            {
+                errors.Add("لقد تجاوزت الحجم المسموح");
+                return null;
+            }
+
+            try
+            {
+
+                var newFileName = $"{Guid.NewGuid().ToString()}.{new Random().Next()}{Path.GetExtension(file.FileName)?.ToLower()}";
+
+
+                string path = Path.Combine(mappedPath, newFileName);
+
+                file.SaveAs(path);
+
+                return newFileName;
+            }
+            catch (Exception ee)
+            {
+                errors.Add("لم يتم إضافة الملف");
+                return null;
+            }
+        }
+        public static string SaveImage(this HttpPostedFileBase file, List<string> errors, ImageType imageType, int r = 0, int h = 0, int w = 0)
+        {
+
+            var supportedVideoTypes = new[] { "mp4" };
             var supportedImageTypes = new[] { "jpg", "jpeg", "png" };
 
             var mappedPath = System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{imageType.ToString()}/imagesTMP");
- 
+
             var isImage = supportedImageTypes.Contains(Path.GetExtension(file.FileName).Substring(1)?.ToLower());
             var isVideo = supportedVideoTypes.Contains(Path.GetExtension(file.FileName).Substring(1)?.ToLower()) && !isImage;
-   
+
             if (!isImage && !isVideo)
             {
                 errors.Add("صيغه الملف غير مدعومه");
                 return null;
             }
 
-            if (file.ContentLength > 15 * 1024 * 1024) 
+            if (file.ContentLength > 15 * 1024 * 1024)
             {
                 errors.Add("لقد تجاوزت الحجم المسموح");
                 return null;
@@ -120,23 +162,95 @@ namespace Cigarette.Enterprise.Extentions.ExtentionMethods.HttpFileBase
                 int height = h == 0 ? 350 : h;
                 int width = w == 0 ? 300 : w;
                 if (r > 0)
-                { 
-                        double ratio = (double)width / image.Width;
-                        int newWidth = (int)(image.Width * ratio);
-                        int newHeight = (int)(image.Height * ratio);
-                        Bitmap newImage = new Bitmap(width, height);
-                        using (Graphics g = Graphics.FromImage(newImage))
-                        {
-                            g.DrawImage(image, 0, 0, newWidth, newHeight);
-                        }
-                        image.Dispose();
+                {
+                    double ratio = (double)width / image.Width;
+                    int newWidth = (int)(image.Width * ratio);
+                    int newHeight = (int)(image.Height * ratio);
+                    Bitmap newImage = new Bitmap(width, height);
+                    using (Graphics g = Graphics.FromImage(newImage))
+                    {
+                        g.DrawImage(image, 0, 0, newWidth, newHeight);
+                    }
+                    image.Dispose();
                     newImage.Save(path);
                 }
                 else
                 {
                     file.SaveAs(path);
                 }
-                
+
+                return newFileName;
+            }
+            catch (Exception ee)
+            {
+                errors.Add("Api-Err-F3" + ee.Message);
+                return null;
+            }
+        }
+        public static string SaveImage(this HttpPostedFile file, List<string> errors, ImageType imageType, int r = 0, int h = 0, int w = 0)
+        {
+
+            var supportedVideoTypes = new[] { "mp4" };
+            var supportedImageTypes = new[] { "jpg", "jpeg", "png" };
+
+            var mappedPath = System.Web.Hosting.HostingEnvironment.MapPath($"/Content/Data/{imageType.ToString()}/imagesTMP");
+
+            var isImage = supportedImageTypes.Contains(Path.GetExtension(file.FileName).Substring(1)?.ToLower());
+            var isVideo = supportedVideoTypes.Contains(Path.GetExtension(file.FileName).Substring(1)?.ToLower()) && !isImage;
+
+            if (!isImage && !isVideo)
+            {
+                errors.Add("صيغه الملف غير مدعومه");
+                return null;
+            }
+
+            if (file.ContentLength > 15 * 1024 * 1024)
+            {
+                errors.Add("لقد تجاوزت الحجم المسموح");
+                return null;
+            }
+
+            try
+            {
+                var newFileName = $"{Guid.NewGuid().ToString()}.{new Random().Next()}{Path.GetExtension(file.FileName)?.ToLower()}";
+
+                string path = Path.Combine(mappedPath, newFileName);
+
+                //using (Image imageFile = Image.FromStream(file.InputStream))
+                //using (Image watermarkImage = Image.FromFile(Path.Combine(mappedPath, "Saudiceos_logo.png")))
+                //using (Graphics imageGraphics = Graphics.FromImage(imageFile))
+                //using (TextureBrush watermarkBrush =
+                //    new TextureBrush(((Bitmap)ResizeImageKeepAspectRatio(watermarkImage,
+                //    (int)(imageFile.Width/3), (int)(imageFile.Height/3)))))
+                //{
+                //    int x = (imageFile.Width - imageFile.Width/3);
+                //    int y = (imageFile.Height - imageFile.Height/3);
+
+                //    // watermarkBrush.TranslateTransform(x, y);
+                //    imageGraphics.FillRectangle(watermarkBrush, new Rectangle(new Point(x, y), new Size(watermarkImage.Width + 1, watermarkImage.Height)));
+                //    imageFile.Save(path);
+                //} 
+                var image = Image.FromStream(file.InputStream);
+                int height = h == 0 ? 350 : h;
+                int width = w == 0 ? 300 : w;
+                if (r > 0)
+                {
+                    double ratio = (double)width / image.Width;
+                    int newWidth = (int)(image.Width * ratio);
+                    int newHeight = (int)(image.Height * ratio);
+                    Bitmap newImage = new Bitmap(width, height);
+                    using (Graphics g = Graphics.FromImage(newImage))
+                    {
+                        g.DrawImage(image, 0, 0, newWidth, newHeight);
+                    }
+                    image.Dispose();
+                    newImage.Save(path);
+                }
+                else
+                {
+                    file.SaveAs(path);
+                }
+
                 return newFileName;
             }
             catch (Exception ee)

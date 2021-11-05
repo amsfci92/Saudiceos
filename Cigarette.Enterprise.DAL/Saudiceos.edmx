@@ -133,7 +133,7 @@
           <Property Name="Position" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
-          <Property Name="CVDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="CVDescription" Type="nvarchar(max)" />
           <Property Name="ImageUrl" Type="nvarchar" MaxLength="500" />
           <Property Name="DateCreated" Type="datetime" />
           <Property Name="CEOId" Type="bigint" />
@@ -162,7 +162,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
           <Property Name="Subject" Type="nvarchar" MaxLength="500" />
-          <Property Name="Message" Type="text" />
+          <Property Name="Message" Type="nvarchar(max)" />
           <Property Name="Name" Type="nvarchar" MaxLength="500" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
@@ -215,7 +215,7 @@
           <Property Name="Issuer" Type="nvarchar" MaxLength="500" />
           <Property Name="IssueDate" Type="datetime" />
           <Property Name="PublishDate" Type="datetime" />
-          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="Service">
@@ -486,7 +486,7 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Subject" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
@@ -625,7 +625,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ImageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="FileUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="SocialShare" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -728,7 +728,7 @@
           <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CVDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CVDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ImageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DateCreated" Type="DateTime" Precision="3" />
           <Property Name="CEOId" Type="Int64" />

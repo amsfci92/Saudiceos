@@ -26,7 +26,8 @@ namespace Saudiceos.Enterprise.Web
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
-        {  
+        {
+            Response.AppendHeader("Access-Control-Allow-Origin", "*");
         }
         
         

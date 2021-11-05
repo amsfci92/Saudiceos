@@ -59,7 +59,7 @@
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="  تغيير الصورة">
                                 <i class="bi bi-pencil-fill fs-7"></i>
                                 <!--begin::Inputs-->
-                                <input class="upl-img" data-utype="3" data-image-url="/Content/Data/Report/ImagesTMP/"  data-url-id="#ImageUrl" type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                <input class="upl-img" data-utype="3" data-image-url="/Content/Data/Report/ImagesTMP/" data-url-id="#ImageUrl" type="file" name="avatar" accept=".png, .jpg, .jpeg" />
                                 <input type="hidden" name="avatar_remove" />
                                 <input type="hidden" value="@Model.ImageUrl" name="ImageUrl" id="ImageUrl" required />
                                 <!--end::Inputs-->
@@ -142,7 +142,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">الوصف</label>
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">الوصف</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
@@ -151,7 +151,28 @@
                             <!--begin::Col-->
                             <div class="col-lg-12 fv-row">
                                 <textarea type="hidden" id="Description" name="Description" class="ck-editor-element form-control form-control-lg form-control-solid" placeholder="الوصف">@Model.Description</textarea>
-                                 <span class="text-danger">@Html.ValidationMessageFor(m => m.Description)</span>
+                                <span class="text-danger">@Html.ValidationMessageFor(m => m.Description)</span>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">الرابط</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <textarea type="hidden" id="Issuer" name="Issuer" class="ck-editor-element form-control form-control-lg form-control-solid" placeholder="الرابط'">@Model.Issuer</textarea>
+                                <span class="text-danger">@Html.ValidationMessageFor(m => m.Issuer)</span>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -233,7 +254,6 @@
                     <!--end::Col-->
                 </div>
                 <!--end::Input group-->
-                
                 <!--begin::Input group-->
                 <div class="row mb-0">
                     <!--begin::Label-->

@@ -59,7 +59,7 @@ namespace Cigarette.Enterprise.BLL.ServiceServ
 
         public List<Service> GetAll()
         {
-            return _unitOfWork.Service.GetAll().ToList();
+            return _unitOfWork.Service.GetAll().OrderByDescending(m => m.DateCreated).ToList();
 
         }
 
@@ -98,7 +98,7 @@ namespace Cigarette.Enterprise.BLL.ServiceServ
         {
             var data = _unitOfWork.Service.GetAll()
                 .Where(m => m.Active == true)
-                .OrderBy(m => m.Id)
+                .OrderByDescending(m => m.Id)
                 .ToPagedList(pageNo, pageSize);
             var result = new Result<IPagedList<Service>>
             {
