@@ -171,7 +171,7 @@
                         <div class="row">
                             <!--begin::Col-->
                             <div class="col-lg-12 fv-row">
-                                <textarea type="hidden" id="Issuer" name="Issuer" class="ck-editor-element form-control form-control-lg form-control-solid" placeholder="الرابط'">@Model.Issuer</textarea>
+                                <textarea type="hidden" id="Issuer" name="Issuer" class="form-control form-control-lg form-control-solid" placeholder="الرابط'">@Model.Issuer</textarea>
                                 <span class="text-danger">@Html.ValidationMessageFor(m => m.Issuer)</span>
                             </div>
                             <!--end::Col-->
@@ -277,7 +277,6 @@
             <!--end::Card body-->
             <!--begin::Actions-->
             <div class="card-footer d-flex justify-content-end py-6 px-9">
-                <button type="reset" class="btn btn-light btn-active-light-primary me-2">الغاء</button>
                 <button type="submit" class="btn btn-primary">حفظ  </button>
             </div>
             <!--end::Actions-->
