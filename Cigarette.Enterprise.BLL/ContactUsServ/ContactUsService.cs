@@ -29,7 +29,7 @@ namespace Cigarette.Enterprise.BLL.ContactUsServ
 
         public List<ContactU> GetAll()
         {
-            return _unitOfWork.ContactUs.GetAll().ToList();
+            return _unitOfWork.ContactUs.GetAll().OrderByDescending(m => m.Id).ToList();
         }
 
         public int Edit(ContactU model)

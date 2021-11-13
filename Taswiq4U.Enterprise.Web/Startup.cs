@@ -1,6 +1,8 @@
 ﻿using FluentValidation.Mvc;
 using Microsoft.Owin;
 using Owin;
+using Serilog;
+using System.IO;
 
 [assembly: OwinStartupAttribute(typeof(Saudiceos.Enterprise.Web.Startup))]
 namespace Saudiceos.Enterprise.Web
@@ -11,6 +13,7 @@ namespace Saudiceos.Enterprise.Web
         {
             ConfigureAuth(app);
             FluentValidationModelValidatorProvider.Configure();
+            Log.Logger = SerilogConfig.CreateLogger();
         }
     }
 }

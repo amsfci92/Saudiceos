@@ -24,7 +24,7 @@ namespace Cigarette.Enterprise.ViewModels.VM.Report
         public Nullable<System.DateTime> DateCreated { get; set; }
     
         public string Type { get; set; }
- 
+        [AllowHtml]
         public string Issuer { get; set; }
  
         public Nullable<System.DateTime> IssueDate { get; set; }

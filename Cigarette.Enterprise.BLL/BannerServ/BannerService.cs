@@ -91,7 +91,7 @@ namespace Cigarette.Enterprise.BLL.BannerServ
         {
             var data = _unitOfWork.Banners.GetAll()
          .Where(m => m.Active == true)
-         .OrderBy(m => m.Id)
+         .OrderByDescending(m => m.Id)
          .ToPagedList(pageNo, pageSize);
             var result = new Result<IPagedList<Banner>>
             {
@@ -106,7 +106,7 @@ namespace Cigarette.Enterprise.BLL.BannerServ
         {
             var data = _unitOfWork.Banners.GetAll()
         .Where(m => m.Active == true)
-        .OrderBy(m => m.Id).Where(m => m.AdPlace == type).FirstOrDefault();
+        .OrderByDescending(m => m.Id).Where(m => m.AdPlace == type).FirstOrDefault();
       
             var result = new Result<Banner> 
             {
@@ -121,7 +121,7 @@ namespace Cigarette.Enterprise.BLL.BannerServ
         {
             var data = _unitOfWork.Banners.GetAll()
          .Where(m => m.Active == true && m.AdPlace == type)
-         .OrderBy(m => m.Id)
+         .OrderByDescending(m => m.Id)
          .ToPagedList(pageNo, pageSize);
             var result = new Result<IPagedList<Banner>>
             {

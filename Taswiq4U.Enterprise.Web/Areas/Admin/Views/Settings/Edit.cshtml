@@ -44,7 +44,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">اسم الموقع</label>
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">اسم الموقع</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
@@ -65,7 +65,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">العنوان</label>
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">العنوان</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
@@ -86,7 +86,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">الهاتف</label>
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">الهاتف</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
@@ -107,7 +107,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">الهاتف النقال</label>
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">الهاتف النقال</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
@@ -128,7 +128,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">وصف الموقع</label>
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">وصف الموقع</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
@@ -136,7 +136,7 @@
                         <div class="row">
                             <!--begin::Col-->
                             <div class="col-lg-12 fv-row">
-                                <textarea id="SiteDescription" name="SiteDescription"  rows="5" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="وصف الموقع" >@Model.SiteDescription</textarea>
+                                <textarea id="SiteDescription" name="SiteDescription" rows="5" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="وصف الموقع">@Model.SiteDescription</textarea>
                                 @Html.ValidationMessageFor(m => m.SiteDescription)
                             </div>
                             <!--end::Col-->
@@ -149,7 +149,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">البريد الالكتروني</label>
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">البريد الالكتروني</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
@@ -170,7 +170,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">فيس بوك</label>
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">فيس بوك</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
@@ -191,7 +191,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">انستجرام</label>
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">انستجرام</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
@@ -212,7 +212,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">لينكد ان</label>
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">لينكد ان</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
@@ -233,7 +233,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">تويتر</label>
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">تويتر</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
@@ -250,11 +250,10 @@
                     </div>
                     <!--end::Col-->
                 </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
+                <!--end::Input group--> <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label required fw-bold fs-6">نص الفوتر</label>
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">نص المختصر</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
@@ -262,7 +261,28 @@
                         <div class="row">
                             <!--begin::Col-->
                             <div class="col-lg-12 fv-row">
-                                <textarea name="FooterSentence" id="FooterSentence" rows="5" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="نص الفوتر"   >@Model.FooterSentence</textarea>
+                                <textarea name="SiteHomeDescription" id="SiteHomeDescription" rows="5" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="نص المختصر">@Model.SiteHomeDescription</textarea>
+                                @Html.ValidationMessageFor(m => m.SiteHomeDescription)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">نص الفوتر</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <textarea name="FooterSentence" id="FooterSentence" rows="5" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="نص الفوتر">@Model.FooterSentence</textarea>
                                 @Html.ValidationMessageFor(m => m.FooterSentence)
                             </div>
                             <!--end::Col-->
@@ -272,12 +292,75 @@
                     <!--end::Col-->
                 </div>
                 <!--end::Input group-->
-                
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">من نحن</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <textarea name="AboutUs" id="AboutUs" rows="5" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder=" ">@Model.AboutUs</textarea>
+                                @Html.ValidationMessageFor(m => m.AboutUs)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">اخلاء المسئوليه</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <textarea name="Disclaimer" id="Disclaimer" rows="5" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder=" ">@Model.Disclaimer</textarea>
+                                @Html.ValidationMessageFor(m => m.Disclaimer)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label  fw-bold fs-6">سياسه الاستخدام</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <textarea name="TermsOfUse" id="TermsOfUse" rows="5" class="ck-editor-element form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="سياسه الاستخدام">@Model.TermsOfUse</textarea>
+                                @Html.ValidationMessageFor(m => m.TermsOfUse)
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
             </div>
             <!--end::Card body-->
             <!--begin::Actions-->
             <div class="card-footer d-flex justify-content-end py-6 px-9">
-                <button type="reset" class="btn btn-light btn-active-light-primary me-2">الغاء</button>
+             
                 <button type="submit" class="btn btn-primary">حفظ  </button>
             </div>
             <!--end::Actions-->

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Cigarette.Enterprise.ViewModels.VM.Settings
 {
@@ -14,8 +15,10 @@ namespace Cigarette.Enterprise.ViewModels.VM.Settings
         public string Phone { get; set; }
         public string Mobile { get; set; }
         public string Address { get; set; }
+        [AllowHtml]
         public string FooterSentence { get; set; }
         public string SiteKeywords { get; set; }
+        [AllowHtml]
         public string SiteDescription { get; set; }
         public string SiteHomeDescription { get; set; }
         public string SiteFacebook { get; set; }
@@ -29,5 +32,11 @@ namespace Cigarette.Enterprise.ViewModels.VM.Settings
         public string ShareCode { get; set; }
         public string GoogleAnalytics { get; set; }
         public string GoogleMaps { get; set; }
+        [AllowHtml]
+        public string AboutUs { get; set; }
+        [AllowHtml]
+        public string TermsOfUse { get; set; }
+        [AllowHtml]
+        public string Disclaimer { get; set; }
     }
 }

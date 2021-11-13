@@ -83,9 +83,7 @@
                                             <input class="form-check-input" type="checkbox" data-remove-url-bulk-del="/admin/news/del/" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1" />
                                         </div>
                                     </th>
-                                    <th class="min-w-125px">العنوان </th>
-                                    <th class="min-w-125px">الوصف</th>
-                                    <th class="min-w-125px">ملحوظه </th> 
+                                    <th class="min-w-125px">العنوان </th> 
                                     <th class="min-w-125px">توقيت الانشاء</th>
                                     <th class="text-end min-w-70px">الإجراءات</th>
                                 </tr>
@@ -111,15 +109,7 @@
                                     <td>
                                         <a class="text-gray-800 text-hover-primary mb-1">  @item.Title</a>
                                     </td>
-                                    <!--end::Name=-->
-                                    <!--begin::Email=-->
-                                    <td>
-                                        <a class="text-gray-600 text-hover-primary mb-1">@(item.Description.Length < 20 ? item.Description : item.Description.Substring(0, 20)) </a>
-                                    </td>
-                                    <!--end::Email=-->
-                                    <!--begin::Company=-->
-                                    <td> @item.Note</td>
-                                    <!--end::Company=--> 
+                                    <!--end::Name=-->  
                                     <!--begin::Date=-->
                                     <td>@(item.CreateDate?.ToLongDateString())</td>
                                     <!--end::Date=-->

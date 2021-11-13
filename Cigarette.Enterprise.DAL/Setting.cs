@@ -36,5 +36,8 @@ namespace Cigarette.Enterprise.DAL
         public string GoogleAnalytics { get; set; }
         public string GoogleMaps { get; set; }
         public string SiteHomeDescription { get; set; }
+        public string TermsOfUse { get; set; }
+        public string Disclaimer { get; set; }
+        public string AboutUs { get; set; }
     }
 }

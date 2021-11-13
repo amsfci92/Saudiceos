@@ -36,7 +36,7 @@ namespace Cigarette.Enterprise.BLL.NewsServ
 
         public IEnumerable<News> GetAll()
         {
-            return _unitOfWork.News.GetAll().ToList();
+            return _unitOfWork.News.GetAll().OrderByDescending(m => m.Id).ToList();
         }
 
         public bool Delete(long id)
@@ -77,7 +77,7 @@ namespace Cigarette.Enterprise.BLL.NewsServ
         {
             var data = _unitOfWork.News.GetAll()
                 .Where(m => m.Active == true)
-                .OrderBy(m => m.Id)
+                .OrderByDescending(m => m.Id)
                 .ToPagedList(pageNo, pageSize);
             var result = new Result<IPagedList<News>>
             {

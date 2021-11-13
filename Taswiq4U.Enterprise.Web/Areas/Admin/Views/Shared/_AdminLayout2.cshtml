@@ -3875,7 +3875,7 @@ License: For each use you must have a valid license purchased only from above li
     @RenderSection("Scripts", false)
 
     <script>
-        var KTCkeditorDocument = function () {
+         var KTCkeditorDocument = function () {
             // Private functions
             var demo = function () {
                 var ckEditoer = $('.ck-editor-element');
@@ -3889,14 +3889,13 @@ License: For each use you must have a valid license purchased only from above li
                                     // But the content will be edited in Arabic.
                                     content: 'ar'
                                 },
-                                mediaEmbed: {
-                                    previewsInData: true
-                                }
                             })
                             .then(editor => {
-                                console.log(editor);
+                                window.editor = editor;
+
                             })
                             .catch(error => {
+                                console.error('Oops, something went wrong!');  
                                 console.error(error);
                             });
                     }

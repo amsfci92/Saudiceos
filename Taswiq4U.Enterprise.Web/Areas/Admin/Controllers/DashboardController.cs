@@ -7,6 +7,7 @@ using Cigarette.Enterprise.BLL.ServiceServ;
 using Cigarette.Enterprise.ViewModels.ViewModels.About;
 using Cigarette.Enterprise.ViewModels.VM;
 using Microsoft.AspNet.Identity;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace Saudiceos.Enterprise.Web.Areas.AdminPanel.Controllers
         private INewsService _newsService;
         private IReportService _reportService;
         private IServiceService _serviceService;
-
+        private ILogger _logger = Log.Logger;
 
         public DashboardController(ICEOService cEOService,
             IBannerService bannerService, 
@@ -42,6 +43,7 @@ namespace Saudiceos.Enterprise.Web.Areas.AdminPanel.Controllers
         [Route("details")]
         public ActionResult Index()
         {
+            _logger.Debug("Dashboard Called..");
             var dashboardStats = new DashboardStat
             {
                 CEOCount = _cEOSerivce.GetAllCeosCount(),

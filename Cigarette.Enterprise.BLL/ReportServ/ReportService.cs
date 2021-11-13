@@ -59,7 +59,7 @@ namespace Cigarette.Enterprise.BLL.ReportServ
 
         public List<Report> GetAll()
         {
-            return _unitOfWork.Report.GetAll().ToList();
+            return _unitOfWork.Report.GetAll().OrderByDescending(m => m.Id).ToList();
 
         }
 
@@ -98,7 +98,7 @@ namespace Cigarette.Enterprise.BLL.ReportServ
         {
             var data = _unitOfWork.Report.GetAll()
                 //.Where(m => m.Active == true)
-                .OrderBy(m => m.Id)
+                .OrderByDescending(m => m.Id)
                 .ToPagedList(pageNo, pageSize);
             var result = new Result<IPagedList<Report>>
             {

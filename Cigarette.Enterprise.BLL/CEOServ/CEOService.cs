@@ -24,7 +24,7 @@ namespace Cigarette.Enterprise.BLL.CEOServ
 
         public IEnumerable<CEO> GetAllCeos()
         {
-            var query = _unitOfWork.CEOs.GetAll();
+            var query = _unitOfWork.CEOs.GetAll().OrderByDescending(m => m.Id);
             return query.ToList();
         }
 
@@ -96,7 +96,7 @@ namespace Cigarette.Enterprise.BLL.CEOServ
                     m.Position != null && m.Position.ToLower().Contains(searchText) 
                     );
             }
-              var finalResult = query.OrderBy(m => m.Id)
+              var finalResult = query.OrderByDescending(m => m.Id)
               .ToPagedList(pageNo, pageSize);
             var result = new Result<IPagedList<CEO>>
             {

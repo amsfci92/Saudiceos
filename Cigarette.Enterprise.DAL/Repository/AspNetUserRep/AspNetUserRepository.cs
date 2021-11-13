@@ -16,7 +16,7 @@ namespace Cigarette.Enterprise.DAL.Repository.AspNetUserRep
 
         public List<AspNetUser> GetAllAsNoTracking()
         {
-            return _context.AspNetUsers.AsNoTracking().ToList();
+            return _context.AspNetUsers.AsNoTracking().OrderByDescending(m => m.Id).ToList();
         }
 
         public AspNetUser GetAsNoTracking(string id)

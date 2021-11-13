@@ -14,7 +14,7 @@ namespace Cigarette.Enterprise.BLL.CEOAddEditRequestServ
         }
         public IEnumerable<CEOAddEditRequest> GetAll()
         {
-            var query = _unitOfWork.CEOAddEditRequests.GetAll();
+            var query = _unitOfWork.CEOAddEditRequests.GetAll().OrderByDescending(m => m.Id);
             return query;
         }
 
@@ -47,7 +47,7 @@ namespace Cigarette.Enterprise.BLL.CEOAddEditRequestServ
 
         public long GetAllCount()
         {
-            var query = _unitOfWork.CEOAddEditRequests.GetAll();
+            var query = _unitOfWork.CEOAddEditRequests.GetAll().OrderByDescending(m => m.Id);
             return query.Count();
         }
 

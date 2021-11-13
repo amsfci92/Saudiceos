@@ -121,7 +121,7 @@
       <DependentUpon>Saudiceos.tt</DependentUpon>
     </Compile>
     <Compile Include="CustomModels\AdvancedSearchMainModel.cs" />
-    <Compile Include="CustomModels\Advertisement.cs" />
+    <Compile Include="CustomModels\AspNetUser.cs" />
     <Compile Include="CustomModels\CustomCEO.cs" />
     <Compile Include="CustomModels\SearchParamsModel.cs" />
     <Compile Include="IndividualOpportunityDiscovery.cs">

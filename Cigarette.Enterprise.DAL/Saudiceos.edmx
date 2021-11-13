@@ -259,6 +259,9 @@
           <Property Name="GoogleAnalytics" Type="nvarchar(max)" />
           <Property Name="GoogleMaps" Type="nvarchar(max)" />
           <Property Name="SiteHomeDescription" Type="nvarchar(max)" />
+          <Property Name="TermsOfUse" Type="nvarchar(max)" />
+          <Property Name="Disclaimer" Type="nvarchar(max)" />
+          <Property Name="AboutUs" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_CEOAddEditRequest_CEO">
           <End Role="CEO" Type="Self.CEO" Multiplicity="0..1" />
@@ -695,6 +698,9 @@
           <Property Name="GoogleAnalytics" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="GoogleMaps" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SiteHomeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TermsOfUse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Disclaimer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AboutUs" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CEO">
           <Key>
@@ -984,6 +990,9 @@
           <EntitySetMapping Name="Settings">
             <EntityTypeMapping TypeName="SaudiceosModel.Setting">
               <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="AboutUs" ColumnName="AboutUs" />
+                <ScalarProperty Name="Disclaimer" ColumnName="Disclaimer" />
+                <ScalarProperty Name="TermsOfUse" ColumnName="TermsOfUse" />
                 <ScalarProperty Name="SiteHomeDescription" ColumnName="SiteHomeDescription" />
                 <ScalarProperty Name="GoogleMaps" ColumnName="GoogleMaps" />
                 <ScalarProperty Name="GoogleAnalytics" ColumnName="GoogleAnalytics" />

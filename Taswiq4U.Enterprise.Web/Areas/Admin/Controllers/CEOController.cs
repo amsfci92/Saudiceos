@@ -101,6 +101,11 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            if (!string.IsNullOrWhiteSpace(model.Data.ImageUrl))
+                SaveImageToTemp(model.Data.ImageUrl, ImageType.CeoAPI, ImageType.Ceo, ImageType.CeoAPI);
+
+            if (!string.IsNullOrWhiteSpace(model.Data.CVUrl))
+                SaveFileToTemp(model.Data.CVUrl, FileType.CeoAPI, FileType.Ceo, FileType.CeoAPI);
 
             return View("updateDetails", model.Data);
         }
@@ -108,7 +113,7 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
         [Route("new")]
         [Authorize(Roles = Permissions.CEO_ADD)]
 
-        public ActionResult New(long addRequestId)
+        public ActionResult New(long addRequestId = 0)
         {
             var updateRequest = _addEditService.Get(addRequestId);
 

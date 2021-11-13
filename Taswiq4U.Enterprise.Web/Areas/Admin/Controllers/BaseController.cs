@@ -12,6 +12,9 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
 {
     public class BaseController : Controller
     { 
+        protected void Log(string message)
+        {
+        }
         public ActionResult Index()
         {
             return View();

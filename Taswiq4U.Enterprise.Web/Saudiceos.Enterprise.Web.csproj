@@ -76,6 +76,30 @@
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=106.6.10.0, Culture=neutral, PublicKeyToken=598062e77f915f75" />
+    <Reference Include="Seq.Client.Serilog, Version=0.5.0.0, Culture=neutral, PublicKeyToken=88fe373b29b321c0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Seq.Client.Serilog.0.10.2\lib\net45\Seq.Client.Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.10.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Enrichers.Environment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Enrichers.Environment.2.2.0\lib\net45\Serilog.Enrichers.Environment.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Formatting.Compact, Version=1.1.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Formatting.Compact.1.1.0\lib\net452\Serilog.Formatting.Compact.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.4.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.PeriodicBatching, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.PeriodicBatching.2.3.0\lib\net45\Serilog.Sinks.PeriodicBatching.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Seq, Version=5.0.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.Seq.5.0.1\lib\net45\Serilog.Sinks.Seq.dll</HintPath>
+    </Reference>
+    <Reference Include="SerilogWeb.Classic, Version=5.1.0.0, Culture=neutral, PublicKeyToken=9462ddd55fbc0e7f, processorArchitecture=MSIL">
+      <HintPath>..\packages\SerilogWeb.Classic.5.1.66\lib\net45\SerilogWeb.Classic.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ComponentModel.Annotations.4.4.1\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
@@ -259,6 +283,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SerilogConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminPanelAreaRegistration.cs" />
     <Compile Include="Areas\Admin\AuthServices\UserRoleService\IUserRoleService.cs" />
@@ -1874,172 +1899,6 @@
     <Content Include="Content\assets\media\technology-logos\Html5.png" />
     <Content Include="Content\assets\media\technology-logos\React.png" />
     <Content Include="Content\assets\media\technology-logos\VueJS.png" />
-    <Content Include="Content\assets\ng\3rdpartylicenses.txt" />
-    <Content Include="Content\assets\ng\assets\css\animate.min.css" />
-    <Content Include="Content\assets\ng\assets\css\boxicons.min.css" />
-    <Content Include="Content\assets\ng\assets\fonts\boxicons.svg" />
-    <Content Include="Content\assets\ng\assets\img\about-img.jpg" />
-    <Content Include="Content\assets\ng\assets\img\animate-banner-img1.jpg" />
-    <Content Include="Content\assets\ng\assets\img\applestore.png" />
-    <Content Include="Content\assets\ng\assets\img\author-image\img1.jpg" />
-    <Content Include="Content\assets\ng\assets\img\author-image\img2.jpg" />
-    <Content Include="Content\assets\ng\assets\img\author-image\img3.jpg" />
-    <Content Include="Content\assets\ng\assets\img\author-image\img4.jpg" />
-    <Content Include="Content\assets\ng\assets\img\author-image\img5.jpg" />
-    <Content Include="Content\assets\ng\assets\img\author-image\img6.jpg" />
-    <Content Include="Content\assets\ng\assets\img\author-image\img7.jpg" />
-    <Content Include="Content\assets\ng\assets\img\author-image\img8.jpg" />
-    <Content Include="Content\assets\ng\assets\img\author-image\img9.jpg" />
-    <Content Include="Content\assets\ng\assets\img\banner-full-img1.jpg" />
-    <Content Include="Content\assets\ng\assets\img\banner-img1.jpg" />
-    <Content Include="Content\assets\ng\assets\img\banner-img2.jpg" />
-    <Content Include="Content\assets\ng\assets\img\banner-img2.png" />
-    <Content Include="Content\assets\ng\assets\img\banner-img3.jpg" />
-    <Content Include="Content\assets\ng\assets\img\banner-slider\banner-img1.jpg" />
-    <Content Include="Content\assets\ng\assets\img\banner-slider\banner-img2.jpg" />
-    <Content Include="Content\assets\ng\assets\img\banner-slider\banner-img3.jpg" />
-    <Content Include="Content\assets\ng\assets\img\banner-video-bg.jpg" />
-    <Content Include="Content\assets\ng\assets\img\bg_lines.svg" />
-    <Content Include="Content\assets\ng\assets\img\blog-image\img1.jpg" />
-    <Content Include="Content\assets\ng\assets\img\blog-image\img12.jpg" />
-    <Content Include="Content\assets\ng\assets\img\blog-image\img3.jpg" />
-    <Content Include="Content\assets\ng\assets\img\blog-image\img4.jpg" />
-    <Content Include="Content\assets\ng\assets\img\blog-image\img5.jpg" />
-    <Content Include="Content\assets\ng\assets\img\blog-image\img6.jpg" />
-    <Content Include="Content\assets\ng\assets\img\blog-image\img7.jpg" />
-    <Content Include="Content\assets\ng\assets\img\blog-image\img8.jpg" />
-    <Content Include="Content\assets\ng\assets\img\blog-image\img9.jpg" />
-    <Content Include="Content\assets\ng\assets\img\clients-image\img1.png" />
-    <Content Include="Content\assets\ng\assets\img\clients-image\img2.png" />
-    <Content Include="Content\assets\ng\assets\img\clients-image\img3.png" />
-    <Content Include="Content\assets\ng\assets\img\clients-image\img4.png" />
-    <Content Include="Content\assets\ng\assets\img\clients-image\img5.png" />
-    <Content Include="Content\assets\ng\assets\img\clients-image\img6.png" />
-    <Content Include="Content\assets\ng\assets\img\clients-image\img7.png" />
-    <Content Include="Content\assets\ng\assets\img\clients-image\img8.png" />
-    <Content Include="Content\assets\ng\assets\img\clients-image\img9.png" />
-    <Content Include="Content\assets\ng\assets\img\contact.svg" />
-    <Content Include="Content\assets\ng\assets\img\error-404.png" />
-    <Content Include="Content\assets\ng\assets\img\faq-img1.png" />
-    <Content Include="Content\assets\ng\assets\img\footer-shape1.png" />
-    <Content Include="Content\assets\ng\assets\img\footer-shape2.png" />
-    <Content Include="Content\assets\ng\assets\img\full-page-slider\slider1.jpg" />
-    <Content Include="Content\assets\ng\assets\img\full-page-slider\slider2.jpg" />
-    <Content Include="Content\assets\ng\assets\img\guide.svg" />
-    <Content Include="Content\assets\ng\assets\img\home-saas\feature1.png" />
-    <Content Include="Content\assets\ng\assets\img\home-saas\feature2.png" />
-    <Content Include="Content\assets\ng\assets\img\home-saas\feature3.png" />
-    <Content Include="Content\assets\ng\assets\img\home-saas\feature4.png" />
-    <Content Include="Content\assets\ng\assets\img\home-saas\feature5.png" />
-    <Content Include="Content\assets\ng\assets\img\icon1.png" />
-    <Content Include="Content\assets\ng\assets\img\login-bg.jpg" />
-    <Content Include="Content\assets\ng\assets\img\logo-color.svg" />
-    <Content Include="Content\assets\ng\assets\img\logo-guide.svg" />
-    <Content Include="Content\assets\ng\assets\img\logo-white.svg" />
-    <Content Include="Content\assets\ng\assets\img\logo.png" />
-    <Content Include="Content\assets\ng\assets\img\logo_2.png" />
-    <Content Include="Content\assets\ng\assets\img\man1.png" />
-    <Content Include="Content\assets\ng\assets\img\map1.png" />
-    <Content Include="Content\assets\ng\assets\img\mobile.png" />
-    <Content Include="Content\assets\ng\assets\img\news\new1.png" />
-    <Content Include="Content\assets\ng\assets\img\news\new2.png" />
-    <Content Include="Content\assets\ng\assets\img\news\new3.png" />
-    <Content Include="Content\assets\ng\assets\img\partner-image\img1.png" />
-    <Content Include="Content\assets\ng\assets\img\partner-image\img2.png" />
-    <Content Include="Content\assets\ng\assets\img\partner-image\img3.png" />
-    <Content Include="Content\assets\ng\assets\img\partner-image\img4.png" />
-    <Content Include="Content\assets\ng\assets\img\playstore.png" />
-    <Content Include="Content\assets\ng\assets\img\report\report1.png" />
-    <Content Include="Content\assets\ng\assets\img\report\report2.png" />
-    <Content Include="Content\assets\ng\assets\img\saas-shape\arrow.png" />
-    <Content Include="Content\assets\ng\assets\img\saas-shape\box1.png" />
-    <Content Include="Content\assets\ng\assets\img\saas-shape\boy1.png" />
-    <Content Include="Content\assets\ng\assets\img\saas-shape\boy2.png" />
-    <Content Include="Content\assets\ng\assets\img\saas-shape\boy3.png" />
-    <Content Include="Content\assets\ng\assets\img\saas-shape\digital-screen.png" />
-    <Content Include="Content\assets\ng\assets\img\saas-shape\filter1.png" />
-    <Content Include="Content\assets\ng\assets\img\saas-shape\filter2.png" />
-    <Content Include="Content\assets\ng\assets\img\saas-shape\filter3.png" />
-    <Content Include="Content\assets\ng\assets\img\saas-shape\girl1.png" />
-    <Content Include="Content\assets\ng\assets\img\saas-shape\girl2.png" />
-    <Content Include="Content\assets\ng\assets\img\saas-shape\main-image.png" />
-    <Content Include="Content\assets\ng\assets\img\saas-shape\monitor.png" />
-    <Content Include="Content\assets\ng\assets\img\saas-shape\shape-rotate.png" />
-    <Content Include="Content\assets\ng\assets\img\services-image\service1.png" />
-    <Content Include="Content\assets\ng\assets\img\services-image\service2.png" />
-    <Content Include="Content\assets\ng\assets\img\services-image\service3.png" />
-    <Content Include="Content\assets\ng\assets\img\services-image\service4.png" />
-    <Content Include="Content\assets\ng\assets\img\services-image\service5.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape1.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape10.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape11.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape12.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape13.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape14.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape15.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape16.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape17.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape18.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape19.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape2.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape20.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape21.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape21.svg" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape22.svg" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape23.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape24.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape25.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape3.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape4.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape5.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape6.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape7.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape8.png" />
-    <Content Include="Content\assets\ng\assets\img\shape\shape9.png" />
-    <Content Include="Content\assets\ng\assets\img\signup-bg.jpg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\img1.jpg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\img2.jpg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\img3.jpg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\img4.jpg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\img5.jpg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\img6.jpg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\img7.jpg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\img8.jpg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\img_1.jpeg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\img_2.jpeg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\img_3.jpeg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\img_4.jpg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\team1.jpg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\team2.jpg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\team3.jpg" />
-    <Content Include="Content\assets\ng\assets\img\team-image\team4.jpg" />
-    <Content Include="Content\assets\ng\assets\img\video-bg.jpg" />
-    <Content Include="Content\assets\ng\assets\img\white-bg.jpg" />
-    <Content Include="Content\assets\ng\assets\img\white-logo.png" />
-    <Content Include="Content\assets\ng\assets\img\woman1.png" />
-    <Content Include="Content\assets\ng\assets\img\woman2.png" />
-    <Content Include="Content\assets\ng\assets\js\main.js" />
-    <Content Include="Content\assets\ng\assets\js\wow.min.js" />
-    <Content Include="Content\assets\ng\banner-img2.jpg" />
-    <Content Include="Content\assets\ng\bg_lines.svg" />
-    <Content Include="Content\assets\ng\boxicons.svg" />
-    <Content Include="Content\assets\ng\contact.svg" />
-    <Content Include="Content\assets\ng\favicon.ico" />
-    <Content Include="Content\assets\ng\footer-shape1.png" />
-    <Content Include="Content\assets\ng\footer-shape2.png" />
-    <Content Include="Content\assets\ng\guide.svg" />
-    <Content Include="Content\assets\ng\img7.jpg" />
-    <Content Include="Content\assets\ng\img8.jpg" />
-    <Content Include="Content\assets\ng\img9.jpg" />
-    <Content Include="Content\assets\ng\index.html" />
-    <Content Include="Content\assets\ng\login-bg.jpg" />
-    <Content Include="Content\assets\ng\main.js" />
-    <Content Include="Content\assets\ng\polyfills.js" />
-    <Content Include="Content\assets\ng\runtime.js" />
-    <Content Include="Content\assets\ng\scripts.js" />
-    <Content Include="Content\assets\ng\signup-bg.jpg" />
-    <Content Include="Content\assets\ng\styles.css" />
-    <Content Include="Content\assets\ng\white-bg.jpg" />
     <Content Include="Content\assets\plugins\ckeditor5-31.0.0-jonbalw5wk1w\build\ckeditor.js" />
     <Content Include="Content\assets\plugins\custom\ckeditor\ckeditor-balloon-block.bundle.js" />
     <Content Include="Content\assets\plugins\custom\ckeditor\ckeditor-balloon.bundle.js" />
@@ -2386,23 +2245,11 @@
     <Content Include="Areas\Admin\Views\CEO\updateDetails.cshtml" />
     <Content Include="Areas\Admin\Views\CEO\ceosAddList.cshtml" />
     <Content Include="Areas\Admin\Views\User\UserPermissions.cshtml" />
-    <Content Include="Content\assets\ng\assets\css\responsive.scss" />
-    <Content Include="Content\assets\ng\assets\css\rtl.scss" />
-    <Content Include="Content\assets\ng\assets\css\style.scss" />
-    <Content Include="Content\assets\ng\assets\fonts\boxicons.eot" />
-    <Content Include="Content\assets\ng\assets\fonts\boxicons.ttf" />
-    <Content Include="Content\assets\ng\assets\fonts\boxicons.woff" />
-    <Content Include="Content\assets\ng\assets\fonts\boxicons.woff2" />
-    <Content Include="Content\assets\ng\assets\scss\_color.scss" />
     <Content Include="Areas\Admin\Views\Service - Copy\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Service - Copy\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Service - Copy\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Service - Copy\servicesList.cshtml" />
     <Content Include="Areas\Admin\Views\Service\_Categories.cshtml" />
-    <Content Include="Content\assets\ng\boxicons.eot" />
-    <Content Include="Content\assets\ng\boxicons.ttf" />
-    <Content Include="Content\assets\ng\boxicons.woff" />
-    <Content Include="Content\assets\ng\boxicons.woff2" />
     <Content Include="Content\Data\Report\FileTMP\05e7b324-2058-41c7-b852-881242fa2f61.941207887.pdf" />
     <Content Include="Content\Data\Report\FileTMP\25a1e575-767d-47c6-a56a-336a738e1442.1201946516.pdf" />
     <Content Include="Content\Data\Report\FileTMP\3b98898e-5093-4869-9bad-237927187f3b.599549733.pdf" />

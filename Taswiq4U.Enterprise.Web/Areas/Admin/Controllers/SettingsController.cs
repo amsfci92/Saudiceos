@@ -52,6 +52,9 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
                 SiteDescription = model.SiteDescription,
                 Address = model.Address,
                 FooterSentence = model.FooterSentence,
+                TermsOfUse = model.TermsOfUse,
+                AboutUs = model.AboutUs,
+                Disclaimer = model.Disclaimer,
                 GoogleMaps = model.GoogleMaps,
                 GoogleAnalytics = model.GoogleAnalytics,
                 Mobile = model.Mobile,
@@ -68,6 +71,7 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
                 SiteName = model.SiteName,
                 SiteTwitter = model.SiteTwitter,
                 SiteViemo = model.SiteViemo,
+                SiteHomeDescription = model.SiteHomeDescription
             }; 
 
             return View("Edit", vm);
@@ -88,6 +92,9 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
                 SiteDescription = model.SiteDescription,
                 Address = model.Address,
                 FooterSentence = model.FooterSentence,
+                TermsOfUse = model.TermsOfUse,
+                AboutUs = model.AboutUs,
+                Disclaimer = model.Disclaimer,
                 GoogleMaps = model.GoogleMaps,
                 GoogleAnalytics = model.GoogleAnalytics,
                 Mobile = model.Mobile,
@@ -104,6 +111,8 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
                 SiteName = model.SiteName,
                 SiteTwitter = model.SiteTwitter,
                 SiteViemo = model.SiteViemo,
+                SiteHomeDescription = model.SiteHomeDescription
+
             };
 
             var result = _settingsService.Update(db);

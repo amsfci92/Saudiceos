@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Cigarette.Enterprise.DAL
 {
-    public partial class Advertisement
+    public partial class AspNetUser
     {
-            }
+        public bool DeleteAllowed { get; set; }
+    }
 }

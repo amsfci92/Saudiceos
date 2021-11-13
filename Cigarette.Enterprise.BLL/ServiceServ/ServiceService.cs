@@ -116,8 +116,8 @@ namespace Cigarette.Enterprise.BLL.ServiceServ
 
         public Result<IPagedList<Category>> GetAllCategoriesPaged(int pageSize = 10, int pageNo = 1)
         {
-            var data = _unitOfWork.Category.GetAll() 
-               .OrderBy(m => m.Id)
+            var data = _unitOfWork.Category.GetAll()
+              .OrderByDescending(m => m.Id)
                .ToPagedList(pageNo, pageSize);
             var result = new Result<IPagedList<Category>>
             {
@@ -130,7 +130,7 @@ namespace Cigarette.Enterprise.BLL.ServiceServ
         {
             var data = _unitOfWork.Category.GetAll() 
                .Where(m => m.Services.Any())
-               .OrderBy(m => m.Id).ToPagedList(pageNo, pageSize); 
+               .OrderByDescending(m => m.Id).ToPagedList(pageNo, pageSize); 
 
             var result = new Result<IPagedList<Category>>
             {

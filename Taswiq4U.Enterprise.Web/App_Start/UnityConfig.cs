@@ -1,12 +1,12 @@
 
-using Cigarette.Enterprise.BLL.ContactUsServ; 
-using Cigarette.Enterprise.DAL.Repository; 
+using Cigarette.Enterprise.BLL.ContactUsServ;
+using Cigarette.Enterprise.DAL.Repository;
 using System.Web.Mvc;
 using Saudiceos.Enterprise.Web.Areas.AdminPanel.AuthServices.UserRoleService;
 using Saudiceos.Enterprise.Web.Controllers;
 using Unity;
 using Unity.Injection;
-using Unity.Mvc5; 
+using Unity.Mvc5;
 using Cigarette.Enterprise.BLL.SettingsServ;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
