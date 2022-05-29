@@ -1,0 +1,67 @@
+<section class="features-area pt-100 pb-70 bg-f4f6fc">
+    <div class="container max-width-1290">
+        <div class="section-title">
+            <h2>خدمات التنفيذيين</h2>
+            <p class="mt-2">"نسعى من خلال "خدمات التنفيذيين" إلى مساعدة زوار المنصة من الأفراد والشركات في الوصول إلى مزودي الخدمات ذات العلاقة بالقيادة التنفيذية</p>
+        </div>
+        <!-- Show in Larg Screen -->
+        <div *ngIf="showInLargScreen" class="row ">
+            <div class="col-lg-3 col-md-6 col-sm-12 " *ngFor="let item of serviceListItems | slice:0:4; let i=index">
+                <div class="features-box-one wow fadeInLeft" data-wow-delay=".1s">
+                    <div class="img-back" [style.backgroundImage]="'url(https://saudiceos.com'+ item.imageUrl +')'">
+                        <div class="overlay">
+                            <div class="overlay-content">
+                                <h3>{{item.name}}</h3>
+                                <div class="service-link d-flex flex-column">
+                                    <ul class="list-unstyled px-0">
+                                        <li  *ngFor="let item of item.servicesList">
+                                            <a routerLink="/service/{{item.id}}" class="mb-2">{{item.title}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 justify-content-center">
+                <div class="d-flex justify-content-center wow fadeInUp" data-wow-delay=".8s">
+                    <a routerLink="/service" class="default-btn">
+                        المزيد
+                        <i class="bx bx-left-arrow-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Show in Small Screen -->
+        <div *ngIf="showInSmallScreen" class="row">
+            <div class="col-lg-3 col-md-6 col-sm-12" *ngFor="let item of serviceListItems | slice:0:2; let i=index">
+                <div class="features-box-one wow fadeInLeft" data-wow-delay=".1s">
+                    <div class="img-back" [style.backgroundImage]="'url(https://saudiceos.com'+ item.imageUrl +')'">
+                        <div class="overlay">
+                            <div class="overlay-content">
+                                <h3>{{item.name}}</h3>
+                                <div class="service-link d-flex flex-column">
+                                    <ul class="list-unstyled px-0">
+                                        <li  *ngFor="let linkName of item.servicesList">
+                                            <a routerLink="/service/{{linkName.id}}" class="mb-2">{{linkName.title| slice:0:47}}... </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 justify-content-center">
+                <div class="d-flex justify-content-center wow fadeInUp" data-wow-delay=".8s">
+                    <a routerLink="/service" class="default-btn">
+                        المزيد
+                        <i class="bx bx-left-arrow-alt"></i>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

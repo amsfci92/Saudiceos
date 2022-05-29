@@ -1,0 +1,62 @@
+.default-btn {
+  margin-bottom: 0;
+  padding-left: 25px;
+}
+.guide-logo {
+  min-height:  170px;
+  img
+  {
+    max-height: 110px !important;
+  }
+}
+form {
+  .form-control {
+    padding: 0.65rem 0.75rem;
+    &:focus {
+      box-shadow: none;
+      border-color: #45a887;
+    }
+  }
+  label {
+    &[for="imageUrl"],
+    &[for="nationalIDimgPathUrl"] {
+      position: relative;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      width: 100%;
+      height: 200px;
+    }
+    .edit-img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #4a6f8a80;
+      color: #fff;
+      border-radius: 0.5rem;
+      opacity: 1;
+      transition: all 0.3s ease-in-out;
+    }
+    img {
+      min-height: 200px;
+      min-width: 100%;
+    }
+    &.file-upload {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed #4a6f8a;
+      height: 3rem;
+      border-radius: 0.25rem;
+      background-color: #4a6f8a21;
+      margin-top: 0.5rem;
+      padding: 2rem;
+    }
+  }
+}

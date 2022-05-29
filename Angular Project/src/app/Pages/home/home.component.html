@@ -1,0 +1,22 @@
+<div class="saas-banner ">
+    <div class="d-table bg__maincolor--opacity ">
+        <div class="d-table-cell">
+            <div class="container max-width-1290">
+                <div class="row align-items-start pt-5 pb-5 pb-lg-0">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="hero-content pt-5">
+                            <h1>{{settingHome?.siteName}}</h1>
+                            <div class="p" [innerHTML]="settingHome?.siteHomeDescription"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-shared-news [sectionTitle]="sectionTitle" [classes]="classes"></app-shared-news>
+<app-shared-report></app-shared-report>
+<app-shared-service></app-shared-service>
+<app-shared-gide></app-shared-gide>
+<!-- <app-ads-baner></app-ads-baner> -->

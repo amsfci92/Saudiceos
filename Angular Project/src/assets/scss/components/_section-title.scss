@@ -1,0 +1,22 @@
+/* Section title */
+.section-title {
+  text-align: center;
+  max-width: 575px;
+  text-transform: capitalize;
+  margin: {
+    left: auto;
+    bottom: 60px;
+    right: auto;
+  }
+  h2 {
+    margin-bottom: 0;
+    @media (min-width: 1200px) {
+      font-size: 40px;
+    }
+    font-weight: 600;
+    span {
+      display: inline-block;
+      color: $optional-color;
+    }
+  }
+}

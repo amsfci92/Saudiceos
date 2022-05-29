@@ -1,0 +1,12 @@
+.default-btn {
+  padding-left: 25px;
+  padding-right: 25px;
+  &.discount {
+    background-color: #45a88726;
+    color: #45a887;
+    &:hover {
+      background-color: #45a887;
+      color: #fff;
+    }
+  }
+}

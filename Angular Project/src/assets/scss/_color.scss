@@ -1,0 +1,10 @@
+$main-color: #45a887;
+$optional-color: $main-color;
+$black-color: #080a3c;
+$white-color: #ffffff;
+$paragraph-color: #4a6f8a;
+
+
+.bg__maincolor--opacity {
+  background-color: rgba($color: #296954, $alpha: 0.8);
+}

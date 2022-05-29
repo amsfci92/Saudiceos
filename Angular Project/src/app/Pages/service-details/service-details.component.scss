@@ -1,0 +1,35 @@
+.default-btn {
+  padding-left: 25px;
+  padding-right: 25px;
+  &.discount {
+    background-color: #45a88726;
+    color: #45a887;
+    &:hover {
+      background-color: #45a887;
+      color: #fff;
+    }
+  }
+}
+
+.page-title-area {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.carousel-control {
+  &-prev,
+  &-next {
+    background: black;
+    top: 43%;
+    height: 3rem;
+    width: 10%;
+  }
+
+  &-prev {
+    left: 0.5rem;
+  }
+
+  &-next {
+    right: 0.5rem;
+  }
+}

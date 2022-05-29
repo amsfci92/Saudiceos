@@ -1,0 +1,57 @@
+<footer class="footer-area">
+    <div class="divider"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center align-items-center">
+                <div class="single-footer-widget">
+                    <div class="text-white" [innerHTML]="settingFooter?.footerSentence"></div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 d-flex justify-content-center align-items-center">
+                <div class="single-footer-widget">
+                    <div class="logo d-flex justify-content-center">
+                        <a routerLink="/"><img src="/Content/assets/ng/assets/img/logo-white.svg" alt="image"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="single-footer-widget">
+                            <ul class="services-list">
+                                <li><a routerLink="/">الرئيسية</a></li>
+                                <li><a routerLink="/news">الأخبار</a></li>
+                                <li><a routerLink="/report">التقارير</a></li>
+                                <li><a routerLink="/guide">الدليل</a></li>
+                                <li><a routerLink="/service">الخدمات</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="single-footer-widget">
+                            <ul class="services-list">
+                                <li><a routerLink="/about">من نحن</a></li>
+                                <li><a routerLink="/contact">اتصل بنا</a></li>
+                                <li><a routerLink="/decleration">إخلاء المسؤولية</a></li>
+                                <li><a routerLink="/terms">شروط الاستخدام</a></li>
+                            </ul>
+                            <ul class="social">
+                                <li><a href="{{settingFooter?.siteLinkedIn}}" target="_blank"><i
+                                            class="bx bxl-linkedin"></i></a></li>
+                                <li><a href="{{settingFooter?.siteTwitter}}" target="_blank"><i
+                                            class="bx bxl-twitter"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="copyright-area">
+            <p>جميع الحقوق محفوظة 2021 &copy; <a href="https://saudiceos.com" target="_blank">الرؤساء التنفيذيون
+                    السعوديون</a></p>
+        </div>
+    </div>
+</footer>
+
+<div class="go-top" (click)="goToTop()"><i class='bx bx-chevron-up'></i></div>

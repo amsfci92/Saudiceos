@@ -1,0 +1,20 @@
+/*================================================
+About Area CSS
+=================================================*/
+.about-content {
+    .sub-title {
+        display: block;
+        color: $optional-color;
+        margin-bottom: 7px;
+    }
+    h2 {
+        margin-bottom: 10px;
+        font: {
+            size: 40px;
+            weight: 500;
+        };
+    }
+}
+.about-image {
+    text-align: center;
+}

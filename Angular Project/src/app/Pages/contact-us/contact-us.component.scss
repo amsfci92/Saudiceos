@@ -1,0 +1,58 @@
+.contact-form {
+  padding: 30px;
+}
+
+.contact-info {
+  &:last-of-type {
+    background-color: #4a6f8a;
+    margin-top: 0;
+    border-radius: 1rem;
+    height: 100%;
+    overflow: hidden;
+  }
+  &-content {
+    background-image: url("/Content/assets/ng/assets/img/contact.svg");
+    background-position: center;
+    background-size: cover;
+    background-position: bottom;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    h3,
+    h4 a {
+      color: #fff !important;
+    }
+    .social li {
+      margin: 0 0.5rem;
+      a {
+        border: 1px solid #ffffff;
+        color: #ffffff;
+        &:hover {
+          border-color: #080a3c;
+          background-color: #080a3c;
+        }
+      }
+    }
+  }
+}
+
+.msg-done {
+  h4 {
+    padding: 1rem;
+  }
+  margin-top: 200px;
+  margin-bottom: 200px;
+}
+
+.default-btn {
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}

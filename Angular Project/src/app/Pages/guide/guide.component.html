@@ -1,0 +1,169 @@
+<div class="page-title-area">
+  <div class="container">
+    <div class="page-title-content">
+      <h2>الدليل</h2>
+    </div>
+  </div>
+</div>
+
+<section class="feedback-area ptb-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-end align-items-center mb-3">
+        <button type="button" class="default-btn ms-3 wow fadeInUp" data-bs-toggle="modal" data-bs-target="#addCeo">
+          طلب إضافة شخصية
+          <span></span>
+        </button>
+        <form class="d-flex wow fadeInUp">
+          <input type="search" class="form-control" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}"
+            placeholder="ابحث هنا ...">
+        </form>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let item of ceoList
+            | filter: searchText
+            | paginate: {
+              itemsPerPage: itemPerPage,
+              currentPage: pageNumber,
+              totalItems: totalItemCount
+            }">
+        <a class="single-feedback-item wow fadeInUp" routerLink="/guide/{{item.id}}">
+          <div class="guide-logo">
+            <img src="https://saudiceos.com{{item.image}}" alt="image">
+            <div class="feedback-desc">
+              <div class="client-info">
+                <h3>{{item.name}}</h3>
+                <span>{{item?.position}} في {{item?.company}}</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-12">
+        <div class="d-flex justify-content-center">
+          <pagination-controls class="pagination-area" previousLabel="السابق" nextLabel="التالى"
+            (pageChange)="changePage((pageNumber = $event))">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="modal fade" id="addCeo" tabindex="-1" aria-labelledby="addCeoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <form class="w-100" id="addCeo" [formGroup]="addCeo" (ngSubmit)="addCeoSubmit(addCeo)">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">طلب إضافة شخصية</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="container-fluid p-0">
+                  <div class="row">
+                    <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center">
+                      <label for="imageUrl">
+                        <div class="edit-img">
+                          <h6>الصورة الشخصية</h6>
+                        </div>
+                        <img [src]="imgPathUrl" *ngIf="imgPathUrl" height="150px" width="150px" alt="Ceo Image">
+                        <input type="file" id="imageUrl" class="d-none"
+                          [ngClass]="{'border-danger': imageUrlIn && imageUrlIn?.invalid && imageUrlIn?.touched}"
+                          accept=".png, .jpg" (change)="onSelectImage($event)" />
+                      </label>
+                      <div class="invalid-feedback d-block"
+                        *ngIf="imageUrlIn && imageUrlIn.invalid && imageUrlIn.touched">
+                        <div> هذا الحقل مطلوب. </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center">
+                      <label for="nationalIDimgPathUrl">
+                        <div class="edit-img">
+                          <h6>البطاقة التعريفية</h6>
+                        </div>
+                        <img [src]="nationalIDimgPathUrl" *ngIf="nationalIDimgPathUrl" height="150px" width="150px"
+                          alt="Ceo Image">
+                        <input type="file" id="nationalIDimgPathUrl" class="d-none"
+                          [ngClass]="{'border-danger': nationalIDUrlIn && nationalIDUrlIn?.invalid && nationalIDUrlIn?.touched}"
+                          accept=".png, .jpg" (change)="onSelectNationalIDImage($event)" />
+                      </label>
+                      <div class="invalid-feedback d-block"
+                        *ngIf="nationalIDUrlIn && nationalIDUrlIn.invalid && nationalIDUrlIn.touched">
+                        <div> هذا الحقل مطلوب. </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12">
+                <div class="form-group">
+                  <label for="name" class="col-form-label">الاسم</label>
+                  <input type="text" formControlName="name"
+                    [ngClass]="{'border-danger': nameIn && nameIn.invalid && nameIn.touched}" id="name"
+                    class="form-control" placeholder="الاسم" />
+                  <div class="invalid-feedback d-block" *ngIf="nameIn && nameIn.invalid && nameIn.touched">
+                    <div> هذا الحقل مطلوب. </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12">
+                <div class="form-group">
+                  <label for="position" class="col-form-label">المنصب</label>
+                  <input type="text" formControlName="position"
+                    [ngClass]="{'border-danger': positionIn && positionIn.invalid && positionIn.touched}" id="position"
+                    class="form-control" placeholder="المنصب" />
+                  <div class="invalid-feedback d-block" *ngIf="positionIn && positionIn.invalid && positionIn.touched">
+                    <div> هذا الحقل مطلوب. </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12">
+                <div class="form-group">
+                  <label for="email" class="col-form-label">البريد الإلكتروني</label>
+                  <input type="email" formControlName="email"
+                    [ngClass]="{'border-danger': emailIn && emailIn.invalid && emailIn.touched}" id="email"
+                    class="form-control" placeholder="البريد الإلكتروني" />
+                  <div class="invalid-feedback d-block" *ngIf="emailIn && emailIn.invalid && emailIn.touched">
+                    <div> هذا الحقل مطلوب. </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12">
+                <div class="form-group">
+                  <label for="cvDescription" class="col-form-label">نص الرسالة</label>
+                  <ckeditor formControlName="cvDescription" [editor]="Editor" id="cvDescription">
+                  </ckeditor>
+                  <div class="invalid-feedback d-block"
+                    *ngIf="cvDescriptionIn && cvDescriptionIn.invalid && cvDescriptionIn.touched">
+                    <div> هذا الحقل مطلوب. </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12">
+                <div class="form-group">
+                  <label for="cvUrl" class="file-upload">
+                    <span *ngIf="!cvUrlIn?.value">إرفاق ملف السيرة الذاتية المحدث</span>
+                    <span *ngIf="cvUrlIn?.value">{{fileName}}</span>
+                    <input class="d-none" [ngClass]="{'border-danger': cvUrlIn && cvUrlIn.invalid && cvUrlIn.touched}"
+                      type="file" accept=".docx, .pdf" id="cvUrl" (change)="onSelectFile($event)">
+                  </label>
+                  <div class="invalid-feedback d-block" *ngIf="cvUrlIn && cvUrlIn.invalid && cvUrlIn.touched">
+                    <div> هذا الحقل مطلوب. </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="default-btn mb-0" [disabled]="!addCeo.valid">
+            ارسال
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+export interface Settings {
+    id: number,
+    siteName: string,
+    siteEmail: string,
+    siteFax: string,
+    phone: string,
+    mobile: string,
+    address: string,
+    footerSentence: string,
+    siteKeywords: string,
+    siteDescription: string,
+    siteFacebook: string,
+    siteTwitter: string,
+    siteSnapchat: string,
+    siteFlicker: string,
+    siteGoogle: string,
+    siteLinkedIn: string,
+    siteInstagram: string,
+    siteViemo: string,
+    shareCode: string,
+    googleAnalytics: string,
+    googleMaps: string
+}

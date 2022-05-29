@@ -1,0 +1,53 @@
+<div class="page-title-area">
+  <div class="container">
+    <div class="page-title-content">
+      <h2>التقارير</h2>
+    </div>
+  </div>
+</div>
+
+<section class="blog-details-area ptb-100">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="blog-details-desc">
+        <div class="row">
+          <div class="col-lg-4 col-12">
+            <div class="article-image">
+              <img src="https://saudiceos.com{{ reporItem?.image }}" alt="image">
+            </div>
+          </div>
+          <div class="col-lg-8 col-12 d-flex align-items-center">
+            <div class="article-content">
+              <div class="entry-meta">
+                <ul class="d-flex">
+                  <li class="d-flex  publish-date">
+                    <i class='bx bx-calendar'></i>
+                    <span>تاريخ النشر</span>
+                    <div class="me-1">{{reporItem?.publishDate | slice:0:10}}</div>
+                  </li>
+                  <li class="d-flex">
+                    <i class='bx bx-calendar'></i>
+                    <span>تاريخ الاصدار </span>
+                    <div class="me-1">{{reporItem?.issueDate | slice:0:10}}</div>
+                  </li>
+                </ul>
+              </div>
+              <h3>{{reporItem?.title}}</h3>
+              <div [innerHTML]="reporItem?.description"></div>
+              <a *ngIf="reporItem?.link" href="{{reporItem?.link}}" target="_blank" class="default-btn mt-3 ms-2">
+                رابط التقرير
+              </a>
+              <a *ngIf="reporItem?.file" target="_blank" href="https://saudiceos.com{{reporItem?.file}}"
+                download class="default-btn mt-3 discount">
+                تحميل الملف
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-shared-report [classes]="classes"></app-shared-report>

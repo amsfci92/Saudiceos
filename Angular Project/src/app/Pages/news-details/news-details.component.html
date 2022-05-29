@@ -1,0 +1,40 @@
+<div class="page-title-area">
+  <div class="container">
+    <div class="page-title-content">
+      <h2>الأخبار</h2>
+    </div>
+  </div>
+</div>
+
+<section class="blog-details-area ptb-100">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="blog-details-desc">
+        <div class="row">
+          <div class="col-lg-4 col-12">
+            <div class="article-image">
+              <img src="https://saudiceos.com{{newsItem?.image}}" alt="image">
+            </div>
+          </div>
+          <div class="col-lg-8 col-12 d-flex">
+            <div class="article-content">
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex publish-date">
+                    <i class='bx bx-calendar'></i>
+                    <span>تاريخ النشر</span>
+                    <div class="me-1">{{newsItem?.createDate | slice:0:10}}</div>
+                  </li>
+                </ul>
+              </div>
+              <h3>{{newsItem?.title}}</h3>
+              <div [innerHTML]="innerHTMLDisc"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--
+<app-shared-news [sectionTitle]="sectionTitle" [classes]="classes"></app-shared-news> -->
