@@ -24,6 +24,10 @@ namespace Cigarette.Enterprise.DAL
         public Nullable<bool> Active { get; set; }
         public string Tags { get; set; }
         public Nullable<long> CeoId { get; set; }
+        public string Slug { get; set; }
+        public Nullable<int> OldNewsRef { get; set; }
+        public Nullable<byte> Category { get; set; }
+        public string Language { get; set; }
     
         public virtual CEO CEO { get; set; }
     }

@@ -26,5 +26,6 @@ namespace Cigarette.Enterprise.DAL
         public Nullable<System.DateTime> IssueDate { get; set; }
         public Nullable<System.DateTime> PublishDate { get; set; }
         public Nullable<bool> Active { get; set; }
+        public string Slug { get; set; }
     }
 }

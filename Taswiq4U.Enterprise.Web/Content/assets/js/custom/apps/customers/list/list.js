@@ -15,8 +15,8 @@ var KTCustomersList = function () {
 
         tableRows.forEach(row => {
             const dateRow = row.querySelectorAll('td');
-            const realDate = moment(dateRow[5].innerHTML, "DD MMM YYYY, LT").format(); // select date from 5th column in table
-            dateRow[5].setAttribute('data-order', realDate);
+            //const realDate = moment(dateRow[5].innerHTML, "DD MMM YYYY, LT").format(); // select date from 5th column in table
+            //dateRow[5].setAttribute('data-order', realDate);
         });
         const rows = table.querySelectorAll('thead tr td').length;
         // Init datatable --- more info on datatables: https://datatables.net/manual/
@@ -295,10 +295,15 @@ var KTCustomersList = function () {
         // Toggle toolbars
         if (checkedState) {
             selectedCount.innerHTML = count;
-            toolbarBase.classList.add('d-none');
+            if (toolbarBase) {
+                toolbarBase.classList.add('d-none');
+            }
             toolbarSelected.classList.remove('d-none');
         } else {
-            toolbarBase.classList.remove('d-none');
+            if (toolbarBase) {
+                toolbarBase.classList.remove('d-none');
+
+            }
             toolbarSelected.classList.add('d-none');
         }
     }

@@ -86,8 +86,8 @@
                                     <th class="min-w-125px">الصورة</th>
                                     <th class="min-w-125px">العنوان </th>
 
-                                    <th class="min-w-125px">المصدر  </th>
-                                    <th class="min-w-125px">تاريخ الاصدار  </th>
+                                    <th class="min-w-125px">الرابط  </th>
+                                    
                                     <th class="min-w-125px">توقيت الانشاء</th>
                                     <th class="text-end min-w-70px">الإجراءات</th>
                                 </tr>
@@ -127,11 +127,7 @@
                                         @item.Issuer
                                     </td>
                                     <!--end::Payment method=-->
-                                    <!--begin::Payment method=-->
-                                    <td data-filter="mastercard">
-                                        @item.IssueDate
-                                    </td>
-                                    <!--end::Payment method=-->
+                                 
                                     <!--begin::Date=-->
                                     <td>@DateTime.Now.ToShortDateString()</td>
                                     <!--end::Date=-->

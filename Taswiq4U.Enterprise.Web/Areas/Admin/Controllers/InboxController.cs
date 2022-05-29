@@ -54,6 +54,18 @@ namespace Saudiceos.Enterprise.Web.Areas.Admin.Controllers
 
             return View("Details", model);
         }
+        [Route("del/{encodedIds}")]
+        public ActionResult Delete(string encodedIds)
+        {
+            var ids = GetIds(encodedIds);
+            if (ids.Count() == 0)
+            {
+                return Json(new { deleted = false }, JsonRequestBehavior.AllowGet);
+            }
+
+            var result = _contactUsService.DeleteRange(ids);
+            return Json(new { deleted = result }, JsonRequestBehavior.AllowGet);
+        }
 
         //[HttpGet]
         //public ActionResult AdsListByType(int countryId, int type)

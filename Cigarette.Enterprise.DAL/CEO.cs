@@ -37,6 +37,9 @@ namespace Cigarette.Enterprise.DAL
         public Nullable<bool> Active { get; set; }
         public Nullable<int> Views { get; set; }
         public string CVUrl { get; set; }
+        public Nullable<int> DaleelRef { get; set; }
+        public string Summary { get; set; }
+        public string Slug { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CEOAddEditRequest> CEOAddEditRequests { get; set; }

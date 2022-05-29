@@ -35,7 +35,7 @@
         <div class="">
             @if (Model.CEOId != null)
             {
-                <a href="/admin/ceo/edit/@General.Base64Encode($"{Model.CEOId}")?updateRequestId=@Model.Id" class="btn btn-primary  ">نشر التعديل</a>
+                @*<a href="/admin/ceo/edit/@General.Base64Encode($"{Model.CEOId}")?updateRequestId=@Model.Id" class="btn btn-primary  ">نشر التعديل</a>*@
             }
             else
             {
@@ -48,23 +48,29 @@
     <!--begin::Card header-->
     <!--begin::Card body-->
     <div class="card-body p-9">
-        @if (Model.NationalIdImageUrl != null)
-        {
-            <!--begin::Row-->
-            <div class="row mb-7">
-                <!--begin::Label-->
-                <label class="col-lg-4 fw-bold text-muted">صورة الهويه</label>
-                <!--end::Label-->
-                <!--begin::Col-->
-                <div class="col-lg-8">
+
+        <!--begin::Row-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">صورة الهويه</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                @if (!string.IsNullOrWhiteSpace(Model.NationalIdImageUrl))
+                {
                     <img width="250" height="350" src="/Content/Data/CeoAPI/ImagesTMP/@Model.NationalIdImageUrl" />
-                </div>
-                <!--end::Col-->
+                }
+                else
+                {
+                    <p>لم يتم إضافة الصوره</p>
+                }
+
             </div>
-            <!--end::Row-->
-        }
-        @if (Model.ImageUrl != null)
-        {
+            <!--end::Col-->
+        </div>
+        <!--end::Row-->
+
+
             <!--begin::Row-->
             <div class="row mb-7">
                 <!--begin::Label-->
@@ -72,12 +78,20 @@
                 <!--end::Label-->
                 <!--begin::Col-->
                 <div class="col-lg-8">
-                    <img width="250" height="350" src="/Content/Data/CeoAPI/ImagesTMP/@Model.ImageUrl" />
+                    @if (Model.ImageUrl != null)
+                    {
+                        <img width="250" height="350" src="/Content/Data/CeoAPI/ImagesTMP/@Model.ImageUrl" />
+                    }
+                    else
+                    {
+                        <p>لم يتم إضافة الصوره</p>
+                    }
                 </div>
                 <!--end::Col-->
             </div>
             <!--end::Row-->
-        }
+       
+
         <!--begin::Row-->
         <div class="row mb-7">
             <!--begin::Label-->
@@ -109,7 +123,7 @@
             <!--end::Label-->
             <!--begin::Col-->
             <div class="col-lg-8">
-                <span class="fw-bolder fs-6 text-gray-800">@Model.CVDescription  </span>
+                <div class="fw-bolder fs-6 text-gray-800">@Model.CVDescription  </div>
             </div>
             <!--end::Col-->
         </div>

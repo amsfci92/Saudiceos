@@ -21,6 +21,7 @@ namespace Cigarette.Enterprise.Extentions.ExtentionMethods.HttpFileBase
         User = 4,
         Service = 5,
         CeoAPI = 6,
+        CK = 7,
     }
     public enum FileType
     {
