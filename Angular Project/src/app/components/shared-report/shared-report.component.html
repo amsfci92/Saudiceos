@@ -27,13 +27,13 @@
         </div>
         <!-- Show in Small Screen -->
         <div *ngIf="showInSmallScreen" class="row">
-            <div class="col-lg-3 col-6" *ngFor="let item of reportListItems | slice:0:2; let i=index">
+            <div class="col-lg-3 col-md-6 col-sm-12" *ngFor="let item of reportListItems | slice:0:2; let i=index">
               <div class="single-blog-post wow fadeInUp" data-wow-delay=".2s" >
                 <div class="post-image">
                     <a routerLink="/report/{{item.id}}"><img src="https://saudiceos.com{{ item.image }}" alt="image"></a>
                 </div>
                 <div class="post-content" routerLink="/report/{{item.id}}">
-                    <h3 class="text-center"><a routerLink="/report/{{item.id}}"> {{item.title}} </a></h3>
+                    <h3 class="text-center"><a routerLink="/report/{{item.id}}"> {{item.title| slice:0:47}}... </a></h3>
                 </div>
               </div>
             </div>
