@@ -35,7 +35,7 @@
                   </button>
                 </div>
               </div>
-              <div [innerHTML]="ceoItem?.cvDescription"></div>
+              <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(ceoItem.cvDescription)"></div>
             </div>
           </div>
         </div>

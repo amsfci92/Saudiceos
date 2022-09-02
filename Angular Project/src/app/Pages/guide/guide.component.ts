@@ -1,18 +1,20 @@
 import { CeoList } from 'src/app/core/pages/guide';
 import { SendFileService } from './../../core/services/send-file.service';
 import { SendImageService } from './../../core/services/send-image.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GuideService } from 'src/app/core/services/guide.service';
 import { environment as env } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { DomSanitizer } from '@angular/platform-browser';
 declare let $: any;
 
 @Component({
   selector: 'app-guide',
   templateUrl: './guide.component.html',
   styleUrls: ['./guide.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class GuideComponent implements OnInit {
   Editor: any = ClassicEditor;
@@ -58,10 +60,13 @@ export class GuideComponent implements OnInit {
         }
       );
   }
-
+  searchCeo() {
+    this.pageNumber = 1;
+    this.getAllCeo();
+  }
   changePage(pageNumber: number) {
     this.pageNumber = pageNumber;
-    window.scrollTo(0, 0)
+    //window.scrollTo(0, 0)
     this.getAllCeo();
   }
 

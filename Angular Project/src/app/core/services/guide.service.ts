@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CeoList, AddNewCeo, UpdateCeo } from '../pages/guide';
 import { environment as env } from 'src/environments/environment';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -20,7 +21,7 @@ export class GuideService {
     searchText: string
   ): Observable<any> {
     return this.http.get<any>(
-      `${env.BASE_URL}/ceo?pageNo=${pageNo}&pageSize=${pageSize}&searchText=${searchText}`
+      `${env.BASE_URL}/ceo?pageNo=${pageNo}&pageSize=${pageSize}&searchText=${encodeURI( searchText)}`
     );
   }
 

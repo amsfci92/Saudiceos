@@ -1,5 +1,5 @@
 import { CeoList } from 'src/app/core/pages/guide';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { GuideService } from 'src/app/core/services/guide.service';
@@ -7,12 +7,14 @@ import { SendFileService } from 'src/app/core/services/send-file.service';
 import { SendImageService } from 'src/app/core/services/send-image.service';
 import { ToastrService } from 'ngx-toastr';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { DomSanitizer } from '@angular/platform-browser';
 declare let $: any;
 
 @Component({
   selector: 'app-guide-details',
   templateUrl: './guide-details.component.html',
   styleUrls: ['./guide-details.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class GuideDetailsComponent implements OnInit {
   Editor: any = ClassicEditor;
@@ -64,7 +66,8 @@ export class GuideDetailsComponent implements OnInit {
     private fb: FormBuilder,
     private sendImage: SendImageService,
     private sendFile: SendFileService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
